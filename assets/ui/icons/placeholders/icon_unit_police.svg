@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <defs>
+    <filter id="glow-police">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="flash-bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#3b82f6"/>
+      <stop offset="50%"  stop-color="#93c5fd"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <!-- tło -->
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#03082a" stroke="#3b82f6" stroke-width="2.5"/>
+  <!-- karoseria radiowozu -->
+  <rect x="10" y="46" width="62" height="22" rx="5" fill="#1e3a8a"/>
+  <!-- dach/szyba trapezoid -->
+  <path d="M20 46 L28 32 L64 32 L72 46 Z" fill="#1d4ed8"/>
+  <!-- okna -->
+  <rect x="30" y="34" width="14" height="9" rx="2" fill="#bfdbfe" opacity=".9"/>
+  <rect x="47" y="34" width="14" height="9" rx="2" fill="#bfdbfe" opacity=".9"/>
+  <!-- belka świetlna -->
+  <rect x="28" y="29" width="40" height="5" rx="2.5" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1"/>
+  <rect x="29" y="30" width="17" height="3" rx="1.5" fill="url(#flash-bar)" filter="url(#glow-police)"/>
+  <rect x="50" y="30" width="17" height="3" rx="1.5" fill="#ef4444" filter="url(#glow-police)" opacity=".9"/>
+  <!-- koła -->
+  <circle cx="27" cy="70" r="8" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="27" cy="70" r="3.5" fill="#334155"/>
+  <circle cx="65" cy="70" r="8" fill="#0f172a" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="65" cy="70" r="3.5" fill="#334155"/>
+  <!-- zderzak -->
+  <rect x="10" y="65" width="9" height="5" rx="2" fill="#1e40af"/>
+  <rect x="77" y="65" width="9" height="5" rx="2" fill="#1e40af"/>
+  <!-- napis POLICJA -->
+  <text x="41" y="60" font-size="7.5" font-weight="800" font-family="Arial" fill="#93c5fd" text-anchor="middle" letter-spacing="1">POLICJA</text>
+</svg>

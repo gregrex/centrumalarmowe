@@ -1,0 +1,26 @@
+{
+  "missionId": "mission.demo.16",
+  "totalSeconds": 240,
+  "thresholds": [
+    {
+      "id": "thr.180",
+      "secondsRemaining": 180,
+      "phase": "active"
+    },
+    {
+      "id": "thr.90",
+      "secondsRemaining": 90,
+      "phase": "pressure_peak"
+    },
+    {
+      "id": "thr.30",
+      "secondsRemaining": 30,
+      "phase": "critical"
+    },
+    {
+      "id": "thr.10",
+      "secondsRemaining": 10,
+      "phase": "last_call"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "missionId": "mission.01.03",
+  "titleKey": "mission.01.03.title",
+  "difficulty": "high",
+  "estimatedMinutes": 14,
+  "weatherPreset": "storm_night",
+  "timeOfDay": "night",
+  "primaryObjectives": [
+    "obj.keep_response_time",
+    "obj.correct_priority",
+    "obj.limit_losses"
+  ],
+  "secondaryObjectives": [
+    "obj.zero_dead_units",
+    "obj.keep_city_stability"
+  ],
+  "riskTags": [
+    "risk.flooded_routes",
+    "risk.power_loss",
+    "risk.high_call_volume"
+  ],
+  "recommendedRoles": [
+    "dispatcher",
+    "operator"
+  ],
+  "suggestedUnits": [
+    "ems.alpha",
+    "fire.bravo",
+    "police.delta"
+  ],
+  "speaker": {
+    "portraitId": "portrait.commander.helena",
+    "lineKey": "briefing.line.001"
+  },
+  "hotspots": [
+    "west_bridge",
+    "mall_block",
+    "hospital_corridor"
+  ]
+}

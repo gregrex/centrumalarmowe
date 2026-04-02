@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <defs>
+    <filter id="glow-pol">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#0a0218" stroke="#a855f7" stroke-width="2.5"/>
+  <!-- tarcza policyjna -->
+  <path d="M48 16 L72 24 L72 46 C72 60 62 72 48 78 C34 72 24 60 24 46 L24 24 Z"
+        fill="#1e1b4b" stroke="#a855f7" stroke-width="2" filter="url(#glow-pol)"/>
+  <path d="M48 22 L66 29 L66 46 C66 57 57 67 48 72 C39 67 30 57 30 46 L30 29 Z"
+        fill="#312e81"/>
+  <!-- orzeł / gwiazda policyjna uproszczona -->
+  <circle cx="48" cy="44" r="12" fill="#1e1b4b" stroke="#c4b5fd" stroke-width="1.5"/>
+  <circle cx="48" cy="44" r="8" fill="#4c1d95"/>
+  <!-- promienie gwiazdy -->
+  <g fill="#c4b5fd" filter="url(#glow-pol)">
+    <rect x="46.5" y="32" width="3" height="6" rx="1.5"/>
+    <rect x="46.5" y="50" width="3" height="6" rx="1.5"/>
+    <rect x="36"   y="42.5" width="6" height="3" rx="1.5"/>
+    <rect x="54"   y="42.5" width="6" height="3" rx="1.5"/>
+    <rect x="40" y="36" width="3" height="6" rx="1" transform="rotate(45 41.5 39)"/>
+    <rect x="55" y="36" width="3" height="6" rx="1" transform="rotate(-45 56.5 39)"/>
+    <rect x="40" y="47" width="3" height="6" rx="1" transform="rotate(-45 41.5 50)"/>
+    <rect x="55" y="47" width="3" height="6" rx="1" transform="rotate(45 56.5 50)"/>
+  </g>
+  <!-- sygnalizator na dole tarczy -->
+  <rect x="40" y="68" width="16" height="5" rx="2.5" fill="#7c3aed" filter="url(#glow-pol)"/>
+</svg>

@@ -1,0 +1,34 @@
+{
+  "version": "v1",
+  "layers": [
+    {
+      "id": "layer.base.pad",
+      "for": [
+        "default",
+        "day_clear",
+        "night_calm"
+      ]
+    },
+    {
+      "id": "layer.city.pulse",
+      "for": [
+        "default",
+        "challenge_selected"
+      ]
+    },
+    {
+      "id": "layer.weather.stress",
+      "for": [
+        "storm_blackout",
+        "heavy_rain"
+      ]
+    },
+    {
+      "id": "layer.reward.shine",
+      "for": [
+        "reward_popup",
+        "chapter_complete"
+      ]
+    }
+  ]
+}

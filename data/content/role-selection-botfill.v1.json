@@ -1,0 +1,38 @@
+{
+  "missionId": "mission.01.03",
+  "recommendedRole": "dispatcher",
+  "slots": [
+    {
+      "roleId": "operator",
+      "state": "bot_assigned",
+      "occupantId": "bot.operator.alpha",
+      "difficulty": "medium"
+    },
+    {
+      "roleId": "dispatcher",
+      "state": "player_assigned",
+      "occupantId": "player.demo.001",
+      "difficulty": "medium"
+    },
+    {
+      "roleId": "coordinator",
+      "state": "open",
+      "occupantId": null,
+      "difficulty": "high"
+    },
+    {
+      "roleId": "crisis_officer",
+      "state": "bot_assigned",
+      "occupantId": "bot.crisis.delta",
+      "difficulty": "very_high"
+    }
+  ],
+  "botPreview": {
+    "style": "balanced_support",
+    "expectedWeaknesses": [
+      "late strategic swaps",
+      "slower risk escalation"
+    ],
+    "summaryKey": "bot.preview.balanced_support"
+  }
+}

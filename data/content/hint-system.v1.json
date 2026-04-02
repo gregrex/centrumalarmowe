@@ -1,0 +1,18 @@
+{
+  "hintGroups": [
+    {
+      "id": "map-basics",
+      "trigger": "first_open_map",
+      "messages": [
+        "Dotknij incydentu, aby zobaczyć szczegóły."
+      ]
+    },
+    {
+      "id": "retry-coach",
+      "trigger": "post_report_partial",
+      "messages": [
+        "Zostaw jedną jednostkę w rezerwie."
+      ]
+    }
+  ]
+}

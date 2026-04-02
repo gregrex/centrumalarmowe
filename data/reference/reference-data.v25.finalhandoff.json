@@ -1,0 +1,9 @@
+{
+  "version": "v25",
+  "dictionaryGroups": [
+    "build_state",
+    "store_compliance_state",
+    "feedback_severity",
+    "liveops_widget_type"
+  ]
+}

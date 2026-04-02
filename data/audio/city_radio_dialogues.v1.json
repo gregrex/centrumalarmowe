@@ -1,0 +1,24 @@
+{
+  "barks": [
+    {
+      "id": "radio.ready.ems",
+      "textKey": "radio.ready.ems",
+      "category": "unit_confirmation"
+    },
+    {
+      "id": "radio.bot.assigned",
+      "textKey": "radio.bot.assigned",
+      "category": "bot_assigned"
+    },
+    {
+      "id": "radio.route.delay",
+      "textKey": "radio.route.delay",
+      "category": "warning"
+    },
+    {
+      "id": "radio.team.ready",
+      "textKey": "radio.team.ready",
+      "category": "mission_ready"
+    }
+  ]
+}

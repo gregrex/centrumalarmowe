@@ -1,0 +1,10 @@
+{
+  "nextMissionId": "chapter02.mission03",
+  "title": "Blackout in the Old Town",
+  "hook": "Weather damage escalates into grid instability.",
+  "recommendedUnits": [
+    "ems.alpha",
+    "fire.bravo",
+    "police.delta"
+  ]
+}

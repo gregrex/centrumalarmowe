@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "sections": [
+    {
+      "id": "settings.audio",
+      "labelKey": "settings.audio",
+      "options": [
+        "master",
+        "music",
+        "sfx",
+        "radio",
+        "ducking",
+        "haptics"
+      ]
+    },
+    {
+      "id": "settings.accessibility",
+      "labelKey": "settings.accessibility",
+      "options": [
+        "fontScale",
+        "highContrast",
+        "colorblind",
+        "reducedMotion",
+        "leftHandMode",
+        "captions"
+      ]
+    },
+    {
+      "id": "settings.controls",
+      "labelKey": "settings.controls",
+      "options": [
+        "tapSize",
+        "confirmDispatch",
+        "dragMode",
+        "holdToConfirm"
+      ]
+    },
+    {
+      "id": "settings.data",
+      "labelKey": "settings.data",
+      "options": [
+        "analytics",
+        "cloudSync",
+        "clearCache"
+      ]
+    }
+  ]
+}

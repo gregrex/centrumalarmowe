@@ -1,0 +1,18 @@
+{
+  "musicStates": [
+    "briefing_low_tension",
+    "briefing_storm_focus",
+    "readiness_countdown"
+  ],
+  "sfx": [
+    "briefing_page_sweep",
+    "role_lock_soft",
+    "ready_toggle",
+    "all_ready_confirm"
+  ],
+  "voices": [
+    "briefing.line.001",
+    "briefing.line.002",
+    "readiness.warning.001"
+  ]
+}

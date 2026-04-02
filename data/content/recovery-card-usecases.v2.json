@@ -1,0 +1,41 @@
+{
+  "version": "v18",
+  "cards": [
+    {
+      "id": "recovery.card.route_clearance",
+      "trigger": "route.blocked",
+      "severity": "critical",
+      "role": "dispatcher",
+      "options": [
+        {
+          "id": "opt.police_clear",
+          "effect": "route_clear_fast",
+          "risk": "medium"
+        },
+        {
+          "id": "opt.fire_reroute",
+          "effect": "route_longer_safe",
+          "risk": "low"
+        }
+      ]
+    },
+    {
+      "id": "recovery.card.ems_gap",
+      "trigger": "unit.delayed",
+      "severity": "high",
+      "role": "coordinator",
+      "options": [
+        {
+          "id": "opt.call_backup",
+          "effect": "extra_unit",
+          "risk": "resource_cost"
+        },
+        {
+          "id": "opt.delay_minor",
+          "effect": "free_local_unit",
+          "risk": "reputation_drop"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "cityId": "city.nowogrod",
+  "presetId": "map.v1.quickplay",
+  "nodes": [
+    {
+      "nodeId": "zone.central",
+      "labelKey": "zone.central",
+      "typeId": "district.center",
+      "x": 0.5,
+      "y": 0.36
+    },
+    {
+      "nodeId": "zone.residential.north",
+      "labelKey": "zone.residential.north",
+      "typeId": "residential.cluster",
+      "x": 0.32,
+      "y": 0.18
+    },
+    {
+      "nodeId": "zone.industrial.east",
+      "labelKey": "zone.industrial.east",
+      "typeId": "industrial.site",
+      "x": 0.78,
+      "y": 0.42
+    },
+    {
+      "nodeId": "station.medical.1",
+      "labelKey": "station.medical.1",
+      "typeId": "station.medical",
+      "x": 0.44,
+      "y": 0.52
+    },
+    {
+      "nodeId": "station.fire.1",
+      "labelKey": "station.fire.1",
+      "typeId": "station.fire",
+      "x": 0.67,
+      "y": 0.56
+    },
+    {
+      "nodeId": "station.police.1",
+      "labelKey": "station.police.1",
+      "typeId": "station.police",
+      "x": 0.58,
+      "y": 0.22
+    }
+  ],
+  "connections": [
+    {
+      "connectionId": "c1",
+      "fromNodeId": "station.medical.1",
+      "toNodeId": "zone.central",
+      "typeId": "road.primary"
+    },
+    {
+      "connectionId": "c2",
+      "fromNodeId": "station.fire.1",
+      "toNodeId": "zone.industrial.east",
+      "typeId": "road.primary"
+    },
+    {
+      "connectionId": "c3",
+      "fromNodeId": "station.police.1",
+      "toNodeId": "zone.central",
+      "typeId": "road.secondary"
+    },
+    {
+      "connectionId": "c4",
+      "fromNodeId": "zone.central",
+      "toNodeId": "zone.residential.north",
+      "typeId": "road.secondary"
+    },
+    {
+      "connectionId": "c5",
+      "fromNodeId": "zone.central",
+      "toNodeId": "zone.industrial.east",
+      "typeId": "road.primary"
+    }
+  ],
+  "legend": [
+    {
+      "id": "medical",
+      "iconId": "marker.medical"
+    },
+    {
+      "id": "fire",
+      "iconId": "marker.fire"
+    },
+    {
+      "id": "police",
+      "iconId": "marker.police"
+    },
+    {
+      "id": "critical",
+      "iconId": "marker.critical"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReferenceDataBundle",
+  "type": "object",
+  "required": [
+    "version",
+    "groups",
+    "texts"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "generatedBy": {
+      "type": "string"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    },
+    "texts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "group": {
+      "type": "object",
+      "required": [
+        "groupId",
+        "entries"
+      ],
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entry"
+          }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "id",
+        "labelKey",
+        "sort"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "labelKey": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

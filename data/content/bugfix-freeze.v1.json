@@ -1,0 +1,20 @@
+{
+  "freezeLabel": "v26_bugfix_freeze",
+  "allowedChanges": [
+    "p0_bugfix",
+    "p1_readability_fix",
+    "audio_mix_fix",
+    "blocking_input_fix"
+  ],
+  "blockedChanges": [
+    "new_mode",
+    "new_mission",
+    "network_refactor",
+    "ui_relayout_large"
+  ],
+  "owners": [
+    "tech_lead",
+    "qa_lead",
+    "design_lead"
+  ]
+}

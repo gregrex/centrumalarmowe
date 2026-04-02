@@ -1,0 +1,74 @@
+{
+  "groups": [
+    {
+      "groupId": "route.warning",
+      "entries": [
+        {
+          "id": "route.warning.none",
+          "labelKey": "route.warning.none",
+          "order": 1
+        },
+        {
+          "id": "route.warning.traffic",
+          "labelKey": "route.warning.traffic",
+          "order": 2
+        },
+        {
+          "id": "route.warning.blocked",
+          "labelKey": "route.warning.blocked",
+          "order": 3
+        },
+        {
+          "id": "route.warning.detour",
+          "labelKey": "route.warning.detour",
+          "order": 4
+        }
+      ]
+    },
+    {
+      "groupId": "shared.action.type",
+      "entries": [
+        {
+          "id": "shared.escalate.major-incident",
+          "labelKey": "shared.escalate.major-incident",
+          "order": 1
+        },
+        {
+          "id": "shared.reallocate.cross-district",
+          "labelKey": "shared.reallocate.cross-district",
+          "order": 2
+        },
+        {
+          "id": "shared.lock.high-priority-lane",
+          "labelKey": "shared.lock.high-priority-lane",
+          "order": 3
+        }
+      ]
+    },
+    {
+      "groupId": "unit.status.summary",
+      "entries": [
+        {
+          "id": "unit.status.free",
+          "labelKey": "unit.status.free",
+          "order": 1
+        },
+        {
+          "id": "unit.status.busy",
+          "labelKey": "unit.status.busy",
+          "order": 2
+        },
+        {
+          "id": "unit.status.delayed",
+          "labelKey": "unit.status.delayed",
+          "order": 3
+        },
+        {
+          "id": "unit.status.unavailable",
+          "labelKey": "unit.status.unavailable",
+          "order": 4
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "operator": [
+    "incoming_call_bed",
+    "priority_confirm_beep",
+    "critical_escalation_pulse"
+  ],
+  "dispatcher": [
+    "assign_click",
+    "route_preview_swish",
+    "reroute_warning"
+  ],
+  "global": [
+    "resolve_success",
+    "resolve_partial",
+    "resolve_fail",
+    "retry_recommendation"
+  ]
+}

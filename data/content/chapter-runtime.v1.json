@@ -1,0 +1,40 @@
+{
+  "activeChapterId": "chapter.01",
+  "cameraFocusNodeId": "mission.01.03",
+  "chapters": [
+    {
+      "chapterId": "chapter.01",
+      "titleKey": "chapter.01.title",
+      "completion": 0.72,
+      "weatherPreset": "storm_night"
+    },
+    {
+      "chapterId": "chapter.02",
+      "titleKey": "chapter.02.title",
+      "completion": 0.18,
+      "weatherPreset": "city_dawn"
+    }
+  ],
+  "nodeStates": [
+    {
+      "missionId": "mission.01.01",
+      "state": "completed_three_stars",
+      "stars": 3
+    },
+    {
+      "missionId": "mission.01.02",
+      "state": "completed_two_stars",
+      "stars": 2
+    },
+    {
+      "missionId": "mission.01.03",
+      "state": "active",
+      "stars": 0
+    },
+    {
+      "missionId": "mission.01.04",
+      "state": "locked",
+      "stars": 0
+    }
+  ]
+}

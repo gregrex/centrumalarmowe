@@ -1,0 +1,21 @@
+{
+  "style": "premium 2d emergency dispatch game, stylized realistic, mobile readable",
+  "packs": [
+    {
+      "id": "runtime_scene_downtown_rain",
+      "prompt": "premium 2d emergency dispatch city map scene, rainy downtown, readable roads, reflective puddles, atlas friendly, no text"
+    },
+    {
+      "id": "runtime_scene_bridge_blackout",
+      "prompt": "premium 2d emergency dispatch bridge sector, partial blackout, warning lights, clear silhouettes, mobile readable"
+    },
+    {
+      "id": "report_room_success",
+      "prompt": "premium 2d dispatch command report room, calm blue monitors, reward reveal desk, clean dark ui compatible"
+    },
+    {
+      "id": "hero_ambulance_runtime",
+      "prompt": "premium 2d ambulance top-down and 3/4 card, clean silhouette, emergency dispatch game asset, no logos"
+    }
+  ]
+}

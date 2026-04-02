@@ -1,0 +1,11 @@
+{
+  "route": [
+    "home_calm",
+    "briefing_focus",
+    "runtime_mid",
+    "runtime_peak",
+    "recovery_focus",
+    "report_partial"
+  ],
+  "fallback": "retry_prep"
+}

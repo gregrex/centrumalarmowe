@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-oo">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#050a12"/>
+  <!-- lewa połowa – ONLINE (zielona) -->
+  <rect x="4" y="4" width="60" height="120" rx="24" fill="#021407"/>
+  <rect x="54" y="4" width="14" height="120" fill="#021407"/>
+  <!-- prawa połowa – OFFLINE (szara) -->
+  <rect x="64" y="4" width="60" height="120" rx="24" fill="#0c0c0c"/>
+  <rect x="64" y="4" width="14" height="120" fill="#0c0c0c"/>
+  <!-- separator centralny -->
+  <line x1="64" y1="14" x2="64" y2="114" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <!-- ONLINE – ikona WiFi/signal -->
+  <g fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" filter="url(#glow-oo)">
+    <path d="M34 60 C26 52 26 44 34 36 C42 28 56 28 64 36"/>
+    <path d="M34 60 C29 55 29 49 34 44 C39 39 49 39 54 44"/>
+    <circle cx="44" cy="62" r="4" fill="#22c55e"/>
+  </g>
+  <text x="34" y="100" font-size="10" font-weight="700" font-family="Arial" fill="#22c55e"
+        text-anchor="middle" letter-spacing="1">ONLINE</text>
+  <!-- OFFLINE – ikona przekreślona / brak sygnału -->
+  <g stroke="rgba(255,255,255,0.2)" stroke-width="3" stroke-linecap="round">
+    <path d="M84 60 C76 52 76 44 84 36 C92 28 106 28 114 36"/>
+    <path d="M84 60 C79 55 79 49 84 44 C89 39 99 39 104 44"/>
+    <circle cx="94" cy="62" r="4" fill="rgba(255,255,255,0.3)"/>
+  </g>
+  <!-- przekreślenie offline -->
+  <line x1="75" y1="30" x2="113" y2="75" stroke="#ef4444" stroke-width="3" stroke-linecap="round" filter="url(#glow-oo)" opacity=".8"/>
+  <text x="94" y="100" font-size="10" font-weight="700" font-family="Arial" fill="rgba(255,255,255,0.3)"
+        text-anchor="middle" letter-spacing="1">OFFLINE</text>
+  <!-- aktywny wskaźnik (strzałka na ONLINE) -->
+  <polygon points="64,54 70,64 64,74 58,64" fill="#22c55e" filter="url(#glow-oo)" opacity=".9"/>
+</svg>

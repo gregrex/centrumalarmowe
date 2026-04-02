@@ -1,0 +1,18 @@
+{
+  "culture": "pl-PL",
+  "entries": {
+    "role.operator.name": "Operator zgłoszeń",
+    "role.dispatcher.name": "Dyspozytor jednostek",
+    "role.coordinator.name": "Koordynator operacyjny",
+    "role.crisis_officer.name": "Oficer kryzysowy",
+    "incident.medical.name": "Medyczne",
+    "incident.fire.name": "Pożarowe",
+    "incident.police.name": "Policyjne",
+    "incident.infrastructure.name": "Infrastrukturalne",
+    "incident.special.name": "Specjalne",
+    "hud.alert.critical": "ALERT KRYTYCZNY",
+    "hud.bot.active": "BOT aktywny",
+    "session.status.connected": "Połączono",
+    "session.status.reconnecting": "Ponowne łączenie"
+  }
+}

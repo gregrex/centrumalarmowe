@@ -1,0 +1,42 @@
+{
+  "bands": [
+    {
+      "id": "stable",
+      "min": 0,
+      "max": 24
+    },
+    {
+      "id": "elevated",
+      "min": 25,
+      "max": 49
+    },
+    {
+      "id": "critical",
+      "min": 50,
+      "max": 79
+    },
+    {
+      "id": "collapse_risk",
+      "min": 80,
+      "max": 100
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "traffic_heavy",
+      "delta": 8
+    },
+    {
+      "id": "weather_rain",
+      "delta": 4
+    },
+    {
+      "id": "media_spike",
+      "delta": 6
+    },
+    {
+      "id": "successful_dispatch",
+      "delta": -5
+    }
+  ]
+}

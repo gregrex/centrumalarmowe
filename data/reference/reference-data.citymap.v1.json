@@ -1,0 +1,89 @@
+{
+  "groups": [
+    {
+      "groupId": "city.node.type",
+      "entries": [
+        {
+          "id": "district.center",
+          "value": "district.center",
+          "labelKey": "dict.city.node.district.center"
+        },
+        {
+          "id": "residential.cluster",
+          "value": "residential.cluster",
+          "labelKey": "dict.city.node.residential.cluster"
+        },
+        {
+          "id": "industrial.site",
+          "value": "industrial.site",
+          "labelKey": "dict.city.node.industrial.site"
+        },
+        {
+          "id": "station.medical",
+          "value": "station.medical",
+          "labelKey": "dict.city.node.station.medical"
+        },
+        {
+          "id": "station.fire",
+          "value": "station.fire",
+          "labelKey": "dict.city.node.station.fire"
+        },
+        {
+          "id": "station.police",
+          "value": "station.police",
+          "labelKey": "dict.city.node.station.police"
+        }
+      ]
+    },
+    {
+      "groupId": "dispatch.unit.type",
+      "entries": [
+        {
+          "id": "dispatch.unit.type.ambulance",
+          "value": "ambulance",
+          "labelKey": "dict.unit.ambulance"
+        },
+        {
+          "id": "dispatch.unit.type.firetruck",
+          "value": "firetruck",
+          "labelKey": "dict.unit.firetruck"
+        },
+        {
+          "id": "dispatch.unit.type.policecar",
+          "value": "policecar",
+          "labelKey": "dict.unit.policecar"
+        }
+      ]
+    },
+    {
+      "groupId": "incident.action.type",
+      "entries": [
+        {
+          "id": "action.dispatch.ambulance",
+          "value": "dispatch_ambulance",
+          "labelKey": "dict.action.dispatch.ambulance"
+        },
+        {
+          "id": "action.dispatch.fire",
+          "value": "dispatch_fire",
+          "labelKey": "dict.action.dispatch.fire"
+        },
+        {
+          "id": "action.dispatch.police",
+          "value": "dispatch_police",
+          "labelKey": "dict.action.dispatch.police"
+        },
+        {
+          "id": "action.request.backup",
+          "value": "request_backup",
+          "labelKey": "dict.action.request.backup"
+        },
+        {
+          "id": "action.monitor",
+          "value": "monitor",
+          "labelKey": "dict.action.monitor"
+        }
+      ]
+    }
+  ]
+}

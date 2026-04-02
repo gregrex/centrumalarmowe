@@ -1,0 +1,31 @@
+{
+  "grades": [
+    "S",
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "rewards": [
+    {
+      "id": "reward.credit.01",
+      "type": "credits",
+      "amount": 120
+    },
+    {
+      "id": "reward.badge.response",
+      "type": "badge",
+      "amount": 1
+    },
+    {
+      "id": "reward.cosmetic.banner",
+      "type": "cosmetic",
+      "amount": 1
+    }
+  ],
+  "ctas": [
+    "continue",
+    "retry",
+    "back_home"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "version": "1.1.0",
+  "generatedBy": "AgentPack_v4",
+  "groups": [
+    {
+      "groupId": "roles",
+      "entries": [
+        {
+          "id": "role.operator",
+          "labelKey": "role.operator",
+          "sort": 1
+        },
+        {
+          "id": "role.dispatcher",
+          "labelKey": "role.dispatcher",
+          "sort": 2
+        },
+        {
+          "id": "role.coordinator",
+          "labelKey": "role.coordinator",
+          "sort": 3
+        },
+        {
+          "id": "role.crisis_officer",
+          "labelKey": "role.crisis_officer",
+          "sort": 4
+        }
+      ]
+    },
+    {
+      "groupId": "incident.categories",
+      "entries": [
+        {
+          "id": "incident.medical",
+          "labelKey": "incident.medical",
+          "sort": 1
+        },
+        {
+          "id": "incident.fire",
+          "labelKey": "incident.fire",
+          "sort": 2
+        },
+        {
+          "id": "incident.police",
+          "labelKey": "incident.police",
+          "sort": 3
+        },
+        {
+          "id": "incident.infrastructure",
+          "labelKey": "incident.infrastructure",
+          "sort": 4
+        }
+      ]
+    },
+    {
+      "groupId": "unit.types",
+      "entries": [
+        {
+          "id": "unit.ambulance.basic",
+          "labelKey": "unit.ambulance.basic",
+          "sort": 1
+        },
+        {
+          "id": "unit.ambulance.advanced",
+          "labelKey": "unit.ambulance.advanced",
+          "sort": 2
+        },
+        {
+          "id": "unit.fire.engine",
+          "labelKey": "unit.fire.engine",
+          "sort": 3
+        },
+        {
+          "id": "unit.police.patrol",
+          "labelKey": "unit.police.patrol",
+          "sort": 4
+        },
+        {
+          "id": "unit.tech.support",
+          "labelKey": "unit.tech.support",
+          "sort": 5
+        }
+      ]
+    },
+    {
+      "groupId": "status.alerts",
+      "entries": [
+        {
+          "id": "alert.normal",
+          "labelKey": "alert.normal",
+          "sort": 1
+        },
+        {
+          "id": "alert.warning",
+          "labelKey": "alert.warning",
+          "sort": 2
+        },
+        {
+          "id": "alert.critical",
+          "labelKey": "alert.critical",
+          "sort": 3
+        }
+      ]
+    }
+  ],
+  "texts": {
+    "role.operator": "Operator zgłoszeń",
+    "role.dispatcher": "Dyspozytor jednostek",
+    "role.coordinator": "Koordynator operacyjny",
+    "role.crisis_officer": "Oficer kryzysowy",
+    "incident.medical": "Medyczne",
+    "incident.fire": "Pożarowe",
+    "incident.police": "Policyjne",
+    "incident.infrastructure": "Infrastrukturalne",
+    "unit.ambulance.basic": "Karetka podstawowa",
+    "unit.ambulance.advanced": "Karetka specjalistyczna",
+    "unit.fire.engine": "Wóz gaśniczy",
+    "unit.police.patrol": "Patrol policji",
+    "unit.tech.support": "Wsparcie techniczne",
+    "alert.normal": "Normalny",
+    "alert.warning": "Ostrzeżenie",
+    "alert.critical": "Krytyczny",
+    "ui.screen.lobby.title": "Lobby sesji",
+    "ui.screen.queue.title": "Kolejka matchmaking",
+    "ui.button.quick_play": "Szybka gra",
+    "ui.button.ready": "Gotowy",
+    "ui.button.start": "Start",
+    "ui.button.take_over": "Przejmij rolę"
+  }
+}

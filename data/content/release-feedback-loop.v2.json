@@ -1,0 +1,31 @@
+{
+  "stages": [
+    {
+      "id": "preview_build",
+      "owner": "engineer",
+      "goal": "create installable build"
+    },
+    {
+      "id": "focused_playtest",
+      "owner": "qa",
+      "goal": "validate one mission showcase"
+    },
+    {
+      "id": "triage",
+      "owner": "producer",
+      "goal": "classify blockers and polish tasks"
+    },
+    {
+      "id": "freeze_patch",
+      "owner": "tech_lead",
+      "goal": "ship only approved fixes"
+    }
+  ],
+  "feedbackFields": [
+    "readability",
+    "dispatch_confidence",
+    "route_clarity",
+    "audio_fatigue",
+    "retry_value"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "missionId": "mission.demo.17",
+  "variants": [
+    {
+      "id": "report.success",
+      "state": "success",
+      "scene": "report_room.clean_night",
+      "rewardReveal": "badge_responder_bronze",
+      "music": "debrief_resolve"
+    },
+    {
+      "id": "report.partial",
+      "state": "partial",
+      "scene": "report_room.neutral_night",
+      "rewardReveal": "token_ops_small",
+      "music": "debrief_neutral"
+    },
+    {
+      "id": "report.fail",
+      "state": "fail",
+      "scene": "report_room.dim_alert",
+      "rewardReveal": "none",
+      "music": "debrief_fail"
+    }
+  ]
+}

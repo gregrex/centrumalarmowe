@@ -1,0 +1,25 @@
+{
+  "roundId": "round.demo.001",
+  "phase": "round.phase.alert-window",
+  "durationSeconds": 180,
+  "primaryObjective": "objective.keep-critical-under-control",
+  "roles": [
+    "role.operator",
+    "role.dispatcher",
+    "role.coordinator",
+    "role.crisis-officer"
+  ],
+  "incidents": [
+    "inc.medical.001",
+    "inc.fire.002",
+    "inc.medical.004"
+  ],
+  "sharedActions": [
+    "shared.confirm.priority-shift"
+  ],
+  "successThresholds": {
+    "criticalResolved": 1,
+    "timeoutMax": 1,
+    "sharedActionsAcked": 1
+  }
+}

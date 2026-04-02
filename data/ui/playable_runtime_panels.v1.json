@@ -1,0 +1,24 @@
+{
+  "panels": [
+    {
+      "id": "runtime.incidents",
+      "anchor": "left"
+    },
+    {
+      "id": "runtime.map",
+      "anchor": "center"
+    },
+    {
+      "id": "runtime.units",
+      "anchor": "right"
+    },
+    {
+      "id": "runtime.objectives",
+      "anchor": "top"
+    },
+    {
+      "id": "runtime.actions",
+      "anchor": "bottom"
+    }
+  ]
+}

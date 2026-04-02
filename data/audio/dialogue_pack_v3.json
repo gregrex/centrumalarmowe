@@ -1,0 +1,24 @@
+{
+  "dialogues": [
+    {
+      "id": "briefing.line.001",
+      "text": "Mamy kolejną falę zgłoszeń. Utrzymaj priorytety."
+    },
+    {
+      "id": "briefing.line.002",
+      "text": "Burza odcina zachodni sektor. Uważaj na ETA."
+    },
+    {
+      "id": "readiness.warning.001",
+      "text": "Brakuje koordynatora. Bot może przejąć slot."
+    },
+    {
+      "id": "report.line.001",
+      "text": "Dobra robota. Straty ograniczone."
+    },
+    {
+      "id": "report.line.002",
+      "text": "Za dużo opóźnień. Wróć do briefingu i popraw skład."
+    }
+  ]
+}

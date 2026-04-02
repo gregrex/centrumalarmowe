@@ -1,0 +1,36 @@
+{
+  "sessionId": "DEMO112",
+  "incidentId": "inc.fire.002",
+  "unitId": "unit.fire.01",
+  "heatmapPreset": "heatmap.core.traffic-heavy",
+  "segments": [
+    {
+      "segmentId": "seg.001",
+      "fromNodeId": "station.fire.1",
+      "toNodeId": "cross.central.1",
+      "style": "overlay.style.normal",
+      "isCritical": false,
+      "trafficLevel": 2
+    },
+    {
+      "segmentId": "seg.002",
+      "fromNodeId": "cross.central.1",
+      "toNodeId": "bridge.north",
+      "style": "overlay.style.warning",
+      "isCritical": false,
+      "trafficLevel": 4
+    },
+    {
+      "segmentId": "seg.003",
+      "fromNodeId": "bridge.north",
+      "toNodeId": "zone.residential.north",
+      "style": "overlay.style.critical",
+      "isCritical": true,
+      "trafficLevel": 5
+    }
+  ],
+  "warningCodes": [
+    "route.warning.traffic",
+    "route.warning.narrow-access"
+  ]
+}

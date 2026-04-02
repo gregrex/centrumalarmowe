@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "routes": [
+    {
+      "from": "menu.home",
+      "to": "menu.campaign",
+      "music": "menu.campaign.focus",
+      "stinger": "stinger.campaign.enter"
+    },
+    {
+      "from": "menu.campaign",
+      "to": "menu.mission_entry",
+      "music": "menu.mission.tight",
+      "stinger": "stinger.mission.open"
+    },
+    {
+      "from": "menu.mission_entry",
+      "to": "session.round",
+      "music": "session.prep.rise",
+      "stinger": "stinger.round.start"
+    },
+    {
+      "from": "menu.mission_entry",
+      "to": "menu.coop",
+      "music": "menu.coop.anticipation",
+      "stinger": "stinger.coop.queue"
+    }
+  ]
+}

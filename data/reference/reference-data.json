@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "roles": [
+    {
+      "id": "role.operator",
+      "nameKey": "role.operator.name",
+      "accent": "cyan"
+    },
+    {
+      "id": "role.dispatcher",
+      "nameKey": "role.dispatcher.name",
+      "accent": "blue"
+    },
+    {
+      "id": "role.coordinator",
+      "nameKey": "role.coordinator.name",
+      "accent": "amber"
+    },
+    {
+      "id": "role.crisis_officer",
+      "nameKey": "role.crisis_officer.name",
+      "accent": "red"
+    }
+  ],
+  "incidentCategories": [
+    {
+      "id": "incident.medical",
+      "nameKey": "incident.medical.name"
+    },
+    {
+      "id": "incident.fire",
+      "nameKey": "incident.fire.name"
+    },
+    {
+      "id": "incident.police",
+      "nameKey": "incident.police.name"
+    },
+    {
+      "id": "incident.infrastructure",
+      "nameKey": "incident.infrastructure.name"
+    },
+    {
+      "id": "incident.special",
+      "nameKey": "incident.special.name"
+    }
+  ],
+  "unitTypes": [
+    {
+      "id": "unit.ambulance.basic",
+      "category": "medical"
+    },
+    {
+      "id": "unit.fire.engine",
+      "category": "fire"
+    },
+    {
+      "id": "unit.police.patrol",
+      "category": "police"
+    },
+    {
+      "id": "unit.command.mobile",
+      "category": "special"
+    }
+  ],
+  "severities": [
+    {
+      "id": "severity.low",
+      "weight": 1
+    },
+    {
+      "id": "severity.medium",
+      "weight": 2
+    },
+    {
+      "id": "severity.high",
+      "weight": 3
+    },
+    {
+      "id": "severity.critical",
+      "weight": 4
+    }
+  ],
+  "weather": [
+    {
+      "id": "weather.clear"
+    },
+    {
+      "id": "weather.rain"
+    },
+    {
+      "id": "weather.heavy_rain"
+    },
+    {
+      "id": "weather.storm"
+    },
+    {
+      "id": "weather.heatwave"
+    }
+  ]
+}

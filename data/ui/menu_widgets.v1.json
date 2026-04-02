@@ -1,0 +1,40 @@
+{
+  "widgets": [
+    {
+      "id": "widget.continue_session",
+      "title": "Continue Session",
+      "priority": "primary",
+      "screen": "menu.home"
+    },
+    {
+      "id": "widget.quick_play",
+      "title": "Quick Play",
+      "priority": "primary",
+      "screen": "menu.home"
+    },
+    {
+      "id": "widget.campaign_progress",
+      "title": "Campaign",
+      "priority": "secondary",
+      "screen": "menu.home"
+    },
+    {
+      "id": "widget.coop_party",
+      "title": "Coop",
+      "priority": "secondary",
+      "screen": "menu.home"
+    },
+    {
+      "id": "widget.daily_challenge",
+      "title": "Daily Challenge",
+      "priority": "secondary",
+      "screen": "menu.home"
+    },
+    {
+      "id": "widget.reward_inbox",
+      "title": "Rewards",
+      "priority": "supporting",
+      "screen": "menu.home"
+    }
+  ]
+}

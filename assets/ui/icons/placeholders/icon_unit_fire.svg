@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <defs>
+    <radialGradient id="fg" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#ff8c42"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </radialGradient>
+    <filter id="glow-fire">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- tło -->
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#1a0505" stroke="#ef4444" stroke-width="2.5"/>
+  <!-- karoseria wozu -->
+  <rect x="10" y="44" width="60" height="26" rx="5" fill="#dc2626"/>
+  <!-- kabina kierowcy -->
+  <rect x="62" y="38" width="22" height="32" rx="5" fill="#b91c1c"/>
+  <!-- okno kabiny -->
+  <rect x="65" y="41" width="10" height="10" rx="2" fill="#bfdbfe" opacity=".85"/>
+  <!-- zbiornik / drabina montaż -->
+  <rect x="12" y="38" width="50" height="8" rx="3" fill="#991b1b"/>
+  <!-- drabina -->
+  <rect x="14" y="28" width="46" height="4" rx="1.5" fill="#7f1d1d" stroke="#ef4444" stroke-width="0.8"/>
+  <line x1="20" y1="28" x2="20" y2="32" stroke="#fca5a5" stroke-width="1.2"/>
+  <line x1="30" y1="28" x2="30" y2="32" stroke="#fca5a5" stroke-width="1.2"/>
+  <line x1="40" y1="28" x2="40" y2="32" stroke="#fca5a5" stroke-width="1.2"/>
+  <line x1="50" y1="28" x2="50" y2="32" stroke="#fca5a5" stroke-width="1.2"/>
+  <!-- koła -->
+  <circle cx="28" cy="72" r="8" fill="#111" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="28" cy="72" r="4" fill="#374151"/>
+  <circle cx="62" cy="72" r="8" fill="#111" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="62" cy="72" r="4" fill="#374151"/>
+  <!-- sygnalizator dachowy -->
+  <rect x="64" y="34" width="12" height="5" rx="2.5" fill="url(#fg)" filter="url(#glow-fire)"/>
+  <!-- numer 112 -->
+  <text x="35" y="62" font-size="9" font-weight="700" font-family="Arial" fill="#fff" text-anchor="middle">112</text>
+</svg>

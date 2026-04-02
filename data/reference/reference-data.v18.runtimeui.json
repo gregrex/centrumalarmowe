@@ -1,0 +1,25 @@
+{
+  "version": "v18",
+  "categories": [
+    {
+      "id": "runtime_hud_panel",
+      "count": 5
+    },
+    {
+      "id": "recovery_trigger",
+      "count": 6
+    },
+    {
+      "id": "fail_branch_type",
+      "count": 4
+    },
+    {
+      "id": "retry_hint_type",
+      "count": 3
+    },
+    {
+      "id": "music_route_state",
+      "count": 6
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "layouts": [
+    {
+      "role": "Operator",
+      "panels": [
+        "call",
+        "summary",
+        "alerts",
+        "history"
+      ]
+    },
+    {
+      "role": "Dispatcher",
+      "panels": [
+        "map",
+        "incidents",
+        "units",
+        "recommendations"
+      ]
+    },
+    {
+      "role": "Coordinator",
+      "panels": [
+        "kpi",
+        "timeline",
+        "risks",
+        "decisions"
+      ]
+    },
+    {
+      "role": "CrisisOfficer",
+      "panels": [
+        "infrastructure",
+        "reserves",
+        "globalAlerts",
+        "botControl"
+      ]
+    }
+  ]
+}

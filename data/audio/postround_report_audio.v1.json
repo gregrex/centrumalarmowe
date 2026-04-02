@@ -1,0 +1,19 @@
+{
+  "gradeStingers": [
+    "grade_A_stinger",
+    "grade_B_stinger",
+    "grade_C_stinger",
+    "grade_fail_stinger"
+  ],
+  "rewardSfx": [
+    "star_reveal",
+    "medal_drop",
+    "unlock_soft",
+    "unlock_epic",
+    "xp_fill_loop"
+  ],
+  "ambience": [
+    "report_success_mild",
+    "report_failure_tense"
+  ]
+}

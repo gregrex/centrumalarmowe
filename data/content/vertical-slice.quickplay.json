@@ -1,0 +1,14 @@
+{
+  "version": "v5",
+  "sceneId": "scene.quickplay.verticalslice",
+  "defaultDifficulty": "normal",
+  "preferredRole": "role.operator",
+  "autoFillBots": true,
+  "missionPackId": "missionpack.vslice.001",
+  "startingPressure": 18,
+  "startingIncidents": [
+    "incident.medical.busdriver_unconscious",
+    "incident.fire.kitchen_apartment",
+    "incident.police.domestic_violence"
+  ]
+}

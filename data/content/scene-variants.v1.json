@@ -1,0 +1,47 @@
+{
+  "version": "v1",
+  "themes": [
+    {
+      "id": "scene.menu.city_day.default",
+      "label": "City Day",
+      "timeOfDay": "day",
+      "weather": "clear",
+      "parallaxPreset": "parallax.city_day"
+    },
+    {
+      "id": "scene.menu.city_night.default",
+      "label": "City Night",
+      "timeOfDay": "night",
+      "weather": "clear",
+      "parallaxPreset": "parallax.city_night"
+    },
+    {
+      "id": "scene.menu.rain_alert.default",
+      "label": "Rain Alert",
+      "timeOfDay": "dusk",
+      "weather": "rain",
+      "parallaxPreset": "parallax.rain_alert"
+    },
+    {
+      "id": "scene.menu.storm_response.default",
+      "label": "Storm Response",
+      "timeOfDay": "night",
+      "weather": "storm",
+      "parallaxPreset": "parallax.storm_response"
+    },
+    {
+      "id": "scene.menu.winter_freeze.default",
+      "label": "Winter Freeze",
+      "timeOfDay": "day",
+      "weather": "snow",
+      "parallaxPreset": "parallax.winter_freeze"
+    },
+    {
+      "id": "scene.menu.blackout.default",
+      "label": "Blackout",
+      "timeOfDay": "night",
+      "weather": "blackout",
+      "parallaxPreset": "parallax.blackout"
+    }
+  ]
+}

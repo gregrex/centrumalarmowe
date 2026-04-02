@@ -1,0 +1,34 @@
+{
+  "severity": [
+    "P0",
+    "P1",
+    "P2",
+    "P3"
+  ],
+  "areas": [
+    "home",
+    "onboarding",
+    "runtime",
+    "report_room",
+    "retry_next",
+    "audio",
+    "capture_mode"
+  ],
+  "checks": [
+    {
+      "id": "bb.home.cta",
+      "label": "Home CTA działa",
+      "severity": "P1"
+    },
+    {
+      "id": "bb.runtime.readability",
+      "label": "Runtime HUD czytelny",
+      "severity": "P1"
+    },
+    {
+      "id": "bb.report.flow",
+      "label": "Report room nie blokuje flow",
+      "severity": "P1"
+    }
+  ]
+}

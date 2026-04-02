@@ -1,0 +1,19 @@
+{
+  "panels": [
+    {
+      "id": "rc.banner",
+      "zone": "top",
+      "priority": "high"
+    },
+    {
+      "id": "rc.build_meta",
+      "zone": "footer",
+      "priority": "low"
+    },
+    {
+      "id": "rc.capture_toggle",
+      "zone": "top_right",
+      "priority": "medium"
+    }
+  ]
+}

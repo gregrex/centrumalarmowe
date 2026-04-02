@@ -1,0 +1,24 @@
+{
+  "widgets": [
+    {
+      "id": "widget.timer",
+      "anchor": "top"
+    },
+    {
+      "id": "widget.city_pressure",
+      "anchor": "top"
+    },
+    {
+      "id": "widget.objectives",
+      "anchor": "right"
+    },
+    {
+      "id": "widget.recovery_card",
+      "anchor": "right"
+    },
+    {
+      "id": "widget.dispatch_actions",
+      "anchor": "bottom"
+    }
+  ]
+}

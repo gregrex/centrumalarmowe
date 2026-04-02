@@ -1,0 +1,12 @@
+{
+  "missionId": "showcase.mission.01",
+  "title": "Pierwsza Misja Pokazowa",
+  "recommendedRole": "dispatcher",
+  "beats": [
+    "intro",
+    "dispatch",
+    "recovery",
+    "resolution"
+  ],
+  "estimatedDurationSeconds": 420
+}

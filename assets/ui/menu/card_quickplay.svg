@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg-qp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060b18"/>
+      <stop offset="100%" stop-color="#0e1528"/>
+    </linearGradient>
+    <radialGradient id="urgency-glow" cx="50%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="qp-glow">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="qp-glow-sm">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg-qp)"/>
+
+  <!-- ── URGENCY ATMOSPHERE ─────────────────────────── -->
+  <circle cx="512" cy="580" r="340" fill="url(#urgency-glow)"/>
+
+  <!-- ── ZEGAR ODLICZAJĄCY ──────────────────────────── -->
+  <!-- tarcza zewnętrzna -->
+  <circle cx="512" cy="520" r="200" fill="#0a1020" stroke="rgba(249,115,22,0.3)" stroke-width="3"/>
+  <!-- łuk postępu (3/4 okręgu) -->
+  <circle cx="512" cy="520" r="185" fill="none"
+          stroke="#f97316" stroke-width="12" stroke-linecap="round"
+          stroke-dasharray="872 1164" stroke-dashoffset="-145"
+          filter="url(#qp-glow)"/>
+  <!-- łuk tła szary -->
+  <circle cx="512" cy="520" r="185" fill="none"
+          stroke="rgba(255,255,255,0.06)" stroke-width="12"
+          stroke-dasharray="1164" stroke-dashoffset="-145"/>
+  <!-- sekundy / cyfrowy zegar wewnątrz -->
+  <text x="512" y="500" font-size="100" font-weight="900" font-family="Arial Black, Arial"
+        fill="#f97316" text-anchor="middle" filter="url(#qp-glow)">03</text>
+  <text x="512" y="560" font-size="26" font-family="Arial" fill="rgba(255,255,255,0.45)"
+        text-anchor="middle" letter-spacing="3">minuty</text>
+  <!-- znaki minut na tarczy -->
+  <g stroke="rgba(249,115,22,0.5)" stroke-width="2.5" stroke-linecap="round">
+    <line x1="512" y1="322" x2="512" y2="340"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(30 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(60 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(90 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(120 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(150 512 520)"/>
+    <line x1="512" y1="718" x2="512" y2="700"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(210 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(240 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(270 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(300 512 520)"/>
+    <line x1="700" y1="332" x2="692" y2="347" transform="rotate(330 512 520)"/>
+  </g>
+
+  <!-- ── MARKER INCYDENTU PILNEGO ────────────────────── -->
+  <circle cx="200" cy="750" r="50" fill="#7f1d1d" stroke="#ef4444" stroke-width="3" filter="url(#qp-glow-sm)"/>
+  <circle cx="200" cy="750" r="70" fill="none" stroke="#ef4444" stroke-width="1.5" opacity=".3"/>
+  <text x="200" y="762" font-size="32" font-family="Arial" fill="#fca5a5" text-anchor="middle">🔥</text>
+  <!-- strzałka do markera -->
+  <line x1="312" y1="640" x2="245" y2="705" stroke="#ef4444" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+  <polygon points="245,705 258,692 260,712" fill="#ef4444" opacity=".6"/>
+
+  <!-- ── MARKER MEDYCZNY ─────────────────────────────── -->
+  <circle cx="824" cy="750" r="40" fill="#042028" stroke="#22d3ee" stroke-width="3" filter="url(#qp-glow-sm)"/>
+  <circle cx="824" cy="750" r="58" fill="none" stroke="#22d3ee" stroke-width="1" opacity=".3"/>
+  <text x="824" y="762" font-size="28" font-family="Arial" fill="#67e8f9" text-anchor="middle">🚑</text>
+
+  <!-- ── TYTUŁ ──────────────────────────────────────── -->
+  <rect x="160" y="180" width="704" height="76" rx="16" fill="rgba(0,0,0,0.60)"/>
+  <text x="512" y="234" font-size="54" font-weight="900" font-family="Arial Black, Arial" fill="#d8e0ec"
+        text-anchor="middle" letter-spacing="4">QUICKPLAY</text>
+  <text x="512" y="870" font-size="20" font-family="Arial" fill="rgba(255,255,255,0.40)" text-anchor="middle"
+        letter-spacing="2">BŁYSKAWICZNY START · SOLO I COOP</text>
+
+  <!-- vignette -->
+  <radialGradient id="vig-qp" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.70)"/>
+  </radialGradient>
+  <rect width="1024" height="1024" fill="url(#vig-qp)"/>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "missionId": "mission.demo.17",
+  "branches": [
+    {
+      "id": "fail.primary_objective",
+      "type": "objective_critical_fail",
+      "title": "Primary objective failed",
+      "retryHint": "Prioritize EMS route stabilization earlier."
+    },
+    {
+      "id": "fail.city_pressure",
+      "type": "system_overload",
+      "title": "City pressure collapsed",
+      "retryHint": "Use recovery cards before the second escalation peak."
+    }
+  ]
+}

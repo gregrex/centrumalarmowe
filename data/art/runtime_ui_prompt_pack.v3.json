@@ -1,0 +1,16 @@
+{
+  "style": "premium 2d emergency operations ui",
+  "groups": [
+    "runtime_hud",
+    "recovery_cards",
+    "fail_retry_next",
+    "objective_tracker",
+    "route_overlay"
+  ],
+  "negative": [
+    "childish",
+    "low_contrast",
+    "clutter",
+    "sci_fi_hologram"
+  ]
+}

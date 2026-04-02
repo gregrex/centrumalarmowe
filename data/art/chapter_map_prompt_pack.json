@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "prompts": [
+    {
+      "id": "chapter_map_storm_blackout",
+      "category": "scene",
+      "prompt": "premium 2d mobile chapter map, emergency dispatch city at night, storm blackout, readable nodes, soft parallax skyline, clean silhouettes, no text, no logos, high readability"
+    },
+    {
+      "id": "portrait_dispatcher_steel",
+      "category": "portrait",
+      "prompt": "premium semi-stylized emergency dispatcher portrait, calm focused expression, mobile game profile card, clean rim light, no text, high readability"
+    }
+  ]
+}

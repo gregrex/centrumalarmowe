@@ -1,0 +1,21 @@
+{
+  "style": "premium 2D stylized realism mobile game",
+  "items": [
+    {
+      "id": "scene.menu.city_day.default",
+      "prompt": "top-down mobile emergency operations menu background, modern city day, clean skyline, subtle traffic, premium 2d stylized realism, clear focus area, no text"
+    },
+    {
+      "id": "scene.menu.city_night.default",
+      "prompt": "night emergency operations menu background, city lights, strong contrast routes, premium 2d stylized realism, no text"
+    },
+    {
+      "id": "scene.menu.rain_alert.default",
+      "prompt": "rain alert city emergency menu scene, reflections, ambulance bay glow, premium 2d stylized realism, mobile readability"
+    },
+    {
+      "id": "scene.menu.blackout.default",
+      "prompt": "blackout emergency city menu background, sparse lights, generator glow, command atmosphere, premium 2d stylized realism"
+    }
+  ]
+}

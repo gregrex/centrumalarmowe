@@ -1,0 +1,14 @@
+{
+  "prompts": [
+    {
+      "id": "prompt.route.heatmap.01",
+      "title": "Route overlay with heatmap",
+      "prompt": "premium 2d mobile emergency dispatch map, readable route overlay, district heatmap, high contrast roads, subtle congestion glow, premium control center ui, production friendly art, no logos, no watermark"
+    },
+    {
+      "id": "prompt.split.panels.01",
+      "title": "Split role panels",
+      "prompt": "premium 2d mobile split screen emergency role panels, operator dispatcher layout, clean counters, readable timers, compact alert feed, high usability, not sci-fi, not cluttered"
+    }
+  ]
+}

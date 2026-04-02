@@ -1,0 +1,40 @@
+{
+  "missionId": "mission.01.03",
+  "mode": "online_or_bot_fill",
+  "slots": [
+    {
+      "roleId": "operator",
+      "state": "bot_assigned",
+      "occupantId": "bot.operator.alpha",
+      "ready": true,
+      "networkQuality": "n/a"
+    },
+    {
+      "roleId": "dispatcher",
+      "state": "player_assigned",
+      "occupantId": "player.demo.001",
+      "ready": true,
+      "networkQuality": "good"
+    },
+    {
+      "roleId": "coordinator",
+      "state": "open",
+      "occupantId": null,
+      "ready": false,
+      "networkQuality": "unknown"
+    },
+    {
+      "roleId": "crisis_officer",
+      "state": "bot_assigned",
+      "occupantId": "bot.crisis.delta",
+      "ready": true,
+      "networkQuality": "n/a"
+    }
+  ],
+  "botFillMode": "balanced_support",
+  "canStart": false,
+  "warnings": [
+    "warn.missing_human_coordinator"
+  ],
+  "teamScore": 78
+}

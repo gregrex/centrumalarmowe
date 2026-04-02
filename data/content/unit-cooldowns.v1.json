@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "unitId": "unit.ambulance.01",
+      "callSign": "A-01",
+      "unitType": "medical",
+      "status": "returning",
+      "currentNodeId": "zone.central",
+      "cooldownSeconds": 35,
+      "etaSeconds": 90,
+      "available": true,
+      "isBotBackfilled": false
+    },
+    {
+      "unitId": "unit.ambulance.02",
+      "callSign": "A-02",
+      "unitType": "medical",
+      "status": "engaged",
+      "currentNodeId": "zone.industrial.east",
+      "cooldownSeconds": 120,
+      "etaSeconds": 210,
+      "available": false,
+      "isBotBackfilled": false
+    },
+    {
+      "unitId": "unit.fire.01",
+      "callSign": "F-01",
+      "unitType": "fire",
+      "status": "available",
+      "currentNodeId": "station.fire.1",
+      "cooldownSeconds": 0,
+      "etaSeconds": 160,
+      "available": true,
+      "isBotBackfilled": false
+    },
+    {
+      "unitId": "unit.police.01",
+      "callSign": "P-01",
+      "unitType": "police",
+      "status": "bot-assigned",
+      "currentNodeId": "district.stadium",
+      "cooldownSeconds": 20,
+      "etaSeconds": 110,
+      "available": true,
+      "isBotBackfilled": true
+    }
+  ]
+}

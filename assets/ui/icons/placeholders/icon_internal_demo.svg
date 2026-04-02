@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <rect x="2" y="2" width="252" height="252" rx="23" fill="none" stroke="rgba(56,189,248,0.15)" stroke-width="1.5"/>
+  <!-- ekran z grą -->
+  <rect x="28" y="28" width="200" height="140" rx="12" fill="#06101e" stroke="rgba(56,189,248,0.2)" stroke-width="1.5"/>
+  <!-- scena gry mini -->
+  <rect x="36" y="80" width="184" height="80" fill="#020810" rx="0"/>
+  <rect x="40"  y="60" width="20" height="28" fill="#0d1a2d"/>
+  <rect x="68"  y="52" width="28" height="36" fill="#0d1a2d"/>
+  <rect x="104" y="56" width="36" height="32" fill="#0d1a2d"/>
+  <circle cx="128" cy="74" r="10" fill="rgba(239,68,68,0.4)" filter="url(#g)"/>
+  <polygon points="118,106 140,118 118,130" fill="#fbbf24" filter="url(#g)"/>
+  <!-- badge INTERNAL -->
+  <rect x="28" y="28" width="80" height="24" rx="6" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="68" y="44" font-size="12" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">INTERNAL</text>
+  <!-- stand monitora -->
+  <rect x="114" y="168" width="28" height="16" rx="3" fill="#0d1a2d"/>
+  <rect x="96" y="184" width="64" height="8" rx="3" fill="#0d1a2d"/>
+  <!-- etykieta -->
+  <text x="128" y="216" font-size="18" font-weight="700" font-family="Arial" fill="rgba(56,189,248,0.5)" text-anchor="middle" letter-spacing="2">INTERNAL DEMO</text>
+</svg>

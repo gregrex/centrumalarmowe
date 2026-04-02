@@ -1,0 +1,28 @@
+{
+  "categories": [
+    {
+      "id": "vehicle.ambulance.alpha",
+      "prompt": "2d premium ambulance hero object, stylized realism, mobile readable silhouette, emergency light accents, no text"
+    },
+    {
+      "id": "vehicle.firetruck.compact",
+      "prompt": "2d compact fire truck hero object, stylized realism, premium mobile game prop, no text"
+    },
+    {
+      "id": "vehicle.policevan.command",
+      "prompt": "2d police command van, clean silhouette, premium mobile game object, no text"
+    },
+    {
+      "id": "prop.dispatch_console.wall",
+      "prompt": "2d dispatch console wall, multiple screens, premium mobile game prop, high readability, no text"
+    },
+    {
+      "id": "building.hospital.central",
+      "prompt": "2d hospital building operations marker asset, premium stylized realism, high readability, no text"
+    },
+    {
+      "id": "prop.radio_rack.alpha",
+      "prompt": "2d radio equipment rack, premium operational prop, mobile readable silhouette, no text"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-sc">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="128" height="128" rx="18" fill="#060a0e"/>
+  <rect x="1.5" y="1.5" width="125" height="125" rx="17" fill="none" stroke="rgba(56,189,248,0.25)" stroke-width="1.5"/>
+
+  <!-- nagłówek scoreboard -->
+  <rect x="10" y="10" width="108" height="22" rx="6" fill="#0d2035"/>
+  <text x="64" y="25" font-size="11" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle" letter-spacing="1">SCOREBOARD</text>
+
+  <!-- pozycja 1 (złoto) -->
+  <rect x="10" y="38" width="108" height="22" rx="5" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.3)" stroke-width="1"/>
+  <text x="22" y="53" font-size="14" font-weight="800" font-family="Arial" fill="#fbbf24">1</text>
+  <text x="40" y="53" font-size="11" font-weight="600" font-family="Arial" fill="#e2c76d">Gracz_A</text>
+  <text x="105" y="53" font-size="12" font-weight="800" font-family="Arial" fill="#fbbf24" text-anchor="end">9840</text>
+
+  <!-- pozycja 2 -->
+  <rect x="10" y="64" width="108" height="20" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="22" y="78" font-size="13" font-weight="700" font-family="Arial" fill="#94a3b8">2</text>
+  <text x="40" y="78" font-size="11" font-family="Arial" fill="#94a3b8">Gracz_B</text>
+  <text x="105" y="78" font-size="12" font-weight="700" font-family="Arial" fill="#94a3b8" text-anchor="end">7200</text>
+
+  <!-- pozycja 3 -->
+  <rect x="10" y="88" width="108" height="20" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="22" y="102" font-size="13" font-weight="700" font-family="Arial" fill="#78716c">3</text>
+  <text x="40" y="102" font-size="11" font-family="Arial" fill="#78716c">Gracz_C</text>
+  <text x="105" y="102" font-size="12" font-weight="700" font-family="Arial" fill="#78716c" text-anchor="end">5540</text>
+
+  <!-- pozycja 4 -->
+  <rect x="10" y="112" width="108" height="14" rx="4" fill="rgba(255,255,255,0.02)"/>
+  <text x="22" y="122" font-size="11" font-family="Arial" fill="#4b5563">4</text>
+  <text x="40" y="122" font-size="10" font-family="Arial" fill="#4b5563">Gracz_D</text>
+  <text x="105" y="122" font-size="11" font-family="Arial" fill="#4b5563" text-anchor="end">3100</text>
+
+  <!-- trofeum glow u góry -->
+  <circle cx="114" cy="18" r="7" fill="rgba(251,191,36,0.15)" filter="url(#glow-sc)"/>
+  <text x="114" y="22" font-size="12" text-anchor="middle" fill="#fbbf24">★</text>
+</svg>

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg-coop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050a1a"/>
+      <stop offset="100%" stop-color="#0c1526"/>
+    </linearGradient>
+    <filter id="op-glow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="panel-glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg-coop)"/>
+
+  <!-- ── STOŁY / KONSOLE (4 stanowiska) ─────────────────── -->
+  <!-- Operator (niebieski) — lewy górny -->
+  <rect x="80"  y="340" width="360" height="200" rx="12" fill="#0a1929" stroke="#38bdf8" stroke-width="2.5" filter="url(#panel-glow)"/>
+  <rect x="80"  y="340" width="360" height="42"  rx="12" fill="#1e3a5f"/>
+  <rect x="80"  y="366" width="360" height="16"  fill="#1e3a5f"/>
+  <text x="260" y="368" font-size="22" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle" letter-spacing="1">CALL OPERATOR</text>
+  <!-- ekran konsoli -->
+  <rect x="100" y="396" width="320" height="120" rx="6" fill="#020d1a"/>
+  <g fill="#38bdf8" opacity=".25">
+    <rect x="110" y="406" width="180" height="8"  rx="3"/>
+    <rect x="110" y="422" width="120" height="6"  rx="3"/>
+    <rect x="110" y="436" width="200" height="6"  rx="3"/>
+    <rect x="110" y="450" width="80"  height="8"  rx="3"/>
+  </g>
+  <!-- avatar - sylwetka operatora -->
+  <circle cx="380" cy="440" r="34" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="380" cy="428" r="13" fill="#38bdf8" opacity=".7"/>
+  <path d="M356 474 Q356 454 380 454 Q404 454 404 474" fill="#38bdf8" opacity=".5"/>
+
+  <!-- Dispatcher (bursztyn) — prawy górny -->
+  <rect x="584" y="340" width="360" height="200" rx="12" fill="#1a1000" stroke="#fb923c" stroke-width="2.5" filter="url(#panel-glow)"/>
+  <rect x="584" y="340" width="360" height="42"  rx="12" fill="#431407"/>
+  <rect x="584" y="366" width="360" height="16"  fill="#431407"/>
+  <text x="764" y="368" font-size="22" font-weight="700" font-family="Arial" fill="#fb923c" text-anchor="middle" letter-spacing="1">DISPATCHER</text>
+  <rect x="604" y="396" width="320" height="120" rx="6" fill="#0d0700"/>
+  <g fill="#fb923c" opacity=".25">
+    <rect x="614" y="406" width="200" height="8"  rx="3"/>
+    <rect x="614" y="422" width="140" height="6"  rx="3"/>
+    <rect x="614" y="436" width="160" height="6"  rx="3"/>
+    <rect x="614" y="450" width="100" height="8"  rx="3"/>
+  </g>
+  <circle cx="884" cy="440" r="34" fill="#431407" stroke="#fb923c" stroke-width="2"/>
+  <circle cx="884" cy="428" r="13" fill="#fb923c" opacity=".7"/>
+  <path d="M860 474 Q860 454 884 454 Q908 454 908 474" fill="#fb923c" opacity=".5"/>
+
+  <!-- Coordinator (zielony) — lewy dolny -->
+  <rect x="80"  y="580" width="360" height="200" rx="12" fill="#00160a" stroke="#4ade80" stroke-width="2.5" filter="url(#panel-glow)"/>
+  <rect x="80"  y="580" width="360" height="42"  rx="12" fill="#052e16"/>
+  <rect x="80"  y="606" width="360" height="16"  fill="#052e16"/>
+  <text x="260" y="608" font-size="19" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle" letter-spacing="1">OPS COORDINATOR</text>
+  <rect x="100" y="636" width="320" height="120" rx="6" fill="#010f05"/>
+  <g fill="#4ade80" opacity=".25">
+    <rect x="110" y="646" width="240" height="8"  rx="3"/>
+    <rect x="110" y="662" width="160" height="6"  rx="3"/>
+    <rect x="110" y="676" width="200" height="6"  rx="3"/>
+    <rect x="110" y="690" width="120" height="8"  rx="3"/>
+  </g>
+  <circle cx="380" cy="680" r="34" fill="#052e16" stroke="#4ade80" stroke-width="2"/>
+  <circle cx="380" cy="668" r="13" fill="#4ade80" opacity=".7"/>
+  <path d="M356 714 Q356 694 380 694 Q404 694 404 714" fill="#4ade80" opacity=".5"/>
+
+  <!-- Crisis Officer (czerwony) — prawy dolny -->
+  <rect x="584" y="580" width="360" height="200" rx="12" fill="#160000" stroke="#f87171" stroke-width="2.5" filter="url(#panel-glow)"/>
+  <rect x="584" y="580" width="360" height="42"  rx="12" fill="#450a0a"/>
+  <rect x="584" y="606" width="360" height="16"  fill="#450a0a"/>
+  <text x="764" y="608" font-size="22" font-weight="700" font-family="Arial" fill="#f87171" text-anchor="middle" letter-spacing="1">CRISIS OFFICER</text>
+  <rect x="604" y="636" width="320" height="120" rx="6" fill="#0e0101"/>
+  <g fill="#f87171" opacity=".25">
+    <rect x="614" y="646" width="260" height="8"  rx="3"/>
+    <rect x="614" y="662" width="180" height="6"  rx="3"/>
+    <rect x="614" y="676" width="220" height="6"  rx="3"/>
+    <rect x="614" y="690" width="90"  height="8"  rx="3"/>
+  </g>
+  <circle cx="884" cy="680" r="34" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+  <circle cx="884" cy="668" r="13" fill="#f87171" opacity=".7"/>
+  <path d="M860 714 Q860 694 884 694 Q908 694 908 714" fill="#f87171" opacity=".5"/>
+
+  <!-- ── TYTUŁ ────────────────────────────────────────── -->
+  <rect x="220" y="210" width="584" height="80" rx="16" fill="rgba(0,0,0,0.60)"/>
+  <text x="512" y="264" font-size="54" font-weight="900" font-family="Arial Black, Arial" fill="#d8e0ec"
+        text-anchor="middle" letter-spacing="4">TRYB COOP</text>
+  <text x="512" y="298" font-size="18" font-family="Arial" fill="rgba(255,255,255,0.35)" text-anchor="middle"
+        letter-spacing="2">DO 4 GRACZY</text>
+
+  <!-- ── CONNECTOR LINES ──────────────────────────────── -->
+  <line x1="440" y1="440" x2="584" y2="440" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="260" y1="540" x2="260" y2="580" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="764" y1="540" x2="764" y2="580" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="440" y1="680" x2="584" y2="680" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="8 6"/>
+
+  <!-- vignette -->
+  <radialGradient id="vig-co" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.68)"/>
+  </radialGradient>
+  <rect width="1024" height="1024" fill="url(#vig-co)"/>
+</svg>

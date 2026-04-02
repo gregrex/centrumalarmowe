@@ -1,0 +1,59 @@
+{
+  "presets": [
+    {
+      "id": "parallax.city_day",
+      "layers": [
+        {
+          "id": "sky",
+          "speed": 0.15
+        },
+        {
+          "id": "skyline",
+          "speed": 0.25
+        },
+        {
+          "id": "mid_city",
+          "speed": 0.35
+        },
+        {
+          "id": "foreground_props",
+          "speed": 0.65
+        }
+      ]
+    },
+    {
+      "id": "parallax.city_night",
+      "layers": [
+        {
+          "id": "night_sky",
+          "speed": 0.15
+        },
+        {
+          "id": "city_lights",
+          "speed": 0.3
+        },
+        {
+          "id": "foreground_routeboard",
+          "speed": 0.65
+        }
+      ]
+    },
+    {
+      "id": "parallax.blackout",
+      "layers": [
+        {
+          "id": "dark_sky",
+          "speed": 0.12
+        },
+        {
+          "id": "dim_blocks",
+          "speed": 0.25
+        },
+        {
+          "id": "generator_glow",
+          "speed": 0.55
+        }
+      ]
+    }
+  ]
+}

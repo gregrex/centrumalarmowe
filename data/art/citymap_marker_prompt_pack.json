@@ -1,0 +1,25 @@
+{
+  "masterStyle": "stylized realistic 2d emergency command game art, premium mobile readability, clean silhouettes, atlas-ready, no text, no logos, dark tactical palette",
+  "prompts": [
+    {
+      "assetId": "marker.medical",
+      "prompt": "2d emergency medical incident marker icon, premium mobile readability, strong silhouette, atlas-ready"
+    },
+    {
+      "assetId": "marker.fire",
+      "prompt": "2d fire incident marker icon, premium mobile readability, strong silhouette, atlas-ready"
+    },
+    {
+      "assetId": "marker.police",
+      "prompt": "2d police incident marker icon, premium mobile readability, strong silhouette, atlas-ready"
+    },
+    {
+      "assetId": "marker.critical",
+      "prompt": "2d critical emergency marker icon with high urgency feel, premium mobile readability, atlas-ready"
+    },
+    {
+      "assetId": "route.primary",
+      "prompt": "2d tactical route line effect for emergency command map, subtle glow, premium readability"
+    }
+  ]
+}

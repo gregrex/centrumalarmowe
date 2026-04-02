@@ -1,0 +1,26 @@
+{
+  "missionId": "mission.01.04",
+  "outcomes": [
+    {
+      "incidentId": "inc.med.001",
+      "outcome": "dispatch.success",
+      "scoreDelta": 15,
+      "cityStabilityDelta": 2,
+      "audioState": "dispatch.success"
+    },
+    {
+      "incidentId": "inc.fire.002",
+      "outcome": "dispatch.delayed",
+      "scoreDelta": -8,
+      "cityStabilityDelta": -5,
+      "audioState": "dispatch.delayed"
+    },
+    {
+      "incidentId": "inc.pol.003",
+      "outcome": "dispatch.rerouted",
+      "scoreDelta": 4,
+      "cityStabilityDelta": 0,
+      "audioState": "dispatch.rerouted"
+    }
+  ]
+}

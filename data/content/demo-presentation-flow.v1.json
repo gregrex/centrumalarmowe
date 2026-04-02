@@ -1,0 +1,13 @@
+{
+  "flowId": "presentation.v1",
+  "shots": [
+    "home",
+    "chapter_map",
+    "briefing",
+    "runtime_dispatch",
+    "recovery_card",
+    "scoreboard",
+    "reward",
+    "next"
+  ]
+}

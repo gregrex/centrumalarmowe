@@ -1,0 +1,13 @@
+{
+  "missionId": "mission.01.04",
+  "gateState": "gate.success",
+  "reasonKey": "gate.success.reason.objectives_met",
+  "grade": "A-",
+  "stars": 2,
+  "cityStability": 61,
+  "nextActions": [
+    "continue_to_report",
+    "retry",
+    "back_home"
+  ]
+}

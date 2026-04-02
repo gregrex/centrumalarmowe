@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "key": "score.metric.type",
+      "items": [
+        "score.total",
+        "score.objectives",
+        "score.city_pressure",
+        "score.recovery_quality"
+      ]
+    },
+    {
+      "key": "reward.type",
+      "items": [
+        "xp",
+        "star",
+        "badge",
+        "unlock_teaser"
+      ]
+    },
+    {
+      "key": "retry.recommendation.type",
+      "items": [
+        "loadout",
+        "role_swap",
+        "bot_fill",
+        "route_discipline"
+      ]
+    }
+  ]
+}

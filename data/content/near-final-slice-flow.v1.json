@@ -1,0 +1,10 @@
+{
+  "steps": [
+    "home",
+    "briefing",
+    "runtime",
+    "scoreboard",
+    "reward_reveal",
+    "retry_prep_or_next_handoff"
+  ]
+}

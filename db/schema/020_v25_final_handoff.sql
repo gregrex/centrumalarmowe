@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS FinalHandoffPackages (
+    Id NVARCHAR(64) NOT NULL PRIMARY KEY,
+    Version NVARCHAR(32) NOT NULL,
+    BuildTarget NVARCHAR(32) NOT NULL,
+    Status NVARCHAR(32) NOT NULL,
+    RecommendedNextAction NVARCHAR(256) NOT NULL
+);

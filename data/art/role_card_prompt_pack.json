@@ -1,0 +1,20 @@
+{
+  "cards": [
+    {
+      "roleId": "operator",
+      "prompt": "operator role card, premium 2d mobile, large icon, headset silhouette, cool blue lane, readable and clean"
+    },
+    {
+      "roleId": "dispatcher",
+      "prompt": "dispatcher role card, premium 2d mobile, route and unit symbolism, amber lane, clean sharp hierarchy"
+    },
+    {
+      "roleId": "coordinator",
+      "prompt": "coordinator role card, premium 2d mobile, tactical overview symbolism, balanced teal lane"
+    },
+    {
+      "roleId": "crisis_officer",
+      "prompt": "crisis officer role card, premium 2d mobile, high alert shape language, red lane, strong contrast"
+    }
+  ]
+}

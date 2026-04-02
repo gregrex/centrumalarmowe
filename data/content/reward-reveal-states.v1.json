@@ -1,0 +1,11 @@
+{
+  "states": [
+    "score_freeze",
+    "xp_reveal",
+    "star_reveal",
+    "badge_reveal",
+    "unlock_teaser",
+    "cta_show"
+  ],
+  "defaultState": "xp_reveal"
+}

@@ -1,0 +1,42 @@
+{
+  "banks": [
+    {
+      "id": "sfx.ui",
+      "events": [
+        "tap_light",
+        "confirm_soft",
+        "back_soft",
+        "warning_soft",
+        "card_focus"
+      ]
+    },
+    {
+      "id": "sfx.radio",
+      "events": [
+        "operator_chirp",
+        "dispatcher_chirp",
+        "coordinator_ping",
+        "crisis_ping"
+      ]
+    },
+    {
+      "id": "sfx.city",
+      "events": [
+        "city_hum_light",
+        "rain_window",
+        "storm_rumble",
+        "blackout_generator",
+        "vehicle_idle"
+      ]
+    },
+    {
+      "id": "sfx.route",
+      "events": [
+        "route_overlay_ping",
+        "eta_tick",
+        "unit_ready",
+        "unit_cooldown_end"
+      ]
+    }
+  ]
+}

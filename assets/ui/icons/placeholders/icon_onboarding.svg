@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-ob"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="#030710"/>
+  <!-- ekran urządzenia — tutorial -->
+  <rect x="22" y="18" width="84" height="72" rx="8" fill="#06101e" stroke="rgba(56,189,248,0.2)" stroke-width="1.5"/>
+  <!-- step 1 -->
+  <rect x="30" y="28" width="8" height="8" rx="2" fill="#4ade80" filter="url(#glow-ob)"/>
+  <rect x="44" y="30" width="50" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>
+  <!-- step 2 (active) -->
+  <rect x="30" y="46" width="8" height="8" rx="2" fill="#38bdf8" filter="url(#glow-ob)"/>
+  <rect x="44" y="48" width="50" height="4" rx="2" fill="rgba(56,189,248,0.3)"/>
+  <rect x="30" y="56" width="64" height="3" rx="1" fill="rgba(56,189,248,0.15)"/>
+  <!-- step 3 (locked) -->
+  <rect x="30" y="66" width="8" height="8" rx="2" fill="#374151"/>
+  <rect x="44" y="68" width="50" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+  <!-- strzałka "dalej" -->
+  <polygon points="84,86 106,96 84,106" fill="#38bdf8" filter="url(#glow-ob)"/>
+  <!-- etykieta ONBOARDING -->
+  <text x="64" y="120" font-size="11" font-weight="700" font-family="Arial" fill="rgba(56,189,248,0.45)" text-anchor="middle" letter-spacing="2">ONBOARDING</text>
+</svg>

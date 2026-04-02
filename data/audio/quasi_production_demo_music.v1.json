@@ -1,0 +1,28 @@
+{
+  "flow": [
+    {
+      "screen": "home",
+      "music": "cue_home_tension"
+    },
+    {
+      "screen": "briefing",
+      "music": "cue_briefing_focus"
+    },
+    {
+      "screen": "runtime",
+      "music": "cue_runtime_adaptive"
+    },
+    {
+      "screen": "recovery",
+      "music": "cue_recovery_suspend"
+    },
+    {
+      "screen": "fail",
+      "music": "cue_fail_aftershock"
+    },
+    {
+      "screen": "report",
+      "music": "cue_report_resolve"
+    }
+  ]
+}

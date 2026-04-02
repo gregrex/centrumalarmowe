@@ -1,0 +1,20 @@
+{
+  "buildName": "Alarm112-v25-showcase",
+  "checklist": [
+    {
+      "id": "rr25_01",
+      "title": "Smoke v25 passed",
+      "status": "done"
+    },
+    {
+      "id": "rr25_02",
+      "title": "Store compliance reviewed",
+      "status": "in_progress"
+    },
+    {
+      "id": "rr25_03",
+      "title": "Internal demo package ready",
+      "status": "done"
+    }
+  ]
+}

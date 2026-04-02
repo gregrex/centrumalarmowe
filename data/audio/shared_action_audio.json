@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "eventId": "audio.shared.request",
+      "priority": 2,
+      "duckingGroup": "ui-high"
+    },
+    {
+      "eventId": "audio.shared.ack",
+      "priority": 3,
+      "duckingGroup": "ui-mid"
+    },
+    {
+      "eventId": "audio.shared.resolved-success",
+      "priority": 2,
+      "duckingGroup": "ui-high"
+    },
+    {
+      "eventId": "audio.shared.resolved-fail",
+      "priority": 1,
+      "duckingGroup": "critical"
+    }
+  ]
+}

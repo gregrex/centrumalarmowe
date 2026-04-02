@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "chapters": [
+    {
+      "id": "chapter.01",
+      "titleKey": "chapter.01.title",
+      "themeId": "theme.city.day",
+      "progress": 0.75,
+      "nodeIds": [
+        "mission.01.01",
+        "mission.01.02",
+        "mission.01.03",
+        "mission.01.04"
+      ]
+    },
+    {
+      "id": "chapter.02",
+      "titleKey": "chapter.02.title",
+      "themeId": "theme.city.storm",
+      "progress": 0.2,
+      "nodeIds": [
+        "mission.02.01",
+        "mission.02.02",
+        "mission.02.03"
+      ]
+    }
+  ]
+}

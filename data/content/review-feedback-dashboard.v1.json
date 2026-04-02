@@ -1,0 +1,28 @@
+{
+  "reviewers": [
+    {
+      "name": "QA-1",
+      "severity": "P1",
+      "area": "runtime_hud",
+      "note": "route overlay still busy on 720p"
+    },
+    {
+      "name": "Design-1",
+      "severity": "P2",
+      "area": "report_room",
+      "note": "reward reveal needs slower pacing"
+    },
+    {
+      "name": "Audio-1",
+      "severity": "P2",
+      "area": "mix",
+      "note": "city pressure sting slightly loud"
+    }
+  ],
+  "summary": {
+    "openBlockers": 1,
+    "p1": 1,
+    "p2": 2,
+    "p3": 0
+  }
+}

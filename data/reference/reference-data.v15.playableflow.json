@@ -1,0 +1,80 @@
+{
+  "version": "v15",
+  "groups": [
+    {
+      "id": "objective_state",
+      "entries": [
+        {
+          "id": "objective.locked",
+          "labelKey": "objective.locked"
+        },
+        {
+          "id": "objective.active",
+          "labelKey": "objective.active"
+        },
+        {
+          "id": "objective.progress",
+          "labelKey": "objective.progress"
+        },
+        {
+          "id": "objective.at_risk",
+          "labelKey": "objective.at_risk"
+        },
+        {
+          "id": "objective.completed",
+          "labelKey": "objective.completed"
+        },
+        {
+          "id": "objective.failed",
+          "labelKey": "objective.failed"
+        }
+      ]
+    },
+    {
+      "id": "dispatch_action",
+      "entries": [
+        {
+          "id": "dispatch.assign",
+          "labelKey": "dispatch.assign"
+        },
+        {
+          "id": "dispatch.reinforce",
+          "labelKey": "dispatch.reinforce"
+        },
+        {
+          "id": "dispatch.reroute",
+          "labelKey": "dispatch.reroute"
+        },
+        {
+          "id": "dispatch.hold",
+          "labelKey": "dispatch.hold"
+        },
+        {
+          "id": "dispatch.cancel",
+          "labelKey": "dispatch.cancel"
+        }
+      ]
+    },
+    {
+      "id": "city_pressure_band",
+      "entries": [
+        {
+          "id": "pressure.stable",
+          "labelKey": "pressure.stable"
+        },
+        {
+          "id": "pressure.elevated",
+          "labelKey": "pressure.elevated"
+        },
+        {
+          "id": "pressure.critical",
+          "labelKey": "pressure.critical"
+        },
+        {
+          "id": "pressure.collapse_risk",
+          "labelKey": "pressure.collapse_risk"
+        }
+      ]
+    }
+  ]
+}

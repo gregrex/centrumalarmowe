@@ -1,0 +1,64 @@
+{
+  "version": "v13",
+  "groups": [
+    {
+      "id": "mission_briefing_widget",
+      "entries": [
+        {
+          "id": "briefing.hero",
+          "labelKey": "briefing.hero.label"
+        },
+        {
+          "id": "briefing.objectives",
+          "labelKey": "briefing.objectives.label"
+        },
+        {
+          "id": "briefing.risks",
+          "labelKey": "briefing.risks.label"
+        }
+      ]
+    },
+    {
+      "id": "readiness_slot_state",
+      "entries": [
+        {
+          "id": "slot.open",
+          "labelKey": "slot.open.label"
+        },
+        {
+          "id": "slot.player_assigned",
+          "labelKey": "slot.player_assigned.label"
+        },
+        {
+          "id": "slot.bot_assigned",
+          "labelKey": "slot.bot_assigned.label"
+        },
+        {
+          "id": "slot.locked",
+          "labelKey": "slot.locked.label"
+        }
+      ]
+    },
+    {
+      "id": "grade_state",
+      "entries": [
+        {
+          "id": "grade.A",
+          "labelKey": "grade.a.label"
+        },
+        {
+          "id": "grade.B",
+          "labelKey": "grade.b.label"
+        },
+        {
+          "id": "grade.C",
+          "labelKey": "grade.c.label"
+        },
+        {
+          "id": "grade.F",
+          "labelKey": "grade.f.label"
+        }
+      ]
+    }
+  ]
+}

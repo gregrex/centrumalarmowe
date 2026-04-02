@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-rl">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#08050d" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <!-- 4 role indicators (locked) -->
+  <!-- Operator - niebieski zablokowany -->
+  <rect x="14" y="14" width="46" height="46" rx="10" fill="#050c14" stroke="rgba(56,189,248,0.25)" stroke-width="2"/>
+  <circle cx="37" cy="30" r="9" fill="#0d2035" stroke="#38bdf8" stroke-width="1.5" opacity=".4"/>
+  <!-- Dispatcher - bursztyn zablokowany -->
+  <rect x="68" y="14" width="46" height="46" rx="10" fill="#100900" stroke="rgba(251,146,60,0.25)" stroke-width="2"/>
+  <circle cx="91" cy="30" r="9" fill="#1c0d00" stroke="#fb923c" stroke-width="1.5" opacity=".4"/>
+  <!-- Coordinator - zielony zablokowany -->
+  <rect x="14" y="68" width="46" height="46" rx="10" fill="#020e05" stroke="rgba(74,222,128,0.25)" stroke-width="2"/>
+  <circle cx="37" cy="84" r="9" fill="#021407" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+  <!-- Crisis - czerwony zablokowany -->
+  <rect x="68" y="68" width="46" height="46" rx="10" fill="#100202" stroke="rgba(248,113,113,0.25)" stroke-width="2"/>
+  <circle cx="91" cy="84" r="9" fill="#180303" stroke="#f87171" stroke-width="1.5" opacity=".4"/>
+  <!-- Kłódki na każdej roli -->
+  <g fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5">
+    <!-- kłódka 1 -->
+    <rect x="31" y="42" width="12" height="10" rx="2" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+    <path d="M34 42 C34 38 40 38 40 42" fill="none"/>
+    <!-- kłódka 2 -->
+    <rect x="85" y="42" width="12" height="10" rx="2" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+    <path d="M88 42 C88 38 94 38 94 42" fill="none"/>
+    <!-- kłódka 3 -->
+    <rect x="31" y="96" width="12" height="10" rx="2" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+    <path d="M34 96 C34 92 40 92 40 96" fill="none"/>
+    <!-- kłódka 4 -->
+    <rect x="85" y="96" width="12" height="10" rx="2" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+    <path d="M88 96 C88 92 94 92 94 96" fill="none"/>
+  </g>
+  <!-- centralna ikona blokady (duża) -->
+  <rect x="52" y="54" width="24" height="20" rx="5" fill="#1a1030" stroke="#a855f7" stroke-width="2" filter="url(#glow-rl)"/>
+  <path d="M57 54 C57 46 71 46 71 54" fill="none" stroke="#a855f7" stroke-width="2.5"/>
+  <circle cx="64" cy="64" r="3.5" fill="#c4b5fd"/>
+</svg>

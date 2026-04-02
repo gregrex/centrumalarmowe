@@ -1,0 +1,34 @@
+{
+  "missionId": "mission.demo.16",
+  "routes": [
+    {
+      "id": "route.demo.01",
+      "from": "hub.ems",
+      "to": "incident.bridge",
+      "state": "clear",
+      "etaSeconds": 42,
+      "visualStyle": "pulse_blue"
+    },
+    {
+      "id": "route.demo.02",
+      "from": "hub.fire",
+      "to": "incident.mall",
+      "state": "delayed",
+      "etaSeconds": 67,
+      "visualStyle": "pulse_amber"
+    },
+    {
+      "id": "route.demo.03",
+      "from": "hub.police",
+      "to": "incident.bridge",
+      "state": "rerouted",
+      "etaSeconds": 58,
+      "visualStyle": "pulse_red"
+    }
+  ],
+  "hudFlags": [
+    "show_route_overlay",
+    "show_eta_bubbles",
+    "show_route_warnings"
+  ]
+}

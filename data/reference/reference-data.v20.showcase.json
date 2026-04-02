@@ -1,0 +1,10 @@
+{
+  "version": "v20",
+  "domains": [
+    "showcase",
+    "onboarding",
+    "hints",
+    "capture",
+    "presentation"
+  ]
+}

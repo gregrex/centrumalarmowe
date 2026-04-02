@@ -1,0 +1,51 @@
+{
+  "version": "v1",
+  "screens": [
+    {
+      "id": "menu.home",
+      "title": "Home",
+      "cta": "quickplay",
+      "heroWidget": "continue_session",
+      "sceneTheme": "scene.menu.city_day.default"
+    },
+    {
+      "id": "menu.quickplay",
+      "title": "Quick Play",
+      "cta": "start_round",
+      "sceneTheme": "scene.menu.city_night.default"
+    },
+    {
+      "id": "menu.campaign",
+      "title": "Campaign",
+      "cta": "mission_select",
+      "sceneTheme": "scene.menu.rain_alert.default"
+    },
+    {
+      "id": "menu.coop",
+      "title": "Coop",
+      "cta": "party_lobby",
+      "sceneTheme": "scene.menu.city_night.default"
+    },
+    {
+      "id": "menu.profile",
+      "title": "Profile",
+      "cta": "open_loadout",
+      "sceneTheme": "scene.menu.winter_freeze.default"
+    },
+    {
+      "id": "menu.settings",
+      "title": "Settings",
+      "cta": "save_settings",
+      "sceneTheme": "scene.menu.blackout.default"
+    }
+  ],
+  "widgets": [
+    "widget.continue_session",
+    "widget.quick_play",
+    "widget.campaign_progress",
+    "widget.coop_party",
+    "widget.daily_challenge",
+    "widget.reward_inbox",
+    "widget.scene_theme_selector"
+  ]
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="128" height="128" rx="16" fill="#060308"/>
+  <!-- paczka -->
+  <rect x="20" y="48" width="88" height="64" rx="8" fill="#0d0818" stroke="#a78bfa" stroke-width="2" filter="url(#g)"/>
+  <rect x="20" y="48" width="88" height="20" rx="8" fill="#1a0d2e"/>
+  <rect x="20" y="60" width="88" height="8" fill="#1a0d2e"/>
+  <!-- wstążka -->
+  <line x1="64" y1="48" x2="64" y2="112" stroke="#fbbf24" stroke-width="3"/>
+  <line x1="20" y1="58" x2="108" y2="58" stroke="#fbbf24" stroke-width="3"/>
+  <!-- gwiazdki/iskry -->
+  <polygon points="64,20 67,14 70,20 64,16 70,16" fill="#fbbf24" filter="url(#g)"/>
+  <polygon points="24,30 26,25 28,30 24,27 28,27" fill="#a78bfa" filter="url(#g)"/>
+  <polygon points="100,26 102,21 104,26 100,23 104,23" fill="#a78bfa" filter="url(#g)"/>
+  <text x="64" y="90" font-size="14" font-weight="700" font-family="Arial" fill="#a78bfa" text-anchor="middle">POLISH</text>
+  <text x="64" y="106" font-size="10" font-family="Arial" fill="rgba(167,139,250,0.5)" text-anchor="middle">FINAL PACK</text>
+</svg>

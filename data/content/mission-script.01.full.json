@@ -1,0 +1,45 @@
+{
+  "missionId": "mission.01.04",
+  "timeline": [
+    {
+      "atSeconds": 0,
+      "event": "briefing_confirmed"
+    },
+    {
+      "atSeconds": 20,
+      "event": "runtime_open"
+    },
+    {
+      "atSeconds": 35,
+      "event": "incident.medical.spawn"
+    },
+    {
+      "atSeconds": 80,
+      "event": "incident.fire.spawn"
+    },
+    {
+      "atSeconds": 130,
+      "event": "incident.police.spawn"
+    },
+    {
+      "atSeconds": 180,
+      "event": "route.blocked.west_bridge"
+    },
+    {
+      "atSeconds": 245,
+      "event": "dispatch.outcome.medical.success"
+    },
+    {
+      "atSeconds": 310,
+      "event": "dispatch.outcome.fire.delayed"
+    },
+    {
+      "atSeconds": 390,
+      "event": "objective.primary.01.completed"
+    },
+    {
+      "atSeconds": 420,
+      "event": "mission.complete.gate"
+    }
+  ]
+}

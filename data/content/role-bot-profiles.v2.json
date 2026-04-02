@@ -1,0 +1,36 @@
+{
+  "profiles": [
+    {
+      "roleId": "role.operator",
+      "aggression": 0.25,
+      "riskTolerance": 0.15,
+      "supportsSharedAck": false,
+      "maxParallelDecisions": 2,
+      "notes": "Szybkie klasyfikacje, ostrożna eskalacja."
+    },
+    {
+      "roleId": "role.dispatcher",
+      "aggression": 0.45,
+      "riskTolerance": 0.35,
+      "supportsSharedAck": true,
+      "maxParallelDecisions": 3,
+      "notes": "Preferuje najbliższe wolne jednostki."
+    },
+    {
+      "roleId": "role.coordinator",
+      "aggression": 0.5,
+      "riskTolerance": 0.4,
+      "supportsSharedAck": true,
+      "maxParallelDecisions": 4,
+      "notes": "Pilnuje presji i konfliktów priorytetów."
+    },
+    {
+      "roleId": "role.crisis-officer",
+      "aggression": 0.6,
+      "riskTolerance": 0.55,
+      "supportsSharedAck": true,
+      "maxParallelDecisions": 5,
+      "notes": "Obsługuje tryby kryzysowe i wsparcie systemowe."
+    }
+  ]
+}

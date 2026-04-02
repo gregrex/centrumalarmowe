@@ -1,0 +1,143 @@
+/* ============================================================
+   112: Centrum Alarmowe — Design Tokens
+   Wersja v26 | Dark Operations UI System
+   ============================================================ */
+
+:root {
+
+  /* ── Tła ───────────────────────────────────────────────── */
+  --bg-base:          #080c12;   /* najciemniejsze tło strony */
+  --bg-surface:       #0f1420;   /* karty, panele             */
+  --bg-elevated:      #161c2a;   /* hover / aktywne karty     */
+  --bg-overlay:       #1e2638;   /* modale, drawer            */
+  --bg-glass:         rgba(255,255,255,0.04);
+
+  /* ── Akcent główny (alarm / CTA) ─────────────────────── */
+  --accent:           #ff4b1f;   /* pomarańcz-czerwień 112    */
+  --accent-dim:       #cc3c19;
+  --accent-glow:      rgba(255, 75, 31, 0.35);
+
+  /* ── Role (kolor + glow) ─────────────────────────────── */
+  --role-operator:    #38bdf8;   /* niebieski  – CallOperator       */
+  --role-operator-glow: rgba(56, 189, 248, 0.30);
+  --role-dispatcher:  #fb923c;   /* bursztyn   – Dispatcher         */
+  --role-dispatcher-glow: rgba(251, 146, 60, 0.30);
+  --role-coordinator: #4ade80;   /* zielony    – OpsCoordinator     */
+  --role-coordinator-glow: rgba(74, 222, 128, 0.30);
+  --role-crisis:      #f87171;   /* czerwony   – CrisisOfficer      */
+  --role-crisis-glow: rgba(248, 113, 113, 0.30);
+
+  /* ── Stany alertów ───────────────────────────────────── */
+  --state-critical:   #ef4444;   /* red-500   */
+  --state-critical-bg:#2d0b0b;
+  --state-critical-glow: rgba(239, 68, 68, 0.40);
+  --state-warning:    #f59e0b;   /* amber-400 */
+  --state-warning-bg: #2d1c04;
+  --state-warning-glow: rgba(245, 158, 11, 0.35);
+  --state-stable:     #22c55e;   /* green-500 */
+  --state-stable-bg:  #052010;
+  --state-stable-glow: rgba(34, 197, 94, 0.30);
+  --state-info:       #3b82f6;   /* blue-500  */
+  --state-info-bg:    #0a1a30;
+
+  /* ── Tekst ───────────────────────────────────────────── */
+  --text-primary:     #e8edf5;
+  --text-secondary:   #8b96a8;
+  --text-muted:       #4a5568;
+  --text-on-accent:   #ffffff;
+  --text-label:       #a8b4c4;
+
+  /* ── Bordy ───────────────────────────────────────────── */
+  --border-default:   rgba(255,255,255,0.08);
+  --border-accent:    rgba(255, 75, 31, 0.40);
+  --border-focus:     rgba(56, 189, 248, 0.60);
+  --border-critical:  rgba(239, 68, 68, 0.50);
+
+  /* ── Typografia ──────────────────────────────────────── */
+  --font-display:     'Rajdhani', 'Segoe UI', Arial, sans-serif;
+  --font-body:        'Inter', 'Segoe UI', Arial, sans-serif;
+  --font-mono:        'Fira Code', 'Consolas', monospace;
+
+  --text-xs:   0.72rem;
+  --text-sm:   0.82rem;
+  --text-base: 0.92rem;
+  --text-md:   1.05rem;
+  --text-lg:   1.20rem;
+  --text-xl:   1.45rem;
+  --text-2xl:  1.80rem;
+  --text-3xl:  2.30rem;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+  --weight-bold:    700;
+
+  /* ── Spacing ─────────────────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Border radius ───────────────────────────────────── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-pill: 999px;
+
+  /* ── Shadows / Glow ──────────────────────────────────── */
+  --shadow-card:    0 2px 16px rgba(0,0,0,0.55);
+  --shadow-accent:  0 0 18px var(--accent-glow);
+  --shadow-critical:0 0 20px var(--state-critical-glow);
+  --shadow-warning: 0 0 16px var(--state-warning-glow);
+  --shadow-stable:  0 0 14px var(--state-stable-glow);
+
+  /* ── Animacje ────────────────────────────────────────── */
+  --duration-fast:   120ms;
+  --duration-base:   220ms;
+  --duration-slow:   380ms;
+  --ease-out:        cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:     cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* ── Touch targets (mobile) ──────────────────────────── */
+  --touch-min:       44px;
+  --touch-cta:       52px;
+  --touch-large:     64px;
+}
+
+/* ── Animacje pulsowania ──────────────────────────────────── */
+@keyframes pulse-critical {
+  0%, 100% { box-shadow: 0 0 6px var(--state-critical-glow); }
+  50%       { box-shadow: 0 0 22px var(--state-critical-glow), 0 0 40px rgba(239,68,68,0.20); }
+}
+@keyframes pulse-warning {
+  0%, 100% { box-shadow: 0 0 4px var(--state-warning-glow); }
+  50%       { box-shadow: 0 0 18px var(--state-warning-glow); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow-flicker {
+  0%, 100% { opacity: 1; }
+  45%       { opacity: 0.85; }
+  50%       { opacity: 0.70; }
+  55%       { opacity: 0.90; }
+}

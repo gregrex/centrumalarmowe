@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg-report" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0c1a"/>
+      <stop offset="100%" stop-color="#1a0d20"/>
+    </linearGradient>
+    <filter id="doc-shadow">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000" flood-opacity=".7"/>
+    </filter>
+    <filter id="star-glow-r">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- tło gradientowe -->
+  <rect width="1024" height="1024" fill="url(#bg-report)"/>
+  <!-- dekoracyjne okręgi tła -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="rgba(168,85,247,0.08)" stroke-width="2"/>
+  <circle cx="512" cy="512" r="340" fill="none" stroke="rgba(168,85,247,0.05)" stroke-width="1.5"/>
+  <!-- dokument główny -->
+  <rect x="280" y="180" width="464" height="580" rx="28" fill="#1e1b2e" stroke="rgba(168,85,247,0.4)" stroke-width="3" filter="url(#doc-shadow)"/>
+  <rect x="280" y="180" width="464" height="580" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <!-- nagłówek dokumentu (kolor) -->
+  <rect x="280" y="180" width="464" height="90" rx="28" fill="#4c1d95"/>
+  <rect x="280" y="240" width="464" height="30" fill="#4c1d95"/>
+  <!-- tytuł na nagłówku -->
+  <text x="512" y="232" font-size="36" font-weight="800" font-family="Arial" fill="#e9d5ff" text-anchor="middle" letter-spacing="2">RAPORT MISJI</text>
+  <!-- linie tekstu dokumentu (placeholder) -->
+  <rect x="320" y="308" width="280" height="18" rx="5" fill="rgba(255,255,255,0.12)"/>
+  <rect x="320" y="340" width="200" height="14" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <rect x="320" y="368" width="340" height="14" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <rect x="320" y="396" width="260" height="14" rx="4" fill="rgba(255,255,255,0.07)"/>
+  <!-- separator -->
+  <line x1="320" y1="430" x2="704" y2="430" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <!-- etykiety ocen -->
+  <text x="340" y="470" font-size="22" font-family="Arial" fill="rgba(255,255,255,0.4)" font-weight="600">Efektywność</text>
+  <rect x="580" y="450" width="100" height="26" rx="6" fill="#15803d"/>
+  <text x="630" y="469" font-size="18" font-family="Arial" fill="#86efac" text-anchor="middle" font-weight="700">94%</text>
+  <text x="340" y="510" font-size="22" font-family="Arial" fill="rgba(255,255,255,0.4)" font-weight="600">Czas reakcji</text>
+  <rect x="580" y="490" width="100" height="26" rx="6" fill="#1d4ed8"/>
+  <text x="630" y="509" font-size="18" font-family="Arial" fill="#93c5fd" text-anchor="middle" font-weight="700">2:34</text>
+  <text x="340" y="550" font-size="22" font-family="Arial" fill="rgba(255,255,255,0.4)" font-weight="600">Ofiary</text>
+  <rect x="580" y="530" width="100" height="26" rx="6" fill="#166534"/>
+  <text x="630" y="549" font-size="18" font-family="Arial" fill="#86efac" text-anchor="middle" font-weight="700">0</text>
+  <!-- ocena końcowa S / A / B -->
+  <circle cx="512" cy="660" r="58" fill="#4c1d95" stroke="#a855f7" stroke-width="3" filter="url(#star-glow-r)"/>
+  <text x="512" y="678" font-size="64" font-weight="900" font-family="Arial" fill="#e9d5ff" text-anchor="middle">S</text>
+  <!-- gwiazdki pod oceną -->
+  <g filter="url(#star-glow-r)">
+    <polygon points="400,740 406,758 426,758 410,770 416,788 400,776 384,788 390,770 374,758 394,758" fill="#f59e0b"/>
+    <polygon points="464,740 470,758 490,758 474,770 480,788 464,776 448,788 454,770 438,758 458,758" fill="#f59e0b"/>
+    <polygon points="528,740 534,758 554,758 538,770 544,788 528,776 512,788 518,770 502,758 522,758" fill="#f59e0b"/>
+  </g>
+</svg>

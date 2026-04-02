@@ -1,0 +1,8 @@
+{
+  "id": "app-preview.v21",
+  "segments": [
+    {"key": "preview.open", "prompt": "mobile game app preview first shot, emergency dispatch home screen, premium 2d, vertical framing"},
+    {"key": "preview.runtime", "prompt": "mobile dispatch gameplay, route line, incident card, alert pulse, vertical preview video frame"},
+    {"key": "preview.report", "prompt": "mobile game mission report reward room, retry and next action cards, polished 2d ui"}
+  ]
+}

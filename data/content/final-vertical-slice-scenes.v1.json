@@ -1,0 +1,29 @@
+{
+  "scenes": [
+    {
+      "sceneId": "dispatch_hall_storm",
+      "layerPack": "storm_layers_v2",
+      "heroObjects": [
+        "dispatch_console_v1",
+        "chapter_map_board_v1"
+      ],
+      "audioState": "chapter_map_focus"
+    },
+    {
+      "sceneId": "chapter_map_room",
+      "layerPack": "chapter_room_layers_v1",
+      "heroObjects": [
+        "chapter_map_board_v1"
+      ],
+      "audioState": "menu_home_base"
+    },
+    {
+      "sceneId": "operations_map_neon",
+      "layerPack": "ops_neon_layers_v1",
+      "heroObjects": [
+        "radio_console_prop_v1"
+      ],
+      "audioState": "mission_entry_tension"
+    }
+  ]
+}

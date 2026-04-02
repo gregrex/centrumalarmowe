@@ -1,0 +1,41 @@
+{
+  "version": "v18",
+  "missionId": "mission.demo.18",
+  "panels": [
+    {
+      "id": "topbar.timer",
+      "type": "timer",
+      "priority": "critical"
+    },
+    {
+      "id": "left.incidents",
+      "type": "incident_list",
+      "priority": "high"
+    },
+    {
+      "id": "right.objectives",
+      "type": "objective_tracker",
+      "priority": "high"
+    },
+    {
+      "id": "right.recovery",
+      "type": "recovery_slot",
+      "priority": "critical"
+    },
+    {
+      "id": "bottom.actions",
+      "type": "dispatch_actions",
+      "priority": "high"
+    }
+  ],
+  "banners": [
+    {
+      "id": "banner.city_pressure",
+      "state": "warning"
+    },
+    {
+      "id": "banner.route_blocked",
+      "state": "critical"
+    }
+  ]
+}

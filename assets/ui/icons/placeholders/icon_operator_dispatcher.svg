@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-od"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="#030710"/>
+  <!-- lewa połowa: Operator (niebieski) -->
+  <rect x="2" y="2" width="60" height="124" rx="14" fill="#0a1f38" stroke="#38bdf8" stroke-width="1.5"/>
+  <!-- avatar operator -->
+  <circle cx="32" cy="44" r="18" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2" filter="url(#glow-od)"/>
+  <text x="32" y="50" font-size="20" font-weight="900" font-family="Arial" fill="#38bdf8" text-anchor="middle">OP</text>
+  <!-- mikrofon/słuchawki -->
+  <path d="M20 70 C20 58 44 58 44 70" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="32" y1="70" x2="32" y2="82" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+  <rect x="26" y="82" width="12" height="4" rx="2" fill="#38bdf8"/>
+  <!-- etykieta -->
+  <text x="32" y="116" font-size="9" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">OPERATOR</text>
+
+  <!-- prawa połowa: Dispatcher (amber) -->
+  <rect x="66" y="2" width="60" height="124" rx="14" fill="#2d1505" stroke="#fb923c" stroke-width="1.5"/>
+  <!-- avatar dispatcher -->
+  <circle cx="96" cy="44" r="18" fill="#431407" stroke="#fb923c" stroke-width="2" filter="url(#glow-od)"/>
+  <text x="96" y="50" font-size="20" font-weight="900" font-family="Arial" fill="#fb923c" text-anchor="middle">DY</text>
+  <!-- ikona dyspozytora: mapa/trasa -->
+  <path d="M84 68 L96 78 L108 68" fill="none" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="96" y1="78" x2="96" y2="86" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="96" cy="90" r="4" fill="#fb923c" filter="url(#glow-od)"/>
+  <!-- etykieta -->
+  <text x="96" y="116" font-size="9" font-weight="700" font-family="Arial" fill="#fb923c" text-anchor="middle">DISPATCHER</text>
+</svg>

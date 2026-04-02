@@ -1,0 +1,9 @@
+{
+  "signals": [
+    "feedback_new",
+    "severity_high",
+    "release_blocker",
+    "ready_for_next_build"
+  ],
+  "mixProfile": "ui_light_alerts"
+}

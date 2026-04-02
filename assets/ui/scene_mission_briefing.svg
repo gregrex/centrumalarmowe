@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- scene_mission_briefing.svg — 1024×1024 nocna panorama + overlay briefingu -->
+  <defs>
+    <linearGradient id="sky-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#010408"/>
+      <stop offset="70%" stop-color="#030c1a"/>
+      <stop offset="100%" stop-color="#050f20"/>
+    </linearGradient>
+    <linearGradient id="road-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1a"/>
+      <stop offset="100%" stop-color="#060b14"/>
+    </linearGradient>
+    <filter id="glow-s1">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-s1-sm">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="fire-glow" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="rgba(255,100,0,0.4)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="vignette-s1" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.65)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- SKY -->
+  <rect width="1024" height="1024" fill="url(#sky-grad)"/>
+
+  <!-- gwiazdy -->
+  <g fill="rgba(255,255,255,0.5)">
+    <circle cx="80"  cy="40"  r="1.2"/><circle cx="200" cy="20"  r="1"/>
+    <circle cx="340" cy="55"  r="1.5"/><circle cx="480" cy="30"  r="1"/>
+    <circle cx="600" cy="60"  r="1.2"/><circle cx="720" cy="18"  r="1"/>
+    <circle cx="860" cy="45"  r="1.5"/><circle cx="960" cy="25"  r="1.2"/>
+    <circle cx="140" cy="90"  r="1"/><circle  cx="900" cy="80"  r="1"/>
+  </g>
+
+  <!-- ── PANORAMA NOCNEGO MIASTA ─────────────────────────── -->
+  <!-- budynki tło (dalekie, ciemne) -->
+  <rect x="0"   y="620" width="80"  height="180" fill="#060c18"/>
+  <rect x="60"  y="580" width="60"  height="220" fill="#070d1a"/>
+  <rect x="100" y="600" width="90"  height="200" fill="#06101e"/>
+  <rect x="170" y="560" width="50"  height="240" fill="#050c18"/>
+  <rect x="200" y="540" width="120" height="260" fill="#060d1a"/>
+  <rect x="300" y="570" width="80"  height="230" fill="#06101e"/>
+  <rect x="360" y="530" width="100" height="270" fill="#070e1c"/>
+  <rect x="440" y="550" width="70"  height="250" fill="#06101e"/>
+  <rect x="490" y="510" width="140" height="290" fill="#071120"/>
+  <rect x="610" y="540" width="80"  height="260" fill="#060d1a"/>
+  <rect x="670" y="560" width="90"  height="240" fill="#06101e"/>
+  <rect x="740" y="520" width="120" height="280" fill="#07101f"/>
+  <rect x="840" y="550" width="70"  height="250" fill="#06101e"/>
+  <rect x="890" y="570" width="100" height="230" fill="#060d1a"/>
+  <rect x="970" y="600" width="54"  height="200" fill="#06101e"/>
+
+  <!-- okna w budynkach (rozsiane żółte/niebieskie punkty) -->
+  <g fill="rgba(255,230,120,0.55)" font-size="0">
+    <rect x="75"  y="590" width="6" height="6"/><rect x="89"  y="590" width="6" height="6"/>
+    <rect x="115" y="610" width="6" height="6"/><rect x="130" y="610" width="6" height="6"/>
+    <rect x="210" y="555" width="6" height="6"/><rect x="225" y="555" width="6" height="6"/>
+    <rect x="240" y="555" width="6" height="6"/>
+    <rect x="310" y="578" width="6" height="6"/><rect x="325" y="578" width="6" height="6"/>
+    <rect x="500" y="522" width="6" height="6"/><rect x="515" y="522" width="6" height="6"/>
+    <rect x="530" y="522" width="6" height="6"/>
+    <rect x="750" y="533" width="6" height="6"/><rect x="766" y="533" width="6" height="6"/>
+    <rect x="750" y="548" width="6" height="6"/>
+    <rect x="895" y="580" width="6" height="6"/><rect x="910" y="580" width="6" height="6"/>
+  </g>
+
+  <!-- ── INCYDENT: płonący budynek (środek) ──────────────── -->
+  <!-- blask pożaru -->
+  <ellipse cx="512" cy="750" rx="200" ry="120" fill="url(#fire-glow)"/>
+  <!-- budynek pożarowy -->
+  <rect x="390" y="460" width="244" height="350" rx="4" fill="#1a0a00"/>
+  <!-- płomienie -->
+  <g filter="url(#glow-s1)">
+    <path d="M430 460 C440 430 460 400 480 420 C470 390 490 360 510 380 C500 340 530 330 540 360 C550 330 570 340 570 370 C580 350 595 360 590 390 C610 370 620 400 610 430 C620 410 635 440 620 460 Z"
+          fill="#ff6600" opacity="0.9"/>
+    <path d="M440 460 C455 435 475 415 490 435 C480 410 498 395 512 412 C502 378 528 368 538 395 C548 368 565 378 562 405 C578 388 588 408 580 432 C590 418 600 440 592 460 Z"
+          fill="#ffcc00" opacity="0.7"/>
+  </g>
+  <!-- okna budynku -->
+  <g fill="rgba(255,120,0,0.6)">
+    <rect x="410" y="480" width="28" height="36" rx="2"/><rect x="452" y="480" width="28" height="36" rx="2"/>
+    <rect x="494" y="480" width="28" height="36" rx="2"/><rect x="536" y="480" width="28" height="36" rx="2"/>
+    <rect x="578" y="480" width="28" height="36" rx="2"/>
+    <rect x="410" y="535" width="28" height="36" rx="2"/><rect x="452" y="535" width="28" height="36" rx="2"/>
+    <rect x="578" y="535" width="28" height="36" rx="2"/>
+  </g>
+  <!-- dym -->
+  <g opacity="0.3" filter="url(#glow-s1)">
+    <ellipse cx="460" cy="390" rx="40" ry="30" fill="#1a1a1a"/>
+    <ellipse cx="512" cy="360" rx="50" ry="40" fill="#1a1a1a"/>
+    <ellipse cx="565" cy="380" rx="35" ry="28" fill="#1a1a1a"/>
+  </g>
+
+  <!-- straż pożarna (wóz) -->
+  <g transform="translate(260,730)">
+    <rect x="0" y="0" width="120" height="50" rx="8" fill="#cc2200"/>
+    <rect x="5" y="5" width="50" height="28" rx="4" fill="#b81e00"/>
+    <!-- kola -->
+    <circle cx="20"  cy="52" r="14" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    <circle cx="100" cy="52" r="14" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    <!-- syrena -->
+    <rect x="10" y="-8" width="30" height="10" rx="3" fill="#ff3300" filter="url(#glow-s1-sm)"/>
+    <!-- drabina -->
+    <line x1="60" y1="0" x2="60" y2="-50" stroke="#cc2200" stroke-width="4" stroke-linecap="round"/>
+    <line x1="80" y1="0" x2="80" y2="-50" stroke="#cc2200" stroke-width="4" stroke-linecap="round"/>
+    <g stroke="#cc2200" stroke-width="3">
+      <line x1="60" y1="-10" x2="80" y2="-10"/>
+      <line x1="60" y1="-22" x2="80" y2="-22"/>
+      <line x1="60" y1="-34" x2="80" y2="-34"/>
+      <line x1="60" y1="-46" x2="80" y2="-46"/>
+    </g>
+  </g>
+
+  <!-- karetka -->
+  <g transform="translate(700,740)">
+    <rect x="0" y="0" width="110" height="46" rx="8" fill="#f1f5f9"/>
+    <rect x="6" y="6" width="44" height="28" rx="3" fill="#e2e8f0"/>
+    <rect x="42" y="16" width="18" height="14" rx="2" fill="#16a34a"/>
+    <rect x="54" y="10" width="14" height="24" rx="2" fill="#22c55e" opacity=".5"/>
+    <circle cx="18"  cy="48" r="13" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    <circle cx="92"  cy="48" r="13" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    <rect x="8" y="-8" width="28" height="10" rx="3" fill="#38bdf8" filter="url(#glow-s1-sm)"/>
+  </g>
+
+  <!-- droga -->
+  <rect x="0" y="780" width="1024" height="80" fill="url(#road-grad)"/>
+  <line x1="0" y1="820" x2="1024" y2="820" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="40 20"/>
+
+  <!-- grunt -->
+  <rect x="0" y="860" width="1024" height="164" fill="#03060e"/>
+
+  <!-- ── BRIEFING OVERLAY PANEL ───────────────────────── -->
+  <rect x="60" y="880" width="904" height="128" rx="18" fill="rgba(6,10,18,0.92)"
+        stroke="rgba(56,189,248,0.25)" stroke-width="2" filter="url(#glow-s1-sm)"/>
+  <rect x="60" y="880" width="6" height="128" rx="3" fill="#ef4444" filter="url(#glow-s1)"/>
+  <text x="92" y="920" font-size="26" font-weight="800" font-family="Arial" fill="#fca5a5" letter-spacing="2">POŻAR BUDYNKU — BRIEFING MISJI</text>
+  <text x="92" y="954" font-size="18" font-family="Arial" fill="#94a3b8">📍 ul. Żelazna 14, Centrum · Priorytet: KRYTYCZNY · Jednostki: 🚒×2  🚑×1</text>
+  <rect x="782" y="894" width="164" height="52" rx="12" fill="#7f1d1d" stroke="#ef4444" stroke-width="2" filter="url(#glow-s1-sm)"/>
+  <text x="864" y="925" font-size="20" font-weight="700" font-family="Arial" fill="#fca5a5" text-anchor="middle">ROZPOCZNIJ →</text>
+
+  <!-- VIGNETTE -->
+  <rect width="1024" height="1024" fill="url(#vignette-s1)" pointer-events="none"/>
+</svg>

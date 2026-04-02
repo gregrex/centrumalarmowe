@@ -1,0 +1,29 @@
+{
+  "missionId": "showcase.mission.01",
+  "roles": [
+    {
+      "id": "operator",
+      "focus": "classify_and_prioritize"
+    },
+    {
+      "id": "dispatcher",
+      "focus": "assign_and_reroute"
+    }
+  ],
+  "beats": [
+    "incoming_call",
+    "priority_assignment",
+    "dispatch",
+    "escalation",
+    "recovery_decision",
+    "report"
+  ],
+  "successStates": [
+    "clean_success",
+    "partial_success"
+  ],
+  "failStates": [
+    "timeout_fail",
+    "wrong_unit_fail"
+  ]
+}

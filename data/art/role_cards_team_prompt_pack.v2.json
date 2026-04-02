@@ -1,0 +1,20 @@
+{
+  "prompts": [
+    {
+      "id": "rolecard.operator.ready",
+      "prompt": "premium role card portrait, operator headset, ready state, emerald accent, mobile ui card"
+    },
+    {
+      "id": "rolecard.dispatcher.ready",
+      "prompt": "premium role card portrait, dispatcher, tactical calm, blue accent, mobile ui card"
+    },
+    {
+      "id": "rolecard.coordinator.open",
+      "prompt": "premium role card empty slot, coordinator role, invitation state, clean placeholder portrait"
+    },
+    {
+      "id": "rolecard.crisis.bot",
+      "prompt": "premium role card portrait, crisis officer bot assigned, alert amber accent, serious tone"
+    }
+  ]
+}

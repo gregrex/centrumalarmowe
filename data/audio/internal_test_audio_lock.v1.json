@@ -1,0 +1,9 @@
+{
+  "lock": "internal_test_audio_lock_v24",
+  "states": [
+    "menu_ready",
+    "runtime_stable",
+    "report_reveal",
+    "retry_prepare"
+  ]
+}

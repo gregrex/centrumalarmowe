@@ -1,0 +1,10 @@
+{
+  "panels": [
+    "build_status",
+    "store_compliance",
+    "internal_demo",
+    "playtest_feedback",
+    "liveops_review"
+  ],
+  "theme": "dark_mobile_ops"
+}

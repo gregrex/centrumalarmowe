@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <!-- lupa nad kodem -->
+  <circle cx="96" cy="96" r="56" fill="#060d1a" stroke="#a78bfa" stroke-width="4" filter="url(#g)"/>
+  <!-- kod wewnątrz lupy -->
+  <text x="75" y="82" font-size="13" font-family="monospace" fill="#a78bfa">{"v":"1.0"</text>
+  <text x="75" y="98" font-size="13" font-family="monospace" fill="#a78bfa"> "ok":true</text>
+  <text x="75" y="114" font-size="13" font-family="monospace" fill="#a78bfa">}</text>
+  <!-- uchwyt lupy -->
+  <line x1="140" y1="140" x2="210" y2="210" stroke="#a78bfa" stroke-width="10" stroke-linecap="round" filter="url(#g)"/>
+  <!-- badge REVIEW -->
+  <rect x="148" y="16" width="90" height="30" rx="8" fill="#1a0d2e" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="193" y="35" font-size="14" font-weight="700" font-family="Arial" fill="#a78bfa" text-anchor="middle">REVIEW</text>
+  <text x="128" y="236" font-size="14" font-weight="700" font-family="Arial" fill="rgba(167,139,250,0.45)" text-anchor="middle" letter-spacing="1">REVIEW BUILD</text>
+</svg>

@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "id": "dispatch.success",
+      "sfx": "ui_dispatch_success_01",
+      "stinger": "dispatch_success_stinger"
+    },
+    {
+      "id": "dispatch.delayed",
+      "sfx": "ui_dispatch_delayed_01",
+      "stinger": "dispatch_delay_stinger"
+    },
+    {
+      "id": "dispatch.blocked",
+      "sfx": "ui_dispatch_blocked_01",
+      "stinger": "dispatch_blocked_stinger"
+    },
+    {
+      "id": "dispatch.rerouted",
+      "sfx": "ui_dispatch_reroute_01",
+      "stinger": "dispatch_reroute_stinger"
+    },
+    {
+      "id": "gate.success",
+      "sfx": "mission_complete_success_01",
+      "stinger": "mission_success_gate"
+    },
+    {
+      "id": "gate.fail",
+      "sfx": "mission_complete_fail_01",
+      "stinger": "mission_fail_gate"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": "v18",
+  "scenes": [
+    "runtime.day.alert",
+    "runtime.storm",
+    "fail.dim_room",
+    "retry.prep_room",
+    "report.success_warm"
+  ],
+  "objects": [
+    "ems_van_hero",
+    "fire_truck_compact",
+    "route_blocked_cluster",
+    "recovery_card_frame",
+    "retry_gate_panel"
+  ],
+  "audio": [
+    "runtime_peak",
+    "recovery_focus",
+    "fail_state",
+    "retry_rebuild",
+    "report_release"
+  ]
+}

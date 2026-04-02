@@ -1,0 +1,19 @@
+{
+  "missionId": "mission.demo.16",
+  "chains": [
+    {
+      "id": "chain.bridge.01",
+      "trigger": "route.demo.01.delayed",
+      "steps": [
+        "traffic_spike",
+        "patient_deterioration",
+        "objective_at_risk",
+        "media_pressure"
+      ],
+      "recovery": [
+        "reroute",
+        "reinforce"
+      ]
+    }
+  ]
+}

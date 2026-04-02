@@ -1,0 +1,26 @@
+{
+  "version": "v2",
+  "incidents": [
+    {
+      "id": "incident.medical.busdriver_unconscious",
+      "category": "Medical",
+      "severity": "Critical",
+      "defaultStatus": "Queued",
+      "zone": "Transit"
+    },
+    {
+      "id": "incident.fire.kitchen_apartment",
+      "category": "Fire",
+      "severity": "Medium",
+      "defaultStatus": "Queued",
+      "zone": "HousingA"
+    },
+    {
+      "id": "incident.police.domestic_violence",
+      "category": "Police",
+      "severity": "High",
+      "defaultStatus": "Queued",
+      "zone": "HousingB"
+    }
+  ]
+}

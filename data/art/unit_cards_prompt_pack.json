@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "prompts": [
+    {
+      "id": "unitcard.ambulance.basic",
+      "prompt": "top-down 2d ambulance unit card, premium mobile strategy style, readable silhouette, no logos"
+    },
+    {
+      "id": "unitcard.fire.engine",
+      "prompt": "top-down 2d fire engine unit card, premium mobile strategy style, strong silhouette"
+    },
+    {
+      "id": "unitcard.police.patrol",
+      "prompt": "top-down 2d police patrol unit card, premium mobile simulation style, clean shape language"
+    }
+  ]
+}

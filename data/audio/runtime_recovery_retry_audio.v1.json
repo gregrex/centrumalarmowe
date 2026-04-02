@@ -1,0 +1,17 @@
+{
+  "states": [
+    "runtime_low",
+    "runtime_peak",
+    "recovery_focus",
+    "fail_state",
+    "retry_prep",
+    "report_success"
+  ],
+  "priorities": [
+    "critical_alarm",
+    "mission_bark",
+    "recovery_cue",
+    "ui_click",
+    "ambience"
+  ]
+}

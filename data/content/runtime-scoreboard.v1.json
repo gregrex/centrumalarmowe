@@ -1,0 +1,25 @@
+{
+  "missionId": "mission.demo.19",
+  "rows": [
+    {
+      "id": "score.total",
+      "labelKey": "score.total",
+      "value": 8420,
+      "tier": "gold"
+    },
+    {
+      "id": "score.objectives",
+      "labelKey": "score.objectives",
+      "value": 3,
+      "tier": "green"
+    },
+    {
+      "id": "score.cityPressure",
+      "labelKey": "score.city_pressure",
+      "value": "stable",
+      "tier": "blue"
+    }
+  ],
+  "stars": 2,
+  "resultState": "partial"
+}

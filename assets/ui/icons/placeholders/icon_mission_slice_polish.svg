@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <!-- warstwy (slices) -->
+  <rect x="28" y="172" width="200" height="36" rx="8" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5" filter="url(#g)"/>
+  <text x="128" y="195" font-size="14" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">WARSTWA 1: MISJA</text>
+  <rect x="28" y="126" width="200" height="36" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="1.5" filter="url(#g)"/>
+  <text x="128" y="149" font-size="14" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle">WARSTWA 2: HUD</text>
+  <rect x="28" y="80" width="200" height="36" rx="8" fill="#431407" stroke="#fb923c" stroke-width="1.5" filter="url(#g)"/>
+  <text x="128" y="103" font-size="14" font-weight="700" font-family="Arial" fill="#fb923c" text-anchor="middle">WARSTWA 3: AUDIO</text>
+  <!-- iskry polish na górze -->
+  <polygon points="128,44 132,34 136,44 128,39 136,39" fill="#fbbf24" filter="url(#g)"/>
+  <polygon points="80,54 83,46 86,54 80,50 86,50" fill="#a78bfa" filter="url(#g)"/>
+  <polygon points="176,50 178,44 180,50 176,47 180,47" fill="#a78bfa" filter="url(#g)"/>
+  <text x="128" y="236" font-size="14" font-weight="700" font-family="Arial" fill="rgba(251,191,36,0.45)" text-anchor="middle" letter-spacing="1">MISSION SLICE POLISH</text>
+</svg>

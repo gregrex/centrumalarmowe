@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "prompts": [
+    {
+      "id": "portrait.operator.v1",
+      "role": "role.operator",
+      "prompt": "mobile 2d portrait of emergency call operator, premium stylized realism, readable face, command center glow, no logos"
+    },
+    {
+      "id": "portrait.dispatcher.v1",
+      "role": "role.dispatcher",
+      "prompt": "mobile 2d portrait of emergency dispatcher, tactical map reflections, premium simulation art"
+    },
+    {
+      "id": "portrait.coordinator.v1",
+      "role": "role.coordinator",
+      "prompt": "mobile 2d portrait of operations coordinator, under pressure but composed, premium stylized realism"
+    },
+    {
+      "id": "portrait.crisis.v1",
+      "role": "role.crisis_officer",
+      "prompt": "mobile 2d portrait of crisis officer, strategic command room, premium mobile simulation art"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "groups": [
+    {
+      "groupId": "role.slot.states",
+      "entries": [
+        {
+          "id": "role.state.open",
+          "code": "open",
+          "labelKey": "role.state.open"
+        },
+        {
+          "id": "role.state.reserved",
+          "code": "reserved",
+          "labelKey": "role.state.reserved"
+        },
+        {
+          "id": "role.state.bot_assigned",
+          "code": "bot_assigned",
+          "labelKey": "role.state.bot_assigned"
+        },
+        {
+          "id": "role.state.player_assigned",
+          "code": "player_assigned",
+          "labelKey": "role.state.player_assigned"
+        }
+      ]
+    },
+    {
+      "groupId": "bootstrap.modes",
+      "entries": [
+        {
+          "id": "bootstrap.mode.offline",
+          "code": "offline_solo_with_bots",
+          "labelKey": "bootstrap.mode.offline"
+        },
+        {
+          "id": "bootstrap.mode.online_private",
+          "code": "online_private_lobby",
+          "labelKey": "bootstrap.mode.online_private"
+        },
+        {
+          "id": "bootstrap.mode.online_matchmaking",
+          "code": "online_matchmaking",
+          "labelKey": "bootstrap.mode.online_matchmaking"
+        },
+        {
+          "id": "bootstrap.mode.local_debug",
+          "code": "local_debug_split",
+          "labelKey": "bootstrap.mode.local_debug"
+        }
+      ]
+    },
+    {
+      "groupId": "objective.grades",
+      "entries": [
+        {
+          "id": "grade.a",
+          "code": "A",
+          "labelKey": "grade.a"
+        },
+        {
+          "id": "grade.b",
+          "code": "B",
+          "labelKey": "grade.b"
+        },
+        {
+          "id": "grade.c",
+          "code": "C",
+          "labelKey": "grade.c"
+        },
+        {
+          "id": "grade.d",
+          "code": "D",
+          "labelKey": "grade.d"
+        },
+        {
+          "id": "grade.f",
+          "code": "F",
+          "labelKey": "grade.f"
+        }
+      ]
+    }
+  ]
+}

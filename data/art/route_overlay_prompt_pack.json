@@ -1,0 +1,21 @@
+{
+  "style": "premium mobile 2d emergency coordination game ui, sharp route overlays, clean markers, dark tactical interface, easy-to-produce sprite language",
+  "prompts": [
+    {
+      "id": "route.line.normal",
+      "prompt": "clean tactical route line for mobile emergency strategy game, subtle glow, premium flat icon language, high readability"
+    },
+    {
+      "id": "route.line.warning",
+      "prompt": "warning route line for emergency dispatch mobile game, segmented highlight, readable on dark map, premium 2d ui"
+    },
+    {
+      "id": "route.marker.detour",
+      "prompt": "detour marker icon for emergency dispatch mobile game, clean sharp silhouette, premium flat icon style"
+    },
+    {
+      "id": "route.marker.blocked",
+      "prompt": "blocked road marker icon for mobile emergency strategy game, premium flat vector-like style, clear at small size"
+    }
+  ]
+}

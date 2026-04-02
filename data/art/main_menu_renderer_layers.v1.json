@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "layers": [
+    {
+      "id": "layer.skyline_far",
+      "depth": 0,
+      "parallax": 0.08,
+      "kind": "background"
+    },
+    {
+      "id": "layer.buildings_mid",
+      "depth": 1,
+      "parallax": 0.18,
+      "kind": "background"
+    },
+    {
+      "id": "layer.road_traffic",
+      "depth": 2,
+      "parallax": 0.3,
+      "kind": "motion"
+    },
+    {
+      "id": "layer.weather_overlay",
+      "depth": 3,
+      "parallax": 0.45,
+      "kind": "overlay"
+    },
+    {
+      "id": "layer.hero_slot",
+      "depth": 4,
+      "parallax": 0.6,
+      "kind": "hero"
+    },
+    {
+      "id": "layer.fx_glow",
+      "depth": 5,
+      "parallax": 0.8,
+      "kind": "fx"
+    }
+  ],
+  "heroSlots": [
+    "hero.vehicle.ambulance.alpha",
+    "hero.vehicle.firetruck.compact",
+    "hero.prop.dispatch_console.wall"
+  ]
+}

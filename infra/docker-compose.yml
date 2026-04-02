@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  api:
+    image: alarm112-api:dev
+    build:
+      context: ..
+      dockerfile: src/Alarm112.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Main=Host=db;Port=5432;Database=${POSTGRES_DB:-alarm112};Username=${POSTGRES_USER:-alarm112app};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      - Redis__Connection=redis:6379
+      - ContentBundles__DataRoot=/app/data
+      - Security__Jwt__SigningKey=${JWT_SIGNING_KEY:?JWT_SIGNING_KEY is required}
+      - Security__RequireAuth=${REQUIRE_AUTH:-false}
+    ports:
+      - "${API_PORT:-5080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  admin:
+    image: alarm112-admin:dev
+    build:
+      context: ..
+      dockerfile: src/Alarm112.AdminWeb/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ApiBaseUrl=http://api:8080
+    ports:
+      - "${ADMIN_PORT:-5081}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-alarm112}
+      POSTGRES_USER: ${POSTGRES_USER:-alarm112app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d alarm112"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db-data:
+  redis-data:

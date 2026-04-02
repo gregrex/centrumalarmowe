@@ -1,0 +1,17 @@
+{
+  "style": "premium_2d_mobile_emergency_command",
+  "prompts": [
+    {
+      "id": "briefing.room.storm",
+      "prompt": "premium 2d mobile emergency command briefing room, layered background, storm-night monitors, readable props, no clutter"
+    },
+    {
+      "id": "briefing.board.map",
+      "prompt": "2d command wall with city map, hotspots, strong readability, premium strategy ui illustration"
+    },
+    {
+      "id": "briefing.dossier.card",
+      "prompt": "mission dossier card, sharp clean lighting, serious emergency tone, premium mobile card art"
+    }
+  ]
+}

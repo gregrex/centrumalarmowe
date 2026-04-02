@@ -1,0 +1,47 @@
+{
+  "grades": [
+    {
+      "gradeId": "A",
+      "scoreMin": 90,
+      "stars": 3,
+      "rewardKeys": [
+        "xp.300",
+        "badge.perfect_start"
+      ]
+    },
+    {
+      "gradeId": "B",
+      "scoreMin": 75,
+      "stars": 2,
+      "rewardKeys": [
+        "xp.180"
+      ]
+    },
+    {
+      "gradeId": "C",
+      "scoreMin": 60,
+      "stars": 1,
+      "rewardKeys": [
+        "xp.100"
+      ]
+    },
+    {
+      "gradeId": "D",
+      "scoreMin": 45,
+      "stars": 0,
+      "rewardKeys": []
+    },
+    {
+      "gradeId": "F",
+      "scoreMin": 0,
+      "stars": 0,
+      "rewardKeys": []
+    }
+  ],
+  "objectiveTypes": [
+    "response_time",
+    "correct_dispatch",
+    "escalation_control",
+    "resource_preservation"
+  ]
+}

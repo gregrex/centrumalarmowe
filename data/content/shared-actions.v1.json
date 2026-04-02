@@ -1,0 +1,27 @@
+{
+  "sharedActions": [
+    {
+      "sharedActionId": "shared.demo.001",
+      "incidentId": "inc.fire.002",
+      "actionType": "shared.escalate.major-incident",
+      "requestedByRole": "role.coordinator",
+      "requiredRoles": [
+        "role.dispatcher",
+        "role.crisis-officer"
+      ],
+      "timeoutSeconds": 15,
+      "allowBotAssist": true
+    },
+    {
+      "sharedActionId": "shared.demo.002",
+      "incidentId": "inc.medical.004",
+      "actionType": "shared.reallocate.cross-district",
+      "requestedByRole": "role.dispatcher",
+      "requiredRoles": [
+        "role.coordinator"
+      ],
+      "timeoutSeconds": 10,
+      "allowBotAssist": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "store-presentation.v21",
+  "shots": ["home_hero", "dispatch_runtime", "recovery_card", "report_reward", "next_teaser"],
+  "formats": ["9:16", "16:9", "portrait_store"],
+  "ctaCards": ["koordynuj", "reaguj", "ratuj", "powtarzaj", "awansuj"]
+}

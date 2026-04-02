@@ -1,0 +1,16 @@
+{
+  "missionId": "mission.demo.16",
+  "theme": "rainy_evening",
+  "scenePack": "scene_pack.demo.01",
+  "audioPack": "audio_pack.demo.01",
+  "heroObjects": [
+    "ambulance.hero",
+    "bridge.hero",
+    "dispatcher_console.hero"
+  ],
+  "continuity": [
+    "menu_city_night",
+    "runtime_rain",
+    "report_room_afterglow"
+  ]
+}

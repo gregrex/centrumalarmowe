@@ -1,0 +1,28 @@
+{
+  "modes": [
+    {
+      "id": "campaign",
+      "name": "Campaign",
+      "coop": true,
+      "botsAllowed": true
+    },
+    {
+      "id": "quick_shift",
+      "name": "Quick Shift",
+      "coop": true,
+      "botsAllowed": true
+    },
+    {
+      "id": "sandbox",
+      "name": "Sandbox",
+      "coop": true,
+      "botsAllowed": true
+    },
+    {
+      "id": "special_ops",
+      "name": "Special Ops",
+      "coop": true,
+      "botsAllowed": true
+    }
+  ]
+}

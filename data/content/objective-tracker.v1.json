@@ -1,0 +1,43 @@
+{
+  "missionId": "mission.01.04",
+  "objectives": [
+    {
+      "id": "obj.primary.01",
+      "labelKey": "obj.primary.01",
+      "status": "completed",
+      "progress": 100,
+      "priority": "critical"
+    },
+    {
+      "id": "obj.primary.02",
+      "labelKey": "obj.primary.02",
+      "status": "active",
+      "progress": 60,
+      "priority": "high"
+    },
+    {
+      "id": "obj.secondary.01",
+      "labelKey": "obj.secondary.01",
+      "status": "active",
+      "progress": 45,
+      "priority": "medium"
+    }
+  ],
+  "eventFeed": [
+    {
+      "id": "feed.001",
+      "priority": "critical",
+      "labelKey": "feed.dispatch.success.medical"
+    },
+    {
+      "id": "feed.002",
+      "priority": "high",
+      "labelKey": "feed.route.blocked"
+    },
+    {
+      "id": "feed.003",
+      "priority": "medium",
+      "labelKey": "feed.objective.progress"
+    }
+  ]
+}

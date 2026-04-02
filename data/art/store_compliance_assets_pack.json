@@ -1,0 +1,13 @@
+{
+  "requiredAssets": [
+    "app_icon",
+    "feature_graphic",
+    "phone_screens",
+    "store_capsule_mock"
+  ],
+  "ratios": [
+    "1:1",
+    "16:9",
+    "9:16"
+  ]
+}

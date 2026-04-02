@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <filter id="glow-rh"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-rh-sm"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="256" height="256" rx="24" fill="#04080e"/>
+  <rect x="2" y="2" width="252" height="252" rx="23" fill="none" stroke="rgba(74,222,128,0.2)" stroke-width="1.5"/>
+
+  <!-- HUD: nagłówek RECOVERY MODE -->
+  <rect x="16" y="16" width="224" height="40" rx="8" fill="#052e16" stroke="rgba(74,222,128,0.3)" stroke-width="1.5"/>
+  <rect x="16" y="16" width="5" height="40" rx="2" fill="#4ade80" filter="url(#glow-rh)"/>
+  <text x="140" y="42" font-size="18" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle" letter-spacing="2">TRYB RECOVERY</text>
+
+  <!-- krzyż medyczny w centrum -->
+  <rect x="108" y="74" width="40" height="12" rx="3" fill="#4ade80" filter="url(#glow-rh)"/>
+  <rect x="122" y="60" width="12" height="40" rx="3" fill="#4ade80" filter="url(#glow-rh)"/>
+
+  <!-- pasek HP / stabilizacja -->
+  <text x="16" y="132" font-size="14" font-family="Arial" fill="#86efac">Stabilizacja systemu</text>
+  <rect x="16" y="140" width="224" height="12" rx="5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="16" y="140" width="156" height="12" rx="5" fill="#4ade80" filter="url(#glow-rh-sm)"/>
+
+  <!-- pasek morale -->
+  <text x="16" y="170" font-size="14" font-family="Arial" fill="#86efac">Morale jednostek</text>
+  <rect x="16" y="178" width="224" height="12" rx="5" fill="rgba(255,255,255,0.07)"/>
+  <rect x="16" y="178" width="100" height="12" rx="5" fill="#fbbf24" filter="url(#glow-rh-sm)"/>
+
+  <!-- czas recovery -->
+  <text x="16" y="210" font-size="14" font-family="Arial" fill="#86efac">Czas do przywrócenia</text>
+  <text x="240" y="210" font-size="20" font-weight="700" font-family="Arial" fill="#fbbf24" text-anchor="end" filter="url(#glow-rh-sm)">01:45</text>
+
+  <!-- akcja: wzmocnij -->
+  <rect x="16" y="220" width="100" height="24" rx="6" fill="#052e16" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="66" y="236" font-size="12" font-weight="600" font-family="Arial" fill="#4ade80" text-anchor="middle">WZMOCNIJ ▲</text>
+</svg>

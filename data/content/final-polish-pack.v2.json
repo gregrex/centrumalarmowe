@@ -1,0 +1,18 @@
+{
+  "scope": "one_mission_showcase",
+  "visualFocus": [
+    "route_overlay",
+    "incident_marker_contrast",
+    "report_room_reward_reveal"
+  ],
+  "audioFocus": [
+    "assign_confirm",
+    "critical_alert_balance",
+    "retry_recommendation_stinger"
+  ],
+  "uiFocus": [
+    "operator_card_spacing",
+    "dispatcher_unit_eta_badges",
+    "touch_target_consistency"
+  ]
+}

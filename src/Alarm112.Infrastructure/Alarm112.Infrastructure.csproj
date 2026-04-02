@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Alarm112.Application\Alarm112.Application.csproj" />
+    <ProjectReference Include="..\Alarm112.Contracts\Alarm112.Contracts.csproj" />
+    <ProjectReference Include="..\Alarm112.Domain\Alarm112.Domain.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+{
+  "flowId": "ftue.v1",
+  "steps": [
+    {
+      "id": "intro",
+      "title": "Witaj w 112"
+    },
+    {
+      "id": "roles",
+      "title": "Poznaj role"
+    },
+    {
+      "id": "map",
+      "title": "Mapa miasta"
+    },
+    {
+      "id": "dispatch",
+      "title": "Wyślij jednostkę"
+    }
+  ]
+}

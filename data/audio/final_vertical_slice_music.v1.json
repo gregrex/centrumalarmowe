@@ -1,0 +1,20 @@
+{
+  "states": [
+    {
+      "stateId": "menu_home_base",
+      "loop": "music.menu.home.base"
+    },
+    {
+      "stateId": "chapter_map_focus",
+      "loop": "music.chapter.map.focus"
+    },
+    {
+      "stateId": "mission_entry_tension",
+      "loop": "music.mission.entry.tension"
+    },
+    {
+      "stateId": "bootstrap_rise",
+      "loop": "music.bootstrap.rise"
+    }
+  ]
+}

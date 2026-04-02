@@ -1,0 +1,36 @@
+{
+  "states": [
+    "locked",
+    "active",
+    "progress",
+    "at_risk",
+    "completed",
+    "failed"
+  ],
+  "rules": [
+    {
+      "objectiveId": "obj.primary.01",
+      "trigger": "dispatch.medical.success",
+      "from": "active",
+      "to": "progress"
+    },
+    {
+      "objectiveId": "obj.primary.01",
+      "trigger": "time.exceeded.critical",
+      "from": "active",
+      "to": "at_risk"
+    },
+    {
+      "objectiveId": "obj.primary.01",
+      "trigger": "incident.resolved",
+      "from": "progress",
+      "to": "completed"
+    },
+    {
+      "objectiveId": "obj.secondary.01",
+      "trigger": "chain_event.started",
+      "from": "active",
+      "to": "failed"
+    }
+  ]
+}

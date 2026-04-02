@@ -1,0 +1,50 @@
+{
+  "missionId": "mission.demo.17",
+  "steps": [
+    {
+      "id": "flow.01",
+      "type": "home",
+      "label": "Home"
+    },
+    {
+      "id": "flow.02",
+      "type": "chapter_map",
+      "label": "Chapter Map"
+    },
+    {
+      "id": "flow.03",
+      "type": "briefing",
+      "label": "Mission Briefing"
+    },
+    {
+      "id": "flow.04",
+      "type": "readiness",
+      "label": "Ready Check"
+    },
+    {
+      "id": "flow.05",
+      "type": "runtime",
+      "label": "Runtime Start"
+    },
+    {
+      "id": "flow.06",
+      "type": "recovery",
+      "label": "Recovery Card"
+    },
+    {
+      "id": "flow.07",
+      "type": "resolve_or_fail",
+      "label": "Resolve or Fail"
+    },
+    {
+      "id": "flow.08",
+      "type": "report_room",
+      "label": "Report Room"
+    },
+    {
+      "id": "flow.09",
+      "type": "post_choice",
+      "label": "Retry or Next"
+    }
+  ]
+}

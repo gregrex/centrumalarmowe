@@ -1,0 +1,17 @@
+{
+  "packId": "v26_operator_dispatcher_showcase",
+  "shots": [
+    {
+      "id": "shot_operator",
+      "prompt": "mobile operator emergency intake screen, portrait orientation, premium 2d ui, crisis card focus"
+    },
+    {
+      "id": "shot_dispatcher",
+      "prompt": "mobile dispatcher route assignment screen, portrait orientation, premium 2d ui, unit eta badges"
+    },
+    {
+      "id": "shot_combo",
+      "prompt": "split presentation operator and dispatcher flow, modern emergency mobile game, premium 2d"
+    }
+  ]
+}

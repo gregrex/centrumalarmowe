@@ -1,0 +1,80 @@
+{
+  "groups": [
+    {
+      "id": "mission_runtime_state",
+      "entries": [
+        {
+          "id": "runtime.active",
+          "labelKey": "runtime.active"
+        },
+        {
+          "id": "runtime.paused",
+          "labelKey": "runtime.paused"
+        },
+        {
+          "id": "runtime.complete_success",
+          "labelKey": "runtime.complete_success"
+        },
+        {
+          "id": "runtime.complete_fail",
+          "labelKey": "runtime.complete_fail"
+        }
+      ]
+    },
+    {
+      "id": "mission_gate_state",
+      "entries": [
+        {
+          "id": "gate.success",
+          "labelKey": "gate.success"
+        },
+        {
+          "id": "gate.fail",
+          "labelKey": "gate.fail"
+        }
+      ]
+    },
+    {
+      "id": "dispatch_outcome",
+      "entries": [
+        {
+          "id": "dispatch.success",
+          "labelKey": "dispatch.success"
+        },
+        {
+          "id": "dispatch.delayed",
+          "labelKey": "dispatch.delayed"
+        },
+        {
+          "id": "dispatch.blocked",
+          "labelKey": "dispatch.blocked"
+        },
+        {
+          "id": "dispatch.rerouted",
+          "labelKey": "dispatch.rerouted"
+        },
+        {
+          "id": "dispatch.failed_no_unit",
+          "labelKey": "dispatch.failed_no_unit"
+        }
+      ]
+    },
+    {
+      "id": "objective_state",
+      "entries": [
+        {
+          "id": "objective.active",
+          "labelKey": "objective.active"
+        },
+        {
+          "id": "objective.completed",
+          "labelKey": "objective.completed"
+        },
+        {
+          "id": "objective.failed",
+          "labelKey": "objective.failed"
+        }
+      ]
+    }
+  ]
+}

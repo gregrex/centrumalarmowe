@@ -1,0 +1,10 @@
+{
+  "variantId": "player-facing.v20",
+  "features": [
+    "animated-menu",
+    "onboarding-cards",
+    "reward-reveal",
+    "capture-mode",
+    "retry-polish"
+  ]
+}

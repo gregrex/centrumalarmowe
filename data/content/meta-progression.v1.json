@@ -1,0 +1,79 @@
+{
+  "version": "v1",
+  "levels": [
+    {
+      "level": 1,
+      "xpRequired": 0,
+      "rewards": [
+        "reward.badge.rookie",
+        "reward.theme.city_day"
+      ]
+    },
+    {
+      "level": 2,
+      "xpRequired": 120,
+      "rewards": [
+        "reward.portrait.dispatcher_a",
+        "reward.ui_skin.dark_blue"
+      ]
+    },
+    {
+      "level": 3,
+      "xpRequired": 300,
+      "rewards": [
+        "reward.theme.city_night",
+        "reward.badge.steady_hands"
+      ]
+    },
+    {
+      "level": 4,
+      "xpRequired": 520,
+      "rewards": [
+        "reward.theme.rain_alert",
+        "reward.portrait.operator_b"
+      ]
+    },
+    {
+      "level": 5,
+      "xpRequired": 820,
+      "rewards": [
+        "reward.theme.blackout",
+        "reward.title.city_guard"
+      ]
+    }
+  ],
+  "roleMastery": [
+    {
+      "role": "operator",
+      "milestones": [
+        50,
+        125,
+        250
+      ]
+    },
+    {
+      "role": "dispatcher",
+      "milestones": [
+        50,
+        125,
+        250
+      ]
+    },
+    {
+      "role": "coordinator",
+      "milestones": [
+        50,
+        125,
+        250
+      ]
+    },
+    {
+      "role": "crisis_officer",
+      "milestones": [
+        50,
+        125,
+        250
+      ]
+    }
+  ]
+}

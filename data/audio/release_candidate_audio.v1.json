@@ -1,0 +1,22 @@
+{
+  "banks": [
+    "ui_rc",
+    "runtime_rc",
+    "report_rc",
+    "capture_clean"
+  ],
+  "cues": [
+    {
+      "id": "rc.home.stinger",
+      "bank": "ui_rc"
+    },
+    {
+      "id": "rc.runtime.alert",
+      "bank": "runtime_rc"
+    },
+    {
+      "id": "rc.report.success",
+      "bank": "report_rc"
+    }
+  ]
+}

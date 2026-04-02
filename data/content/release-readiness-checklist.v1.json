@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "rr.preview.smoke",
+      "label": "Smoke preview build",
+      "state": "done",
+      "severity": "P1"
+    },
+    {
+      "id": "rr.capture.pack",
+      "label": "Capture pack complete",
+      "state": "in_progress",
+      "severity": "P2"
+    },
+    {
+      "id": "rr.telemetry.mock",
+      "label": "Telemetry dashboard ready",
+      "state": "done",
+      "severity": "P2"
+    },
+    {
+      "id": "rr.blockers.none",
+      "label": "No blocker bugs open",
+      "state": "pending",
+      "severity": "P1"
+    }
+  ]
+}

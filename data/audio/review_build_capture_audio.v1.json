@@ -1,0 +1,5 @@
+{
+  "id": "review-build-audio.v21",
+  "states": ["home_clean", "briefing_focus", "runtime_capture", "report_reward", "retry_next"],
+  "duckingRules": ["lower_ambient_in_capture", "preserve_dispatch_confirmations", "limit_alarm_overlap"]
+}

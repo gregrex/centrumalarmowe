@@ -1,0 +1,16 @@
+{
+  "routeId": "route.demo.001",
+  "incidentId": "inc.fire.002",
+  "unitId": "unit.fire.01",
+  "etaSeconds": 240,
+  "distanceKm": 4.8,
+  "nodeIds": [
+    "station.fire.1",
+    "zone.central",
+    "zone.residential.north"
+  ],
+  "warningCodes": [
+    "route.warning.traffic"
+  ],
+  "lineStyle": "route.line.warning"
+}

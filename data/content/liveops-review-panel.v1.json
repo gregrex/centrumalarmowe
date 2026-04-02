@@ -1,0 +1,23 @@
+{
+  "title": "LiveOps Review",
+  "widgets": [
+    {
+      "id": "w_retry_rate",
+      "type": "metric",
+      "label": "Retry rate",
+      "value": "24%"
+    },
+    {
+      "id": "w_fail_hotspots",
+      "type": "heatmap",
+      "label": "Fail hotspots",
+      "value": "downtown"
+    },
+    {
+      "id": "w_hint_density",
+      "type": "metric",
+      "label": "Hint density",
+      "value": "0.38"
+    }
+  ]
+}

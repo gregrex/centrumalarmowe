@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "weights": [
+    {
+      "id": "incident.medical.chest_pain",
+      "baseWeight": 8
+    },
+    {
+      "id": "incident.fire.apartment",
+      "baseWeight": 4
+    },
+    {
+      "id": "incident.police.fight",
+      "baseWeight": 6
+    },
+    {
+      "id": "incident.infrastructure.blackout",
+      "baseWeight": 2
+    },
+    {
+      "id": "incident.special.tram_derailment",
+      "baseWeight": 1
+    }
+  ]
+}

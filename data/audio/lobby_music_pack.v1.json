@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "tracks": [
+    {
+      "id": "lobby_idle",
+      "bpm": 82,
+      "mood": "waiting"
+    },
+    {
+      "id": "lobby_party_full",
+      "bpm": 92,
+      "mood": "ready"
+    },
+    {
+      "id": "lobby_ready_check",
+      "bpm": 96,
+      "mood": "tension"
+    },
+    {
+      "id": "session_intro",
+      "bpm": 104,
+      "mood": "start"
+    }
+  ]
+}

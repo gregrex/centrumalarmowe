@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "routes": [
+    {
+      "screenId": "menu.home",
+      "musicState": "menu.home.calm",
+      "stingerOnEnter": "stinger.home.enter"
+    },
+    {
+      "screenId": "menu.campaign",
+      "musicState": "menu.campaign.focus",
+      "stingerOnEnter": "stinger.campaign.enter"
+    },
+    {
+      "screenId": "menu.coop",
+      "musicState": "menu.coop.anticipation",
+      "stingerOnEnter": "stinger.coop.enter"
+    },
+    {
+      "screenId": "menu.profile",
+      "musicState": "menu.profile.light",
+      "stingerOnEnter": "stinger.profile.enter"
+    },
+    {
+      "screenId": "menu.settings",
+      "musicState": "menu.settings.neutral",
+      "stingerOnEnter": "stinger.settings.enter"
+    }
+  ]
+}

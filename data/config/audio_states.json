@@ -1,0 +1,17 @@
+{
+  "musicStates": [
+    "idle_shift",
+    "busy_shift",
+    "escalation",
+    "crisis",
+    "aftermath"
+  ],
+  "alerts": [
+    "incoming_call",
+    "dispatch_confirm",
+    "high_priority",
+    "critical_city_alert",
+    "bot_takeover",
+    "reconnect"
+  ]
+}

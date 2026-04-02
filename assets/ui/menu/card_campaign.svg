@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg-camp" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#04080f"/>
+      <stop offset="100%" stop-color="#0d1625"/>
+    </linearGradient>
+    <filter id="map-glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="node-fire" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="node-med" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg-camp)"/>
+
+  <!-- ── SIATKA MAPY MIASTA (perspektywa) ─────────────── -->
+  <g stroke="rgba(56,189,248,0.10)" stroke-width="1">
+    <!-- ulice poziome -->
+    <line x1="0" y1="300" x2="1024" y2="300"/>
+    <line x1="0" y1="450" x2="1024" y2="450"/>
+    <line x1="0" y1="600" x2="1024" y2="600"/>
+    <line x1="0" y1="750" x2="1024" y2="750"/>
+    <!-- ulice pionowe -->
+    <line x1="200" y1="0" x2="200" y2="1024"/>
+    <line x1="400" y1="0" x2="400" y2="1024"/>
+    <line x1="600" y1="0" x2="600" y2="1024"/>
+    <line x1="800" y1="0" x2="800" y2="1024"/>
+  </g>
+  <!-- główne arterie -->
+  <g stroke="rgba(56,189,248,0.22)" stroke-width="2">
+    <line x1="0" y1="512" x2="1024" y2="512"/>
+    <line x1="512" y1="0" x2="512" y2="1024"/>
+  </g>
+
+  <!-- ── KWARTAŁY / BLOKI BUDYNKÓW ─────────────────────── -->
+  <g fill="rgba(14,24,46,0.9)" stroke="rgba(30,58,138,0.3)" stroke-width="1">
+    <rect x="210" y="310" width="180" height="130" rx="4"/>
+    <rect x="410" y="310" width="180" height="130" rx="4"/>
+    <rect x="610" y="310" width="180" height="130" rx="4"/>
+    <rect x="210" y="460" width="180" height="130" rx="4"/>
+    <rect x="610" y="460" width="180" height="130" rx="4"/>
+    <rect x="210" y="610" width="180" height="130" rx="4"/>
+    <rect x="410" y="610" width="180" height="130" rx="4"/>
+    <rect x="610" y="610" width="180" height="130" rx="4"/>
+  </g>
+
+  <!-- ── WĘZŁY KAMPANII (chapter nodes) ──────────────── -->
+  <!-- ukończony (zielony) -->
+  <circle cx="300" cy="375" r="22" fill="#064e3b" stroke="#22c55e" stroke-width="3" filter="url(#map-glow)"/>
+  <text x="300" y="381" font-size="18" font-family="Arial" fill="#86efac" text-anchor="middle" font-weight="700">✓</text>
+  <!-- aktywny / bieżący (pomarańcz, pulsuje) -->
+  <circle cx="500" cy="512" r="28" fill="#1c1200" stroke="#f59e0b" stroke-width="3.5" filter="url(#map-glow)"/>
+  <circle cx="500" cy="512" r="42" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity=".35"/>
+  <text x="500" y="519" font-size="16" font-family="Arial Bold" fill="#fde68a" text-anchor="middle" font-weight="800">●</text>
+  <!-- zablokowany (szary) -->
+  <circle cx="700" cy="375" r="18" fill="#0f172a" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <text x="700" y="381" font-size="14" font-family="Arial" fill="rgba(255,255,255,0.3)" text-anchor="middle">🔒</text>
+  <!-- zablokowany 2 -->
+  <circle cx="700" cy="512" r="18" fill="#0f172a" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <text x="700" y="518" font-size="14" font-family="Arial" fill="rgba(255,255,255,0.3)" text-anchor="middle">🔒</text>
+
+  <!-- ── MARKERY INCYDENTÓW ─────────────────────────────── -->
+  <!-- pożar -->
+  <circle cx="350" cy="540" r="14" fill="url(#node-fire)" filter="url(#map-glow)"/>
+  <circle cx="350" cy="540" r="8" fill="#f97316" stroke="#fde68a" stroke-width="2"/>
+  <!-- medyczny -->
+  <circle cx="640" cy="680" r="14" fill="url(#node-med)" filter="url(#map-glow)"/>
+  <circle cx="640" cy="680" r="8" fill="#22d3ee" stroke="#e0f2fe" stroke-width="2"/>
+
+  <!-- ── LINIA TRASY ─────────────────────────────────────── -->
+  <path d="M300 375 C300 440 420 470 500 512" fill="none" stroke="#22c55e" stroke-width="2.5"
+        stroke-dasharray="10 6" stroke-linecap="round" opacity=".6"/>
+
+  <!-- ── TYTUŁ ──────────────────────────────────────────── -->
+  <rect x="160" y="200" width="704" height="82" rx="16" fill="rgba(0,0,0,0.55)"/>
+  <text x="512" y="252" font-size="52" font-weight="900" font-family="Arial Black, Arial" fill="#d8e0ec"
+        text-anchor="middle" letter-spacing="3">KAMPANIA</text>
+
+  <!-- vignette -->
+  <radialGradient id="vig-c" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.72)"/>
+  </radialGradient>
+  <rect width="1024" height="1024" fill="url(#vig-c)"/>
+</svg>

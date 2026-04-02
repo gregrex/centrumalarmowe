@@ -1,0 +1,9 @@
+{
+  "packId": "v26_real_android_build",
+  "style": "premium_2d_mobile_control_room",
+  "prompts": [
+    "portrait mobile control room UI, emergency dispatch map, high readability, premium 2d mobile art, strong contrast, no clutter",
+    "vertical mobile mission report room, reward reveal, polished gradients, calm premium 2d interface",
+    "mobile emergency dispatch HUD for operator and dispatcher, readable icons, route overlay, clean modern 2d art"
+  ]
+}

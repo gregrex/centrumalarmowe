@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "chapterId": "chapter.01",
+  "activeNodeId": "mission.01.03",
+  "nodes": [
+    {
+      "id": "mission.01.01",
+      "type": "tutorial",
+      "state": "completed",
+      "label": "Pierwsze zgłoszenia"
+    },
+    {
+      "id": "mission.01.02",
+      "type": "standard",
+      "state": "completed",
+      "label": "Narastające przeciążenie"
+    },
+    {
+      "id": "mission.01.03",
+      "type": "critical",
+      "state": "active",
+      "label": "Burza i blackout"
+    },
+    {
+      "id": "mission.01.04",
+      "type": "challenge",
+      "state": "locked",
+      "label": "Nocny sztorm"
+    }
+  ],
+  "rewardsPreview": [
+    "reward.badge.steady_hands",
+    "reward.theme.city_storm"
+  ]
+}

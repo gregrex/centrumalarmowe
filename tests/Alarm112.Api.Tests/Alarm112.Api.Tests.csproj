@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0-preview*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview*" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.17.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Alarm112.Api\Alarm112.Api.csproj" />
+    <ProjectReference Include="..\..\src\Alarm112.Contracts\Alarm112.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Alarm112.Application\Alarm112.Application.csproj" />
+    <ProjectReference Include="..\..\src\Alarm112.Infrastructure\Alarm112.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Alarm112.Domain\Alarm112.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

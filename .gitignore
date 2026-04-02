@@ -1,0 +1,44 @@
+bin/
+obj/
+.vs/
+.idea/
+Library/
+Temp/
+Logs/
+UserSettings/
+.DS_Store
+*.user
+*.suo
+*.db
+.env
+.env.local
+.env.production
+.env.staging
+infra/docker-compose.override.yml
+**/appsettings.*.local.json
+**/secrets.json
+**/user-secrets/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Artifacts & test output
+artifacts/
+**/test-results.trx
+*.out.log
+*.err.log
+build_out.txt
+build_output.txt
+build_result.txt
+
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+*.pidb
+*.booproj
+*.unityproj
+*.csproj.bak

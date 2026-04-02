@@ -1,0 +1,17 @@
+{
+  "pipelineId": "android.rc.mock",
+  "stages": [
+    "restore",
+    "build_client",
+    "package_apk",
+    "package_aab",
+    "smoke",
+    "handoff"
+  ],
+  "artifacts": [
+    "Alarm112-RC.apk",
+    "Alarm112-RC.aab",
+    "build_manifest.json"
+  ],
+  "signing": "mock_keystore"
+}

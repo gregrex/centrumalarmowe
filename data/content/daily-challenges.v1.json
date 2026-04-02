@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "seed": "daily-2026-03-20",
+  "items": [
+    {
+      "id": "daily.route_efficiency",
+      "role": "dispatcher",
+      "difficulty": "normal",
+      "reward": "xp.120"
+    },
+    {
+      "id": "daily.multi_call_triage",
+      "role": "operator",
+      "difficulty": "hard",
+      "reward": "badge.fast_filter"
+    },
+    {
+      "id": "daily.party_anchor",
+      "role": "coordinator",
+      "difficulty": "hard",
+      "reward": "cosmetic.frame.coop"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "states": [
+    {
+      "id": "runtime.low",
+      "layers": [
+        "city_bed",
+        "soft_pulse"
+      ]
+    },
+    {
+      "id": "runtime.medium",
+      "layers": [
+        "city_bed",
+        "soft_pulse",
+        "dispatch_feedback"
+      ]
+    },
+    {
+      "id": "runtime.high",
+      "layers": [
+        "city_bed",
+        "mission_pulse",
+        "critical_alarm"
+      ]
+    },
+    {
+      "id": "gate.success",
+      "layers": [
+        "resolution_pad",
+        "soft_release"
+      ]
+    },
+    {
+      "id": "gate.fail",
+      "layers": [
+        "low_tension_pad",
+        "cut_pulse"
+      ]
+    }
+  ]
+}

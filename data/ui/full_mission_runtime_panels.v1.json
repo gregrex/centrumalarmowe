@@ -1,0 +1,42 @@
+{
+  "panels": [
+    {
+      "id": "runtime.topbar",
+      "anchor": "top",
+      "elements": [
+        "mission_title",
+        "timer",
+        "pressure_state",
+        "city_stability"
+      ]
+    },
+    {
+      "id": "runtime.left",
+      "anchor": "left",
+      "elements": [
+        "active_incidents",
+        "selected_incident",
+        "event_feed_preview"
+      ]
+    },
+    {
+      "id": "runtime.right",
+      "anchor": "right",
+      "elements": [
+        "live_units",
+        "eta_badges",
+        "cooldown_badges",
+        "dispatch_button"
+      ]
+    },
+    {
+      "id": "runtime.bottom",
+      "anchor": "bottom",
+      "elements": [
+        "objective_tracker",
+        "warnings",
+        "quick_role_hints"
+      ]
+    }
+  ]
+}

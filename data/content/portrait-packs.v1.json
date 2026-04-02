@@ -1,0 +1,28 @@
+{
+  "version": "v1",
+  "packs": [
+    {
+      "id": "portrait.pack.dispatch.classic",
+      "style": "semi_stylized",
+      "roles": [
+        "operator",
+        "dispatcher"
+      ]
+    },
+    {
+      "id": "portrait.pack.field.command",
+      "style": "semi_stylized",
+      "roles": [
+        "coordinator",
+        "crisis_officer"
+      ]
+    },
+    {
+      "id": "portrait.pack.storm_response",
+      "style": "event",
+      "roles": [
+        "all"
+      ]
+    }
+  ]
+}

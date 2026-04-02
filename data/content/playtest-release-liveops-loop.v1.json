@@ -1,0 +1,25 @@
+{
+  "stages": [
+    {
+      "id": "pl01",
+      "name": "playtest",
+      "owner": "qa_lead"
+    },
+    {
+      "id": "pl02",
+      "name": "triage_feedback",
+      "owner": "producer"
+    },
+    {
+      "id": "pl03",
+      "name": "liveops_review",
+      "owner": "analyst"
+    },
+    {
+      "id": "pl04",
+      "name": "patch_scope",
+      "owner": "tech_lead"
+    }
+  ],
+  "status": "active"
+}

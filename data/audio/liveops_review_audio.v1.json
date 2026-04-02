@@ -1,0 +1,12 @@
+{
+  "cues": [
+    {
+      "id": "cue_blocker",
+      "severity": "critical"
+    },
+    {
+      "id": "cue_feedback_added",
+      "severity": "normal"
+    }
+  ]
+}

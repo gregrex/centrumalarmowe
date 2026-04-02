@@ -1,0 +1,20 @@
+{
+  "releaseStages": [
+    "candidate",
+    "internal_testing",
+    "review",
+    "approved"
+  ],
+  "feedbackSeverity": [
+    "blocker",
+    "high",
+    "medium",
+    "low"
+  ],
+  "storeMediaTypes": [
+    "store_shot",
+    "feature_graphic",
+    "app_preview",
+    "trailer_frame"
+  ]
+}

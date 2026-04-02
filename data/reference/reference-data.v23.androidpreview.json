@@ -1,0 +1,84 @@
+{
+  "groups": [
+    {
+      "id": "preview_build_status",
+      "entries": [
+        {
+          "id": "preview_build_status.draft",
+          "label": "Draft"
+        },
+        {
+          "id": "preview_build_status.ready_for_internal_preview",
+          "label": "Ready for internal preview"
+        },
+        {
+          "id": "preview_build_status.qa_review",
+          "label": "QA review"
+        },
+        {
+          "id": "preview_build_status.capture_ready",
+          "label": "Capture ready"
+        }
+      ]
+    },
+    {
+      "id": "release_readiness_state",
+      "entries": [
+        {
+          "id": "release_readiness_state.pending",
+          "label": "Pending"
+        },
+        {
+          "id": "release_readiness_state.in_progress",
+          "label": "In progress"
+        },
+        {
+          "id": "release_readiness_state.done",
+          "label": "Done"
+        },
+        {
+          "id": "release_readiness_state.blocked",
+          "label": "Blocked"
+        }
+      ]
+    },
+    {
+      "id": "feedback_severity",
+      "entries": [
+        {
+          "id": "feedback_severity.P1",
+          "label": "P1"
+        },
+        {
+          "id": "feedback_severity.P2",
+          "label": "P2"
+        },
+        {
+          "id": "feedback_severity.P3",
+          "label": "P3"
+        }
+      ]
+    },
+    {
+      "id": "feedback_area",
+      "entries": [
+        {
+          "id": "feedback_area.runtime_hud",
+          "label": "Runtime HUD"
+        },
+        {
+          "id": "feedback_area.report_room",
+          "label": "Report Room"
+        },
+        {
+          "id": "feedback_area.mix",
+          "label": "Audio Mix"
+        },
+        {
+          "id": "feedback_area.capture_mode",
+          "label": "Capture Mode"
+        }
+      ]
+    }
+  ]
+}

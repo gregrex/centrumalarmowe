@@ -1,0 +1,24 @@
+{
+  "chains": [
+    {
+      "id": "chain.storm.city_pressure",
+      "trigger": "weather.storm",
+      "steps": [
+        "incident.infrastructure.signal_failure",
+        "incident.medical.collision_multiple",
+        "incident.fire.transformer",
+        "incident.police.traffic_chaos"
+      ]
+    },
+    {
+      "id": "chain.match.weekend_disorder",
+      "trigger": "event.match_high_risk",
+      "steps": [
+        "incident.police.fight",
+        "incident.medical.injury_crowd",
+        "incident.infrastructure.road_block",
+        "incident.fire.vehicle_fire"
+      ]
+    }
+  ]
+}

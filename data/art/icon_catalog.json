@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "icons": [
+    {
+      "assetId": "icon.incident.medical",
+      "category": "incident",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_incident_medical.svg",
+      "atlasKey": "incidents"
+    },
+    {
+      "assetId": "icon.incident.fire",
+      "category": "incident",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_incident_fire.svg",
+      "atlasKey": "incidents"
+    },
+    {
+      "assetId": "icon.incident.police",
+      "category": "incident",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_incident_police.svg",
+      "atlasKey": "incidents"
+    },
+    {
+      "assetId": "icon.unit.ambulance",
+      "category": "unit",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_unit_ambulance.svg",
+      "atlasKey": "units"
+    },
+    {
+      "assetId": "icon.unit.fire",
+      "category": "unit",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_unit_fire.svg",
+      "atlasKey": "units"
+    },
+    {
+      "assetId": "icon.unit.police",
+      "category": "unit",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_unit_police.svg",
+      "atlasKey": "units"
+    },
+    {
+      "assetId": "icon.alert.warning",
+      "category": "alert",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_alert_warning.svg",
+      "atlasKey": "alerts"
+    },
+    {
+      "assetId": "icon.alert.critical",
+      "category": "alert",
+      "placeholderPath": "assets/ui/icons/placeholders/icon_alert_critical.svg",
+      "atlasKey": "alerts"
+    }
+  ]
+}

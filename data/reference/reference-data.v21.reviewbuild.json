@@ -1,0 +1,20 @@
+{
+  "groups": [
+    {
+      "groupKey": "review_build_status",
+      "entries": [
+        {"key": "draft", "label": "Draft", "sortOrder": 1},
+        {"key": "review", "label": "Review", "sortOrder": 2},
+        {"key": "approved", "label": "Approved", "sortOrder": 3}
+      ]
+    },
+    {
+      "groupKey": "store_shot_types",
+      "entries": [
+        {"key": "home_hero", "label": "Home Hero", "sortOrder": 1},
+        {"key": "runtime_action", "label": "Runtime Action", "sortOrder": 2},
+        {"key": "report_reward", "label": "Report Reward", "sortOrder": 3}
+      ]
+    }
+  ]
+}

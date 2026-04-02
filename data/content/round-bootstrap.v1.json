@@ -1,0 +1,40 @@
+{
+  "missionId": "mission.01.03",
+  "mode": "offline_solo_with_bots",
+  "selectedRole": "dispatcher",
+  "scenePreset": "dispatch_hall_storm",
+  "weatherPreset": "storm_night",
+  "musicState": "bootstrap_rise",
+  "startingUnits": [
+    "ems.alpha",
+    "fire.bravo",
+    "police.delta"
+  ],
+  "riskTags": [
+    "flooded.routes",
+    "grid.failure"
+  ],
+  "teamSlots": [
+    {
+      "roleId": "operator",
+      "state": "bot_assigned"
+    },
+    {
+      "roleId": "dispatcher",
+      "state": "player_assigned"
+    },
+    {
+      "roleId": "coordinator",
+      "state": "open"
+    },
+    {
+      "roleId": "crisis_officer",
+      "state": "bot_assigned"
+    }
+  ],
+  "objectives": [
+    "response_time",
+    "correct_dispatch",
+    "resource_preservation"
+  ]
+}

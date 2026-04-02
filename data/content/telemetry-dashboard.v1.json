@@ -1,0 +1,40 @@
+{
+  "missionId": "showcase.mission.01",
+  "kpis": [
+    {
+      "id": "mission_complete_rate",
+      "label": "Mission complete rate",
+      "value": 0.84,
+      "trend": "up"
+    },
+    {
+      "id": "retry_rate",
+      "label": "Retry rate",
+      "value": 0.26,
+      "trend": "down"
+    },
+    {
+      "id": "avg_route_confirm_sec",
+      "label": "Avg route confirm sec",
+      "value": 8.4,
+      "trend": "flat"
+    },
+    {
+      "id": "hint_trigger_density",
+      "label": "Hint trigger density",
+      "value": 0.42,
+      "trend": "down"
+    }
+  ],
+  "heatmap": [
+    {
+      "zone": "north",
+      "severity": "medium"
+    },
+    {
+      "zone": "downtown",
+      "severity": "high"
+    }
+  ],
+  "status": "demo_mock"
+}

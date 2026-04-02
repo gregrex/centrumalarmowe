@@ -1,0 +1,9 @@
+{
+  "id": "review-panels.v21",
+  "panels": [
+    "review_checklist",
+    "capture_mode_toggle",
+    "store_shot_selector",
+    "playtest_feedback_stub"
+  ]
+}

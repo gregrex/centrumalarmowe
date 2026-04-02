@@ -1,0 +1,85 @@
+{
+  "version": "v17",
+  "groups": [
+    {
+      "id": "route_visual_state",
+      "entries": [
+        {
+          "id": "route.clear",
+          "label": "Clear"
+        },
+        {
+          "id": "route.delayed",
+          "label": "Delayed"
+        },
+        {
+          "id": "route.blocked",
+          "label": "Blocked"
+        },
+        {
+          "id": "route.rerouted",
+          "label": "Rerouted"
+        },
+        {
+          "id": "route.critical",
+          "label": "Critical"
+        }
+      ]
+    },
+    {
+      "id": "recovery_card_type",
+      "entries": [
+        {
+          "id": "recovery.reroute",
+          "label": "Reroute"
+        },
+        {
+          "id": "recovery.reinforce",
+          "label": "Reinforce"
+        },
+        {
+          "id": "recovery.delay_lower",
+          "label": "Delay lower priority"
+        },
+        {
+          "id": "recovery.bot_assist",
+          "label": "Bot Assist"
+        }
+      ]
+    },
+    {
+      "id": "fail_branch_type",
+      "entries": [
+        {
+          "id": "fail.objective",
+          "label": "Objective Fail"
+        },
+        {
+          "id": "fail.timer",
+          "label": "Timer Fail"
+        },
+        {
+          "id": "fail.city_pressure",
+          "label": "City Pressure Collapse"
+        }
+      ]
+    },
+    {
+      "id": "report_room_variant",
+      "entries": [
+        {
+          "id": "report.success",
+          "label": "Success"
+        },
+        {
+          "id": "report.partial",
+          "label": "Partial"
+        },
+        {
+          "id": "report.fail",
+          "label": "Fail"
+        }
+      ]
+    }
+  ]
+}

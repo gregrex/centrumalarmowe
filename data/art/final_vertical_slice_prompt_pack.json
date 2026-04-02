@@ -1,0 +1,17 @@
+{
+  "style": "premium mobile 2d stylized realism",
+  "prompts": [
+    {
+      "id": "scene.dispatch_hall_storm",
+      "prompt": "premium mobile 2d dispatch hall scene, storm outside windows, layered parallax, readable control room silhouettes, stylized realism, no text, no logos"
+    },
+    {
+      "id": "scene.chapter_map_room",
+      "prompt": "premium mobile 2d chapter map room, tactical wall board, ambient lighting, clean readable UI-friendly composition, stylized realism"
+    },
+    {
+      "id": "hero.dispatch_console",
+      "prompt": "dispatch console hero object, 2d side/front concept, premium mobile game asset, readable buttons and screens, stylized realism"
+    }
+  ]
+}

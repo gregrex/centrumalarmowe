@@ -1,0 +1,13 @@
+{
+  "name": "centrumalarmowe-server",
+  "version": "0.1.0",
+  "description": "Minimalny server scaffold for 112: Centrum Alarmowe (Node.js + WebSocket)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ws": "^8.0.0",
+    "uuid": "^9.0.0"
+  }
+}

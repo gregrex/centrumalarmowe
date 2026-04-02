@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-ot">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#06090f"/>
+  <!-- 3 pola celu (objective checklist) -->
+  <!-- Cel 1 – ukończony -->
+  <rect x="16" y="22" width="96" height="22" rx="6" fill="#052e16" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="32" cy="33" r="7" fill="#22c55e"/>
+  <polyline points="28,33 31,37 37,29" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="46" y="29" width="55" height="8" rx="3" fill="rgba(34,197,94,0.4)"/>
+  <!-- Cel 2 – aktywny -->
+  <rect x="16" y="52" width="96" height="22" rx="6" fill="#1a1000" stroke="#f59e0b" stroke-width="2" filter="url(#glow-ot)"/>
+  <circle cx="32" cy="63" r="7" fill="#f59e0b" opacity=".3" stroke="#f59e0b" stroke-width="2"/>
+  <circle cx="32" cy="63" r="3" fill="#f59e0b"/>
+  <rect x="46" y="59" width="38" height="8" rx="3" fill="rgba(245,158,11,0.5)"/>
+  <!-- Cel 3 – nieukończony -->
+  <rect x="16" y="82" width="96" height="22" rx="6" fill="#0d0d0d" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+  <circle cx="32" cy="93" r="7" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <rect x="46" y="89" width="48" height="8" rx="3" fill="rgba(255,255,255,0.10)"/>
+  <!-- gwiazdka ikona u góry -->
+  <text x="112" y="21" font-size="14" font-family="Arial" text-anchor="middle" fill="#f59e0b" filter="url(#glow-ot)">★</text>
+  <!-- etykieta -->
+  <text x="64" y="118" font-size="9" font-weight="700" font-family="Arial" fill="rgba(245,158,11,0.55)"
+        text-anchor="middle" letter-spacing="1">CELE MISJI</text>
+</svg>

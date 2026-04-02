@@ -1,0 +1,40 @@
+{
+  "missionId": "mission.01.05",
+  "zones": [
+    {
+      "id": "zone.center",
+      "type": "downtown",
+      "risk": "high"
+    },
+    {
+      "id": "zone.west_bridge",
+      "type": "bridge",
+      "risk": "critical"
+    },
+    {
+      "id": "zone.mall",
+      "type": "commercial",
+      "risk": "medium"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc.med.010",
+      "type": "medical",
+      "zoneId": "zone.west_bridge",
+      "priority": "critical"
+    },
+    {
+      "id": "inc.fire.011",
+      "type": "fire",
+      "zoneId": "zone.mall",
+      "priority": "high"
+    },
+    {
+      "id": "inc.pol.012",
+      "type": "police",
+      "zoneId": "zone.center",
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": "v25",
+  "packageId": "final_handoff_v25",
+  "scope": "android_first_real_build",
+  "artifacts": [
+    "android_build",
+    "store_compliance",
+    "internal_demo",
+    "playtest_loop",
+    "liveops_review"
+  ],
+  "status": "draft_ready"
+}

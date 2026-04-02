@@ -1,0 +1,13 @@
+{
+  "id": "mission_demo_001",
+  "title": "Pożar w bloku mieszkalnym",
+  "map": "city_block_a",
+  "playersRequired": 3,
+  "roles": ["Dispatcher","Rescue","FireControl"],
+  "timeLimit": 300,
+  "events": [
+    {"t": 10, "type": "fire_spread", "params": {"zone": "A"}},
+    {"t": 40, "type": "medical_case", "params": {"location": "B2"}}
+  ],
+  "rewards": {"xp": 100, "items": ["medkit"]}
+}

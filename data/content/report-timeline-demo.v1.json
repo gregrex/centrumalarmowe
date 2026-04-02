@@ -1,0 +1,29 @@
+{
+  "sessionId": "DEMO112",
+  "items": [
+    {
+      "timelineItemId": "t1",
+      "timestamp": "2026-03-20T10:00:00Z",
+      "severity": "info",
+      "actorRole": "role.operator",
+      "message": "Call classified: chest pain in central district.",
+      "isBot": false
+    },
+    {
+      "timelineItemId": "t2",
+      "timestamp": "2026-03-20T10:00:10Z",
+      "severity": "warning",
+      "actorRole": "role.dispatcher",
+      "message": "Ambulance AMB-01 dispatched.",
+      "isBot": false
+    },
+    {
+      "timelineItemId": "t3",
+      "timestamp": "2026-03-20T10:00:30Z",
+      "severity": "critical",
+      "actorRole": "role.coordinator",
+      "message": "Incident escalated due to delay in secondary response.",
+      "isBot": true
+    }
+  ]
+}

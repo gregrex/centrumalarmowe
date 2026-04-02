@@ -1,0 +1,19 @@
+{
+  "checklist": [
+    {
+      "id": "rr24_01",
+      "label": "Internal build smoke passed",
+      "priority": "P1"
+    },
+    {
+      "id": "rr24_02",
+      "label": "Known issues drafted",
+      "priority": "P1"
+    },
+    {
+      "id": "rr24_03",
+      "label": "Telemetry review mock ready",
+      "priority": "P2"
+    }
+  ]
+}

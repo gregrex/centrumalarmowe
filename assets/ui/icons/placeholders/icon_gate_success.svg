@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="success-bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#052e16"/>
+      <stop offset="100%" stop-color="#010d05"/>
+    </radialGradient>
+    <filter id="glow-gs">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="url(#success-bg)" stroke="#22c55e" stroke-width="2.5"/>
+  <!-- pierścień zewnętrzny -->
+  <circle cx="64" cy="64" r="46" fill="none" stroke="#22c55e" stroke-width="2" opacity=".3"/>
+  <!-- koło sukcesu -->
+  <circle cx="64" cy="64" r="36" fill="#052e16" stroke="#22c55e" stroke-width="3" filter="url(#glow-gs)"/>
+  <!-- checkmark -->
+  <polyline points="44,64 56,76 84,48" fill="none" stroke="#4ade80" stroke-width="8"
+            stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-gs)"/>
+  <!-- label -->
+  <text x="64" y="118" font-size="11" font-weight="700" font-family="Arial" fill="#22c55e"
+        text-anchor="middle" letter-spacing="1">SUKCES</text>
+</svg>

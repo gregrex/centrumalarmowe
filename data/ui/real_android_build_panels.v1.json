@@ -1,0 +1,24 @@
+{
+  "panels": [
+    {
+      "id": "operator_primary",
+      "anchor": "bottom",
+      "priority": 1
+    },
+    {
+      "id": "dispatcher_primary",
+      "anchor": "bottom",
+      "priority": 1
+    },
+    {
+      "id": "route_overlay_hint",
+      "anchor": "top",
+      "priority": 2
+    },
+    {
+      "id": "retry_recommendation",
+      "anchor": "center",
+      "priority": 3
+    }
+  ]
+}

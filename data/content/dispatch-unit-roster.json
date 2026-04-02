@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "units": [
+    {
+      "id": "AMB-01",
+      "type": "unit.ambulance.basic",
+      "status": "Available",
+      "zone": "Hospital1"
+    },
+    {
+      "id": "AMB-02",
+      "type": "unit.ambulance.advanced",
+      "status": "Available",
+      "zone": "Hospital1"
+    },
+    {
+      "id": "FIRE-01",
+      "type": "unit.fire.engine",
+      "status": "Available",
+      "zone": "NorthStation"
+    },
+    {
+      "id": "POL-01",
+      "type": "unit.police.patrol",
+      "status": "Available",
+      "zone": "Central"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "startup_volume",
+    "mute_toggle",
+    "alert_priority",
+    "mono_compat",
+    "no_clipping"
+  ],
+  "deviceProfiles": [
+    "phone_small",
+    "phone_large",
+    "tablet_debug"
+  ]
+}

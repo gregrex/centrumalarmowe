@@ -1,0 +1,9 @@
+{
+  "director": {
+    "maxConcurrentIncidentsBase": 6,
+    "overloadThreshold": 0.78,
+    "escalationBias": 0.35,
+    "reduceNoiseWhenPlayerOverloaded": true,
+    "boostPressureWhenStable": true
+  }
+}

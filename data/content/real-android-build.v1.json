@@ -1,0 +1,18 @@
+{
+  "buildId": "android.real.v26.preview01",
+  "version": "0.1.0-preview26",
+  "missionId": "showcase.mission.01",
+  "target": "android_internal_preview",
+  "focusAreas": [
+    "operator_runtime",
+    "dispatcher_runtime",
+    "bugfix_freeze",
+    "capture_refresh"
+  ],
+  "devices": [
+    "android_mid_720p",
+    "android_hd_1080p",
+    "android_tablet_debug"
+  ],
+  "status": "candidate_for_real_build"
+}

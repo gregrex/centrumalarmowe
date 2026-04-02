@@ -1,0 +1,33 @@
+{
+  "missionId": "mission.demo.17",
+  "style": "premium_2d_mobile_v4",
+  "segments": [
+    {
+      "id": "seg.ems.01",
+      "state": "clear",
+      "from": "hub.ems",
+      "to": "bridge.accident",
+      "etaSeconds": 36,
+      "visual": "pulse_blue"
+    },
+    {
+      "id": "seg.fire.01",
+      "state": "blocked",
+      "from": "hub.fire",
+      "to": "bridge.smoke",
+      "etaSeconds": 74,
+      "visual": "pulse_red"
+    },
+    {
+      "id": "seg.police.01",
+      "state": "rerouted",
+      "from": "hub.police",
+      "to": "bridge.traffic",
+      "etaSeconds": 58,
+      "visual": "pulse_amber"
+    }
+  ],
+  "focusSegmentId": "seg.fire.01",
+  "showDirectionArrows": true,
+  "showSeverityBadges": true
+}

@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "groups": [
+    {
+      "id": "home.cards",
+      "entries": [
+        {
+          "id": "home.card.continue",
+          "key": "home.continue",
+          "label": "Kontynuuj"
+        },
+        {
+          "id": "home.card.quickplay",
+          "key": "home.quickplay",
+          "label": "Szybka gra"
+        },
+        {
+          "id": "home.card.campaign",
+          "key": "home.campaign",
+          "label": "Kampania"
+        },
+        {
+          "id": "home.card.coop",
+          "key": "home.coop",
+          "label": "Współpraca"
+        },
+        {
+          "id": "home.card.profile",
+          "key": "home.profile",
+          "label": "Profil"
+        },
+        {
+          "id": "home.card.settings",
+          "key": "home.settings",
+          "label": "Ustawienia"
+        }
+      ]
+    },
+    {
+      "id": "audio.screen.routes",
+      "entries": [
+        {
+          "id": "audio.route.home",
+          "key": "menu.home.calm",
+          "label": "Home calm"
+        },
+        {
+          "id": "audio.route.campaign",
+          "key": "menu.campaign.focus",
+          "label": "Campaign focus"
+        },
+        {
+          "id": "audio.route.coop",
+          "key": "menu.coop.anticipation",
+          "label": "Coop anticipation"
+        },
+        {
+          "id": "audio.route.profile",
+          "key": "menu.profile.light",
+          "label": "Profile light"
+        },
+        {
+          "id": "audio.route.settings",
+          "key": "menu.settings.neutral",
+          "label": "Settings neutral"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "test-deploy.v21",
+  "buildName": "Alarm112 Showcase Review",
+  "channels": ["internal-review", "device-smoke"],
+  "requiredChecks": ["health", "showcase_seed", "capture_mode", "review_checklist"]
+}

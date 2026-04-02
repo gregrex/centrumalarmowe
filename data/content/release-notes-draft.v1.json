@@ -1,0 +1,29 @@
+{
+  "title": "Alarm112 RC1 Release Notes",
+  "sections": [
+    {
+      "id": "highlights",
+      "title": "Highlights",
+      "items": [
+        "Showcase mission ready",
+        "Onboarding and hint flow",
+        "Report room polish"
+      ]
+    },
+    {
+      "id": "fixes",
+      "title": "Fixes",
+      "items": [
+        "Retry flow stabilized",
+        "Audio transitions aligned"
+      ]
+    },
+    {
+      "id": "known_issues",
+      "title": "Known Issues",
+      "items": [
+        "Placeholder assets remain outside showcase scope"
+      ]
+    }
+  ]
+}

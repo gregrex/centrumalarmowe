@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "mission_complete_gate",
+    "grade_reveal",
+    "stars_reveal",
+    "timeline_summary",
+    "rewards_reveal",
+    "progression_update",
+    "decision_next_retry_home"
+  ],
+  "audioState": "report_success_mild",
+  "scenePreset": "report_room_success"
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-cn"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="#030710"/>
+  <!-- outer glow ring -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="rgba(56,189,248,0.12)" stroke-width="2"/>
+  <!-- progress arc (70% done) -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="#38bdf8" stroke-width="5"
+          stroke-dasharray="211 302" stroke-dashoffset="-56" stroke-linecap="round"
+          transform="rotate(-90 64 64)" filter="url(#glow-cn)"/>
+  <!-- node center -->
+  <circle cx="64" cy="64" r="28" fill="#0d1a2d" stroke="#38bdf8" stroke-width="2.5" filter="url(#glow-cn)"/>
+  <!-- chapter number -->
+  <text x="64" y="72" font-size="28" font-weight="900" font-family="Arial Black, Arial"
+        fill="#38bdf8" text-anchor="middle" filter="url(#glow-cn)">3</text>
+  <!-- small completed checkmark bottom-right -->
+  <circle cx="100" cy="100" r="13" fill="#052e16" stroke="#4ade80" stroke-width="2"/>
+  <polyline points="94,100 99,106 108,95" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

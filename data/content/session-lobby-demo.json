@@ -1,0 +1,25 @@
+{
+  "scenarioId": "scenario.verticalslice.quickplay",
+  "difficulty": "normal",
+  "botFillEnabled": true,
+  "roles": [
+    {
+      "slotId": "role.operator",
+      "occupant": "human"
+    },
+    {
+      "slotId": "role.dispatcher",
+      "occupant": "bot"
+    },
+    {
+      "slotId": "role.coordinator",
+      "occupant": "bot"
+    },
+    {
+      "slotId": "role.crisis_officer",
+      "occupant": "bot"
+    }
+  ],
+  "weather": "rain",
+  "timeOfDay": "night"
+}

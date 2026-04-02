@@ -1,0 +1,30 @@
+{
+  "shots": [
+    {
+      "id": "cap.home.hero",
+      "type": "store_shot",
+      "ratio": "9:16",
+      "scene": "menu_night_console"
+    },
+    {
+      "id": "cap.briefing",
+      "type": "demo_shot",
+      "ratio": "16:9",
+      "scene": "briefing_room"
+    },
+    {
+      "id": "cap.runtime.route",
+      "type": "trailer_shot",
+      "ratio": "9:16",
+      "scene": "city_route_overlay"
+    },
+    {
+      "id": "cap.report.success",
+      "type": "store_shot",
+      "ratio": "9:16",
+      "scene": "report_room_success"
+    }
+  ],
+  "audioProfile": "preview_capture_lock",
+  "safeFrame": "mobile_portrait_safe"
+}

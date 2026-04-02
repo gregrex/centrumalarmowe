@@ -1,0 +1,45 @@
+{
+  "sessionId": "DEMO112",
+  "items": [
+    {
+      "deltaId": "delta.001",
+      "incidentId": "inc.fire.002",
+      "changeType": "delta.type.escalated",
+      "severity": "critical",
+      "status": "active",
+      "timerDeltaSeconds": -30,
+      "needsAttention": true,
+      "timestamp": "2026-03-20T10:00:02Z"
+    },
+    {
+      "deltaId": "delta.002",
+      "incidentId": "inc.medical.001",
+      "changeType": "delta.type.timeout-risk",
+      "severity": "high",
+      "status": "active",
+      "timerDeltaSeconds": -20,
+      "needsAttention": true,
+      "timestamp": "2026-03-20T10:00:04Z"
+    },
+    {
+      "deltaId": "delta.003",
+      "incidentId": "inc.medical.004",
+      "changeType": "delta.type.shared-action-needed",
+      "severity": "critical",
+      "status": "awaiting-ack",
+      "timerDeltaSeconds": -10,
+      "needsAttention": true,
+      "timestamp": "2026-03-20T10:00:08Z"
+    },
+    {
+      "deltaId": "delta.004",
+      "incidentId": "inc.medical.001",
+      "changeType": "delta.type.resolved",
+      "severity": "normal",
+      "status": "resolved",
+      "timerDeltaSeconds": 0,
+      "needsAttention": false,
+      "timestamp": "2026-03-20T10:00:12Z"
+    }
+  ]
+}

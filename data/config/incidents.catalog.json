@@ -1,0 +1,28 @@
+{
+  "incidents": [
+    {
+      "id": "medical-collapse",
+      "category": "Medical",
+      "severity": "High",
+      "zone": "Downtown"
+    },
+    {
+      "id": "kitchen-fire",
+      "category": "Fire",
+      "severity": "Medium",
+      "zone": "HousingA"
+    },
+    {
+      "id": "bus-driver-unconscious",
+      "category": "Medical",
+      "severity": "Critical",
+      "zone": "Transit"
+    },
+    {
+      "id": "domestic-violence",
+      "category": "Police",
+      "severity": "High",
+      "zone": "HousingB"
+    }
+  ]
+}

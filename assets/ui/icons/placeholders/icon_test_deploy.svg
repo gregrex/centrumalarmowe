@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <!-- rakieta deploy -->
+  <path d="M128 200 C100 200 80 180 80 140 C80 100 128 40 128 40 C128 40 176 100 176 140 C176 180 156 200 128 200Z"
+        fill="#0d1a2d" stroke="#38bdf8" stroke-width="3" filter="url(#g)"/>
+  <!-- okno rakiety -->
+  <circle cx="128" cy="120" r="18" fill="#020810" stroke="#38bdf8" stroke-width="2.5" filter="url(#g)"/>
+  <circle cx="128" cy="120" r="10" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5"/>
+  <!-- ogień -->
+  <path d="M112 200 C112 200 104 220 128 230 C152 220 144 200 144 200Z" fill="#fb923c" filter="url(#g)"/>
+  <path d="M118 200 C118 200 114 214 128 220 C142 214 138 200 138 200Z" fill="#fbbf24" filter="url(#g)"/>
+  <!-- skrzydła -->
+  <path d="M80 140 L52 168 L80 160Z" fill="#0d2035" stroke="#38bdf8" stroke-width="2"/>
+  <path d="M176 140 L204 168 L176 160Z" fill="#0d2035" stroke="#38bdf8" stroke-width="2"/>
+  <!-- badge TEST -->
+  <rect x="86" y="20" width="84" height="28" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="128" y="38" font-size="14" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle">TEST DEPLOY</text>
+  <text x="128" y="246" font-size="13" font-weight="700" font-family="Arial" fill="rgba(56,189,248,0.4)" text-anchor="middle" letter-spacing="2">DEPLOY</text>
+</svg>

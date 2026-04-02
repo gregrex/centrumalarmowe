@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <!-- gamepad -->
+  <rect x="36" y="88" width="184" height="100" rx="50" fill="#0d1a2d" stroke="#38bdf8" stroke-width="2.5" filter="url(#g)"/>
+  <!-- d-pad lewo -->
+  <rect x="60" y="126" width="40" height="14" rx="4" fill="#38bdf8" opacity=".5"/>
+  <rect x="73" y="114" width="14" height="38" rx="4" fill="#38bdf8" opacity=".5"/>
+  <!-- przyciski prawo -->
+  <circle cx="170" cy="128" r="8" fill="#4ade80" opacity=".7"/>
+  <circle cx="186" cy="138" r="8" fill="#fbbf24" opacity=".7"/>
+  <circle cx="154" cy="138" r="8" fill="#f87171" opacity=".7"/>
+  <circle cx="170" cy="150" r="8" fill="#a78bfa" opacity=".7"/>
+  <!-- bańka speech z feedbackiem -->
+  <rect x="84" y="24" width="148" height="56" rx="12" fill="#0d2035" stroke="rgba(56,189,248,0.3)" stroke-width="1.5"/>
+  <path d="M100 80 L90 96 L116 80" fill="#0d2035" stroke="rgba(56,189,248,0.3)" stroke-width="1.5"/>
+  <text x="158" y="52" font-size="14" font-family="Arial" fill="#94a3b8" text-anchor="middle">Feedback:</text>
+  <text x="158" y="70" font-size="16" font-weight="700" font-family="Arial" fill="#fbbf24" text-anchor="middle">★★★★☆</text>
+  <text x="128" y="210" font-size="14" font-weight="700" font-family="Arial" fill="rgba(56,189,248,0.45)" text-anchor="middle" letter-spacing="1">PLAYTEST FEEDBACK</text>
+</svg>

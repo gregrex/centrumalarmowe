@@ -1,0 +1,24 @@
+{
+  "roles": {
+    "role.operator": [
+      "audio.call.new",
+      "audio.call.escalation",
+      "audio.call.drop"
+    ],
+    "role.dispatcher": [
+      "audio.dispatch.confirm",
+      "audio.unit.none_available",
+      "audio.route.blocked"
+    ],
+    "role.coordinator": [
+      "audio.overload.warning",
+      "audio.chain.trigger",
+      "audio.pressure.critical"
+    ],
+    "role.crisis": [
+      "audio.infrastructure.failure",
+      "audio.reserve.deploy",
+      "audio.citywide.alert"
+    ]
+  }
+}

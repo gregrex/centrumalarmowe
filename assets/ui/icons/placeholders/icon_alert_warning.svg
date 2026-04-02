@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <defs>
+    <filter id="glow-warn">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#130e02" stroke="#f59e0b" stroke-width="2.5"/>
+  <!-- trójkąt z obramowaniem -->
+  <path d="M48 20 L80 72 L16 72 Z" fill="#78350f" stroke="#f59e0b" stroke-width="2.5" stroke-linejoin="round" filter="url(#glow-warn)"/>
+  <path d="M48 24 L76 70 L20 70 Z" fill="#92400e"/>
+  <!-- wykrzyknik -->
+  <rect x="44.5" y="36" width="7" height="18" rx="3" fill="#fde68a"/>
+  <circle cx="48" cy="61" r="4" fill="#fde68a"/>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "cues": [
+    {
+      "eventId": "role.lock",
+      "cueId": "ui.role.lock.short"
+    },
+    {
+      "eventId": "bot.preview.open",
+      "cueId": "ui.bot.preview.open"
+    },
+    {
+      "eventId": "bootstrap.confirm",
+      "cueId": "stinger.bootstrap.confirm"
+    },
+    {
+      "eventId": "bootstrap.loading",
+      "cueId": "ui.loading.ops"
+    }
+  ]
+}

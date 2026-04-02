@@ -1,0 +1,16 @@
+{
+  "voiceBarks": [
+    "dispatch_confirmed",
+    "unit_unavailable",
+    "reroute_now",
+    "objective_at_risk",
+    "mission_complete"
+  ],
+  "sfx": [
+    "tap_card",
+    "dispatch_confirm",
+    "dispatch_fail",
+    "pressure_spike",
+    "report_star"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "states": [
+    {
+      "id": "calm",
+      "intensity": 1,
+      "loop": "music.calm"
+    },
+    {
+      "id": "loaded",
+      "intensity": 2,
+      "loop": "music.loaded"
+    },
+    {
+      "id": "escalation",
+      "intensity": 3,
+      "loop": "music.escalation"
+    },
+    {
+      "id": "critical-window",
+      "intensity": 4,
+      "loop": "music.critical"
+    },
+    {
+      "id": "route-warning",
+      "intensity": 3,
+      "loop": "sfx.route.warning"
+    },
+    {
+      "id": "route-critical",
+      "intensity": 4,
+      "loop": "sfx.route.critical"
+    }
+  ]
+}

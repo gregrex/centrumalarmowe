@@ -1,0 +1,8 @@
+{
+  "style": "premium_2d_dispatch_mobile",
+  "prompts": [
+    "premium 2d emergency route overlay with directional arrows and severity pulses, mobile readable, no text artifacts",
+    "clean route segment icons for clear delayed blocked rerouted critical states, premium 2d mobile ui",
+    "objective at risk pulse marker, emergency dispatch map, high contrast, compact and readable"
+  ]
+}

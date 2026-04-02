@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-ca"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="#0a0302"/>
+  <!-- alert 1 (lewa) -->
+  <polygon points="22,88 38,58 54,88" fill="#7f1d1d" stroke="#ef4444" stroke-width="2" filter="url(#glow-ca)"/>
+  <rect x="36" y="66" width="4" height="12" rx="1" fill="#fff"/>
+  <circle cx="38" cy="84" r="2.5" fill="#fff"/>
+  <!-- łańcuch między alertami -->
+  <path d="M54,73 C66,60 76,86 90,73" fill="none" stroke="#f59e0b" stroke-width="3"
+        stroke-dasharray="6 4" stroke-linecap="round" filter="url(#glow-ca)"/>
+  <!-- alert 2 (prawa, eskalowany - większy) -->
+  <polygon points="74,95 96,52 118,95" fill="#991b1b" stroke="#ef4444" stroke-width="2.5" filter="url(#glow-ca)"/>
+  <rect x="94" y="62" width="4" height="18" rx="1" fill="#fca5a5"/>
+  <circle cx="96" cy="87" r="3" fill="#fca5a5"/>
+  <!-- etykieta "CHAIN" -->
+  <text x="64" y="114" font-size="14" font-weight="700" font-family="Arial" fill="rgba(239,68,68,0.6)" text-anchor="middle" letter-spacing="2">CHAIN</text>
+</svg>

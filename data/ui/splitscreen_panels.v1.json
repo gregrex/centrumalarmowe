@@ -1,0 +1,18 @@
+{
+  "layouts": [
+    {
+      "layoutId": "split.panel.layout.operator-dispatcher",
+      "primaryRole": "role.operator",
+      "secondaryRole": "role.dispatcher",
+      "orientation": "vertical",
+      "showSharedTicker": true
+    },
+    {
+      "layoutId": "split.panel.layout.coordinator-crisis",
+      "primaryRole": "role.coordinator",
+      "secondaryRole": "role.crisis-officer",
+      "orientation": "vertical",
+      "showSharedTicker": true
+    }
+  ]
+}

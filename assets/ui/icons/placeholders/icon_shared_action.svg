@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <filter id="glow-sa">
+      <feGaussianBlur stdDeviation="1.8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="12" fill="#040d1a"/>
+  <!-- dwie osoby -->
+  <circle cx="20" cy="18" r="8" fill="#38bdf8" opacity=".85"/>
+  <path d="M10 36 Q10 28 20 28 Q30 28 30 36" fill="#38bdf8" opacity=".7"/>
+  <circle cx="44" cy="18" r="8" fill="#fb923c" opacity=".85"/>
+  <path d="M34 36 Q34 28 44 28 Q54 28 54 36" fill="#fb923c" opacity=".7"/>
+  <!-- linia połączenia / akcja wspólna -->
+  <line x1="20" y1="18" x2="44" y2="18" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <!-- ikona wspólnej akcji – łącznik z checkboxem -->
+  <rect x="20" y="42" width="24" height="14" rx="4" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5" filter="url(#glow-sa)"/>
+  <text x="32" y="52" font-size="7" font-weight="700" font-family="Arial" fill="#7dd3fc" text-anchor="middle">SHARED</text>
+  <!-- strzałki do ramki (akcja obojga) -->
+  <line x1="20" y1="36" x2="24" y2="42" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+  <line x1="44" y1="36" x2="40" y2="42" stroke="#fb923c" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+</svg>

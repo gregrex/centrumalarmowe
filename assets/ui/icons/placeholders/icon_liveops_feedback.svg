@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="glow-lf"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <rect x="2" y="2" width="252" height="252" rx="23" fill="none" stroke="rgba(74,222,128,0.2)" stroke-width="1.5"/>
+  <!-- nagłówek LIVEOPS -->
+  <rect x="16" y="16" width="224" height="36" rx="8" fill="#052e16" stroke="rgba(74,222,128,0.3)" stroke-width="1.5"/>
+  <circle cx="36" cy="34" r="7" fill="#4ade80" filter="url(#glow-lf)"/>
+  <text x="140" y="39" font-size="16" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle" letter-spacing="2">LIVEOPS · FEEDBACK</text>
+  <!-- wykres trendów sesji -->
+  <polyline points="16,180 48,160 80,170 112,140 144,120 176,130 208,100 240,90"
+            fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-lf)"/>
+  <polygon points="16,256 16,180 48,160 80,170 112,140 144,120 176,130 208,100 240,90 240,256"
+           fill="rgba(74,222,128,0.08)"/>
+  <!-- metryki kafelki -->
+  <rect x="16" y="190" width="68" height="50" rx="8" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.2)" stroke-width="1"/>
+  <text x="50" y="213" font-size="11" font-family="Arial" fill="#86efac" text-anchor="middle">Sesje</text>
+  <text x="50" y="232" font-size="20" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle" filter="url(#glow-lf)">2847</text>
+
+  <rect x="94" y="190" width="68" height="50" rx="8" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+  <text x="128" y="213" font-size="11" font-family="Arial" fill="#7dd3fc" text-anchor="middle">Retencja</text>
+  <text x="128" y="232" font-size="20" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">74%</text>
+
+  <rect x="172" y="190" width="68" height="50" rx="8" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="206" y="213" font-size="11" font-family="Arial" fill="#fde68a" text-anchor="middle">Ocena</text>
+  <text x="206" y="232" font-size="20" font-weight="700" font-family="Arial" fill="#fbbf24" text-anchor="middle">4.6★</text>
+</svg>

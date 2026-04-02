@@ -1,0 +1,74 @@
+{
+  "sessionId": "DEMO112",
+  "generatedAtUtc": "2026-03-19T23:59:00Z",
+  "items": [
+    {
+      "incidentId": "inc.medical.001",
+      "incidentTypeId": "incident.medical.chest-pain",
+      "titleKey": "incident.medical.chest-pain.title",
+      "severity": "high",
+      "nodeId": "zone.central",
+      "status": "active",
+      "primaryRequiredRole": "role.dispatcher",
+      "recommendedUnitId": "unit.ambulance.01",
+      "recommendedEtaSeconds": 180,
+      "pressure": 7,
+      "sharedActionRequired": false,
+      "tags": [
+        "medical",
+        "high-priority"
+      ]
+    },
+    {
+      "incidentId": "inc.fire.002",
+      "incidentTypeId": "incident.fire.apartment",
+      "titleKey": "incident.fire.apartment.title",
+      "severity": "critical",
+      "nodeId": "zone.residential.north",
+      "status": "active",
+      "primaryRequiredRole": "role.coordinator",
+      "recommendedUnitId": "unit.fire.01",
+      "recommendedEtaSeconds": 240,
+      "pressure": 9,
+      "sharedActionRequired": true,
+      "tags": [
+        "fire",
+        "shared-action"
+      ]
+    },
+    {
+      "incidentId": "inc.police.003",
+      "incidentTypeId": "incident.police.fight",
+      "titleKey": "incident.police.fight.title",
+      "severity": "medium",
+      "nodeId": "zone.central",
+      "status": "monitoring",
+      "primaryRequiredRole": "role.operator",
+      "recommendedUnitId": "unit.police.01",
+      "recommendedEtaSeconds": 150,
+      "pressure": 4,
+      "sharedActionRequired": false,
+      "tags": [
+        "police"
+      ]
+    },
+    {
+      "incidentId": "inc.medical.004",
+      "incidentTypeId": "incident.medical.unconscious",
+      "titleKey": "incident.medical.unconscious.title",
+      "severity": "critical",
+      "nodeId": "zone.industrial.east",
+      "status": "active",
+      "primaryRequiredRole": "role.dispatcher",
+      "recommendedUnitId": "unit.ambulance.02",
+      "recommendedEtaSeconds": 300,
+      "pressure": 10,
+      "sharedActionRequired": true,
+      "tags": [
+        "medical",
+        "industrial",
+        "shared-action"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "panels": [
+    {
+      "id": "panel.timer.top",
+      "anchor": "top_center"
+    },
+    {
+      "id": "panel.route.legend",
+      "anchor": "top_right"
+    },
+    {
+      "id": "panel.objective.micro",
+      "anchor": "left_center"
+    },
+    {
+      "id": "panel.chain.alert",
+      "anchor": "right_center"
+    }
+  ]
+}

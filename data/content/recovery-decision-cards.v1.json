@@ -1,0 +1,45 @@
+{
+  "missionId": "mission.demo.17",
+  "cards": [
+    {
+      "id": "recovery.card.traffic_reroute",
+      "trigger": "chain.blocked_fire_lane",
+      "title": "Reroute traffic corridor",
+      "severity": "high",
+      "options": [
+        {
+          "id": "opt.open_temp_lane",
+          "label": "Open temporary lane",
+          "impact": "reduce_eta_fire",
+          "risk": "medium"
+        },
+        {
+          "id": "opt.reassign_police",
+          "label": "Reassign police escort",
+          "impact": "stabilize_route",
+          "risk": "low"
+        }
+      ]
+    },
+    {
+      "id": "recovery.card.ems_reinforce",
+      "trigger": "objective.patient_at_risk",
+      "title": "Reinforce EMS coverage",
+      "severity": "critical",
+      "options": [
+        {
+          "id": "opt.call_mutual_aid",
+          "label": "Call mutual aid",
+          "impact": "add_unit",
+          "risk": "resource_cost"
+        },
+        {
+          "id": "opt.delay_minor_case",
+          "label": "Delay minor case",
+          "impact": "free_unit",
+          "risk": "public_frustration"
+        }
+      ]
+    }
+  ]
+}

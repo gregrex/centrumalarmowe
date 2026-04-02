@@ -1,0 +1,20 @@
+{
+  "trackId": "starter_track",
+  "items": [
+    {
+      "rewardId": "xp.100",
+      "type": "xp",
+      "value": 100
+    },
+    {
+      "rewardId": "badge.rapid_response",
+      "type": "badge",
+      "value": 1
+    },
+    {
+      "rewardId": "frame.storm_blue",
+      "type": "cosmetic_frame",
+      "value": 1
+    }
+  ]
+}

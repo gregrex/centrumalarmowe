@@ -1,0 +1,9 @@
+{
+  "panels": [
+    "build_status",
+    "known_issues",
+    "telemetry_summary",
+    "feedback_inbox",
+    "capture_ready"
+  ]
+}

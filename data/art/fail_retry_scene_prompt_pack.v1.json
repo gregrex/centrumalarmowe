@@ -1,0 +1,16 @@
+{
+  "scenes": [
+    {
+      "id": "scene.fail.control_room",
+      "mood": "dim_alert"
+    },
+    {
+      "id": "scene.retry.prep_room",
+      "mood": "focused_rebuild"
+    },
+    {
+      "id": "scene.next.chapter_gate",
+      "mood": "earned_progress"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "characters": [
+    {
+      "id": "portrait.operator.senior.female.a",
+      "role": "role.operator",
+      "mood": [
+        "neutral",
+        "focused",
+        "critical"
+      ]
+    },
+    {
+      "id": "portrait.dispatcher.male.a",
+      "role": "role.dispatcher",
+      "mood": [
+        "neutral",
+        "busy",
+        "critical"
+      ]
+    },
+    {
+      "id": "portrait.coordinator.female.a",
+      "role": "role.coordinator",
+      "mood": [
+        "neutral",
+        "command",
+        "critical"
+      ]
+    },
+    {
+      "id": "portrait.crisis.male.a",
+      "role": "role.crisis_officer",
+      "mood": [
+        "neutral",
+        "alert",
+        "critical"
+      ]
+    }
+  ]
+}

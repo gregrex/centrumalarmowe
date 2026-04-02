@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="glow-sc2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <rect x="2" y="2" width="252" height="252" rx="23" fill="none" stroke="rgba(74,222,128,0.2)" stroke-width="1.5"/>
+  <!-- dokument compliance -->
+  <rect x="60" y="30" width="136" height="170" rx="12" fill="#06101e" stroke="rgba(56,189,248,0.2)" stroke-width="1.5"/>
+  <!-- nagłówek doc -->
+  <rect x="60" y="30" width="136" height="36" rx="12" fill="#0d2035"/>
+  <rect x="60" y="54" width="136" height="12" fill="#0d2035"/>
+  <text x="128" y="54" font-size="14" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle" letter-spacing="1">STORE COMPLIANCE</text>
+  <!-- pozycje check -->
+  <g fill="none">
+    <rect x="76" y="80" width="104" height="18" rx="4" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.3)" stroke-width="1"/>
+    <rect x="76" y="106" width="104" height="18" rx="4" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.3)" stroke-width="1"/>
+    <rect x="76" y="132" width="104" height="18" rx="4" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.3)" stroke-width="1"/>
+    <rect x="76" y="158" width="104" height="18" rx="4" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.3)" stroke-width="1"/>
+  </g>
+  <!-- checkmarki -->
+  <text x="90" y="93" font-size="13" font-weight="700" font-family="Arial" fill="#4ade80" filter="url(#glow-sc2)">✓ Rating — PEGI 7</text>
+  <text x="90" y="119" font-size="13" font-weight="700" font-family="Arial" fill="#4ade80" filter="url(#glow-sc2)">✓ Privacy Policy</text>
+  <text x="90" y="145" font-size="13" font-weight="700" font-family="Arial" fill="#4ade80" filter="url(#glow-sc2)">✓ Permissions OK</text>
+  <text x="90" y="171" font-size="13" font-weight="700" font-family="Arial" fill="#fbbf24">⚠ Screenshots</text>
+  <!-- pieczątka APPROVED -->
+  <circle cx="196" cy="196" r="36" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="2" filter="url(#glow-sc2)"/>
+  <text x="196" y="193" font-size="11" font-weight="800" font-family="Arial" fill="#4ade80" text-anchor="middle" letter-spacing="1">APPROVED</text>
+  <text x="196" y="207" font-size="10" font-family="Arial" fill="#4ade80" text-anchor="middle">STORE</text>
+</svg>

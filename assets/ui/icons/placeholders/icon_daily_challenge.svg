@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <filter id="glow-dc"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="#060a04"/>
+  <!-- kalendarz tło -->
+  <rect x="18" y="22" width="92" height="84" rx="12" fill="#0f1a0a" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
+  <!-- nagłówek kalendarza -->
+  <rect x="18" y="22" width="92" height="26" rx="12" fill="#1a2e0a"/>
+  <rect x="18" y="38" width="92" height="10" fill="#1a2e0a"/>
+  <text x="64" y="40" font-size="14" font-weight="700" font-family="Arial" fill="#fbbf24" text-anchor="middle">WYZWANIE</text>
+  <!-- gwiazdka-tarcza w środku -->
+  <polygon points="64,52 70,64 84,64 73,72 77,86 64,78 51,86 55,72 44,64 58,64"
+           fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5" filter="url(#glow-dc)"/>
+  <!-- liczynik czasu -->
+  <text x="64" y="112" font-size="14" font-weight="700" font-family="Arial" fill="#fbbf24" text-anchor="middle" filter="url(#glow-dc)">23:14:07</text>
+  <!-- pasek czasu -->
+  <rect x="20" y="100" width="88" height="6" rx="3" fill="rgba(255,255,255,0.08)"/>
+  <rect x="20" y="100" width="42" height="6" rx="3" fill="#fbbf24" filter="url(#glow-dc)"/>
+</svg>

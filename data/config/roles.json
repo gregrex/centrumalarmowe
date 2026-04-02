@@ -1,0 +1,28 @@
+{
+  "roles": [
+    {
+      "id": "call_operator",
+      "name": "Operator Zgłoszeń",
+      "hud": "operator_hud",
+      "bot": "CallBot"
+    },
+    {
+      "id": "dispatcher",
+      "name": "Dyspozytor Jednostek",
+      "hud": "dispatcher_hud",
+      "bot": "DispatchBot"
+    },
+    {
+      "id": "ops_coordinator",
+      "name": "Koordynator Operacyjny",
+      "hud": "coordinator_hud",
+      "bot": "OpsBot"
+    },
+    {
+      "id": "crisis_officer",
+      "name": "Oficer Kryzysowy",
+      "hud": "crisis_hud",
+      "bot": "CrisisBot"
+    }
+  ]
+}

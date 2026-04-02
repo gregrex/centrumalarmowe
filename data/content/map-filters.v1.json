@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "groupId": "filter.group.severity",
+      "labelKey": "filter.group.severity",
+      "items": [
+        {
+          "filterId": "filter.severity.critical",
+          "labelKey": "filter.severity.critical",
+          "category": "severity",
+          "enabledByDefault": true,
+          "tags": [
+            "critical"
+          ]
+        },
+        {
+          "filterId": "filter.severity.high",
+          "labelKey": "filter.severity.high",
+          "category": "severity",
+          "enabledByDefault": true,
+          "tags": [
+            "high"
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "filter.group.service",
+      "labelKey": "filter.group.service",
+      "items": [
+        {
+          "filterId": "filter.service.medical",
+          "labelKey": "filter.service.medical",
+          "category": "service",
+          "enabledByDefault": true,
+          "tags": [
+            "medical"
+          ]
+        },
+        {
+          "filterId": "filter.service.fire",
+          "labelKey": "filter.service.fire",
+          "category": "service",
+          "enabledByDefault": true,
+          "tags": [
+            "fire"
+          ]
+        },
+        {
+          "filterId": "filter.service.police",
+          "labelKey": "filter.service.police",
+          "category": "service",
+          "enabledByDefault": true,
+          "tags": [
+            "police"
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "filter.group.state",
+      "labelKey": "filter.group.state",
+      "items": [
+        {
+          "filterId": "filter.state.shared-required",
+          "labelKey": "filter.state.shared-required",
+          "category": "state",
+          "enabledByDefault": false,
+          "tags": [
+            "shared-action"
+          ]
+        },
+        {
+          "filterId": "filter.state.bot-assisted",
+          "labelKey": "filter.state.bot-assisted",
+          "category": "state",
+          "enabledByDefault": false,
+          "tags": [
+            "bot-assisted"
+          ]
+        }
+      ]
+    }
+  ]
+}

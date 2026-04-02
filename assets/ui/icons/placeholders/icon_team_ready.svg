@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg-team" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#030d0a"/>
+      <stop offset="100%" stop-color="#06130f"/>
+    </linearGradient>
+    <filter id="glow-tm">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-tm-sm">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg-team)"/>
+
+  <!-- Pierścień zewnętrzny "wszystko gotowe" -->
+  <circle cx="512" cy="450" r="320" fill="none" stroke="#22c55e" stroke-width="3" opacity=".2"/>
+  <circle cx="512" cy="450" r="290" fill="none" stroke="#22c55e" stroke-width="1.5" opacity=".1"
+          stroke-dasharray="20 12"/>
+
+  <!-- ── 4 karty ról ──────────────────────────────────── -->
+  <!-- Operator (niebieski) – lewy górny -->
+  <rect x="100" y="160" width="380" height="240" rx="18" fill="#030f1e" stroke="#38bdf8" stroke-width="2.5" filter="url(#glow-tm-sm)"/>
+  <rect x="100" y="160" width="380" height="52" rx="18" fill="#1e3a5f"/>
+  <rect x="100" y="196" width="380" height="16" fill="#1e3a5f"/>
+  <text x="290" y="194" font-size="28" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">Call Operator</text>
+  <circle cx="180" cy="310" r="54" fill="#0d2035" stroke="#38bdf8" stroke-width="2.5"/>
+  <circle cx="180" cy="292" r="22" fill="#38bdf8" opacity=".7"/>
+  <path d="M138 348 Q138 310 180 310 Q222 310 222 348" fill="#38bdf8" opacity=".5"/>
+  <!-- check gotowy -->
+  <circle cx="390" cy="320" r="30" fill="#052e16" stroke="#22c55e" stroke-width="3" filter="url(#glow-tm-sm)"/>
+  <polyline points="376,320 385,330 406,308" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Dispatcher (bursztyn) – prawy górny -->
+  <rect x="544" y="160" width="380" height="240" rx="18" fill="#0d0600" stroke="#fb923c" stroke-width="2.5" filter="url(#glow-tm-sm)"/>
+  <rect x="544" y="160" width="380" height="52" rx="18" fill="#431407"/>
+  <rect x="544" y="196" width="380" height="16" fill="#431407"/>
+  <text x="734" y="194" font-size="28" font-weight="700" font-family="Arial" fill="#fb923c" text-anchor="middle">Dispatcher</text>
+  <circle cx="624" cy="310" r="54" fill="#1c0d00" stroke="#fb923c" stroke-width="2.5"/>
+  <circle cx="624" cy="292" r="22" fill="#fb923c" opacity=".7"/>
+  <path d="M582 348 Q582 310 624 310 Q666 310 666 348" fill="#fb923c" opacity=".5"/>
+  <circle cx="834" cy="320" r="30" fill="#052e16" stroke="#22c55e" stroke-width="3" filter="url(#glow-tm-sm)"/>
+  <polyline points="820,320 829,330 850,308" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- OpsCoordinator (zielony) – lewy dolny -->
+  <rect x="100" y="460" width="380" height="240" rx="18" fill="#020e05" stroke="#4ade80" stroke-width="2.5" filter="url(#glow-tm-sm)"/>
+  <rect x="100" y="460" width="380" height="52" rx="18" fill="#052e16"/>
+  <rect x="100" y="496" width="380" height="16" fill="#052e16"/>
+  <text x="290" y="494" font-size="24" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle">Ops Coordinator</text>
+  <circle cx="180" cy="610" r="54" fill="#021407" stroke="#4ade80" stroke-width="2.5"/>
+  <circle cx="180" cy="592" r="22" fill="#4ade80" opacity=".7"/>
+  <path d="M138 648 Q138 610 180 610 Q222 610 222 648" fill="#4ade80" opacity=".5"/>
+  <circle cx="390" cy="620" r="30" fill="#052e16" stroke="#22c55e" stroke-width="3" filter="url(#glow-tm-sm)"/>
+  <polyline points="376,620 385,630 406,608" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Crisis Officer (czerwony) – prawy dolny -->
+  <rect x="544" y="460" width="380" height="240" rx="18" fill="#100202" stroke="#f87171" stroke-width="2.5" filter="url(#glow-tm-sm)"/>
+  <rect x="544" y="460" width="380" height="52" rx="18" fill="#450a0a"/>
+  <rect x="544" y="496" width="380" height="16" fill="#450a0a"/>
+  <text x="734" y="494" font-size="28" font-weight="700" font-family="Arial" fill="#f87171" text-anchor="middle">Crisis Officer</text>
+  <circle cx="624" cy="610" r="54" fill="#180303" stroke="#f87171" stroke-width="2.5"/>
+  <circle cx="624" cy="592" r="22" fill="#f87171" opacity=".7"/>
+  <path d="M582 648 Q582 610 624 610 Q666 610 666 648" fill="#f87171" opacity=".5"/>
+  <circle cx="834" cy="620" r="30" fill="#052e16" stroke="#22c55e" stroke-width="3" filter="url(#glow-tm-sm)"/>
+  <polyline points="820,620 829,630 850,608" fill="none" stroke="#4ade80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ── WIELKI CHECKMARK GOTOWOŚCI ──────────────────── -->
+  <circle cx="512" cy="820" r="80" fill="#052e16" stroke="#22c55e" stroke-width="4" filter="url(#glow-tm)"/>
+  <polyline points="470,820 498,848 554,792" fill="none" stroke="#4ade80" stroke-width="16"
+            stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-tm)"/>
+
+  <!-- ── TYTUŁ ─────────────────────────────────────── -->
+  <text x="512" y="100" font-size="62" font-weight="900" font-family="Arial Black, Arial" fill="#d8e0ec"
+        text-anchor="middle" letter-spacing="4">TEAM READY</text>
+  <text x="512" y="146" font-size="22" font-family="Arial" fill="rgba(74,222,128,0.55)"
+        text-anchor="middle" letter-spacing="3">WSZYSCY GOTOWI · START</text>
+
+  <!-- vignette -->
+  <radialGradient id="vig-tr" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.65)"/>
+  </radialGradient>
+  <rect width="1024" height="1024" fill="url(#vig-tr)"/>
+</svg>

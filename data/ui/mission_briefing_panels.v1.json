@@ -1,0 +1,24 @@
+{
+  "panels": [
+    {
+      "id": "hero",
+      "priority": 1
+    },
+    {
+      "id": "objectives",
+      "priority": 2
+    },
+    {
+      "id": "risks",
+      "priority": 3
+    },
+    {
+      "id": "map_preview",
+      "priority": 4
+    },
+    {
+      "id": "recommended_team",
+      "priority": 5
+    }
+  ]
+}

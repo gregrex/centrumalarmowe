@@ -1,0 +1,16 @@
+{
+  "buildId": "Alarm112-Preview-001",
+  "version": "0.1.0-preview1",
+  "missionId": "showcase.mission.01",
+  "artifacts": [
+    "Alarm112-Preview.apk",
+    "Alarm112-Preview.aab",
+    "preview_manifest.json"
+  ],
+  "deviceTargets": [
+    "android_mid_720p",
+    "android_hd_1080p",
+    "android_tablet_debug"
+  ],
+  "status": "ready_for_internal_preview"
+}

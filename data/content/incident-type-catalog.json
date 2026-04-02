@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "incidents": [
+    {
+      "id": "incident.medical.collapse",
+      "category": "medical",
+      "defaultSeverity": "high"
+    },
+    {
+      "id": "incident.fire.apartment",
+      "category": "fire",
+      "defaultSeverity": "critical"
+    },
+    {
+      "id": "incident.police.assault",
+      "category": "police",
+      "defaultSeverity": "high"
+    },
+    {
+      "id": "incident.infrastructure.blackout",
+      "category": "infrastructure",
+      "defaultSeverity": "critical"
+    }
+  ]
+}

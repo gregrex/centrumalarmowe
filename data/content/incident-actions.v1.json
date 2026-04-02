@@ -1,0 +1,39 @@
+{
+  "actions": [
+    {
+      "actionId": "action.dispatch.ambulance",
+      "labelKey": "action.dispatch.ambulance",
+      "allowedUnitTypes": [
+        "dispatch.unit.type.ambulance"
+      ]
+    },
+    {
+      "actionId": "action.dispatch.fire",
+      "labelKey": "action.dispatch.fire",
+      "allowedUnitTypes": [
+        "dispatch.unit.type.firetruck"
+      ]
+    },
+    {
+      "actionId": "action.dispatch.police",
+      "labelKey": "action.dispatch.police",
+      "allowedUnitTypes": [
+        "dispatch.unit.type.policecar"
+      ]
+    },
+    {
+      "actionId": "action.request.backup",
+      "labelKey": "action.request.backup",
+      "allowedUnitTypes": [
+        "dispatch.unit.type.ambulance",
+        "dispatch.unit.type.firetruck",
+        "dispatch.unit.type.policecar"
+      ]
+    },
+    {
+      "actionId": "action.monitor",
+      "labelKey": "action.monitor",
+      "allowedUnitTypes": []
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "review-build.v21",
+  "steps": ["launch", "home", "showcase_mission", "runtime", "report", "retry_next"],
+  "captureModeDefault": true,
+  "reviewChannels": ["local", "device_internal"]
+}

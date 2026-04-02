@@ -1,0 +1,51 @@
+{
+  "missionId": "mission.01.03",
+  "gradeId": "B",
+  "score": 82,
+  "stars": 2,
+  "objectives": [
+    {
+      "objectiveId": "obj.keep_response_time",
+      "state": "completed"
+    },
+    {
+      "objectiveId": "obj.correct_priority",
+      "state": "completed"
+    },
+    {
+      "objectiveId": "obj.limit_losses",
+      "state": "partial"
+    }
+  ],
+  "metrics": [
+    {
+      "metricId": "response_time",
+      "value": 81
+    },
+    {
+      "metricId": "dispatch_accuracy",
+      "value": 88
+    },
+    {
+      "metricId": "unit_preservation",
+      "value": 72
+    },
+    {
+      "metricId": "team_coordination",
+      "value": 79
+    }
+  ],
+  "mistakes": [
+    "mistake.route_delay.01",
+    "mistake.late_ack.01"
+  ],
+  "rewards": [
+    "xp.220",
+    "reward.badge.rapid_response"
+  ],
+  "nextActions": [
+    "retry",
+    "next_mission",
+    "back_home"
+  ]
+}

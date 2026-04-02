@@ -1,0 +1,16 @@
+{
+  "demoId": "internal_demo_showcase_01",
+  "flow": [
+    "home",
+    "briefing",
+    "runtime",
+    "report",
+    "retry_or_next"
+  ],
+  "targetAudience": [
+    "internal_team",
+    "stakeholders",
+    "qa"
+  ],
+  "notes": "Single mission showcase for controlled internal presentation."
+}

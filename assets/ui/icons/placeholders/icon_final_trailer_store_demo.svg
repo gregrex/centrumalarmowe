@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="256" height="256" rx="24" fill="#04060e"/>
+  <!-- ekran kinowy -->
+  <rect x="20" y="36" width="216" height="136" rx="12" fill="#060d1a" stroke="rgba(56,189,248,0.2)" stroke-width="1.5"/>
+  <!-- nocne miasto na ekranie -->
+  <rect x="20" y="100" width="216" height="72" fill="#020810" rx="0"/>
+  <rect x="28"  y="80"  width="20" height="30" fill="#0d1a2d"/>
+  <rect x="56"  y="68"  width="30" height="42" fill="#0d1a2d"/>
+  <rect x="94"  y="72"  width="40" height="38" fill="#0d1a2d"/>
+  <rect x="142" y="64"  width="28" height="46" fill="#0d1a2d"/>
+  <rect x="178" y="76"  width="24" height="34" fill="#0d1a2d"/>
+  <!-- syrena 112 -->
+  <circle cx="128" cy="90" r="18" fill="rgba(239,68,68,0.3)" filter="url(#g)"/>
+  <text x="128" y="95" font-size="14" font-weight="900" font-family="Arial" fill="#fff" text-anchor="middle" filter="url(#g)">112</text>
+  <!-- play button (trailer) -->
+  <polygon points="108,130 148,154 108,178" fill="rgba(251,191,36,0.8)" filter="url(#g)"/>
+  <!-- store badges -->
+  <rect x="20" y="188" width="100" height="48" rx="8" fill="#0d1a2d" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="70" y="208" font-size="12" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">▶ App Store</text>
+  <text x="70" y="226" font-size="10" font-family="Arial" fill="#64748b" text-anchor="middle">TRAILER LIVE</text>
+  <rect x="136" y="188" width="100" height="48" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="186" y="208" font-size="12" font-weight="700" font-family="Arial" fill="#4ade80" text-anchor="middle">▶ Google Play</text>
+  <text x="186" y="226" font-size="10" font-family="Arial" fill="#64748b" text-anchor="middle">DEMO ACTIVE</text>
+</svg>

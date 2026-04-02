@@ -1,0 +1,15 @@
+{
+  "lockLabel": "v26_audio_lock",
+  "lockedBanks": [
+    "menu_theme",
+    "runtime_alerts",
+    "dispatch_confirm",
+    "recovery_cards",
+    "report_room"
+  ],
+  "qaChecks": [
+    "no_clipping",
+    "clear_priority_alerts",
+    "retry_stinger_balanced"
+  ]
+}

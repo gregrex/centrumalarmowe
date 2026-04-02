@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "units": [
+    {
+      "id": "unit.ambulance.basic",
+      "category": "medical",
+      "maxSeverity": "high",
+      "speedClass": "fast"
+    },
+    {
+      "id": "unit.ambulance.advanced",
+      "category": "medical",
+      "maxSeverity": "critical",
+      "speedClass": "fast"
+    },
+    {
+      "id": "unit.fire.engine",
+      "category": "fire",
+      "maxSeverity": "critical",
+      "speedClass": "medium"
+    },
+    {
+      "id": "unit.police.patrol",
+      "category": "police",
+      "maxSeverity": "high",
+      "speedClass": "fast"
+    },
+    {
+      "id": "unit.tech.support",
+      "category": "infrastructure",
+      "maxSeverity": "medium",
+      "speedClass": "medium"
+    }
+  ]
+}

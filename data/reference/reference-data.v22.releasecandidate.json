@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "id": "build_channels",
+      "name": "Build Channels",
+      "entries": [
+        {
+          "id": "channel.internal_review",
+          "label": "Internal Review",
+          "value": "internal_review"
+        },
+        {
+          "id": "channel.android_rc",
+          "label": "Android RC",
+          "value": "android_rc"
+        },
+        {
+          "id": "channel.capture",
+          "label": "Capture",
+          "value": "capture"
+        }
+      ]
+    },
+    {
+      "id": "bug_severity",
+      "name": "Bug Severity",
+      "entries": [
+        {
+          "id": "severity.p0",
+          "label": "P0",
+          "value": "P0"
+        },
+        {
+          "id": "severity.p1",
+          "label": "P1",
+          "value": "P1"
+        },
+        {
+          "id": "severity.p2",
+          "label": "P2",
+          "value": "P2"
+        },
+        {
+          "id": "severity.p3",
+          "label": "P3",
+          "value": "P3"
+        }
+      ]
+    },
+    {
+      "id": "release_gates",
+      "name": "Release Gates",
+      "entries": [
+        {
+          "id": "gate.flow_complete",
+          "label": "Flow Complete",
+          "value": "flow_complete"
+        },
+        {
+          "id": "gate.bugbash_ready",
+          "label": "Bug Bash Ready",
+          "value": "bugbash_ready"
+        },
+        {
+          "id": "gate.media_pack_ready",
+          "label": "Media Pack Ready",
+          "value": "media_pack_ready"
+        },
+        {
+          "id": "gate.audio_lock",
+          "label": "Audio Lock",
+          "value": "audio_lock"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "style": "premium mobile 2D, grounded emergency command, readable, polished",
+  "items": [
+    "scoreboard_room",
+    "reward_reveal_badges",
+    "retry_prep_table",
+    "next_mission_board"
+  ]
+}

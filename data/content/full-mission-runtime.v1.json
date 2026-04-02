@@ -1,0 +1,54 @@
+{
+  "missionId": "mission.01.04",
+  "titleKey": "mission.01.04.title",
+  "difficulty": "medium_high",
+  "runtimeState": "runtime.active",
+  "cityStability": 68,
+  "pressureState": "medium",
+  "activeIncidents": [
+    {
+      "id": "inc.med.001",
+      "type": "medical",
+      "priority": "critical",
+      "node": "west_bridge",
+      "assignedUnitId": "ems.alpha"
+    },
+    {
+      "id": "inc.fire.002",
+      "type": "fire",
+      "priority": "high",
+      "node": "mall_block",
+      "assignedUnitId": "fire.bravo"
+    },
+    {
+      "id": "inc.pol.003",
+      "type": "police",
+      "priority": "medium",
+      "node": "stadium_perimeter",
+      "assignedUnitId": "police.delta"
+    }
+  ],
+  "availableUnits": [
+    {
+      "id": "ems.alpha",
+      "type": "ambulance",
+      "status": "en_route",
+      "etaSeconds": 55,
+      "cooldownSeconds": 0
+    },
+    {
+      "id": "fire.bravo",
+      "type": "fire_engine",
+      "status": "busy",
+      "etaSeconds": 90,
+      "cooldownSeconds": 35
+    },
+    {
+      "id": "police.delta",
+      "type": "patrol",
+      "status": "available",
+      "etaSeconds": 40,
+      "cooldownSeconds": 0
+    }
+  ]
+}

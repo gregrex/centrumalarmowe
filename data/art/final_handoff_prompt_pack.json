@@ -1,0 +1,10 @@
+{
+  "style": "premium_2d_mobile_dispatch_sim",
+  "targets": [
+    "menu",
+    "runtime_hud",
+    "report_room",
+    "store_assets",
+    "internal_demo_shots"
+  ]
+}

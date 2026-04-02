@@ -1,0 +1,39 @@
+{
+  "states": [
+    {
+      "id": "audio.menu.calm.v1",
+      "bus": "music",
+      "loop": true,
+      "intensity": 1,
+      "recommendedScreen": "menu.home"
+    },
+    {
+      "id": "audio.menu.tension.v1",
+      "bus": "music",
+      "loop": true,
+      "intensity": 2,
+      "recommendedScreen": "menu.quickplay"
+    },
+    {
+      "id": "audio.menu.coop_lobby.v1",
+      "bus": "music",
+      "loop": true,
+      "intensity": 2,
+      "recommendedScreen": "menu.coop"
+    },
+    {
+      "id": "audio.menu.reward_reveal.v1",
+      "bus": "music",
+      "loop": false,
+      "intensity": 3,
+      "recommendedScreen": "menu.rewards"
+    },
+    {
+      "id": "audio.menu.debrief.v1",
+      "bus": "music",
+      "loop": true,
+      "intensity": 1,
+      "recommendedScreen": "report.end"
+    }
+  ]
+}

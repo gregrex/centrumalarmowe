@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "effects": [
+    {
+      "id": "pressure.effect.minor_noise",
+      "trigger": "pressure>=20",
+      "impact": "+1 ui_noise"
+    },
+    {
+      "id": "pressure.effect.dispatch_delay",
+      "trigger": "pressure>=40",
+      "impact": "+2s dispatch"
+    },
+    {
+      "id": "pressure.effect.operator_overload",
+      "trigger": "pressure>=60",
+      "impact": "+1 missing_context_risk"
+    },
+    {
+      "id": "pressure.effect.chain_escalation",
+      "trigger": "pressure>=75",
+      "impact": "+1 escalation chance"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "zones": [
+    "centrum",
+    "osiedla_polnoc",
+    "osiedla_poludnie",
+    "przemysl",
+    "stadion",
+    "galeria",
+    "obwodnica",
+    "szpital",
+    "obrzeza"
+  ]
+}

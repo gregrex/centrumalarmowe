@@ -1,0 +1,28 @@
+{
+  "presets": [
+    {
+      "id": "scene.day.clear",
+      "lighting": "soft_day",
+      "weatherOverlay": "none",
+      "cityGlow": 0.2
+    },
+    {
+      "id": "scene.night.standard",
+      "lighting": "cool_night",
+      "weatherOverlay": "none",
+      "cityGlow": 0.8
+    },
+    {
+      "id": "scene.night.storm",
+      "lighting": "storm_flash",
+      "weatherOverlay": "rain_heavy",
+      "cityGlow": 0.6
+    },
+    {
+      "id": "scene.critical.blackout",
+      "lighting": "grid_failure",
+      "weatherOverlay": "none",
+      "cityGlow": 0.1
+    }
+  ]
+}

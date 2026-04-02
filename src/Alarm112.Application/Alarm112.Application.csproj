@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.0-preview.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0-preview.*" />
+    <ProjectReference Include="..\Alarm112.Contracts\Alarm112.Contracts.csproj" />
+    <ProjectReference Include="..\Alarm112.Domain\Alarm112.Domain.csproj" />
+  </ItemGroup>
+</Project>

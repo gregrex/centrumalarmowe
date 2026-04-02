@@ -1,0 +1,63 @@
+{
+  "groups": [
+    {
+      "id": "route_state",
+      "entries": [
+        {
+          "id": "route.clear",
+          "label": "Clear"
+        },
+        {
+          "id": "route.delayed",
+          "label": "Delayed"
+        },
+        {
+          "id": "route.blocked",
+          "label": "Blocked"
+        },
+        {
+          "id": "route.rerouted",
+          "label": "Rerouted"
+        }
+      ]
+    },
+    {
+      "id": "timer_phase",
+      "entries": [
+        {
+          "id": "phase.active",
+          "label": "Active"
+        },
+        {
+          "id": "phase.pressure_peak",
+          "label": "Pressure Peak"
+        },
+        {
+          "id": "phase.critical",
+          "label": "Critical"
+        },
+        {
+          "id": "phase.last_call",
+          "label": "Last Call"
+        }
+      ]
+    },
+    {
+      "id": "chain_type",
+      "entries": [
+        {
+          "id": "chain.traffic",
+          "label": "Traffic Spike"
+        },
+        {
+          "id": "chain.medical",
+          "label": "Medical Deterioration"
+        },
+        {
+          "id": "chain.media",
+          "label": "Media Pressure"
+        }
+      ]
+    }
+  ]
+}

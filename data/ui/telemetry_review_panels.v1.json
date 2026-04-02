@@ -1,0 +1,20 @@
+{
+  "panels": [
+    {
+      "id": "kpi_tiles",
+      "priority": "high"
+    },
+    {
+      "id": "review_summary",
+      "priority": "high"
+    },
+    {
+      "id": "heatmap",
+      "priority": "medium"
+    },
+    {
+      "id": "review_cards",
+      "priority": "medium"
+    }
+  ]
+}

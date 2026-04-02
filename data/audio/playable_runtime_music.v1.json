@@ -1,0 +1,20 @@
+{
+  "states": [
+    {
+      "id": "calm_dispatch",
+      "intensity": 0.2
+    },
+    {
+      "id": "rising_pressure",
+      "intensity": 0.5
+    },
+    {
+      "id": "crisis_peak",
+      "intensity": 0.9
+    },
+    {
+      "id": "report_room",
+      "intensity": 0.15
+    }
+  ]
+}

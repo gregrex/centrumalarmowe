@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><filter id="g"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="128" height="128" rx="16" fill="#050306"/>
+  <!-- pędzel -->
+  <rect x="74" y="18" width="18" height="56" rx="4" fill="#a78bfa" filter="url(#g)"/>
+  <path d="M74 74 C74 84 60 90 60 90 C60 90 66 76 82 74" fill="#c4b5fd"/>
+  <!-- iskry/polish -->
+  <g fill="#fbbf24" filter="url(#g)">
+    <polygon points="24,28 27,22 30,28 24,24 30,24"/>
+    <polygon points="44,14 46,10 48,14 44,11 48,11"/>
+    <polygon points="20,50 22,45 24,50 20,47 24,47"/>
+  </g>
+  <!-- ekran przed -->
+  <rect x="12" y="60" width="56" height="52" rx="8" fill="#06101e" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+  <rect x="18" y="68" width="44" height="6" rx="2" fill="rgba(167,139,250,0.2)"/>
+  <rect x="18" y="78" width="32" height="6" rx="2" fill="rgba(167,139,250,0.2)"/>
+  <rect x="18" y="88" width="44" height="6" rx="2" fill="rgba(167,139,250,0.2)"/>
+  <!-- gwiazdki finiszu -->
+  <polygon points="104,32 107,26 110,32 104,28 110,28" fill="#fbbf24" filter="url(#g)"/>
+  <polygon points="112,48 114,44 116,48 112,45 116,45" fill="#fbbf24" filter="url(#g)" opacity=".6"/>
+  <text x="64" y="122" font-size="10" font-weight="600" font-family="Arial" fill="rgba(167,139,250,0.5)" text-anchor="middle" letter-spacing="1">DEMO POLISH</text>
+</svg>

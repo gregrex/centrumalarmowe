@@ -1,0 +1,72 @@
+{
+  "version": "v11",
+  "groups": [
+    {
+      "id": "campaign.chapter.theme",
+      "entries": [
+        {
+          "id": "theme.city.day",
+          "textKey": "theme.city.day"
+        },
+        {
+          "id": "theme.city.storm",
+          "textKey": "theme.city.storm"
+        },
+        {
+          "id": "theme.city.blackout",
+          "textKey": "theme.city.blackout"
+        }
+      ]
+    },
+    {
+      "id": "role.reservation.state",
+      "entries": [
+        {
+          "id": "free",
+          "textKey": "role.reservation.free"
+        },
+        {
+          "id": "preferred",
+          "textKey": "role.reservation.preferred"
+        },
+        {
+          "id": "reserved",
+          "textKey": "role.reservation.reserved"
+        },
+        {
+          "id": "bot_reserved",
+          "textKey": "role.reservation.bot_reserved"
+        },
+        {
+          "id": "reconnect_hold",
+          "textKey": "role.reservation.reconnect_hold"
+        }
+      ]
+    },
+    {
+      "id": "profile.cosmetic.rarity",
+      "entries": [
+        {
+          "id": "common",
+          "textKey": "rarity.common"
+        },
+        {
+          "id": "uncommon",
+          "textKey": "rarity.uncommon"
+        },
+        {
+          "id": "rare",
+          "textKey": "rarity.rare"
+        },
+        {
+          "id": "heroic",
+          "textKey": "rarity.heroic"
+        },
+        {
+          "id": "event",
+          "textKey": "rarity.event"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "bots": [
+    {
+      "id": "CallBot",
+      "level": "standard",
+      "riskTolerance": "low",
+      "explainActions": true
+    },
+    {
+      "id": "DispatchBot",
+      "level": "standard",
+      "riskTolerance": "low",
+      "explainActions": true
+    },
+    {
+      "id": "OpsBot",
+      "level": "standard",
+      "riskTolerance": "medium",
+      "explainActions": true
+    },
+    {
+      "id": "CrisisBot",
+      "level": "standard",
+      "riskTolerance": "medium",
+      "explainActions": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "profiles": [
+    "mobile_speaker_preview",
+    "headphones_review"
+  ],
+  "locks": [
+    "ui_click_consistency",
+    "route_alert_balance",
+    "reward_reveal_mix"
+  ],
+  "stingers": [
+    "preview_build_ready",
+    "capture_mode_on",
+    "release_readiness_pass"
+  ]
+}

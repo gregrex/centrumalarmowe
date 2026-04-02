@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "defaultScreen": "menu.home",
+  "continueSession": {
+    "sessionId": "DEMO112",
+    "labelKey": "home.continue",
+    "summary": "2 aktywne incydenty, 3 wolne jednostki"
+  },
+  "cards": [
+    {
+      "id": "card.quickplay",
+      "type": "quickplay",
+      "labelKey": "home.quickplay",
+      "state": "primary",
+      "route": "menu.quickplay"
+    },
+    {
+      "id": "card.campaign",
+      "type": "campaign",
+      "labelKey": "home.campaign",
+      "state": "highlight",
+      "route": "menu.campaign"
+    },
+    {
+      "id": "card.coop",
+      "type": "coop",
+      "labelKey": "home.coop",
+      "state": "online",
+      "route": "menu.coop"
+    },
+    {
+      "id": "card.profile",
+      "type": "profile",
+      "labelKey": "home.profile",
+      "state": "default",
+      "route": "menu.profile"
+    },
+    {
+      "id": "card.settings",
+      "type": "settings",
+      "labelKey": "home.settings",
+      "state": "default",
+      "route": "menu.settings"
+    },
+    {
+      "id": "card.inbox",
+      "type": "inbox",
+      "labelKey": "home.inbox",
+      "state": "reward_waiting",
+      "route": "menu.inbox"
+    }
+  ]
+}

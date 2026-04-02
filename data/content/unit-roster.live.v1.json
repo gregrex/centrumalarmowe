@@ -1,0 +1,26 @@
+{
+  "sessionId": "DEMO112",
+  "units": [
+    {
+      "unitId": "AMB-01",
+      "unitTypeId": "dispatch.unit.type.ambulance",
+      "stateId": "available",
+      "nodeId": "station.medical.1",
+      "etaSeconds": 180
+    },
+    {
+      "unitId": "FIRE-02",
+      "unitTypeId": "dispatch.unit.type.firetruck",
+      "stateId": "available",
+      "nodeId": "station.fire.1",
+      "etaSeconds": 240
+    },
+    {
+      "unitId": "POL-03",
+      "unitTypeId": "dispatch.unit.type.policecar",
+      "stateId": "available",
+      "nodeId": "station.police.1",
+      "etaSeconds": 150
+    }
+  ]
+}

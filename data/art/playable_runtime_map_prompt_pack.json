@@ -1,0 +1,8 @@
+{
+  "style": "premium 2D stylized realism, mobile readable, emergency dispatch interface",
+  "prompts": [
+    "2D emergency city map with districts, roads, bridges, hospitals, fire stations, police hubs, premium mobile readability",
+    "2D incident markers for medical, fire and police with urgency rings and countdown badges",
+    "2D route overlay lines with blocked, delayed and reroute states, clean premium HUD visuals"
+  ]
+}

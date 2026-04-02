@@ -1,0 +1,22 @@
+{
+  "profiles": [
+    {
+      "id": "bot-conservative",
+      "style": "conservative",
+      "cooldownMs": 2500,
+      "riskTolerance": 0.25
+    },
+    {
+      "id": "bot-balanced",
+      "style": "balanced",
+      "cooldownMs": 1800,
+      "riskTolerance": 0.5
+    },
+    {
+      "id": "bot-aggressive",
+      "style": "aggressive",
+      "cooldownMs": 1100,
+      "riskTolerance": 0.8
+    }
+  ]
+}

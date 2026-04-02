@@ -1,0 +1,45 @@
+{
+  "version": "v2",
+  "layouts": [
+    {
+      "role": "role.operator",
+      "primaryPanel": "callQueue",
+      "secondaryPanel": "callDetails",
+      "bottomActionBar": [
+        "validate",
+        "escalate",
+        "sendToDispatcher"
+      ]
+    },
+    {
+      "role": "role.dispatcher",
+      "primaryPanel": "unitMap",
+      "secondaryPanel": "unitRoster",
+      "bottomActionBar": [
+        "assignUnit",
+        "reroute",
+        "cancelDispatch"
+      ]
+    },
+    {
+      "role": "role.coordinator",
+      "primaryPanel": "incidentPriorityList",
+      "secondaryPanel": "bottlenecks",
+      "bottomActionBar": [
+        "reprioritize",
+        "requestSupport",
+        "markEscalation"
+      ]
+    },
+    {
+      "role": "role.crisis_officer",
+      "primaryPanel": "cityPressure",
+      "secondaryPanel": "chainEvents",
+      "bottomActionBar": [
+        "unlockReserve",
+        "issueWarning",
+        "shiftResources"
+      ]
+    }
+  ]
+}

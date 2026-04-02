@@ -1,0 +1,13 @@
+{
+  "missionId": "mission.demo.19",
+  "recommendations": [
+    "keep backup ems free",
+    "use reroute earlier",
+    "lock coordinator role to player"
+  ],
+  "suggestedRole": "dispatcher",
+  "botFill": [
+    "operator-bot",
+    "crisis-bot"
+  ]
+}

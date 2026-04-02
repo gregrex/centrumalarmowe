@@ -1,0 +1,20 @@
+{
+  "states": [
+    {
+      "id": "music.menu.city",
+      "intensity": "low"
+    },
+    {
+      "id": "music.runtime.active",
+      "intensity": "medium"
+    },
+    {
+      "id": "music.runtime.critical",
+      "intensity": "high"
+    },
+    {
+      "id": "music.report.resolve",
+      "intensity": "low"
+    }
+  ]
+}

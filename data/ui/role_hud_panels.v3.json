@@ -1,0 +1,26 @@
+{
+  "layouts": [
+    {
+      "roleId": "role.operator",
+      "panels": [
+        "alert-bar",
+        "call-stack",
+        "classification-chips",
+        "active-board-mini",
+        "timeline-mini"
+      ]
+    },
+    {
+      "roleId": "role.dispatcher",
+      "panels": [
+        "active-incident-board",
+        "map-filters",
+        "city-map",
+        "unit-roster",
+        "route-preview",
+        "shared-action-panel",
+        "timeline-feed"
+      ]
+    }
+  ]
+}

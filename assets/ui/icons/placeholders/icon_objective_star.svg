@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="star-glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="star-fx">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="#0d0a00"/>
+  <!-- aureola -->
+  <circle cx="64" cy="64" r="42" fill="url(#star-glow)" opacity=".25"/>
+  <!-- gwiazda 5-ramienna -->
+  <polygon points="64,20 73,50 105,50 80,68 89,98 64,80 39,98 48,68 23,50 55,50"
+           fill="#f59e0b" stroke="#fde68a" stroke-width="1.5" stroke-linejoin="round"
+           filter="url(#star-fx)"/>
+  <polygon points="64,26 72,51 101,51 79,67 87,93 64,77 41,93 49,67 27,51 56,51"
+           fill="#fbbf24"/>
+  <!-- blask wewnętrzny -->
+  <polygon points="64,36 69,52 86,52 73,62 78,78 64,68 50,78 55,62 42,52 59,52"
+           fill="#fde68a" opacity=".5"/>
+</svg>

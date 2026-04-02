@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs><filter id="glow-ap"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="128" height="128" rx="16" fill="#03060e"/>
+  <!-- obudowa telefonu -->
+  <rect x="30" y="14" width="68" height="100" rx="12" fill="#0d1a2d" stroke="#38bdf8" stroke-width="2" filter="url(#glow-ap)"/>
+  <!-- kamera -->
+  <circle cx="64" cy="26" r="4" fill="#06101e" stroke="rgba(56,189,248,0.5)" stroke-width="1.5"/>
+  <circle cx="64" cy="26" r="1.5" fill="#38bdf8" opacity=".6"/>
+  <!-- ekran -->
+  <rect x="36" y="36" width="56" height="72" rx="6" fill="#020810"/>
+  <!-- game HUD na ekranie -->
+  <rect x="38" y="38" width="52" height="12" rx="3" fill="#0d1a2d"/>
+  <text x="64" y="48" font-size="7" font-weight="700" font-family="Arial" fill="#38bdf8" text-anchor="middle">HUD · 14:22</text>
+  <!-- mini mapa -->
+  <rect x="38" y="54" width="28" height="28" rx="3" fill="#06101e" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+  <circle cx="52" cy="66" r="5" fill="#7f1d1d" stroke="#ef4444" stroke-width="1" filter="url(#glow-ap)"/>
+  <!-- incident list -->
+  <rect x="70" y="54" width="20" height="8" rx="2" fill="rgba(239,68,68,0.3)" stroke="rgba(239,68,68,0.5)" stroke-width="1"/>
+  <rect x="70" y="66" width="20" height="8" rx="2" fill="rgba(56,189,248,0.2)" stroke="rgba(56,189,248,0.4)" stroke-width="1"/>
+  <!-- przycisk home -->
+  <circle cx="64" cy="118" r="6" fill="#0d1a2d" stroke="rgba(56,189,248,0.3)" stroke-width="1.5"/>
+</svg>

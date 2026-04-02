@@ -1,0 +1,37 @@
+{
+  "version": "v1",
+  "missionId": "mission.01.03",
+  "titleKey": "mission.01.03.title",
+  "chapterId": "chapter.01",
+  "estimatedMinutes": 12,
+  "difficulty": "critical",
+  "recommendedRole": "dispatcher",
+  "weatherPreset": "storm_blackout",
+  "timeOfDay": "night",
+  "startingUnits": [
+    "ems.alpha",
+    "fire.bravo",
+    "police.delta"
+  ],
+  "riskTags": [
+    "grid.failure",
+    "flooded.routes",
+    "multi-call"
+  ],
+  "rewards": [
+    "badge.storm_dispatch",
+    "theme.city.storm",
+    "xp.250"
+  ],
+  "availableSlots": 4,
+  "botFillSummary": {
+    "supported": true,
+    "modes": [
+      "balanced",
+      "cautious",
+      "rapid",
+      "training"
+    ],
+    "defaultMode": "balanced"
+  }
+}

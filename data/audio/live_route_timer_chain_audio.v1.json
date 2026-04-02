@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "id": "audio.route.blocked",
+      "priority": "high"
+    },
+    {
+      "id": "audio.timer.30s",
+      "priority": "high"
+    },
+    {
+      "id": "audio.chain.start",
+      "priority": "critical"
+    },
+    {
+      "id": "audio.recovery.open",
+      "priority": "medium"
+    }
+  ]
+}

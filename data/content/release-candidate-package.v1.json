@@ -1,0 +1,21 @@
+{
+  "buildId": "Alarm112-RC-001",
+  "version": "0.1.0-rc1",
+  "missionId": "showcase.mission.01",
+  "channels": [
+    "internal_review",
+    "android_rc"
+  ],
+  "gates": [
+    "flow_complete",
+    "bugbash_ready",
+    "media_pack_ready",
+    "audio_lock"
+  ],
+  "artifacts": [
+    "apk_mock",
+    "aab_mock",
+    "release_notes_draft",
+    "store_shot_pack"
+  ]
+}

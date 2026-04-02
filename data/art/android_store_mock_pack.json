@@ -1,0 +1,15 @@
+{
+  "capsules": [
+    "main",
+    "runtime",
+    "report"
+  ],
+  "previewBoards": [
+    "home_to_runtime",
+    "runtime_to_report"
+  ],
+  "safeZones": {
+    "portrait": "1080x1920",
+    "landscape": "1920x1080"
+  }
+}

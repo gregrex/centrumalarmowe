@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "layout": "two_columns_mobile",
+  "cards": [
+    {
+      "id": "home.continue",
+      "accent": "primary",
+      "icon": "icon_continue"
+    },
+    {
+      "id": "home.quickplay",
+      "accent": "warning",
+      "icon": "icon_quickplay"
+    },
+    {
+      "id": "home.campaign",
+      "accent": "info",
+      "icon": "icon_campaign"
+    },
+    {
+      "id": "home.coop",
+      "accent": "success",
+      "icon": "icon_coop"
+    },
+    {
+      "id": "home.profile",
+      "accent": "neutral",
+      "icon": "icon_profile"
+    },
+    {
+      "id": "home.settings",
+      "accent": "neutral",
+      "icon": "icon_settings"
+    }
+  ]
+}

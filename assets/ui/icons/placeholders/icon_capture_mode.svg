@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs><filter id="glow-cm2"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="128" height="128" rx="16" fill="#030710"/>
+  <!-- ramka kamery -->
+  <rect x="14" y="30" width="100" height="68" rx="10" fill="#06101e" stroke="rgba(56,189,248,0.3)" stroke-width="2"/>
+  <!-- narożniki viewfindera -->
+  <g stroke="#38bdf8" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#glow-cm2)">
+    <path d="M24,50 L24,40 L34,40"/>
+    <path d="M94,40 L104,40 L104,50"/>
+    <path d="M24,78 L24,88 L34,88"/>
+    <path d="M94,88 L104,88 L104,78"/>
+  </g>
+  <!-- obiektyw -->
+  <circle cx="64" cy="64" r="20" fill="#03060e" stroke="rgba(56,189,248,0.2)" stroke-width="2"/>
+  <circle cx="64" cy="64" r="12" fill="#06101e" stroke="#38bdf8" stroke-width="2" filter="url(#glow-cm2)"/>
+  <circle cx="64" cy="64" r="5" fill="#38bdf8" opacity=".6"/>
+  <!-- wskaźnik REC -->
+  <circle cx="104" cy="34" r="7" fill="#ef4444" filter="url(#glow-cm2)"/>
+  <text x="104" y="38" font-size="8" font-weight="700" font-family="Arial" fill="#fff" text-anchor="middle">REC</text>
+  <!-- etykieta -->
+  <text x="64" y="118" font-size="10" font-weight="600" font-family="Arial" fill="rgba(56,189,248,0.45)" text-anchor="middle" letter-spacing="2">CAPTURE</text>
+</svg>

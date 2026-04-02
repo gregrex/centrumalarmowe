@@ -1,0 +1,20 @@
+{
+  "platform": "google_play_internal_testing",
+  "items": [
+    {
+      "id": "sc01",
+      "title": "Privacy disclosure reviewed",
+      "status": "todo"
+    },
+    {
+      "id": "sc02",
+      "title": "Screenshots mapped to real gameplay",
+      "status": "todo"
+    },
+    {
+      "id": "sc03",
+      "title": "App icon and feature graphic prepared",
+      "status": "in_progress"
+    }
+  ]
+}

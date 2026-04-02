@@ -1,0 +1,17 @@
+{
+  "style": "premium_2d_mobile_emergency_ops",
+  "prompts": [
+    {
+      "id": "rc.home.hero",
+      "prompt": "premium 2d mobile operations menu, dispatch console hero scene, clean neon accents, layered parallax, readable UI negative space"
+    },
+    {
+      "id": "rc.runtime.route",
+      "prompt": "premium 2d emergency map gameplay, live route overlays, district markers, clear incident focus, no clutter"
+    },
+    {
+      "id": "rc.report.room",
+      "prompt": "premium 2d report room, success reveal, cards, badges, reward pedestal, polished game UI framing"
+    }
+  ]
+}

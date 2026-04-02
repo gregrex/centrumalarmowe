@@ -1,0 +1,25 @@
+{
+  "version": "v1",
+  "panels": [
+    {
+      "id": "panel.chapter.header",
+      "anchor": "top"
+    },
+    {
+      "id": "panel.chapter.progress",
+      "anchor": "top"
+    },
+    {
+      "id": "panel.chapter.map",
+      "anchor": "center"
+    },
+    {
+      "id": "panel.chapter.details",
+      "anchor": "right"
+    },
+    {
+      "id": "panel.chapter.cta",
+      "anchor": "bottom"
+    }
+  ]
+}

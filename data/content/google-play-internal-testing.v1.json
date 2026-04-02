@@ -1,0 +1,20 @@
+{
+  "track": "internal",
+  "steps": [
+    {
+      "id": "gp01",
+      "label": "Upload AAB",
+      "status": "todo"
+    },
+    {
+      "id": "gp02",
+      "label": "Attach release notes",
+      "status": "todo"
+    },
+    {
+      "id": "gp03",
+      "label": "Invite testers",
+      "status": "todo"
+    }
+  ]
+}

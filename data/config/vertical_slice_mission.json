@@ -1,0 +1,17 @@
+{
+  "id": "vs-001",
+  "name": "Wieczorny korek",
+  "durationMinutes": 12,
+  "roles": [
+    "Operator",
+    "Dispatcher",
+    "Coordinator",
+    "CrisisOfficer"
+  ],
+  "initialIncidents": [
+    "bus-driver-unconscious",
+    "kitchen-fire"
+  ],
+  "botFillEmptySlots": true,
+  "directorProfile": "balanced"
+}

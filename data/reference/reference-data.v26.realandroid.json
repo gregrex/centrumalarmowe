@@ -1,0 +1,100 @@
+{
+  "version": "v26",
+  "groups": [
+    {
+      "id": "build_profiles",
+      "entries": [
+        {
+          "id": "bp_android_preview",
+          "label": "Android Preview",
+          "value": "android_preview"
+        },
+        {
+          "id": "bp_android_internal",
+          "label": "Android Internal",
+          "value": "android_internal"
+        }
+      ]
+    },
+    {
+      "id": "freeze_status",
+      "entries": [
+        {
+          "id": "freeze_open",
+          "label": "Freeze Open",
+          "value": "open"
+        },
+        {
+          "id": "freeze_active",
+          "label": "Freeze Active",
+          "value": "active"
+        },
+        {
+          "id": "freeze_locked",
+          "label": "Freeze Locked",
+          "value": "locked"
+        }
+      ]
+    },
+    {
+      "id": "showcase_roles",
+      "entries": [
+        {
+          "id": "role_operator_showcase",
+          "label": "Operator Showcase",
+          "value": "operator"
+        },
+        {
+          "id": "role_dispatcher_showcase",
+          "label": "Dispatcher Showcase",
+          "value": "dispatcher"
+        }
+      ]
+    },
+    {
+      "id": "polish_focus_areas",
+      "entries": [
+        {
+          "id": "pfa_route",
+          "label": "Route Overlay",
+          "value": "route_overlay"
+        },
+        {
+          "id": "pfa_readability",
+          "label": "Readability",
+          "value": "readability"
+        },
+        {
+          "id": "pfa_audio",
+          "label": "Audio Mix",
+          "value": "audio_mix"
+        }
+      ]
+    },
+    {
+      "id": "release_feedback_stage",
+      "entries": [
+        {
+          "id": "rfs_preview",
+          "label": "Preview Build",
+          "value": "preview_build"
+        },
+        {
+          "id": "rfs_playtest",
+          "label": "Playtest",
+          "value": "playtest"
+        },
+        {
+          "id": "rfs_triage",
+          "label": "Triage",
+          "value": "triage"
+        },
+        {
+          "id": "rfs_freeze_patch",
+          "label": "Freeze Patch",
+          "value": "freeze_patch"
+        }
+      ]
+    }
+  ]
+}

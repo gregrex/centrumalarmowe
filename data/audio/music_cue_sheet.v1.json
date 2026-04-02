@@ -1,0 +1,43 @@
+{
+  "cues": [
+    {
+      "id": "menu_calm_loop",
+      "category": "menu",
+      "transitionTo": [
+        "menu_tension_loop",
+        "coop_lobby_loop"
+      ]
+    },
+    {
+      "id": "menu_tension_loop",
+      "category": "menu",
+      "transitionTo": [
+        "menu_calm_loop",
+        "reward_reveal_sting"
+      ]
+    },
+    {
+      "id": "coop_lobby_loop",
+      "category": "lobby",
+      "transitionTo": [
+        "menu_calm_loop",
+        "debrief_loop"
+      ]
+    },
+    {
+      "id": "reward_reveal_sting",
+      "category": "reward",
+      "transitionTo": [
+        "debrief_loop",
+        "menu_calm_loop"
+      ]
+    },
+    {
+      "id": "debrief_loop",
+      "category": "report",
+      "transitionTo": [
+        "menu_calm_loop"
+      ]
+    }
+  ]
+}

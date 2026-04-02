@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "presets": [
+    {
+      "id": "day_clear",
+      "sky": "soft_blue",
+      "overlay": "none",
+      "lightPulse": "low"
+    },
+    {
+      "id": "evening_amber",
+      "sky": "amber",
+      "overlay": "none",
+      "lightPulse": "medium"
+    },
+    {
+      "id": "night_calm",
+      "sky": "deep_navy",
+      "overlay": "city_glow",
+      "lightPulse": "medium"
+    },
+    {
+      "id": "storm_blackout",
+      "sky": "dark_storm",
+      "overlay": "rain_flash",
+      "lightPulse": "high"
+    }
+  ]
+}

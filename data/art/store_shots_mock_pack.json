@@ -1,0 +1,8 @@
+{
+  "id": "store-shots.v21",
+  "items": [
+    {"key": "shot.home.hero", "prompt": "premium mobile 2d emergency dispatch home scene, hero console, neon alert accents, clean readable UI, store screenshot composition"},
+    {"key": "shot.dispatch.runtime", "prompt": "premium 2d city dispatch runtime, route overlay, ambulance marker, high readability, app preview screenshot"},
+    {"key": "shot.report.reward", "prompt": "premium 2d report room, reward reveal, soft light, celebratory but grounded, mobile game store screenshot"}
+  ]
+}

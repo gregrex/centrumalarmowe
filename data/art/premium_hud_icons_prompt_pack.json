@@ -1,0 +1,18 @@
+{
+  "stylePrompt": "premium 2d emergency command interface, mobile game HUD, dark operations dashboard, clean silhouettes, subtle glow, serious emergency management tone",
+  "negativePrompt": "cartoon casual, childish mobile ui, sci-fi overload, unreadable clutter, text artifacts",
+  "prompts": [
+    {
+      "id": "prompt.icon.incident.medical",
+      "text": "medical incident icon for emergency dispatch mobile game, premium 2d, readable at 64x64"
+    },
+    {
+      "id": "prompt.icon.unit.ambulance",
+      "text": "ambulance dispatch unit icon for premium mobile HUD, clean silhouette, serious tone"
+    },
+    {
+      "id": "prompt.alert.critical.frame",
+      "text": "critical alert frame for emergency command mobile HUD, red amber pulse, readable and premium"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "id": "store-trailer-audio.v21",
+  "segments": ["hook", "briefing", "dispatch", "escalation", "reward", "teaser_next"],
+  "style": "tight, cinematic, readable, non-chaotic"
+}

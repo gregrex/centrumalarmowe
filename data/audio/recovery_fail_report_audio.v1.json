@@ -1,0 +1,24 @@
+{
+  "states": [
+    {
+      "id": "audio.recovery_open",
+      "type": "stinger",
+      "priority": "high"
+    },
+    {
+      "id": "audio.failstate_enter",
+      "type": "transition",
+      "priority": "high"
+    },
+    {
+      "id": "audio.report_reward",
+      "type": "ui_reward",
+      "priority": "medium"
+    },
+    {
+      "id": "audio.report_retry_click",
+      "type": "ui",
+      "priority": "low"
+    }
+  ]
+}

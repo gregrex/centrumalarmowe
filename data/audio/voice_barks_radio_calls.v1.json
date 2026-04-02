@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "packs": [
+    {
+      "role": "operator",
+      "lines": [
+        "call.accepted",
+        "need.location.confirmed",
+        "report.forwarded"
+      ]
+    },
+    {
+      "role": "dispatcher",
+      "lines": [
+        "unit.enroute",
+        "no.free.unit",
+        "confirm.task.takeover"
+      ]
+    },
+    {
+      "role": "coordinator",
+      "lines": [
+        "priority.red",
+        "regroup.resources",
+        "sector.blocked"
+      ]
+    },
+    {
+      "role": "crisis_officer",
+      "lines": [
+        "raise.alert.level",
+        "prepare.crosssector.support",
+        "global.review"
+      ]
+    },
+    {
+      "role": "bot",
+      "lines": [
+        "bot.covering.role",
+        "bot.awaiting.human.return"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "panels": [
+    {
+      "id": "grade",
+      "priority": 1
+    },
+    {
+      "id": "stars",
+      "priority": 2
+    },
+    {
+      "id": "metrics",
+      "priority": 3
+    },
+    {
+      "id": "timeline",
+      "priority": 4
+    },
+    {
+      "id": "rewards",
+      "priority": 5
+    }
+  ]
+}

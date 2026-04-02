@@ -1,0 +1,110 @@
+{
+  "groups": [
+    {
+      "groupId": "round.phase",
+      "entries": [
+        {
+          "id": "round.phase.alert-window",
+          "textKey": "round.phase.alert-window"
+        },
+        {
+          "id": "round.phase.dispatch-window",
+          "textKey": "round.phase.dispatch-window"
+        },
+        {
+          "id": "round.phase.resolve-window",
+          "textKey": "round.phase.resolve-window"
+        },
+        {
+          "id": "round.phase.report",
+          "textKey": "round.phase.report"
+        }
+      ]
+    },
+    {
+      "groupId": "delta.type",
+      "entries": [
+        {
+          "id": "delta.type.escalated",
+          "textKey": "delta.type.escalated"
+        },
+        {
+          "id": "delta.type.timeout-risk",
+          "textKey": "delta.type.timeout-risk"
+        },
+        {
+          "id": "delta.type.shared-action-needed",
+          "textKey": "delta.type.shared-action-needed"
+        },
+        {
+          "id": "delta.type.resolved",
+          "textKey": "delta.type.resolved"
+        }
+      ]
+    },
+    {
+      "groupId": "unit.cooldown.reason",
+      "entries": [
+        {
+          "id": "unit.cooldown.reason.refuel",
+          "textKey": "unit.cooldown.reason.refuel"
+        },
+        {
+          "id": "unit.cooldown.reason.restock",
+          "textKey": "unit.cooldown.reason.restock"
+        },
+        {
+          "id": "unit.cooldown.reason.handover",
+          "textKey": "unit.cooldown.reason.handover"
+        }
+      ]
+    },
+    {
+      "groupId": "eta.band",
+      "entries": [
+        {
+          "id": "eta.band.fast",
+          "textKey": "eta.band.fast"
+        },
+        {
+          "id": "eta.band.medium",
+          "textKey": "eta.band.medium"
+        },
+        {
+          "id": "eta.band.slow",
+          "textKey": "eta.band.slow"
+        }
+      ]
+    },
+    {
+      "groupId": "overlay.style",
+      "entries": [
+        {
+          "id": "overlay.style.normal",
+          "textKey": "overlay.style.normal"
+        },
+        {
+          "id": "overlay.style.warning",
+          "textKey": "overlay.style.warning"
+        },
+        {
+          "id": "overlay.style.critical",
+          "textKey": "overlay.style.critical"
+        }
+      ]
+    },
+    {
+      "groupId": "split.panel.layout",
+      "entries": [
+        {
+          "id": "split.panel.layout.operator-dispatcher",
+          "textKey": "split.panel.layout.operator-dispatcher"
+        },
+        {
+          "id": "split.panel.layout.coordinator-crisis",
+          "textKey": "split.panel.layout.coordinator-crisis"
+        }
+      ]
+    }
+  ]
+}

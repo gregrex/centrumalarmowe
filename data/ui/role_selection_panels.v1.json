@@ -1,0 +1,25 @@
+{
+  "layout": "2x2_role_grid",
+  "panels": [
+    {
+      "roleId": "operator",
+      "badgeSlots": 3,
+      "showBotPreview": true
+    },
+    {
+      "roleId": "dispatcher",
+      "badgeSlots": 3,
+      "showBotPreview": true
+    },
+    {
+      "roleId": "coordinator",
+      "badgeSlots": 3,
+      "showBotPreview": true
+    },
+    {
+      "roleId": "crisis_officer",
+      "badgeSlots": 3,
+      "showBotPreview": true
+    }
+  ]
+}

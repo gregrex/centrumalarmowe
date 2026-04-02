@@ -1,0 +1,9 @@
+{
+  "panels": [
+    "summary",
+    "score_breakdown",
+    "rewards",
+    "retry_advice",
+    "next_handoff"
+  ]
+}

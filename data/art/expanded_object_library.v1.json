@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "categories": [
+    {
+      "id": "objects.menu.hero",
+      "count": 24
+    },
+    {
+      "id": "objects.city.buildings",
+      "count": 78
+    },
+    {
+      "id": "objects.emergency.vehicles",
+      "count": 42
+    },
+    {
+      "id": "objects.ui.badges",
+      "count": 36
+    },
+    {
+      "id": "objects.profile.portraits",
+      "count": 28
+    },
+    {
+      "id": "objects.weather.overlays",
+      "count": 12
+    }
+  ],
+  "priorityBuild": [
+    "objects.menu.hero",
+    "objects.profile.portraits",
+    "objects.ui.badges",
+    "objects.weather.overlays"
+  ]
+}

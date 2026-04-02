@@ -1,0 +1,31 @@
+{
+  "actions": [
+    "assign",
+    "reinforce",
+    "reroute",
+    "hold",
+    "cancel"
+  ],
+  "outcomes": [
+    {
+      "id": "dispatch.success.fast",
+      "etaDelta": -10,
+      "pressureDelta": -4
+    },
+    {
+      "id": "dispatch.standard",
+      "etaDelta": 0,
+      "pressureDelta": 0
+    },
+    {
+      "id": "dispatch.delayed",
+      "etaDelta": 18,
+      "pressureDelta": 6
+    },
+    {
+      "id": "dispatch.failed",
+      "etaDelta": 30,
+      "pressureDelta": 12
+    }
+  ]
+}

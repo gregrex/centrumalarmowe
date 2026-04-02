@@ -1,0 +1,9 @@
+{
+  "cues": [
+    "runtime.freeze",
+    "score.tick",
+    "reward.star",
+    "reward.badge",
+    "result.partial"
+  ]
+}

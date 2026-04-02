@@ -1,0 +1,19 @@
+{
+  "panels": [
+    {
+      "id": "panel.recovery_card",
+      "anchor": "center",
+      "layout": "vertical_card_stack"
+    },
+    {
+      "id": "panel.failstate",
+      "anchor": "center",
+      "layout": "summary_focus"
+    },
+    {
+      "id": "panel.report_room",
+      "anchor": "full",
+      "layout": "debrief_split"
+    }
+  ]
+}

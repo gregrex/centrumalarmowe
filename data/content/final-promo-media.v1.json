@@ -1,0 +1,25 @@
+{
+  "shots": [
+    {
+      "id": "promo.home.hero",
+      "type": "screenshot",
+      "ratio": "9:16"
+    },
+    {
+      "id": "promo.runtime.route",
+      "type": "screenshot",
+      "ratio": "9:16"
+    },
+    {
+      "id": "promo.report.success",
+      "type": "screenshot",
+      "ratio": "16:9"
+    },
+    {
+      "id": "promo.capsule.main",
+      "type": "capsule",
+      "ratio": "landscape"
+    }
+  ],
+  "captureMode": true
+}

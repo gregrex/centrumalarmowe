@@ -1,0 +1,15 @@
+{
+  "buildId": "Alarm112-Internal-001",
+  "missionId": "showcase.mission.01",
+  "status": "ready_for_google_play_internal_testing",
+  "artifacts": [
+    "Alarm112-internal.apk",
+    "Alarm112-internal.aab",
+    "release-notes.md"
+  ],
+  "testerGroups": [
+    "qa_core",
+    "design_review",
+    "business_demo"
+  ]
+}

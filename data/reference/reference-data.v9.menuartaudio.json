@@ -1,0 +1,154 @@
+{
+  "version": "v9",
+  "groups": [
+    {
+      "id": "scene_theme",
+      "entries": [
+        {
+          "id": "scene.menu.city_day.default",
+          "label": "City Day",
+          "tags": [
+            "menu",
+            "scene",
+            "day"
+          ]
+        },
+        {
+          "id": "scene.menu.city_night.default",
+          "label": "City Night",
+          "tags": [
+            "menu",
+            "scene",
+            "night"
+          ]
+        },
+        {
+          "id": "scene.menu.rain_alert.default",
+          "label": "Rain Alert",
+          "tags": [
+            "menu",
+            "scene",
+            "rain"
+          ]
+        },
+        {
+          "id": "scene.menu.storm_response.default",
+          "label": "Storm Response",
+          "tags": [
+            "menu",
+            "scene",
+            "storm"
+          ]
+        },
+        {
+          "id": "scene.menu.winter_freeze.default",
+          "label": "Winter Freeze",
+          "tags": [
+            "menu",
+            "scene",
+            "snow"
+          ]
+        },
+        {
+          "id": "scene.menu.blackout.default",
+          "label": "Blackout",
+          "tags": [
+            "menu",
+            "scene",
+            "blackout"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hero_object",
+      "entries": [
+        {
+          "id": "hero.vehicle.ambulance.alpha",
+          "label": "Ambulance Alpha",
+          "tags": [
+            "hero",
+            "vehicle"
+          ]
+        },
+        {
+          "id": "hero.vehicle.firetruck.compact",
+          "label": "Fire Truck Compact",
+          "tags": [
+            "hero",
+            "vehicle"
+          ]
+        },
+        {
+          "id": "hero.vehicle.policevan.command",
+          "label": "Police Command Van",
+          "tags": [
+            "hero",
+            "vehicle"
+          ]
+        },
+        {
+          "id": "hero.prop.dispatch_console.wall",
+          "label": "Dispatch Console Wall",
+          "tags": [
+            "hero",
+            "prop"
+          ]
+        },
+        {
+          "id": "hero.prop.operator_desk.premium",
+          "label": "Operator Desk Premium",
+          "tags": [
+            "hero",
+            "prop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio_state",
+      "entries": [
+        {
+          "id": "audio.menu.calm.v1",
+          "label": "Menu Calm",
+          "tags": [
+            "audio",
+            "menu"
+          ]
+        },
+        {
+          "id": "audio.menu.tension.v1",
+          "label": "Menu Tension",
+          "tags": [
+            "audio",
+            "menu"
+          ]
+        },
+        {
+          "id": "audio.menu.coop_lobby.v1",
+          "label": "Coop Lobby",
+          "tags": [
+            "audio",
+            "lobby"
+          ]
+        },
+        {
+          "id": "audio.menu.reward_reveal.v1",
+          "label": "Reward Reveal",
+          "tags": [
+            "audio",
+            "reward"
+          ]
+        },
+        {
+          "id": "audio.menu.debrief.v1",
+          "label": "Debrief",
+          "tags": [
+            "audio",
+            "report"
+          ]
+        }
+      ]
+    }
+  ]
+}

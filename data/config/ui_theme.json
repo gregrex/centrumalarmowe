@@ -1,0 +1,10 @@
+{
+  "theme": {
+    "mode": "dark",
+    "critical": "#E24C4C",
+    "high": "#F39C12",
+    "medium": "#4A90E2",
+    "low": "#A0AEC0",
+    "success": "#2ECC71"
+  }
+}

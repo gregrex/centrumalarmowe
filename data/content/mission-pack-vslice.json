@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "packId": "missionpack.vslice.001",
+  "missions": [
+    {
+      "id": "mission.vslice.01",
+      "name": "Evening Quick Start",
+      "durationMinutes": 6
+    },
+    {
+      "id": "mission.vslice.02",
+      "name": "Traffic Pressure",
+      "durationMinutes": 7
+    },
+    {
+      "id": "mission.vslice.03",
+      "name": "Disconnect Drill",
+      "durationMinutes": 5
+    }
+  ]
+}

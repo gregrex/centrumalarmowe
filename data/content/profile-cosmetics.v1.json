@@ -1,0 +1,35 @@
+{
+  "version": "v1",
+  "items": [
+    {
+      "id": "portrait.dispatcher.steel",
+      "category": "portrait",
+      "rarity": "common",
+      "unlock": "starter"
+    },
+    {
+      "id": "frame.blackout.pulse",
+      "category": "frame",
+      "rarity": "rare",
+      "unlock": "chapter.03.complete"
+    },
+    {
+      "id": "badge.fast_filter",
+      "category": "badge",
+      "rarity": "uncommon",
+      "unlock": "daily.challenge"
+    },
+    {
+      "id": "title.city_anchor",
+      "category": "title",
+      "rarity": "heroic",
+      "unlock": "coop.milestone.10"
+    },
+    {
+      "id": "nameplate.stormline",
+      "category": "nameplate",
+      "rarity": "rare",
+      "unlock": "chapter.01.perfect"
+    }
+  ]
+}

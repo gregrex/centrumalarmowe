@@ -1,0 +1,9 @@
+{
+  "session": {
+    "maxPlayers": 4,
+    "allowBots": true,
+    "botTakeoverTimeoutSeconds": 12,
+    "reconnectWindowSeconds": 120,
+    "lateJoinMode": "rejoin_only"
+  }
+}

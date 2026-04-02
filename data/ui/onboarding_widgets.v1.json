@@ -1,0 +1,12 @@
+{
+  "widgets": [
+    {
+      "id": "coachmark_bubble",
+      "style": "rounded-dark"
+    },
+    {
+      "id": "hint_strip",
+      "style": "compact-warning"
+    }
+  ]
+}
