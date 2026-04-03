@@ -1,5 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="Npgsql" Version="9.0.3" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Alarm112.Application\Alarm112.Application.csproj" />
     <ProjectReference Include="..\Alarm112.Contracts\Alarm112.Contracts.csproj" />
     <ProjectReference Include="..\Alarm112.Domain\Alarm112.Domain.csproj" />

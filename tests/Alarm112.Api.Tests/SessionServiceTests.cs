@@ -1,6 +1,7 @@
 using Alarm112.Application.Services;
 using Alarm112.Contracts;
 using Alarm112.Infrastructure.Persistence;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Alarm112.Api.Tests;
 
@@ -9,7 +10,7 @@ public class SessionServiceTests
     private static SessionService CreateService(out InMemorySessionStore store)
     {
         store = new InMemorySessionStore();
-        return new SessionService(store);
+        return new SessionService(store, NullLogger<SessionService>.Instance);
     }
 
     private static SessionActionDto MakeAction(string sessionId, string actionType, string? payload = null) =>

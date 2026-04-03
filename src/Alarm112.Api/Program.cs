@@ -146,6 +146,16 @@ builder.Services.AddHostedService<Alarm112.Application.Services.BotTickHostedSer
 
 var app = builder.Build();
 
+// Startup validation — fail fast if production config is incomplete
+var isProduction = app.Environment.IsProduction();
+var jwtKeyAtRuntime = app.Configuration["Security:Jwt:SigningKey"];
+if (isProduction && string.IsNullOrWhiteSpace(jwtKeyAtRuntime))
+    throw new InvalidOperationException(
+        "Security:Jwt:SigningKey is required in production. Set the Security__Jwt__SigningKey environment variable.");
+if (isProduction && (jwtKeyAtRuntime?.Length ?? 0) < 32)
+    throw new InvalidOperationException(
+        "Security:Jwt:SigningKey must be at least 32 characters in production.");
+
 // Security headers — must be first in pipeline
 app.UseSecurityHeaders();
 

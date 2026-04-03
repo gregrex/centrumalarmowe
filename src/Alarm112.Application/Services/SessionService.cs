@@ -2,14 +2,20 @@ using System.Text.Json;
 using Alarm112.Application.Factories;
 using Alarm112.Application.Interfaces;
 using Alarm112.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace Alarm112.Application.Services;
 
 public sealed class SessionService : ISessionService
 {
     private readonly ISessionStore _store;
+    private readonly ILogger<SessionService> _logger;
 
-    public SessionService(ISessionStore store) => _store = store;
+    public SessionService(ISessionStore store, ILogger<SessionService> logger)
+    {
+        _store = store;
+        _logger = logger;
+    }
 
     public Task<SessionSnapshotDto> GetSnapshotAsync(string sessionId, CancellationToken cancellationToken)
     {
@@ -41,7 +47,7 @@ public sealed class SessionService : ISessionService
         return Task.FromResult(new SessionActionResultDto(true, sessionId, action.ActionType, $"Action '{action.ActionType}' applied by {action.ActorId}."));
     }
 
-    private static SessionSnapshotDto ApplyDispatch(SessionSnapshotDto snapshot, SessionActionDto action)
+    private SessionSnapshotDto ApplyDispatch(SessionSnapshotDto snapshot, SessionActionDto action)
     {
         if (action.PayloadJson is null) return snapshot;
 
@@ -55,7 +61,11 @@ public sealed class SessionService : ISessionService
             incidentId = incElem.GetString();
             unitId = unitElem.GetString();
         }
-        catch { return snapshot; }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Dispatch: failed to parse PayloadJson for actor {ActorId}", action.ActorId);
+            return snapshot;
+        }
 
         if (incidentId is null || unitId is null) return snapshot;
 
@@ -74,7 +84,7 @@ public sealed class SessionService : ISessionService
         return snapshot with { Incidents = updatedIncidents, Units = updatedUnits };
     }
 
-    private static SessionSnapshotDto ApplyEscalation(SessionSnapshotDto snapshot, SessionActionDto action)
+    private SessionSnapshotDto ApplyEscalation(SessionSnapshotDto snapshot, SessionActionDto action)
     {
         if (action.PayloadJson is null) return snapshot;
         string? incidentId = null;
@@ -84,7 +94,11 @@ public sealed class SessionService : ISessionService
             doc.RootElement.TryGetProperty("incidentId", out var incElem);
             incidentId = incElem.GetString();
         }
-        catch { return snapshot; }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Escalate: failed to parse PayloadJson for actor {ActorId}", action.ActorId);
+            return snapshot;
+        }
 
         if (incidentId is null) return snapshot;
 
@@ -97,7 +111,7 @@ public sealed class SessionService : ISessionService
         return snapshot with { Incidents = updatedIncidents };
     }
 
-    private static SessionSnapshotDto ApplyResolve(SessionSnapshotDto snapshot, SessionActionDto action)
+    private SessionSnapshotDto ApplyResolve(SessionSnapshotDto snapshot, SessionActionDto action)
     {
         if (action.PayloadJson is null) return snapshot;
         string? incidentId = null;
@@ -110,7 +124,11 @@ public sealed class SessionService : ISessionService
             incidentId = incElem.GetString();
             unitId = unitElem.GetString();
         }
-        catch { return snapshot; }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Resolve: failed to parse PayloadJson for actor {ActorId}", action.ActorId);
+            return snapshot;
+        }
 
         var updatedIncidents = snapshot.Incidents
             .Select(i => i.IncidentId == incidentId
