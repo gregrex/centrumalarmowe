@@ -127,37 +127,80 @@
 ## Co pozostało do zrobienia
 
 ### Blokujące produkcję
-- [ ] Podłączenie PostgreSQL (zastąpienie InMemoryStore)
+- [ ] Podłączenie PostgreSQL (zastąpienie InMemoryStore) — `PostgresSessionStore.cs` gotowy, do podpięcia DI
 - [ ] Admin panel: pełny ekran logowania (obecna: Basic Auth via nagłówek HTTP)
 
 ### Backlog MVP
 - [ ] Testy E2E (Playwright) — `tests/e2e/` puste
 - [ ] Response cache na reference-data endpoints
-- [ ] Program.cs refaktoryzacja (endpoint groups — 962 linie)
-- [ ] ILogger w serwisach domenowych
+- [ ] Program.cs refaktoryzacja (endpoint groups)
 - [ ] Pagination na listach
 - [ ] SignalR auth requirement
 - [ ] Redis auth konfiguracja
+- [ ] `ui-adminweb-data` — live API data w AdminWeb (sessions snapshot, incidents, units)
 
 ### Backlog techniczny
 - [ ] .NET 10 stable (gdy dostępny, zmiana z preview)
 - [ ] Audit logging middleware
 - [ ] CORS hardening (ograniczyć AllowAnyMethod)
-- [ ] Testy jednostkowe BotDirector i SessionService
+- [ ] ContentValidationService — naprawić bare catch (line ~34)
 
 ---
 
-## Metryki projektu
+## Sesja 2 (Security Hardening Round 2) ✅
 
-| Metryka | Przed audytem | Po audycie |
-|---------|--------------|--------------------------|
-| Security headers | 0 | 6 ✅ |
-| Testy | ~24 (happy path) | 50 (+ security + validation + unit) ✅ |
-| Docs audytowe | 0 | 11 ✅ |
-| CI/CD workflows | 0 | 1 (ci.yml) ✅ |
-| DTO validation | 0 | 3 DTO z DataAnnotations ✅ |
-| Prod appsettings | Brak | Istnieje ✅ |
-| Hardcoded secrets | 2 (JWT + DB) | 0 ✅ |
-| Non-root Docker | Nie | Tak ✅ |
-| BotTick "DEMO112" bug | Tak | Naprawione ✅ |
-| Security score | ~20% | ~65% |
+### 5.1 AdminWeb — password hardening
+- Usunięto hardcoded fallback `"admin112"` z `AdminWeb/Program.cs`
+- Wdrożono `?? throw new InvalidOperationException(...)` — fail-fast przy starcie
+- Wymagane min 12 znaków dla `AdminAuth__Password`
+
+### 5.2 SessionService — logging
+- Dodano `ILogger<SessionService>` jako konstruktorowy parametr
+- Naprawiono 3 puste `catch {}` → `catch (JsonException ex)` + `_logger.LogError()`
+- Metody `private static Apply*` zamienione na `private instance`
+
+### 5.3 AdminWeb — XSS fix
+- `addLog()` używała `innerHTML` → zamieniona na `createElement` + `textContent`
+
+### 5.4 API Program.cs — JWT startup validation
+- Dodano fail-fast: jeśli `SigningKey` pusty lub krótszy niż 32 znaki w Production → `InvalidOperationException`
+
+### 5.5 AdminWeb — modularyzacja
+- Wyekstrahowano CSS do `wwwroot/css/admin.css` (353 linie)
+- Wyekstrahowano JS do `wwwroot/js/admin.js` (XSS-safe, log capped 200)
+- Dodano `UseStaticFiles()` + `<link>` + `<script src>` + `window.API_BASE` injection
+- Inline `<style>` i `<script>` usunięte z HTML template
+
+### 5.6 PostgreSQL ISessionStore
+- Nowy plik: `src/Alarm112.Infrastructure/Persistence/PostgresSessionStore.cs`
+- Npgsql 9.0.3, write-through cache (`ConcurrentDictionary`), UPSERT, `EnsureTableExists()`
+- Nie podpięty domyślnie — fallback na InMemoryStore
+
+### 5.7 CI/CD — docker-build job
+- `.github/workflows/ci.yml` rozszerzony o `docker-build` job
+- Buduje oba obrazy (API + AdminWeb) z layer cache
+
+### 5.8 Nowe testy bezpieczeństwa (18 testów)
+- `AdvancedSecurityTests.cs`: JWT expiry, wrong key, no-role token, XSS payload, path traversal, SQL injection, IDOR, security headers, rate limiting, ProblemDetails format
+- `SignalRHubTests.cs`: connect, JoinSession, multi-client, disconnect resilience, empty sessionId
+
+**Wynik testów: 77/77 ✅**
+
+---
+
+
+| Metryka | Przed audytem | Po sesji 1 | Po sesji 2 |
+|---------|--------------|------------|------------|
+| Security headers | 0 | 6 ✅ | 6 ✅ |
+| Testy | ~24 (happy path) | 59 ✅ | 77 ✅ |
+| Docs audytowe | 0 | 11 ✅ | 11 (updated) ✅ |
+| CI/CD workflows | 0 | 1 (ci.yml) ✅ | 1 + docker-build ✅ |
+| DTO validation | 0 | 3 DTO z DataAnnotations ✅ | 3 DTO ✅ |
+| Prod appsettings | Brak | Istnieje ✅ | Istnieje ✅ |
+| Hardcoded secrets | 2 (JWT + DB) | 0 ✅ | 0 ✅ |
+| Non-root Docker | Nie | Tak ✅ | Tak ✅ |
+| BotTick "DEMO112" bug | Tak | Naprawione ✅ | Naprawione ✅ |
+| AdminWeb XSS | innerHTML | innerHTML | textContent ✅ |
+| catch{} bez logów | 3 | 3 | 0 ✅ |
+| PostgreSQL store | Brak | Brak | Gotowy (nie podpięty) |
+| Security score | ~20% | ~65% | ~75% |

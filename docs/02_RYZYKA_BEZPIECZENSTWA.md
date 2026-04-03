@@ -6,24 +6,27 @@
 
 ## Macierz ryzyk
 
-| ID | Kategoria | Ryzyko | Prawdopodobieństwo | Wpływ | Priorytet |
-|----|-----------|--------|-------------------|-------|-----------|
-| SEC-01 | A01 Broken Access Control | Brak auth na API | Wysokie | Krytyczny | 🔴 |
-| SEC-02 | A02 Cryptographic Failures | Hardcoded JWT key | Wysokie | Krytyczny | 🔴 |
-| SEC-03 | A01 Broken Access Control | Admin panel bez auth | Wysokie | Krytyczny | 🔴 |
-| SEC-04 | A01 Broken Access Control | Dev token endpoint otwarty | Wysokie | Krytyczny | 🔴 |
-| SEC-05 | A02 Cryptographic Failures | Hardcoded DB credentials | Wysokie | Wysoki | 🔴 |
-| SEC-06 | A03 Injection | Brak walidacji DTO | Średnie | Wysoki | 🟠 |
-| SEC-07 | A05 Security Misconfiguration | Brak security headers | Wysokie | Średni | 🟠 |
-| SEC-08 | A05 Security Misconfiguration | CORS + AllowCredentials | Średnie | Wysoki | 🟠 |
-| SEC-09 | A05 Security Misconfiguration | Swagger publiczny | Wysokie | Średni | 🟠 |
-| SEC-10 | A04 Insecure Design | Rate limiter niepodpięty | Średnie | Średni | 🟠 |
-| SEC-11 | A05 Security Misconfiguration | Redis bez auth | Niskie | Średni | 🟡 |
-| SEC-12 | A05 Security Misconfiguration | AllowedHosts: "*" | Niskie | Niski | 🟡 |
-| SEC-13 | A04 Insecure Design | InMemory — brak persystencji | Niskie | Wysoki | 🟡 |
-| SEC-14 | A09 Security Logging Failures | Brak audit log | Niskie | Średni | 🟡 |
-| SEC-15 | A01 Broken Access Control | SignalR hub bez auth | Niskie | Średni | 🟡 |
-| SEC-16 | A03 Injection | PayloadJson bez limitu | Niskie | Niski | 🟢 |
+| ID | Kategoria | Ryzyko | Prawdopodobieństwo | Wpływ | Priorytet | Status |
+|----|-----------|--------|-------------------|-------|-----------|--------|
+| SEC-01 | A01 Broken Access Control | Brak auth na API | Wysokie | Krytyczny | 🔴 | ✅ NAPRAWIONE (appsettings.Production.json) |
+| SEC-02 | A02 Cryptographic Failures | Hardcoded JWT key | Wysokie | Krytyczny | 🔴 | ✅ NAPRAWIONE (env var, fail-fast startup) |
+| SEC-03 | A01 Broken Access Control | Admin panel bez auth | Wysokie | Krytyczny | 🔴 | ✅ NAPRAWIONE (Basic Auth middleware) |
+| SEC-04 | A01 Broken Access Control | Dev token endpoint otwarty | Wysokie | Krytyczny | 🔴 | ✅ NAPRAWIONE (disabled w Production) |
+| SEC-05 | A02 Cryptographic Failures | Hardcoded DB credentials | Wysokie | Wysoki | 🔴 | ✅ NAPRAWIONE (env var w docker-compose) |
+| SEC-06 | A03 Injection | Brak walidacji DTO | Średnie | Wysoki | 🟠 | ✅ NAPRAWIONE (DataAnnotations na 3 DTO) |
+| SEC-07 | A05 Security Misconfiguration | Brak security headers | Wysokie | Średni | 🟠 | ✅ NAPRAWIONE (SecurityHeadersMiddleware) |
+| SEC-08 | A05 Security Misconfiguration | CORS + AllowCredentials | Średnie | Wysoki | 🟠 | ⚠️ CZĘŚCIOWE (ograniczone do known origins) |
+| SEC-09 | A05 Security Misconfiguration | Swagger publiczny | Wysokie | Średni | 🟠 | ✅ NAPRAWIONE (tylko w Development) |
+| SEC-10 | A04 Insecure Design | Rate limiter niepodpięty | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (RequireRateLimiting na POST) |
+| SEC-11 | A05 Security Misconfiguration | Redis bez auth | Niskie | Średni | 🟡 | 📋 BACKLOG |
+| SEC-12 | A05 Security Misconfiguration | AllowedHosts: "*" | Niskie | Niski | 🟡 | 📋 BACKLOG |
+| SEC-13 | A04 Insecure Design | InMemory — brak persystencji | Niskie | Wysoki | 🟡 | ⚠️ PostgresSessionStore gotowy, nie podpięty |
+| SEC-14 | A09 Security Logging Failures | Brak audit log | Niskie | Średni | 🟡 | 📋 BACKLOG |
+| SEC-15 | A01 Broken Access Control | SignalR hub bez auth | Niskie | Średni | 🟡 | 📋 BACKLOG |
+| SEC-16 | A03 Injection | PayloadJson bez limitu | Niskie | Niski | 🟢 | ✅ NAPRAWIONE (StringLength validation) |
+| SEC-17 | A03 Injection | innerHTML XSS w AdminWeb | Wysokie | Wysoki | 🔴 | ✅ NAPRAWIONE (textContent w admin.js) |
+| SEC-18 | A09 Security Logging Failures | catch{} bez logów w SessionService | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (ILogger + catch(JsonException)) |
+| SEC-19 | A07 Auth Failures | AdminWeb hardcoded password fallback | Krytyczny | Krytyczny | 🔴 | ✅ NAPRAWIONE (fail-fast, min 12 chars) |
 
 ---
 
