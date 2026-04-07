@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Alarm112 - Centrum Alarmowe - Panel Admina</title>
+  <link rel="stylesheet" href="/css/admin.css"/>
+</head>
+<body>
+<div class="scanline-overlay"></div>
+
+<header class="header">
+  <a class="header-logo" href="/">
+    <span class="logo-badge">112</span>
+    <span class="logo-name">Centrum Alarmowe <span>Panel Admina</span></span>
+  </a>
+  <div class="header-spacer"></div>
+  <div class="header-status">
+    <span class="status-dot" id="api-dot"></span>
+    <span id="api-status-text">sprawdzam...</span>
+  </div>
+  <span class="header-ver">v26</span>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="nav-section"><span class="nav-label">System</span></div>
+    <a class="nav-item active" href="/">
+      <span class="nav-icon">🏠</span> Dashboard
+    </a>
+    <a class="nav-item" href="{{apiBase}}/swagger" target="_blank">
+      <span class="nav-icon">📘</span> Swagger UI
+    </a>
+    <a class="nav-item" href="{{apiBase}}/health" target="_blank">
+      <span class="nav-icon">❤️</span> Health Check
+    </a>
+    <hr class="nav-divider"/>
+
+    <div class="nav-section"><span class="nav-label">Content</span></div>
+    <a class="nav-item" href="{{apiBase}}/api/reference-data" target="_blank">
+      <span class="nav-icon">📦</span> Reference Data
+    </a>
+    <a class="nav-item" href="{{apiBase}}/api/content/validate" target="_blank">
+      <span class="nav-icon">✅</span> Walidacja
+    </a>
+    <hr class="nav-divider"/>
+
+    <div class="nav-section"><span class="nav-label">Sesje</span></div>
+    <a class="nav-item" href="{{apiBase}}/api/home-hub" target="_blank">
+      <span class="nav-icon">🏘️</span> Home Hub
+    </a>
+    <a class="nav-item" href="{{apiBase}}/api/city-map" target="_blank">
+      <span class="nav-icon">🗺️</span> City Map
+    </a>
+    <a class="nav-item" href="{{apiBase}}/api/mission-briefing/demo" target="_blank">
+      <span class="nav-icon">📋</span> Mission Briefing
+    </a>
+    <a class="nav-item" href="{{apiBase}}/api/quickplay/bootstrap" target="_blank">
+      <span class="nav-icon">⚡</span> Quickplay
+    </a>
+    <hr class="nav-divider"/>
+
+    <div class="nav-section"><span class="nav-label">Demo</span></div>
+    <a class="nav-item" href="{{apiBase}}/api/showcase-demo/demo" target="_blank">
+      <span class="nav-icon">🎬</span> Showcase Demo
+    </a>
+    <a class="nav-item" href="{{apiBase}}/api/real-android-build/demo" target="_blank">
+      <span class="nav-icon">📱</span> Android Build
+    </a>
+
+    <div class="sidebar-footer">
+      API: <a href="{{apiBase}}" target="_blank">{{apiBase}}</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="page-title">Dashboard operacyjny</div>
+      <div class="page-subtitle" id="page-subtitle">Centrum Alarmowe v26 · oczekiwanie na dane operacyjne</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric" style="--m-color:var(--ok)">
+        <div class="metric-label">Status API</div>
+        <div class="metric-value" id="metric-api-status">-</div>
+        <div class="metric-sub" id="metric-api-sub">oczekiwanie...</div>
+        <div class="metric-icon">🛰️</div>
+      </div>
+      <div class="metric" style="--m-color:var(--role-op)">
+        <div class="metric-label">Sesje aktywne</div>
+        <div class="metric-value" id="metric-sessions">-</div>
+        <div class="metric-sub" id="metric-sessions-sub">oczekiwanie...</div>
+        <div class="metric-icon">🎮</div>
+      </div>
+      <div class="metric" style="--m-color:var(--role-dis)">
+        <div class="metric-label">Content bundle</div>
+        <div class="metric-value" id="metric-bundle">-</div>
+        <div class="metric-sub" id="metric-bundle-sub">reference-data v26</div>
+        <div class="metric-icon">📦</div>
+      </div>
+      <div class="metric" style="--m-color:var(--role-coord)">
+        <div class="metric-label">SignalR hub</div>
+        <div class="metric-value">LIVE</div>
+        <div class="metric-sub">/hubs/session</div>
+        <div class="metric-icon">📡</div>
+      </div>
+      <div class="metric" style="--m-color:var(--role-crisis)">
+        <div class="metric-label">Bot Director</div>
+        <div class="metric-value">4 role</div>
+        <div class="metric-sub">AI fallback aktywny</div>
+        <div class="metric-icon">🤖</div>
+      </div>
+    </div>
+
+    <div class="section-label">Role w systemie</div>
+    <div class="roles-grid">
+      <div class="role-card" style="--r-color:var(--role-op)">
+        <div class="role-name">Call Operator</div>
+        <div class="role-status"><span class="role-dot"></span>AI fallback gotowy</div>
+      </div>
+      <div class="role-card" style="--r-color:var(--role-dis)">
+        <div class="role-name">Dispatcher</div>
+        <div class="role-status"><span class="role-dot"></span>AI fallback gotowy</div>
+      </div>
+      <div class="role-card" style="--r-color:var(--role-coord)">
+        <div class="role-name">Ops Coordinator</div>
+        <div class="role-status"><span class="role-dot"></span>AI fallback gotowy</div>
+      </div>
+      <div class="role-card" style="--r-color:var(--role-crisis)">
+        <div class="role-name">Crisis Officer</div>
+        <div class="role-status"><span class="role-dot"></span>AI fallback gotowy</div>
+      </div>
+    </div>
+
+    <div class="section-label">Endpointy API</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--ok)"></div>
+        <div class="card-header">
+          <div class="card-icon">❤️</div>
+          <div class="card-title">Health Check</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Status serwera backend. Zwraca JSON z polem <code>ok</code> i wersja.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/health" target="_blank">GET /health</a>
+          <a class="btn btn-link" href="{{apiBase}}/swagger" target="_blank">-> Swagger UI</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-dis)"></div>
+        <div class="card-header">
+          <div class="card-icon">✅</div>
+          <div class="card-title">Walidacja contentu</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Sprawdza poprawnosc wszystkich JSON bundli content pipeline.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/content/validate" target="_blank">Waliduj</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-crisis)"></div>
+        <div class="card-header">
+          <div class="card-icon">🎮</div>
+          <div class="card-title">Sesje demo</div>
+          <span class="card-tag">POST</span>
+        </div>
+        <div class="card-desc">Utworz lub przegladaj sesje demo. Pelne POST dostepne w Swagger.</div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="{{apiBase}}/api/sessions/demo" target="_blank">GET /sessions/demo</a>
+          <a class="btn btn-link" href="{{apiBase}}/swagger#/Sessions" target="_blank">-> Swagger</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-op)"></div>
+        <div class="card-header">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Reference Data</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Pelny bundle danych referencyjnych v26: role, incydenty, jednostki, mapy.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/reference-data" target="_blank">GET /reference-data</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-coord)"></div>
+        <div class="card-header">
+          <div class="card-icon">🏘️</div>
+          <div class="card-title">Home Hub</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Dane ekranu glownego gracza: profil, kampania, quickplay, powiadomienia.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/home-hub" target="_blank">GET /home-hub</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-op)"></div>
+        <div class="card-header">
+          <div class="card-icon">🗺️</div>
+          <div class="card-title">City Map</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Mapa miasta z wezlami, polaczeniami i aktualnymi incydentami.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/city-map" target="_blank">GET /city-map</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--warn)"></div>
+        <div class="card-header">
+          <div class="card-icon">📋</div>
+          <div class="card-title">Mission Briefing</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Briefing misji showcase - pelny pakiet danych briefingu misji demo.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/mission-briefing/demo" target="_blank">GET /mission-briefing</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--role-coord)"></div>
+        <div class="card-header">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Quickplay Lobby</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Bootstrap quickplay session - natychmiastowy start z AI botami.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/quickplay/bootstrap" target="_blank">Bootstrap</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--text-dim)"></div>
+        <div class="card-header">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Android Build Status</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Status buildu Android preview v26 - RC build metadata.</div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="{{apiBase}}/api/real-android-build/demo" target="_blank">GET status</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent-line" style="--c-color:var(--accent)"></div>
+        <div class="card-header">
+          <div class="card-icon">🎬</div>
+          <div class="card-title">Showcase Demo Flow</div>
+          <span class="card-tag">GET</span>
+        </div>
+        <div class="card-desc">Kompletny flow showcase - misja demo operator + dispatcher end-to-end.</div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="{{apiBase}}/api/showcase-demo/demo" target="_blank">GET showcase</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Log systemowy</div>
+    <div class="log-feed">
+      <div class="log-header">
+        <span class="log-header-dot"></span>
+        Live feed - aktywnosc panelu
+      </div>
+      <div class="log-body" id="log-body">
+        <div class="log-row">
+          <span class="log-time" id="ts-boot"></span>
+          <span class="log-tag info">[BOOT]</span>
+          <span class="log-msg">Alarm112 AdminWeb v26 zaladowany</span>
+        </div>
+        <div class="log-row">
+          <span class="log-time"></span>
+          <span class="log-tag info">[SYS]</span>
+          <span class="log-msg">Sprawdzanie statusu API: {{apiBase}}/health</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>window.API_BASE = '{{apiBase}}';</script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

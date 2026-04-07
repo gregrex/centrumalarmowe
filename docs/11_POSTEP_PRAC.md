@@ -651,3 +651,15 @@
 - rozszerzyć summary endpoint o incidents/units, jeśli te metryki będą potrzebne operacyjnie
 - uruchomić pełny build + test suite po integracji
 
+## Sesja 13 — wydzielenie szablonu AdminWeb dashboard
+
+### Co poprawiono
+- wyjęto inline HTML dashboardu z `src/Alarm112.AdminWeb/Program.cs`
+- dodano dedykowany plik `src/Alarm112.AdminWeb/Templates/Dashboard.html`
+- `Program.cs` ładuje szablon z `ContentRootPath` / output directory i podstawia tylko `{{apiBase}}`
+- `Alarm112.AdminWeb.csproj` publikuje katalog `Templates/`
+
+### Testy
+- `AdminDashboardEndpointTests` rozszerzono o test renderowania `/`
+- test sprawdza, że template jest serwowany i ma podstawione `ApiBaseUrl`
+

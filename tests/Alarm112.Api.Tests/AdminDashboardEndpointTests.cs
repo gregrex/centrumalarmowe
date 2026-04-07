@@ -48,6 +48,23 @@ public sealed class AdminDashboardEndpointTests
         Assert.Equal("auth-not-configured", response.Content.Status);
     }
 
+    [Fact]
+    public async Task RootPage_ReturnsRenderedDashboardTemplate()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = CreateBasicAuthHeader();
+
+        var response = await client.GetAsync("/");
+        var body = await response.Content.ReadAsStringAsync();
+
+        Assert.True(response.IsSuccessStatusCode);
+        Assert.Contains("Alarm112", body);
+        Assert.Contains(stubApi.BaseUrl, body);
+        Assert.Contains("/js/admin.js", body);
+    }
+
     private static AuthenticationHeaderValue CreateBasicAuthHeader()
     {
         var encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes("admin:test-admin-pass"));
