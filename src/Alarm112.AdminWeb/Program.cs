@@ -100,15 +100,20 @@ app.MapGet("/api/admin/dashboard",
             return Results.Ok(new AdminDashboardSummaryDto(
                 health,
                 new AdminDashboardSessionsDto("auth-not-configured", null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null),
-                new AdminDashboardContentDto("auth-not-configured", null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null)));
+                new AdminDashboardContentDto("auth-not-configured", null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null),
+                new AdminDashboardIncidentsDto("auth-not-configured", null, null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null),
+                new AdminDashboardUnitsDto("auth-not-configured", null, null, null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null)));
         }
 
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         var sessions = await FetchSessionsAsync(client, logger, cancellationToken);
         var content = await FetchContentAsync(client, logger, cancellationToken);
+        var sessionIds = await FetchSessionIdsAsync(client, logger, cancellationToken);
+        var incidents = await FetchIncidentsAsync(client, logger, sessionIds, cancellationToken);
+        var units = await FetchUnitsAsync(client, logger, sessionIds, cancellationToken);
 
-        return Results.Ok(new AdminDashboardSummaryDto(health, sessions, content));
+        return Results.Ok(new AdminDashboardSummaryDto(health, sessions, content, incidents, units));
     });
 
 app.MapGet("/", () => Results.Content(dashboardHtml, "text/html"));
@@ -207,6 +212,114 @@ static async Task<AdminDashboardContentDto> FetchContentAsync(
     }
 }
 
+static async Task<IReadOnlyCollection<string>> FetchSessionIdsAsync(
+    HttpClient client,
+    ILogger logger,
+    CancellationToken cancellationToken)
+{
+    var sessionIds = new List<string>();
+    var page = 1;
+    var totalPages = 1;
+
+    try
+    {
+        while (page <= totalPages)
+        {
+            using var response = await client.GetAsync($"/api/sessions?page={page}&pageSize=100", cancellationToken);
+            if (!response.IsSuccessStatusCode)
+            {
+                logger.LogWarning("Admin dashboard could not enumerate sessions. HTTP {StatusCode}", (int)response.StatusCode);
+                return [];
+            }
+
+            var payload = await response.Content.ReadFromJsonAsync<AdminSessionsResponseDto>(cancellationToken);
+            if (payload is null)
+                return [];
+
+            sessionIds.AddRange(payload.Items);
+            totalPages = Math.Max(payload.TotalPages, 1);
+            page++;
+        }
+
+        return sessionIds;
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not enumerate sessions.");
+        return [];
+    }
+}
+
+static async Task<AdminDashboardIncidentsDto> FetchIncidentsAsync(
+    HttpClient client,
+    ILogger logger,
+    IReadOnlyCollection<string> sessionIds,
+    CancellationToken cancellationToken)
+{
+    if (sessionIds.Count == 0)
+        return new AdminDashboardIncidentsDto("ok", 0, 0, "Brak aktywnych sesji.", null);
+
+    try
+    {
+        var boards = await Task.WhenAll(sessionIds.Select(async sessionId =>
+        {
+            using var response = await client.GetAsync($"/api/sessions/{sessionId}/active-incidents", cancellationToken);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<Alarm112.Contracts.ActiveIncidentBoardDto>(cancellationToken);
+        }));
+
+        var totalCount = boards.Sum(board => board?.ActiveCount ?? 0);
+        var criticalCount = boards.Sum(board => board?.CriticalCount ?? 0);
+        var summary = criticalCount > 0
+            ? $"{totalCount} aktywne / {criticalCount} krytyczne."
+            : $"{totalCount} aktywne / brak krytycznych.";
+
+        return new AdminDashboardIncidentsDto("ok", totalCount, criticalCount, summary, null);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not aggregate incident metrics.");
+        return new AdminDashboardIncidentsDto("unavailable", null, null, null, ex.Message);
+    }
+}
+
+static async Task<AdminDashboardUnitsDto> FetchUnitsAsync(
+    HttpClient client,
+    ILogger logger,
+    IReadOnlyCollection<string> sessionIds,
+    CancellationToken cancellationToken)
+{
+    if (sessionIds.Count == 0)
+        return new AdminDashboardUnitsDto("ok", 0, 0, 0, "Brak aktywnych sesji.", null);
+
+    try
+    {
+        var unitsPerSession = await Task.WhenAll(sessionIds.Select(async sessionId =>
+        {
+            using var response = await client.GetAsync($"/api/sessions/{sessionId}/units/runtime", cancellationToken);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<IReadOnlyCollection<Alarm112.Contracts.UnitRuntimeDto>>(cancellationToken);
+        }));
+
+        var units = unitsPerSession
+            .Where(collection => collection is not null)
+            .SelectMany(collection => collection!)
+            .ToList();
+
+        var totalCount = units.Count;
+        var availableCount = units.Count(unit => unit.Available);
+        var botBackfillCount = units.Count(unit => unit.IsBotBackfilled);
+        var summary = $"{availableCount} dostepne z {totalCount} runtime, boty: {botBackfillCount}.";
+
+        return new AdminDashboardUnitsDto("ok", totalCount, availableCount, botBackfillCount, summary, null);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not aggregate unit metrics.");
+        return new AdminDashboardUnitsDto("unavailable", null, null, null, null, ex.Message);
+    }
+}
+
 static string? TryCreateApiAccessToken(AdminApiAuthOptions options)
 {
     if (string.IsNullOrWhiteSpace(options.SigningKey) || options.SigningKey.Length < 32)
@@ -255,7 +368,9 @@ internal sealed record AdminApiAuthOptions(
 internal sealed record AdminDashboardSummaryDto(
     AdminDashboardApiDto Api,
     AdminDashboardSessionsDto Sessions,
-    AdminDashboardContentDto Content);
+    AdminDashboardContentDto Content,
+    AdminDashboardIncidentsDto Incidents,
+    AdminDashboardUnitsDto Units);
 
 internal sealed record AdminDashboardApiDto(
     string Status,
@@ -273,6 +388,21 @@ internal sealed record AdminDashboardSessionsDto(
 internal sealed record AdminDashboardContentDto(
     string Status,
     int? IssueCount,
+    string? Summary,
+    string? Error);
+
+internal sealed record AdminDashboardIncidentsDto(
+    string Status,
+    int? TotalCount,
+    int? CriticalCount,
+    string? Summary,
+    string? Error);
+
+internal sealed record AdminDashboardUnitsDto(
+    string Status,
+    int? TotalCount,
+    int? AvailableCount,
+    int? BotBackfillCount,
     string? Summary,
     string? Error);
 

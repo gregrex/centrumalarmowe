@@ -13,6 +13,10 @@
   const metricSessionsSub = document.getElementById('metric-sessions-sub');
   const metricBundle = document.getElementById('metric-bundle');
   const metricBundleSub = document.getElementById('metric-bundle-sub');
+  const metricIncidents = document.getElementById('metric-incidents');
+  const metricIncidentsSub = document.getElementById('metric-incidents-sub');
+  const metricUnits = document.getElementById('metric-units');
+  const metricUnitsSub = document.getElementById('metric-units-sub');
   const pageSubtitle = document.getElementById('page-subtitle');
   const logBody      = document.getElementById('log-body');
 
@@ -94,6 +98,32 @@
     metricBundleSub.textContent = String(error ?? summary ?? 'Brak danych walidacji.');
   }
 
+  function setIncidents(status, totalCount, criticalCount, summary, error) {
+    if (status === 'ok') {
+      metricIncidents.textContent = String(totalCount ?? 0);
+      metricIncidents.style.color = (criticalCount ?? 0) > 0 ? 'var(--warn)' : 'var(--role-coord)';
+      metricIncidentsSub.textContent = String(summary ?? 'Brak aktywnych incydentow.');
+      return;
+    }
+
+    metricIncidents.textContent = '—';
+    metricIncidents.style.color = 'var(--warn)';
+    metricIncidentsSub.textContent = String(error ?? summary ?? 'Brak danych o incydentach.');
+  }
+
+  function setUnits(status, availableCount, totalCount, summary, error) {
+    if (status === 'ok') {
+      metricUnits.textContent = String(availableCount ?? 0);
+      metricUnits.style.color = 'var(--role-crisis)';
+      metricUnitsSub.textContent = String(summary ?? ('Dostepne: ' + String(totalCount ?? 0)));
+      return;
+    }
+
+    metricUnits.textContent = '—';
+    metricUnits.style.color = 'var(--warn)';
+    metricUnitsSub.textContent = String(error ?? summary ?? 'Brak danych o jednostkach.');
+  }
+
   async function refreshDashboard() {
     try {
       const r = await fetch('/api/admin/dashboard', { signal: AbortSignal.timeout(5000) });
@@ -112,6 +142,8 @@
 
         setSessions(j.sessions?.status, j.sessions?.totalCount, j.sessions?.summary, j.sessions?.error);
         setContent(j.content?.status, j.content?.issueCount, j.content?.summary, j.content?.error);
+        setIncidents(j.incidents?.status, j.incidents?.totalCount, j.incidents?.criticalCount, j.incidents?.summary, j.incidents?.error);
+        setUnits(j.units?.status, j.units?.availableCount, j.units?.totalCount, j.units?.summary, j.units?.error);
 
         addLog('ok', 'HEALTH', String(j.api?.service ?? 'Alarm112.Api') + ' · ' + String(j.api?.version ?? ''));
         addLog(
@@ -124,17 +156,31 @@
           'CONTENT',
           String(j.content?.summary ?? j.content?.error ?? 'Brak danych walidacji.')
         );
+        addLog(
+          j.incidents?.status === 'ok' ? ((j.incidents?.criticalCount ?? 0) > 0 ? 'warn' : 'info') : 'err',
+          'INCIDENTS',
+          String(j.incidents?.summary ?? j.incidents?.error ?? 'Brak danych o incydentach.')
+        );
+        addLog(
+          j.units?.status === 'ok' ? 'info' : 'err',
+          'UNITS',
+          String(j.units?.summary ?? j.units?.error ?? 'Brak danych o jednostkach.')
+        );
         return;
       }
 
       setApiOffline('blad odpowiedzi');
       setSessions('unavailable', null, null, 'Dashboard zwrocil HTTP ' + String(r.status));
       setContent('unavailable', null, null, 'Dashboard zwrocil HTTP ' + String(r.status));
+      setIncidents('unavailable', null, null, null, 'Dashboard zwrocil HTTP ' + String(r.status));
+      setUnits('unavailable', null, null, null, 'Dashboard zwrocil HTTP ' + String(r.status));
       addLog('err', 'DASH', 'HTTP ' + String(r.status));
     } catch (e) {
       setApiOffline('brak połączenia');
       setSessions('unavailable', null, null, e.message);
       setContent('unavailable', null, null, e.message);
+      setIncidents('unavailable', null, null, null, e.message);
+      setUnits('unavailable', null, null, null, e.message);
       addLog('err', 'DASH', 'Brak odpowiedzi: ' + String(e.message));
     }
   }

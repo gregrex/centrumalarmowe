@@ -663,3 +663,16 @@
 - `AdminDashboardEndpointTests` rozszerzono o test renderowania `/`
 - test sprawdza, że template jest serwowany i ma podstawione `ApiBaseUrl`
 
+## Sesja 14 — metryki runtime w AdminWeb
+
+### Co poprawiono
+- `GET /api/admin/dashboard` agreguje teraz nie tylko stan API, sesje i walidacje contentu
+- dodano live summary dla:
+  - aktywnych incydentow (`/api/sessions/{id}/active-incidents`)
+  - jednostek runtime (`/api/sessions/{id}/units/runtime`)
+- agregacja wykonywana jest po wszystkich aktywnych sesjach zwroconych przez `/api/sessions`
+- dashboard pokazuje teraz liczby operacyjne dla incydentow i dostepnych jednostek zamiast dwoch statycznych kart
+
+### Testy
+- `AdminDashboardEndpointTests` rozszerzono o asercje dla agregacji incydentow i jednostek
+
