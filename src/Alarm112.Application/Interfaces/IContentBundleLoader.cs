@@ -5,6 +5,8 @@ namespace Alarm112.Application.Interfaces;
 /// </summary>
 public interface IContentBundleLoader
 {
+    string DataRoot { get; }
+
     /// <summary>Loads a file from data/content/ by filename (e.g. "home-hub.v1.json").</summary>
     Task<T> LoadContentAsync<T>(string fileName, CancellationToken cancellationToken = default);
 

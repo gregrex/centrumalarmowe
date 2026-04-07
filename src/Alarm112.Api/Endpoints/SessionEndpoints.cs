@@ -27,6 +27,8 @@ public static class SessionEndpoints
                 if (!IsValidSessionId(sessionId))
                     return Results.BadRequest(new { error = "Invalid sessionId format." });
                 var snapshot = await sessionService.GetSnapshotAsync(sessionId, cancellationToken);
+                if (snapshot is null)
+                    return Results.NotFound(new { error = "Session not found." });
                 return Results.Ok(snapshot);
             });
 
@@ -129,6 +131,30 @@ public static class SessionEndpoints
         app.MapGet("/api/sessions/{sessionId}/report",
             async (string sessionId, IQuickPlayService qp, CancellationToken cancellationToken) =>
                 Results.Ok(await qp.GetReportAsync(sessionId, cancellationToken)));
+
+        // List all active sessions with pagination (admin/debug use)
+        app.MapGet("/api/sessions",
+            (ISessionStore store, int page = 1, int pageSize = 20) =>
+            {
+                if (page < 1) page = 1;
+                pageSize = Math.Clamp(pageSize, 1, 100);
+
+                var allIds = store.GetActiveSessionIds();
+                var totalCount = allIds.Count;
+                var items = allIds
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Results.Ok(new
+                {
+                    page,
+                    pageSize,
+                    totalCount,
+                    totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
+                    items
+                });
+            });
 
         return app;
     }

@@ -10,12 +10,15 @@ services:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - ASPNETCORE_URLS=http://+:8080
       - ConnectionStrings__Main=Host=db;Port=5432;Database=${POSTGRES_DB:-alarm112};Username=${POSTGRES_USER:-alarm112app};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
-      - Redis__Connection=redis:6379
+      - Redis__Connection=redis:6379,password=${REDIS_PASSWORD:?REDIS_PASSWORD is required}
       - ContentBundles__DataRoot=/app/data
       - Security__Jwt__SigningKey=${JWT_SIGNING_KEY:?JWT_SIGNING_KEY is required}
       - Security__RequireAuth=${REQUIRE_AUTH:-false}
     ports:
       - "${API_PORT:-5080}:8080"
+    networks:
+      - internal
+      - external
     depends_on:
       db:
         condition: service_healthy
@@ -34,11 +37,19 @@ services:
       context: ..
       dockerfile: src/Alarm112.AdminWeb/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - ASPNETCORE_URLS=http://+:8080
       - ApiBaseUrl=http://api:8080
+      - AdminAuth__Username=${ADMIN_USERNAME:?ADMIN_USERNAME is required}
+      - AdminAuth__Password=${ADMIN_PASSWORD:?ADMIN_PASSWORD is required}
+      - ApiAuth__Jwt__SigningKey=${JWT_SIGNING_KEY:?JWT_SIGNING_KEY is required}
+      - ApiAuth__Jwt__Issuer=Alarm112.Api
+      - ApiAuth__Jwt__Audience=Alarm112.Client
     ports:
       - "${ADMIN_PORT:-5081}:8080"
+    networks:
+      - internal
+      - external
     depends_on:
       api:
         condition: service_healthy
@@ -57,25 +68,37 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
     ports:
       - "${DB_PORT:-5432}:5432"
+    networks:
+      - internal
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d alarm112"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-alarm112app} -d ${POSTGRES_DB:-alarm112}"]
       interval: 5s
       timeout: 3s
       retries: 10
 
   redis:
     image: redis:7
+    command: redis-server --requirepass ${REDIS_PASSWORD:?REDIS_PASSWORD is required}
     ports:
       - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - internal
     volumes:
       - redis-data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 5s
       timeout: 3s
       retries: 5
+
+networks:
+  internal:
+    driver: bridge
+    internal: true
+  external:
+    driver: bridge
 
 volumes:
   db-data:

@@ -200,6 +200,9 @@ GET /health/detail → { ok, db: "connected|disconnected", redis: "connected|dis
 | `Redis__Connection` | Redis mode | (brak) | Redis conn string |
 | `Cors__AllowedOrigins` | Nie | `http://localhost:*` | Dozwolone origins |
 | `ApiBaseUrl` | AdminWeb | `http://localhost:5080` | URL API dla AdminWeb |
+| `ApiAuth__Jwt__SigningKey` | AdminWeb prod | (brak) | Klucz do krótkotrwałego JWT używanego przez AdminWeb do odczytu chronionych metryk API |
+| `ApiAuth__Jwt__Issuer` | AdminWeb | `Alarm112.Api` | Issuer JWT generowanego przez AdminWeb |
+| `ApiAuth__Jwt__Audience` | AdminWeb | `Alarm112.Client` | Audience JWT generowanego przez AdminWeb |
 
 ---
 
@@ -221,6 +224,7 @@ Application:
   [ ] Security__EnableDevTokenEndpoint=false
   [ ] Security__Jwt__SigningKey ustawiony (silny, losowy)
   [ ] ConnectionStrings__Main ustawiony
+  [ ] Migracje uruchomione: .\tools\run-migrations.ps1
   [ ] Swagger wyłączony (lub za auth)
   [ ] AllowedHosts ustawiony na domenę
 
@@ -230,6 +234,23 @@ Docker:
   [ ] Image scanning (trivy / snyk)
   [ ] docker-compose.override.yml z prawdziwymi hasłami (gitignored)
 ```
+
+---
+
+## Migracje SQL — uruchomienie operacyjne
+
+```powershell
+# 1. Start infrastruktury
+docker compose -f infra/docker-compose.yml up -d db
+
+# 2. Dry-run kolejności
+.\tools\run-migrations.ps1 -ListOnly
+
+# 3. Zastosowanie wszystkich migracji
+.\tools\run-migrations.ps1
+```
+
+Skrypt używa kontenera `db` z `infra/docker-compose.yml` i przerywa wykonanie przy pierwszym błędzie SQL.
 
 ---
 

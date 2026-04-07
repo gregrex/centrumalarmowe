@@ -17,9 +17,9 @@ public sealed class SessionService : ISessionService
         _logger = logger;
     }
 
-    public Task<SessionSnapshotDto> GetSnapshotAsync(string sessionId, CancellationToken cancellationToken)
+    public Task<SessionSnapshotDto?> GetSnapshotAsync(string sessionId, CancellationToken cancellationToken)
     {
-        var snapshot = _store.GetOrAdd(sessionId, id => DemoFactory.Create(id));
+        var snapshot = _store.TryGet(sessionId);
         return Task.FromResult(snapshot);
     }
 
@@ -56,10 +56,17 @@ public sealed class SessionService : ISessionService
         try
         {
             var doc = JsonDocument.Parse(action.PayloadJson);
-            doc.RootElement.TryGetProperty("incidentId", out var incElem);
-            doc.RootElement.TryGetProperty("unitId", out var unitElem);
-            incidentId = incElem.GetString();
-            unitId = unitElem.GetString();
+            if (doc.RootElement.TryGetProperty("incidentId", out var incElem) &&
+                incElem.ValueKind == JsonValueKind.String)
+            {
+                incidentId = incElem.GetString();
+            }
+
+            if (doc.RootElement.TryGetProperty("unitId", out var unitElem) &&
+                unitElem.ValueKind == JsonValueKind.String)
+            {
+                unitId = unitElem.GetString();
+            }
         }
         catch (JsonException ex)
         {
@@ -91,8 +98,11 @@ public sealed class SessionService : ISessionService
         try
         {
             var doc = JsonDocument.Parse(action.PayloadJson);
-            doc.RootElement.TryGetProperty("incidentId", out var incElem);
-            incidentId = incElem.GetString();
+            if (doc.RootElement.TryGetProperty("incidentId", out var incElem) &&
+                incElem.ValueKind == JsonValueKind.String)
+            {
+                incidentId = incElem.GetString();
+            }
         }
         catch (JsonException ex)
         {
@@ -119,10 +129,17 @@ public sealed class SessionService : ISessionService
         try
         {
             var doc = JsonDocument.Parse(action.PayloadJson);
-            doc.RootElement.TryGetProperty("incidentId", out var incElem);
-            doc.RootElement.TryGetProperty("unitId", out var unitElem);
-            incidentId = incElem.GetString();
-            unitId = unitElem.GetString();
+            if (doc.RootElement.TryGetProperty("incidentId", out var incElem) &&
+                incElem.ValueKind == JsonValueKind.String)
+            {
+                incidentId = incElem.GetString();
+            }
+
+            if (doc.RootElement.TryGetProperty("unitId", out var unitElem) &&
+                unitElem.ValueKind == JsonValueKind.String)
+            {
+                unitId = unitElem.GetString();
+            }
         }
         catch (JsonException ex)
         {
@@ -145,4 +162,3 @@ public sealed class SessionService : ISessionService
         return snapshot with { Incidents = updatedIncidents, Units = updatedUnits };
     }
 }
-

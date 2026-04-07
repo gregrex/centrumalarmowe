@@ -1,7 +1,14 @@
 namespace Alarm112.Api.Hubs;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
+/// <summary>
+/// Real-time session hub.
+/// When RequireAuth=true the hub requires an authenticated user (JWT Bearer).
+/// In development (RequireAuth=false) the [Authorize] policy allows all via the permissive default policy.
+/// </summary>
+[Authorize]
 public sealed class SessionHub : Hub
 {
     public async Task JoinSession(string sessionId)

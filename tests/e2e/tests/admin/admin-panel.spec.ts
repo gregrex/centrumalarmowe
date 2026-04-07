@@ -3,7 +3,16 @@ import { test, expect } from '@playwright/test';
 /**
  * E2E tests — AdminWeb panel
  * Covers: health page, dashboard (cards visible), links to API
+ *
+ * Auth credentials come from env vars to support CI and local dev.
  */
+
+const ADMIN_USER = process.env.ADMIN_USERNAME ?? 'admin';
+const ADMIN_PASS = process.env.ADMIN_PASSWORD ?? 'AdminPass_dev_only_1';
+
+function basicAuth(user: string, pass: string): string {
+  return 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
+}
 
 test.describe('AdminWeb health', () => {
   test('GET /health returns 200', async ({ request }) => {
@@ -21,6 +30,10 @@ test.describe('AdminWeb health', () => {
 });
 
 test.describe('AdminWeb dashboard', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setExtraHTTPHeaders({ Authorization: basicAuth(ADMIN_USER, ADMIN_PASS) });
+  });
+
   test('GET / returns 200', async ({ page }) => {
     const response = await page.goto('/');
     expect(response?.status()).toBe(200);

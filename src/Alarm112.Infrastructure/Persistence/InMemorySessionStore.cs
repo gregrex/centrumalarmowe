@@ -8,6 +8,9 @@ public sealed class InMemorySessionStore : ISessionStore
 {
     private readonly ConcurrentDictionary<string, SessionSnapshotDto> _sessions = new();
 
+    public SessionSnapshotDto? TryGet(string sessionId)
+        => _sessions.TryGetValue(sessionId, out var snapshot) ? snapshot : null;
+
     public SessionSnapshotDto GetOrAdd(string sessionId, Func<string, SessionSnapshotDto> factory)
         => _sessions.GetOrAdd(sessionId, factory);
 

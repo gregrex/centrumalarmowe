@@ -6,7 +6,6 @@ namespace Alarm112.Application.Services;
 
 public sealed class JsonContentBundleLoader : IContentBundleLoader
 {
-    private readonly string _dataRoot;
     private readonly ConcurrentDictionary<string, object> _cache = new();
 
     private static readonly JsonSerializerOptions _jsonOptions = new()
@@ -18,17 +17,19 @@ public sealed class JsonContentBundleLoader : IContentBundleLoader
 
     public JsonContentBundleLoader(string dataRoot)
     {
-        _dataRoot = dataRoot;
+        DataRoot = dataRoot;
     }
 
+    public string DataRoot { get; }
+
     public Task<T> LoadContentAsync<T>(string fileName, CancellationToken cancellationToken = default)
-        => LoadAsync<T>(Path.Combine(_dataRoot, "content", fileName), cancellationToken);
+        => LoadAsync<T>(Path.Combine(DataRoot, "content", fileName), cancellationToken);
 
     public Task<T> LoadConfigAsync<T>(string fileName, CancellationToken cancellationToken = default)
-        => LoadAsync<T>(Path.Combine(_dataRoot, "config", fileName), cancellationToken);
+        => LoadAsync<T>(Path.Combine(DataRoot, "config", fileName), cancellationToken);
 
     public Task<T> LoadReferenceAsync<T>(string fileName, CancellationToken cancellationToken = default)
-        => LoadAsync<T>(Path.Combine(_dataRoot, "reference", fileName), cancellationToken);
+        => LoadAsync<T>(Path.Combine(DataRoot, "reference", fileName), cancellationToken);
 
     private async Task<T> LoadAsync<T>(string fullPath, CancellationToken cancellationToken)
     {

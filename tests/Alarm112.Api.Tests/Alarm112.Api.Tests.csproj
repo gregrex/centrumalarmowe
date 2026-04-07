@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Alarm112.Api\Alarm112.Api.csproj" />
+    <ProjectReference Include="..\..\src\Alarm112.AdminWeb\Alarm112.AdminWeb.csproj" />
     <ProjectReference Include="..\..\src\Alarm112.Contracts\Alarm112.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Alarm112.Application\Alarm112.Application.csproj" />
     <ProjectReference Include="..\..\src\Alarm112.Infrastructure\Alarm112.Infrastructure.csproj" />

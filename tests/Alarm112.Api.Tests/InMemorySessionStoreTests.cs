@@ -84,4 +84,32 @@ public class InMemorySessionStoreTests
 
         await Task.WhenAll(tasks);
     }
+
+    [Fact]
+    public void TryGet_ExistingSession_ReturnsSnapshot()
+    {
+        var store = new InMemorySessionStore();
+        store.Save(MakeSnapshot("existing-id"));
+        var result = store.TryGet("existing-id");
+        Assert.NotNull(result);
+        Assert.Equal("existing-id", result!.SessionId);
+    }
+
+    [Fact]
+    public void TryGet_NonExistentSession_ReturnsNull()
+    {
+        var store = new InMemorySessionStore();
+        var result = store.TryGet("does-not-exist");
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void TryGet_AfterGetOrAdd_ReturnsSameData()
+    {
+        var store = new InMemorySessionStore();
+        store.GetOrAdd("via-getOradd", id => MakeSnapshot(id));
+        var result = store.TryGet("via-getOradd");
+        Assert.NotNull(result);
+        Assert.Equal("via-getOradd", result!.SessionId);
+    }
 }

@@ -17,6 +17,15 @@ To repo zawiera rozszerzony blueprint, prompty, content-driven dane oraz starter
 - `docs/tests/21_V26_REAL_ANDROID_BUILD_ACCEPTANCE.md`
 - `docs/build/20_REAL_ANDROID_BUILD_AND_BUGFIX_FREEZE.md`
 - `tools/smoke-v26.sh`
+- `tools/run-migrations.ps1`
+
+## AdminWeb live dashboard
+- AdminWeb odświeża dashboard z własnego endpointu `GET /api/admin/dashboard`.
+- Endpoint pobiera publiczne `/health` oraz chronione `/api/sessions` i `/api/content/validate` po stronie serwera.
+- Aby działał także przy `Security__RequireAuth=true`, AdminWeb musi mieć skonfigurowane:
+  - `ApiAuth__Jwt__SigningKey`
+  - `ApiAuth__Jwt__Issuer` (domyślnie `Alarm112.Api`)
+  - `ApiAuth__Jwt__Audience` (domyślnie `Alarm112.Client`)
 
 ## Status
 To nadal jest scaffold + dokumentacja + starter source pack. Część kodu to minimalne szkielety pod dalszą pracę agenta kodującego i dopięcia w prawdziwym środowisku buildowym.

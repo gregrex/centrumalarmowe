@@ -41,6 +41,14 @@ public sealed class SessionEndpointTests(Alarm112ApiFactory factory)
     }
 
     [Fact]
+    public async Task GetSession_UnknownId_Returns404()
+    {
+        var response = await _client.GetAsync("/api/sessions/non-existent-session");
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
+
+    [Fact]
     public async Task ApplyDispatchAction_Returns200()
     {
         // Create session

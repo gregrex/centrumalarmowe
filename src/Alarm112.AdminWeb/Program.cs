@@ -1,7 +1,21 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var apiBase = builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5080";
+if (!Uri.TryCreate(apiBase, UriKind.Absolute, out var apiBaseUri))
+    throw new InvalidOperationException("ApiBaseUrl must be an absolute URI.");
+
+var apiAuth = new AdminApiAuthOptions(
+    builder.Configuration["ApiAuth:Jwt:SigningKey"],
+    builder.Configuration["ApiAuth:Jwt:Issuer"] ?? "Alarm112.Api",
+    builder.Configuration["ApiAuth:Jwt:Audience"] ?? "Alarm112.Client",
+    builder.Configuration["ApiAuth:Subject"] ?? "admin-dashboard",
+    builder.Configuration["ApiAuth:Role"] ?? "CallOperator");
 
 // Basic Auth credentials — MUST be provided via environment variables
 // Set AdminAuth__Username and AdminAuth__Password env vars (never use defaults in production)
@@ -12,6 +26,8 @@ var adminPass = builder.Configuration["AdminAuth:Password"]
 
 if (adminPass.Length < 12)
     throw new InvalidOperationException("AdminAuth:Password must be at least 12 characters.");
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
@@ -50,8 +66,13 @@ app.Use(async (context, next) =>
             return;
         }
     }
-    catch
+    catch (FormatException)
     {
+        // Malformed Base64 in Authorization header — reject with 400
+        var logger = context.RequestServices.GetRequiredService<ILoggerFactory>()
+            .CreateLogger("AdminAuth");
+        logger.LogWarning("Malformed Base64 in Authorization header from {RemoteIp}",
+            context.Connection.RemoteIpAddress);
         context.Response.StatusCode = 400;
         return;
     }
@@ -62,6 +83,32 @@ app.Use(async (context, next) =>
 app.UseStaticFiles();
 
 app.MapGet("/health", () => Results.Ok(new { ok = true, service = "Alarm112.AdminWeb", version = "v26" }));
+
+app.MapGet("/api/admin/dashboard",
+    async (IHttpClientFactory httpClientFactory, ILoggerFactory loggerFactory, CancellationToken cancellationToken) =>
+    {
+        var logger = loggerFactory.CreateLogger("AdminDashboard");
+        using var client = httpClientFactory.CreateClient();
+        client.BaseAddress = apiBaseUri;
+        client.Timeout = TimeSpan.FromSeconds(5);
+
+        var health = await FetchHealthAsync(client, logger, cancellationToken);
+
+        if (TryCreateApiAccessToken(apiAuth) is not { } accessToken)
+        {
+            return Results.Ok(new AdminDashboardSummaryDto(
+                health,
+                new AdminDashboardSessionsDto("auth-not-configured", null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null),
+                new AdminDashboardContentDto("auth-not-configured", null, "Skonfiguruj ApiAuth:Jwt:* w AdminWeb.", null)));
+        }
+
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        var sessions = await FetchSessionsAsync(client, logger, cancellationToken);
+        var content = await FetchContentAsync(client, logger, cancellationToken);
+
+        return Results.Ok(new AdminDashboardSummaryDto(health, sessions, content));
+    });
 
 app.MapGet("/", () => Results.Content($$"""
 <!DOCTYPE html>
@@ -147,7 +194,7 @@ app.MapGet("/", () => Results.Content($$"""
   <main class="main">
     <div class="page-header">
       <div class="page-title">Dashboard operacyjny</div>
-      <div class="page-subtitle">Centrum Alarmowe v26 · backend scaffold · InMemory store</div>
+      <div class="page-subtitle" id="page-subtitle">Centrum Alarmowe v26 · oczekiwanie na dane operacyjne</div>
     </div>
 
     <!-- METRYKI -->
@@ -160,14 +207,14 @@ app.MapGet("/", () => Results.Content($$"""
       </div>
       <div class="metric" style="--m-color:var(--role-op)">
         <div class="metric-label">Sesje aktywne</div>
-        <div class="metric-value">0</div>
-        <div class="metric-sub">InMemory store</div>
+        <div class="metric-value" id="metric-sessions">—</div>
+        <div class="metric-sub" id="metric-sessions-sub">oczekiwanie…</div>
         <div class="metric-icon">🎮</div>
       </div>
       <div class="metric" style="--m-color:var(--role-dis)">
         <div class="metric-label">Content bundle</div>
         <div class="metric-value" id="metric-bundle">—</div>
-        <div class="metric-sub">reference-data v26</div>
+        <div class="metric-sub" id="metric-bundle-sub">reference-data v26</div>
         <div class="metric-icon">📦</div>
       </div>
       <div class="metric" style="--m-color:var(--role-coord)">
@@ -374,3 +421,162 @@ app.MapGet("/", () => Results.Content($$"""
 """, "text/html"));
 
 app.Run();
+
+static async Task<AdminDashboardApiDto> FetchHealthAsync(
+    HttpClient client,
+    ILogger logger,
+    CancellationToken cancellationToken)
+{
+    try
+    {
+        using var response = await client.GetAsync("/health", cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            return new AdminDashboardApiDto(
+                "offline",
+                null,
+                $"HTTP {(int)response.StatusCode}",
+                null,
+                $"Backend returned {(int)response.StatusCode}.");
+        }
+
+        var payload = await response.Content.ReadFromJsonAsync<AdminHealthResponseDto>(cancellationToken);
+        return new AdminDashboardApiDto(
+            "online",
+            payload?.Version ?? "v26",
+            payload?.Service ?? "Alarm112.Api",
+            payload?.Store,
+            null);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not read API health.");
+        return new AdminDashboardApiDto("offline", null, null, null, ex.Message);
+    }
+}
+
+static async Task<AdminDashboardSessionsDto> FetchSessionsAsync(
+    HttpClient client,
+    ILogger logger,
+    CancellationToken cancellationToken)
+{
+    try
+    {
+        using var response = await client.GetAsync("/api/sessions?page=1&pageSize=1", cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            return new AdminDashboardSessionsDto(
+                "unavailable",
+                null,
+                $"HTTP {(int)response.StatusCode}",
+                $"Session endpoint returned {(int)response.StatusCode}.");
+        }
+
+        var payload = await response.Content.ReadFromJsonAsync<AdminSessionsResponseDto>(cancellationToken);
+        return new AdminDashboardSessionsDto("ok", payload?.TotalCount ?? 0, "Aktywne sesje z API.", null);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not read session summary.");
+        return new AdminDashboardSessionsDto("unavailable", null, null, ex.Message);
+    }
+}
+
+static async Task<AdminDashboardContentDto> FetchContentAsync(
+    HttpClient client,
+    ILogger logger,
+    CancellationToken cancellationToken)
+{
+    try
+    {
+        using var response = await client.GetAsync("/api/content/validate", cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            return new AdminDashboardContentDto(
+                "unavailable",
+                null,
+                $"HTTP {(int)response.StatusCode}",
+                $"Content validation returned {(int)response.StatusCode}.");
+        }
+
+        var payload = await response.Content.ReadFromJsonAsync<Alarm112.Contracts.ContentValidationResultDto>(cancellationToken);
+        var status = payload?.IsValid == true ? "valid" : "invalid";
+        var summary = payload?.IsValid == true
+            ? "Brak problemow walidacji."
+            : "Wykryto problemy wymagajace reakcji.";
+
+        return new AdminDashboardContentDto(status, payload?.Issues.Count ?? 0, summary, null);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning(ex, "Admin dashboard could not read content validation summary.");
+        return new AdminDashboardContentDto("unavailable", null, null, ex.Message);
+    }
+}
+
+static string? TryCreateApiAccessToken(AdminApiAuthOptions options)
+{
+    if (string.IsNullOrWhiteSpace(options.SigningKey) || options.SigningKey.Length < 32)
+        return null;
+
+    var credentials = new SigningCredentials(
+        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey)),
+        SecurityAlgorithms.HmacSha256);
+
+    var token = new JwtSecurityToken(
+        options.Issuer,
+        options.Audience,
+        [
+            new Claim(JwtRegisteredClaimNames.Sub, options.Subject),
+            new Claim(ClaimTypes.Name, options.Subject),
+            new Claim(ClaimTypes.Role, options.Role)
+        ],
+        expires: DateTime.UtcNow.AddMinutes(5),
+        signingCredentials: credentials);
+
+    return new JwtSecurityTokenHandler().WriteToken(token);
+}
+
+internal sealed record AdminApiAuthOptions(
+    string? SigningKey,
+    string Issuer,
+    string Audience,
+    string Subject,
+    string Role);
+
+internal sealed record AdminDashboardSummaryDto(
+    AdminDashboardApiDto Api,
+    AdminDashboardSessionsDto Sessions,
+    AdminDashboardContentDto Content);
+
+internal sealed record AdminDashboardApiDto(
+    string Status,
+    string? Version,
+    string? Service,
+    string? Store,
+    string? Error);
+
+internal sealed record AdminDashboardSessionsDto(
+    string Status,
+    int? TotalCount,
+    string? Summary,
+    string? Error);
+
+internal sealed record AdminDashboardContentDto(
+    string Status,
+    int? IssueCount,
+    string? Summary,
+    string? Error);
+
+internal sealed record AdminHealthResponseDto(
+    bool Ok,
+    string Service,
+    string Version,
+    string? Store);
+
+internal sealed record AdminSessionsResponseDto(
+    int Page,
+    int PageSize,
+    int TotalCount,
+    int TotalPages,
+    IReadOnlyCollection<string> Items);

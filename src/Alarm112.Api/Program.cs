@@ -10,11 +10,30 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Formatting.Compact;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, services, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext();
+
+    if (context.HostingEnvironment.IsProduction())
+    {
+        loggerConfiguration.WriteTo.Console(new CompactJsonFormatter());
+    }
+    else
+    {
+        loggerConfiguration.WriteTo.Console();
+    }
+});
 
 // Content bundle loader — resolves data/ relative to solution root
 var dataRoot = Path.GetFullPath(
@@ -22,12 +41,24 @@ var dataRoot = Path.GetFullPath(
         builder.Configuration["ContentBundles:DataRoot"] ?? "../../data"));
 builder.Services.AddSingleton<IContentBundleLoader>(_ => new JsonContentBundleLoader(dataRoot));
 
-// Session store (in-memory; swap for DB-backed impl when ready)
-builder.Services.AddSingleton<ISessionStore, InMemorySessionStore>();
+// Session store — use PostgreSQL when ConnectionStrings:Main is configured, else InMemory.
+// In production: set ConnectionStrings__Main env var to activate PostgresSessionStore.
+var pgConnStr = builder.Configuration.GetConnectionString("Main");
+var usingPostgres = !string.IsNullOrWhiteSpace(pgConnStr);
+if (usingPostgres)
+{
+    builder.Services.AddSingleton<ISessionStore>(sp =>
+        new PostgresSessionStore(pgConnStr!, sp.GetRequiredService<ILogger<PostgresSessionStore>>()));
+}
+else
+{
+    builder.Services.AddSingleton<ISessionStore, InMemorySessionStore>();
+}
 
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddOutputCache();
 
 // Security (optional): JWT auth can be enabled per-environment via configuration.
 var requireAuth = builder.Configuration.GetValue<bool>("Security:RequireAuth");
@@ -39,8 +70,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         var jwtIssuer = builder.Configuration["Security:Jwt:Issuer"] ?? "Alarm112.Api";
         var jwtAudience = builder.Configuration["Security:Jwt:Audience"] ?? "Alarm112.Client";
-        var jwtSigningKey = builder.Configuration["Security:Jwt:SigningKey"]
-            ?? "dev-only-signing-key-change-me-to-32-plus-chars";
+        // If no key is configured (dev/test), generate a random one per startup.
+        // This avoids any hardcoded known key in source. Production requires an env var key ≥32 chars.
+        var configuredKey = builder.Configuration["Security:Jwt:SigningKey"] ?? string.Empty;
+        var jwtSigningKey = configuredKey.Length >= 32
+            ? configuredKey
+            : Convert.ToBase64String(System.Security.Cryptography.RandomNumberGenerator.GetBytes(32));
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -81,13 +116,20 @@ builder.Services.AddAuthorization(options =>
 // CORS — allow Unity client and admin panel cross-origin access
 var allowedOrigins = builder.Configuration["Cors:AllowedOrigins"]?.Split(',', StringSplitOptions.RemoveEmptyEntries)
     ?? new[] { "http://localhost:3000", "http://localhost:5081", "http://localhost:5090" };
+var allowedMethods = builder.Configuration["Cors:AllowedMethods"]?.Split(',', StringSplitOptions.RemoveEmptyEntries)
+    ?? null; // null = AllowAnyMethod (dev default)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
-        policy.WithOrigins(allowedOrigins)
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials());
+    {
+        var p = policy.WithOrigins(allowedOrigins)
+                      .AllowAnyHeader()
+                      .AllowCredentials();
+        if (allowedMethods is not null && allowedMethods.Length > 0)
+            p.WithMethods(allowedMethods);
+        else
+            p.AllowAnyMethod();
+    });
 });
 
 // Rate limiting — 200 requests per 10 seconds per IP
@@ -146,6 +188,11 @@ builder.Services.AddHostedService<Alarm112.Application.Services.BotTickHostedSer
 
 var app = builder.Build();
 
+// Log which session store is active (visible in container logs and dev output)
+var startupLogger = app.Services.GetRequiredService<ILogger<Microsoft.AspNetCore.Builder.WebApplication>>();
+startupLogger.LogInformation("Session store: {StoreType}",
+    usingPostgres ? "PostgresSessionStore" : "InMemorySessionStore");
+
 // Startup validation — fail fast if production config is incomplete
 var isProduction = app.Environment.IsProduction();
 var jwtKeyAtRuntime = app.Configuration["Security:Jwt:SigningKey"];
@@ -158,6 +205,12 @@ if (isProduction && (jwtKeyAtRuntime?.Length ?? 0) < 32)
 
 // Security headers — must be first in pipeline
 app.UseSecurityHeaders();
+
+// Correlation ID — assign/propagate X-Correlation-Id for every request
+app.UseCorrelationId();
+
+// Audit logging for all mutating requests (POST/PUT/PATCH/DELETE)
+app.UseAuditLogging();
 
 // Global error handler — structured ProblemDetails responses
 app.UseExceptionHandler();
@@ -172,6 +225,7 @@ if (app.Environment.IsDevelopment() || builder.Configuration.GetValue<bool>("Swa
 
 app.UseCors();
 app.UseRateLimiter();
+app.UseOutputCache();
 
 // Always enable auth/authz services (but only enforce if requireAuth=true)
 app.UseAuthentication();
@@ -204,7 +258,18 @@ if (requireAuth)
     });
 }
 
-app.MapGet("/health", () => Results.Ok(new { ok = true, service = "Alarm112.Api", version = "v26" }));
+app.MapGet("/health", (ISessionStore store, IContentValidationService contentSvc) =>
+{
+    var storeType = store.GetType().Name;
+    return Results.Ok(new
+    {
+        ok = true,
+        service = "Alarm112.Api",
+        version = "v26",
+        store = storeType,
+        utc = DateTimeOffset.UtcNow
+    });
+});
 
 // Endpoint groups — each group in its own file under Endpoints/
 app.MapAuthEndpoints();

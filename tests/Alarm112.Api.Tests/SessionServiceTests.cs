@@ -50,15 +50,16 @@ public class SessionServiceTests
         var created = await service.CreateDemoSessionAsync(default);
         var fetched = await service.GetSnapshotAsync(created.SessionId, default);
 
+        Assert.NotNull(fetched);
         Assert.Equal(created.SessionId, fetched.SessionId);
     }
 
     [Fact]
-    public async Task GetSnapshot_UnknownId_CreatesNewSession()
+    public async Task GetSnapshot_UnknownId_ReturnsNull()
     {
         var service = CreateService(out _);
         var snapshot = await service.GetSnapshotAsync("brand-new-id", default);
-        Assert.Equal("brand-new-id", snapshot.SessionId);
+        Assert.Null(snapshot);
     }
 
     [Fact]
@@ -91,6 +92,7 @@ public class SessionServiceTests
         await service.ApplyActionAsync(created.SessionId, action, default);
 
         var updated = await service.GetSnapshotAsync(created.SessionId, default);
+        Assert.NotNull(updated);
         var updatedIncident = updated.Incidents.First(i => i.IncidentId == incident.IncidentId);
         Assert.Equal("escalated", updatedIncident.Status);
     }
@@ -146,5 +148,95 @@ public class SessionServiceTests
         var stored = store.GetOrAdd(created.SessionId, _ => throw new Exception("should not recreate"));
         var storedIncident = stored.Incidents.First(i => i.IncidentId == incident.IncidentId);
         Assert.Equal("escalated", storedIncident.Status);
+    }
+
+    [Fact]
+    public async Task ApplyAction_Dispatch_InvalidJson_LeavesSnapshotUnchanged()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+
+        await service.ApplyActionAsync(
+            created.SessionId,
+            MakeAction(created.SessionId, "dispatch", "{\"incidentId\":\"broken\""),
+            default);
+
+        var updated = await service.GetSnapshotAsync(created.SessionId, default);
+        Assert.NotNull(updated);
+        Assert.Equivalent(created, updated);
+    }
+
+    [Fact]
+    public async Task ApplyAction_Escalate_MissingIncidentId_LeavesSnapshotUnchanged()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+
+        await service.ApplyActionAsync(
+            created.SessionId,
+            MakeAction(created.SessionId, "escalate", "{\"wrongField\":\"inc-1\"}"),
+            default);
+
+        var updated = await service.GetSnapshotAsync(created.SessionId, default);
+        Assert.NotNull(updated);
+        Assert.Equivalent(created, updated);
+    }
+
+    [Fact]
+    public async Task ApplyAction_Dispatch_XssLikePayload_DoesNotMatchOrMutateEntities()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+
+        await service.ApplyActionAsync(
+            created.SessionId,
+            MakeAction(
+                created.SessionId,
+                "dispatch",
+                "{\"incidentId\":\"<script>alert(1)</script>\",\"unitId\":\"<img src=x onerror=alert(1)>\"}"),
+            default);
+
+        var updated = await service.GetSnapshotAsync(created.SessionId, default);
+        Assert.NotNull(updated);
+        Assert.Equivalent(created, updated);
+    }
+
+    [Fact]
+    public async Task ApplyAction_Dispatch_UnknownIdentifiers_LeavesSnapshotUnchanged()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+
+        await service.ApplyActionAsync(
+            created.SessionId,
+            MakeAction(created.SessionId, "dispatch", "{\"incidentId\":\"missing-incident\",\"unitId\":\"missing-unit\"}"),
+            default);
+
+        var updated = await service.GetSnapshotAsync(created.SessionId, default);
+        Assert.NotNull(updated);
+        Assert.Equivalent(created, updated);
+    }
+
+    [Fact]
+    public async Task ApplyAction_Dispatch_RepeatedPayload_IsEffectivelyIdempotent()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+        var incident = created.Incidents.First();
+        var unit = created.Units.First();
+        var action = MakeAction(
+            created.SessionId,
+            "dispatch",
+            $"{{\"incidentId\":\"{incident.IncidentId}\",\"unitId\":\"{unit.UnitId}\"}}");
+
+        await service.ApplyActionAsync(created.SessionId, action, default);
+        var afterFirst = await service.GetSnapshotAsync(created.SessionId, default);
+
+        await service.ApplyActionAsync(created.SessionId, action, default);
+        var afterSecond = await service.GetSnapshotAsync(created.SessionId, default);
+
+        Assert.NotNull(afterFirst);
+        Assert.NotNull(afterSecond);
+        Assert.Equivalent(afterFirst, afterSecond);
     }
 }

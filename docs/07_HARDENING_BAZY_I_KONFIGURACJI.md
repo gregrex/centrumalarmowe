@@ -186,12 +186,18 @@ Krok 5: Feature flag: InMemory (dev) / Postgres (prod)
 
 ```powershell
 # tools/run-migrations.ps1
-$connStr = $env:ConnectionStrings__Main
-foreach ($file in Get-ChildItem db/schema/*.sql | Sort-Object Name) {
-    Write-Host "Applying: $($file.Name)"
-    psql $connStr -f $file.FullName
-}
+
+# pokaż kolejność bez wykonywania
+.\tools\run-migrations.ps1 -ListOnly
+
+# zastosuj wszystkie migracje do kontenera db z infra/docker-compose.yml
+.\tools\run-migrations.ps1
 ```
+
+Skrypt:
+- czyta `POSTGRES_DB` i `POSTGRES_USER` z `infra/.env` lub `infra/.env.example`,
+- wykonuje wszystkie pliki `db/schema/*.sql` w kolejności alfabetycznej,
+- używa `docker compose exec -T db psql -v ON_ERROR_STOP=1`, więc zatrzymuje się na pierwszym błędzie.
 
 ---
 

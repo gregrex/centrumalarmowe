@@ -33,6 +33,32 @@ public sealed class PostgresSessionStore : ISessionStore, IDisposable
         EnsureTableExists();
     }
 
+    public SessionSnapshotDto? TryGet(string sessionId)
+    {
+        if (_cache.TryGetValue(sessionId, out var cached)) return cached;
+
+        try
+        {
+            using var cmd = _dataSource.CreateCommand(
+                "SELECT snapshot FROM sessions WHERE session_id = @id LIMIT 1");
+            cmd.Parameters.AddWithValue("id", sessionId);
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                var json = reader.GetString(0);
+                var snapshot = JsonSerializer.Deserialize<SessionSnapshotDto>(json, _json)!;
+                _cache[sessionId] = snapshot;
+                return snapshot;
+            }
+            return null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "PostgresSessionStore.TryGet: DB read failed for session {SessionId}", sessionId);
+            return null;
+        }
+    }
+
     public SessionSnapshotDto GetOrAdd(string sessionId, Func<string, SessionSnapshotDto> factory)
     {
         if (_cache.TryGetValue(sessionId, out var cached)) return cached;

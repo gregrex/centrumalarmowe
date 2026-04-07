@@ -6,16 +6,23 @@ namespace Alarm112.Application.Services;
 
 public sealed class ContentValidationService : IContentValidationService
 {
+    private readonly IContentBundleLoader _contentBundleLoader;
+
+    public ContentValidationService(IContentBundleLoader contentBundleLoader)
+    {
+        _contentBundleLoader = contentBundleLoader;
+    }
+
     public async Task<ContentValidationResultDto> ValidateAsync(CancellationToken cancellationToken)
     {
         var issues = new List<ContentValidationIssueDto>();
-        var root = FindProjectRoot();
+        var dataRoot = _contentBundleLoader.DataRoot;
         var files = new[]
         {
-            Path.Combine(root, "data", "reference", "reference-data.json"),
-            Path.Combine(root, "data", "reference", "reference-data.extended.json"),
-            Path.Combine(root, "data", "art", "icon_catalog.json"),
-            Path.Combine(root, "data", "art", "sprite_atlas_manifest.json")
+            Path.Combine(dataRoot, "reference", "reference-data.json"),
+            Path.Combine(dataRoot, "reference", "reference-data.extended.json"),
+            Path.Combine(dataRoot, "art", "icon_catalog.json"),
+            Path.Combine(dataRoot, "art", "sprite_atlas_manifest.json")
         };
 
         foreach (var file in files)
@@ -38,23 +45,5 @@ public sealed class ContentValidationService : IContentValidationService
         }
 
         return new ContentValidationResultDto(issues.Count == 0, issues);
-    }
-
-    private static string FindProjectRoot()
-    {
-        var current = AppContext.BaseDirectory;
-        var dir = new DirectoryInfo(current);
-
-        while (dir is not null)
-        {
-            if (File.Exists(Path.Combine(dir.FullName, "Alarm112.sln")))
-            {
-                return dir.FullName;
-            }
-
-            dir = dir.Parent;
-        }
-
-        return Directory.GetCurrentDirectory();
     }
 }

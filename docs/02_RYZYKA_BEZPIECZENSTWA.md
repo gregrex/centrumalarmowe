@@ -21,12 +21,20 @@
 | SEC-11 | A05 Security Misconfiguration | Redis bez auth | Niskie | Średni | 🟡 | 📋 BACKLOG |
 | SEC-12 | A05 Security Misconfiguration | AllowedHosts: "*" | Niskie | Niski | 🟡 | 📋 BACKLOG |
 | SEC-13 | A04 Insecure Design | InMemory — brak persystencji | Niskie | Wysoki | 🟡 | ⚠️ PostgresSessionStore gotowy, nie podpięty |
-| SEC-14 | A09 Security Logging Failures | Brak audit log | Niskie | Średni | 🟡 | 📋 BACKLOG |
-| SEC-15 | A01 Broken Access Control | SignalR hub bez auth | Niskie | Średni | 🟡 | 📋 BACKLOG |
+| SEC-14 | A09 Security Logging Failures | Brak audit log | Niskie | Średni | 🟡 | ✅ NAPRAWIONE (AuditLoggingMiddleware) |
+| SEC-15 | A01 Broken Access Control | SignalR hub bez auth | Niskie | Średni | 🟡 | ✅ NAPRAWIONE ([Authorize] na SessionHub) |
 | SEC-16 | A03 Injection | PayloadJson bez limitu | Niskie | Niski | 🟢 | ✅ NAPRAWIONE (StringLength validation) |
 | SEC-17 | A03 Injection | innerHTML XSS w AdminWeb | Wysokie | Wysoki | 🔴 | ✅ NAPRAWIONE (textContent w admin.js) |
 | SEC-18 | A09 Security Logging Failures | catch{} bez logów w SessionService | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (ILogger + catch(JsonException)) |
 | SEC-19 | A07 Auth Failures | AdminWeb hardcoded password fallback | Krytyczny | Krytyczny | 🔴 | ✅ NAPRAWIONE (fail-fast, min 12 chars) |
+| SEC-20 | A02 Cryptographic Failures | JWT hardcoded fallback key w Program.cs | Średnie | Wysoki | 🟠 | ✅ NAPRAWIONE (random per-startup key gdy pusty) |
+| SEC-21 | A03 Injection | SharedActionDto bez walidacji | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (DataAnnotations) |
+| SEC-22 | A05 Security Misconfiguration | AdminWeb bare catch w auth middleware | Niskie | Niski | 🟢 | ✅ NAPRAWIONE (FormatException + logging) |
+| SEC-23 | A05 Security Misconfiguration | CORS AllowAnyMethod w produkcji | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (Cors:AllowedMethods w prod config) |
+| SEC-24 | A05 Security Misconfiguration | Redis bez hasła w docker-compose | Średnie | Średni | 🟠 | ✅ NAPRAWIONE (requirepass + REDIS_PASSWORD env var) |
+| SEC-25 | A01 Broken Access Control | AdminWeb /health publiczny, ale dashboard nie wymagał auth w testach | Niskie | Niski | 🟢 | ✅ NAPRAWIONE (E2E testy auth + admin-panel.spec.ts zaktualizowany) |
+| SEC-26 | A02 Cryptographic Failures | PostgresSessionStore nie był podpięty (InMemory brak persystencji) | Średnie | Wysoki | 🟠 | ✅ NAPRAWIONE (warunkowe DI: PostgresStore gdy ConnectionStrings:Main ustawiony) |
+| SEC-27 | A05 Security Misconfiguration | AllowedHosts: "*" w Development — host injection ryzyko | Niskie | Niski | 🟢 | ✅ NAPRAWIONE (localhost;127.0.0.1 w appsettings.Development.json) |
 
 ---
 
