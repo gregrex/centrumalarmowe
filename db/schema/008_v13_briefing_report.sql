@@ -9,7 +9,7 @@ create table if not exists mission_briefings (
 );
 
 create table if not exists post_round_reports (
-    report_id integer primary key autoincrement,
+    report_id integer generated always as identity primary key,
     mission_id text not null,
     grade_id text not null,
     score integer not null,

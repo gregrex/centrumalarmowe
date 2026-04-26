@@ -13,21 +13,21 @@ public static class DemoFactory
             State: SessionState.Active.ToString(),
             Roles: new[]
             {
-                new RoleSlotDto("Operator", true, false, "operator-1"),
+                new RoleSlotDto("CallOperator", true, false, "operator-1"),
                 new RoleSlotDto("Dispatcher", false, true, null),
-                new RoleSlotDto("Coordinator", true, false, "coord-1"),
+                new RoleSlotDto("OperationsCoordinator", true, false, "coord-1"),
                 new RoleSlotDto("CrisisOfficer", false, true, null)
             },
             Incidents: new[]
             {
-                new IncidentDto("INC-001", "Bus driver unconscious", "Medical", "Critical", "Transit", "New"),
-                new IncidentDto("INC-002", "Kitchen fire", "Fire", "Medium", "HousingA", "Assigned")
+                new IncidentDto("INC-001", "Bus driver unconscious", "Medical", "Critical", "Transit", "pending"),
+                new IncidentDto("INC-002", "Kitchen fire", "Fire", "Medium", "HousingA", "dispatched")
             },
             Units: new[]
             {
-                new DispatchUnitDto("AMB-01", "Ambulance", "Available", "Hospital1"),
-                new DispatchUnitDto("FIRE-03", "FireTruck", "OnRoute", "HousingA"),
-                new DispatchUnitDto("POL-02", "Police", "Busy", "Downtown")
+                new DispatchUnitDto("AMB-01", "Ambulance", "available", "Hospital1"),
+                new DispatchUnitDto("FIRE-03", "FireTruck", "dispatched", "HousingA"),
+                new DispatchUnitDto("POL-02", "Police", "dispatched", "Downtown")
             },
             Alerts: new[]
             {

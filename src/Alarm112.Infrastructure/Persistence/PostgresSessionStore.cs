@@ -131,6 +131,22 @@ public sealed class PostgresSessionStore : ISessionStore, IDisposable
         }
     }
 
+    public bool CanConnect(out string? error)
+    {
+        try
+        {
+            using var cmd = _dataSource.CreateCommand("SELECT 1");
+            _ = cmd.ExecuteScalar();
+            error = null;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+            return false;
+        }
+    }
+
     private void EnsureTableExists()
     {
         try

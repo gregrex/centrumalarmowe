@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>112: Centrum Alarmowe - dashboard demo uzytkownika</title>
+  <meta name="description" content="Demo dashboard gracza prezentujacy quickplay, mission briefing i showcase flow na zywych danych API." />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body class="site-body">
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-badge">112</span>
+      <span class="brand-text">Centrum Alarmowe</span>
+    </a>
+    <nav class="site-nav">
+      <a href="/">Landing</a>
+      <a href="/admin">Admin</a>
+      <a href="{{apiBase}}/swagger" target="_blank" rel="noreferrer">Swagger</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <section class="app-hero">
+      <div>
+        <p class="eyebrow">Dashboard demo gracza</p>
+        <h1>Od home huba do quickplay w jednym widoku.</h1>
+        <p class="hero-lead">Ten ekran agreguje player-facing endpointy z API i daje wiarygodny punkt startu do prezentacji produktu.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{apiBase}}/api/home-hub" target="_blank" rel="noreferrer">API home hub</a>
+        <a class="btn btn-secondary" href="/admin">Panel admina</a>
+      </div>
+    </section>
+
+    <section class="metrics-strip">
+      <article class="metric-tile"><span>Status API</span><strong id="user-api-status">...</strong><small id="user-api-sub">Ladowanie...</small></article>
+      <article class="metric-tile"><span>Karty home</span><strong id="user-card-count">...</strong><small id="user-home-sub">Ladowanie...</small></article>
+      <article class="metric-tile"><span>Rozdzialy kampanii</span><strong id="user-chapter-count">...</strong><small id="user-chapter-sub">Ladowanie...</small></article>
+      <article class="metric-tile"><span>Quickplay</span><strong id="user-quickplay-role">...</strong><small id="user-quickplay-sub">Ladowanie...</small></article>
+    </section>
+
+    <section class="app-grid">
+      <article class="surface-card">
+        <h2>Home hub</h2>
+        <p id="home-summary">Ladowanie...</p>
+        <ul id="home-cards" class="list-stack"></ul>
+      </article>
+
+      <article class="surface-card">
+        <h2>Mission entry</h2>
+        <p id="mission-entry-title">Ladowanie...</p>
+        <p id="mission-entry-meta" class="muted"></p>
+        <ul id="mission-risk-tags" class="chip-list"></ul>
+      </article>
+
+      <article class="surface-card">
+        <h2>Mission briefing</h2>
+        <p id="briefing-title">Ladowanie...</p>
+        <p id="briefing-meta" class="muted"></p>
+        <ul id="briefing-objectives" class="list-stack"></ul>
+      </article>
+
+      <article class="surface-card">
+        <h2>Showcase mission</h2>
+        <p id="showcase-title">Ladowanie...</p>
+        <ul id="showcase-steps" class="list-stack"></ul>
+      </article>
+    </section>
+
+    <section class="surface-card wide-card">
+      <h2>Gotowosc demo</h2>
+      <div id="launchpad-copy" class="muted">Ladowanie...</div>
+      <div class="hero-actions top-gap">
+        <a class="btn btn-primary" href="{{apiBase}}/api/quickplay/bootstrap" target="_blank" rel="noreferrer">Quickplay bootstrap</a>
+        <a class="btn btn-secondary" href="{{apiBase}}/api/showcase-mission/demo" target="_blank" rel="noreferrer">Showcase mission</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Demo user dashboard</span>
+    <span>API base: {{apiBase}}</span>
+  </footer>
+
+  <script src="/js/user-dashboard.js"></script>
+</body>
+</html>

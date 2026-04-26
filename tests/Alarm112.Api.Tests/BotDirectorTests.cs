@@ -153,11 +153,11 @@ public class BotDirectorTests
         await bot.ExecuteBotTickAsync("sess-no-units", CancellationToken.None);
 
         var after = store.TryGet("sess-no-units");
-        Assert.Equal("pending", after!.Incidents.First().Status);
+        Assert.Equal("escalated", after!.Incidents.First().Status);
     }
 
     [Fact]
-    public async Task ExecuteBotTick_SecondCallAfterDispatch_IsIdempotent()
+    public async Task ExecuteBotTick_SecondCallAfterDispatch_ResolvesIncident()
     {
         var store = CreateStore();
         var svc = CreateSessionService(store);
@@ -168,9 +168,26 @@ public class BotDirectorTests
         await bot.ExecuteBotTickAsync("sess-multi", CancellationToken.None);
         Assert.Equal("dispatched", store.TryGet("sess-multi")!.Incidents.First().Status);
 
-        // Second tick: no pending incidents left, no crash
+        // Second tick: bot can now resolve the dispatched incident
         await bot.ExecuteBotTickAsync("sess-multi", CancellationToken.None);
-        Assert.Equal("dispatched", store.TryGet("sess-multi")!.Incidents.First().Status);
+        Assert.Equal("resolved", store.TryGet("sess-multi")!.Incidents.First().Status);
+        Assert.Equal("available", store.TryGet("sess-multi")!.Units.First().Status);
+    }
+
+    [Fact]
+    public async Task ExecuteBotTick_DispatchedIncidentWithoutPendingWork_ResolvesIt()
+    {
+        var store = CreateStore();
+        var svc = CreateSessionService(store);
+        var bot = CreateBotDirectorReal(store, svc);
+
+        store.Save(MakeSnapshot("sess-resolve", hasBotRole: true, incidentStatus: "dispatched", unitStatus: "dispatched"));
+
+        await bot.ExecuteBotTickAsync("sess-resolve", CancellationToken.None);
+
+        var after = store.TryGet("sess-resolve");
+        Assert.Equal("resolved", after!.Incidents.First().Status);
+        Assert.Equal("available", after.Units.First().Status);
     }
 
     [Fact]

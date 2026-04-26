@@ -44,6 +44,18 @@ public class SessionServiceTests
     }
 
     [Fact]
+    public async Task CreateDemoSession_UsesCanonicalRolesAndStatuses()
+    {
+        var service = CreateService(out _);
+        var snapshot = await service.CreateDemoSessionAsync(default);
+
+        Assert.Contains(snapshot.Roles, role => role.Role == "CallOperator");
+        Assert.Contains(snapshot.Roles, role => role.Role == "OperationsCoordinator");
+        Assert.Contains(snapshot.Incidents, incident => incident.Status == "pending");
+        Assert.Contains(snapshot.Units, unit => unit.Status == "available");
+    }
+
+    [Fact]
     public async Task GetSnapshot_ReturnsStoredSession()
     {
         var service = CreateService(out _);
@@ -77,6 +89,7 @@ public class SessionServiceTests
 
         Assert.True(result.Success);
         Assert.Equal("dispatch", result.ActionType);
+        Assert.False(result.Duplicate);
     }
 
     [Fact]
@@ -105,6 +118,11 @@ public class SessionServiceTests
         var incident = created.Incidents.First();
         var unit = created.Units.First();
 
+        await service.ApplyActionAsync(
+            created.SessionId,
+            MakeAction(created.SessionId, "dispatch", $"{{\"incidentId\":\"{incident.IncidentId}\",\"unitId\":\"{unit.UnitId}\"}}"),
+            default);
+
         var result = await service.ApplyActionAsync(
             created.SessionId,
             MakeAction(created.SessionId, "resolve", $"{{\"incidentId\":\"{incident.IncidentId}\",\"unitId\":\"{unit.UnitId}\"}}"),
@@ -114,7 +132,7 @@ public class SessionServiceTests
     }
 
     [Fact]
-    public async Task ApplyAction_UnknownActionType_DoesNotCrash()
+    public async Task ApplyAction_Dispatch_WithoutPayload_ReturnsFailure()
     {
         var service = CreateService(out _);
         var created = await service.CreateDemoSessionAsync(default);
@@ -129,7 +147,8 @@ public class SessionServiceTests
         };
 
         var result = await service.ApplyActionAsync(created.SessionId, action, default);
-        Assert.True(result.Success);
+        Assert.False(result.Success);
+        Assert.Contains("requires payloadJson", result.Message);
     }
 
     [Fact]
@@ -238,5 +257,43 @@ public class SessionServiceTests
         Assert.NotNull(afterFirst);
         Assert.NotNull(afterSecond);
         Assert.Equivalent(afterFirst, afterSecond);
+    }
+
+    [Fact]
+    public async Task ApplyAction_SameCorrelationId_ReturnsDuplicateReplay()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+        var incident = created.Incidents.First();
+        var unit = created.Units.First();
+        var action = MakeAction(
+            created.SessionId,
+            "dispatch",
+            $"{{\"incidentId\":\"{incident.IncidentId}\",\"unitId\":\"{unit.UnitId}\"}}");
+
+        var first = await service.ApplyActionAsync(created.SessionId, action, default);
+        var second = await service.ApplyActionAsync(created.SessionId, action, default);
+
+        Assert.True(first.Success);
+        Assert.True(second.Success);
+        Assert.True(second.Duplicate);
+    }
+
+    [Fact]
+    public async Task ApplyAction_BodySessionIdMismatch_ReturnsFailure()
+    {
+        var service = CreateService(out _);
+        var created = await service.CreateDemoSessionAsync(default);
+        var incident = created.Incidents.First();
+        var unit = created.Units.First();
+        var action = MakeAction(
+            "other-session",
+            "dispatch",
+            $"{{\"incidentId\":\"{incident.IncidentId}\",\"unitId\":\"{unit.UnitId}\"}}");
+
+        var result = await service.ApplyActionAsync(created.SessionId, action, default);
+
+        Assert.False(result.Success);
+        Assert.Contains("must match", result.Message);
     }
 }

@@ -1,0 +1,21 @@
+services:
+  proxy:
+    image: caddy:2
+    depends_on:
+      api:
+        condition: service_healthy
+      admin:
+        condition: service_healthy
+    ports:
+      - "${GATEWAY_PORT:-5090}:80"
+    networks:
+      - internal
+      - external
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  caddy-data:
+  caddy-config:

@@ -1,189 +1,91 @@
-# ADMIN_GUIDE.md — Przewodnik administratora
+# ADMIN_GUIDE.md — przewodnik administratora
 
-> Wersja: v26
+## Dostęp
 
----
+Aktualny układ webowy:
 
-## Panel Admina — dostęp
+- `http://localhost:5081/` — landing page
+- `http://localhost:5081/app` — dashboard demo gracza
+- `http://localhost:5081/admin` — panel administratora
 
-Panel Admina jest dostępny pod adresem:
-- **Lokalnie:** http://localhost:5081
-- **Docker:** http://localhost:5081 (zob. `.env` → `ADMIN_PORT`)
+Panel admina jest chroniony **Basic Auth**.
 
-Panel nie wymaga logowania w v26. **Plan:** autentykacja w v27.
+Przykład lokalny:
 
----
-
-## Funkcje panelu
-
-### Dashboard
-
-Strona główna wyświetla karty z linkami do wszystkich kluczowych endpointów API:
-
-| Karta | Endpoint | Opis |
-|---|---|---|
-| Status API | GET /health | Zdrowie serwera API |
-| Walidacja contentu | GET /api/content/validate | Sprawdź poprawność JSON bundli |
-| Sesje demo | POST /api/sessions/demo | Utwórz sesję testową |
-| Reference data | GET /api/reference-data | Pełny bundle referencyjny v26 |
-| Home Hub | GET /api/home-hub | Dane ekranu głównego gracza |
-| City Map | GET /api/city-map | Mapa miasta |
-| Mission Briefing | GET /api/mission-briefing/demo | Briefing misji demo |
-| Quick Play | GET /api/quickplay/bootstrap | Bootstrap trybu quick play |
-| Theme Pack | GET /api/theme-pack | Motyw graficzny |
-| Settings | GET /api/settings-bundle | Ustawienia gry |
-| Operator/Dispatcher | GET /api/operator-dispatcher-showcase | Showcase ról |
-| Android Build | GET /api/real-android-build | Status build Android |
+- login: `admin`
+- hasło: `AdminDemoPass_12345`
 
 ---
 
-## Zarządzanie contentem
+## Co robi panel admina
 
-### Walidacja JSON bundli
+Panel `/admin` agreguje dane z API i pokazuje:
 
-```
-GET /api/content/validate
-```
+- status backendu,
+- aktywne sesje,
+- wynik walidacji contentu,
+- liczbę aktywnych incydentów,
+- dostępność jednostek i bot backfill.
 
-Zwraca wynik walidacji wszystkich kluczowych plików JSON w `data/`.
+Źródło danych:
 
-Przykładowa odpowiedź:
-```json
-{
-  "isValid": true,
-  "checkedFiles": ["data/reference/reference-data.v26.json", ...],
-  "issues": []
-}
-```
+- publiczne `GET /health`
+- chronione `GET /api/sessions`
+- chronione `GET /api/content/validate`
+- chronione runtime endpoints sesji
 
-### Lokalny skrypt walidacji
+Jeśli API działa z `RequireAuth=true`, AdminWeb musi mieć poprawny `ApiAuth__Jwt__SigningKey`.
+
+---
+
+## Operacje codzienne
+
+### 1. Kontrola zdrowia
 
 ```powershell
+Invoke-RestMethod http://localhost:5080/health/live
+Invoke-RestMethod http://localhost:5080/health/ready
+```
+
+### 2. Kontrola contentu
+
+```powershell
+Invoke-RestMethod http://localhost:5080/api/content/validate
 .\tools\content-verify.ps1
 ```
 
----
-
-## Zarządzanie sesjami
-
-### Tworzenie sesji demo
-
-```
-POST /api/sessions/demo
-```
-
-Odpowiedź: `SessionSnapshotDto` z `sessionId`, incydentami i jednostkami.
-
-### Podgląd sesji
-
-```
-GET /api/sessions/{sessionId}
-```
-
-### Wysyłanie akcji do sesji
-
-```
-POST /api/sessions/{sessionId}/actions
-Content-Type: application/json
-
-{
-  "sessionId": "...",
-  "actorId": "admin-1",
-  "role": "Dispatcher",
-  "actionType": "dispatch",
-  "payloadJson": "{\"incidentId\":\"inc-1\",\"unitId\":\"unit-1\"}",
-  "correlationId": "..."
-}
-```
-
----
-
-## Role gracza
-
-| Rola | ID | Opis |
-|------|----|----|
-| Operator Centrum | `CallOperator` | Odbiera zgłoszenia, kategoryzuje zdarzenia |
-| Dyspozytor | `Dispatcher` | Dysponuje jednostki do zdarzeń |
-| Koordynator Operacji | `OperationsCoordinator` | Zarządza zasobami i eskalacją |
-| Oficer Kryzysowy | `CrisisOfficer` | Decyzje strategiczne, relacje z mediami |
-
----
-
-## AI Boty
-
-Boty automatycznie zastępują brakujących graczy.
-
-- Konfiguracja botów: `data/config/bot_profiles.json`
-- Konfiguracja ról: `data/config/roles.json`
-- `BotTickHostedService` — tyknie co 5 sekund
-
----
-
-## Zmiane konfiguracji
-
-### Zmiana portów
-
-Edytuj `infra/.env`:
-```dotenv
-API_PORT=5080
-ADMIN_PORT=5081
-```
-
-Następnie zrestart:
-```powershell
-docker compose -f infra/docker-compose.yml restart
-```
-
-### Zmiana CORS origins
-
-W `appsettings.json` lub zmiennej środowiskowej:
-```json
-{
-  "Cors": {
-    "AllowedOrigins": "http://localhost:3000,http://localhost:5081,https://twoja-domena.pl"
-  }
-}
-```
-
-### Zmiana ścieżki do data/
-
-```
-ContentBundles:DataRoot=/ścieżka/do/data
-```
-
----
-
-## Swagger UI
-
-Pełna dokumentacja API dostępna pod:
-- http://localhost:5080/swagger
-
-Pozwala na testowanie wszystkich 40+ endpointów bezpośrednio z przeglądarki.
-
----
-
-## Logi systemu
-
-### Lokalne
+### 3. Kontrola demo sesji
 
 ```powershell
-dotnet run --project src/Alarm112.Api 2>&1 | Tee-Object -FilePath logs/api.log
+Invoke-RestMethod -Method POST http://localhost:5080/api/sessions/demo
+Invoke-RestMethod http://localhost:5080/api/sessions?page=1&pageSize=20
 ```
 
-### Docker
+### 4. Pełna lokalna bramka
 
-```bash
-docker compose -f infra/docker-compose.yml logs -f api
-docker compose -f infra/docker-compose.yml logs -f admin
+```powershell
+.\tools\verify.ps1
 ```
 
 ---
 
-## Diagnostyka
+## Zmienne środowiskowe admina
 
-| Problem | Diagnoza | Rozwiązanie |
+| Zmienna | Opis |
+|---|---|
+| `AdminAuth__Username` | login do `/admin` |
+| `AdminAuth__Password` | hasło do `/admin` |
+| `ApiBaseUrl` | URL backendu API |
+| `ApiAuth__Jwt__SigningKey` | klucz JWT do odpytywania chronionych endpointów API |
+| `ApiAuth__Jwt__Issuer` | issuer tokenu dla AdminWeb |
+| `ApiAuth__Jwt__Audience` | audience tokenu dla AdminWeb |
+
+---
+
+## Najczęstsze problemy
+
+| Problem | Przyczyna | Co zrobić |
 |---|---|---|
-| API nie odpowiada | Port zajęty | `netstat -an | findstr 5080` |
-| Content validate fail | Plik JSON brakujący | Sprawdź `data/content/` i `data/reference/` |
-| Bot nie działa | BotTickHostedService | Sprawdź logi: `Started BotTickHostedService` |
-| SignalR nie działa | CORS | Dodaj origin Unity client do `Cors:AllowedOrigins` |
+| `/admin` zwraca `401` | brak / zły Basic Auth | sprawdź `AdminAuth__Username` i `AdminAuth__Password` |
+| dashboard pokazuje `auth-not-configured` | brak `ApiAuth__Jwt__SigningKey` | ustaw ten sam klucz co w API |
+| readiness zwraca `503` | brak danych lub problem ze store | sprawdź `data/`, content validation i połączenie do Postgresa |

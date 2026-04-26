@@ -1,8 +1,6 @@
 # Copy to docker-compose.override.yml for local dev overrides
 # This file is gitignored — safe to put local secrets here
 
-version: "3.9"
-
 services:
   api:
     environment:

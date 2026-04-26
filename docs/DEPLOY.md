@@ -1,278 +1,137 @@
-# DEPLOY.md — Wdrożenie produkcyjne
+# DEPLOY.md — wdrożenie produkcyjne
 
-> Wersja: v26  
-> Dotyczy: wdrożenie na serwer Linux z Docker Compose
+## Założenia
 
----
+Aktualny rekomendowany model wdrożenia:
 
-## Wymagania środowiska produkcyjnego
+- API i AdminWeb w Docker Compose,
+- PostgreSQL i Redis w tym samym stacku albo jako usługi zarządzane,
+- reverse proxy / HTTPS realizowane przez infrastrukturę zewnętrzną (np. Nginx, Caddy, Traefik, ingress).
 
-| Składnik | Wersja | Uwagi |
-| --- | --- | --- |
-| Docker Engine | 24.x+ | |
-| Docker Compose | 2.x | plugin, nie standalone |
-| Serwer | Ubuntu 22.04 / Debian 12 | 2 CPU / 4GB RAM minimum |
-| Domena | opcjonalna | wymagana do TLS |
+Repo zawiera teraz **opcjonalny** sample reverse proxy dla Caddy w:
 
----
+- `infra/Caddyfile`
+- `infra/docker-compose.proxy.yml`
 
-## Przygotowanie serwera
-
-```bash
-# Zainstaluj Docker
-curl -fsSL https://get.docker.com | sh
-sudo usermod -aG docker $USER
-
-# Klonuj repo
-git clone <repo-url> /opt/alarm112
-cd /opt/alarm112
-```
+Możesz go użyć na local/stage albo zastąpić własnym proxy/infrastructure ingress.
 
 ---
 
-## Konfiguracja środowiska
+## 1. Wymagane zmienne środowiskowe
 
-Skopiuj i dostosuj zmienne:
+Skopiuj:
 
 ```bash
 cp infra/.env.example infra/.env
-nano infra/.env
 ```
 
-Obowiązkowe do zmiany:
+W produkcji ustaw co najmniej:
 
 ```dotenv
-# Porty (zmień jeśli są zajęte)
-API_PORT=5080
-ADMIN_PORT=5081
-DB_PORT=5432
-REDIS_PORT=6379
+ASPNETCORE_ENVIRONMENT=Production
 
-# WAŻNE: zmień hasło bazy danych!
-POSTGRES_PASSWORD=<silne-haslo>
+POSTGRES_DB=alarm112
+POSTGRES_USER=alarm112app
+POSTGRES_PASSWORD=<silne_haslo>
 
-# Security (zalecane dla produkcji)
-SECURITY__REQUIREAUTH=true
-SECURITY__ENABLEDEVTOKENENDPOINT=false
-SECURITY__JWT__ISSUER=Alarm112.Api
-SECURITY__JWT__AUDIENCE=Alarm112.Client
-SECURITY__JWT__SIGNINGKEY=<min-32-znaki-losowy-sekret>
+REDIS_PASSWORD=<silne_haslo>
+
+JWT_SIGNING_KEY=<minimum_32_znaki>
+REQUIRE_AUTH=true
+
+ADMIN_USERNAME=<admin_login>
+ADMIN_PASSWORD=<silne_haslo_admina>
 ```
 
 ---
 
-## Sekrety (produkcja)
+## 2. Security posture dla prod
 
-Nie umieszczaj sekretów w repozytorium. Użyj:
-
-- **Docker Secrets** (Swarm mode) dla haseł bazy danych
-- **Zmienne środowiskowe** przez system init serwera
-- Plik `.env` nigdy nie powinien być w git (jest w `.gitignore`)
-
-```bash
-# Skopiuj .env poza repo
-cp infra/.env /etc/alarm112.env
-chmod 600 /etc/alarm112.env
-```
+- `appsettings.Production.json` już wymusza:
+  - `RequireAuth=true`
+  - `EnableDevTokenEndpoint=false`
+  - `Swagger:Enabled=false`
+- sekret JWT musi być dostarczony z env i mieć minimum 32 znaki
+- AdminWeb nie powinien być wystawiany publicznie bez dodatkowych ograniczeń sieciowych / reverse proxy / allowlisty
 
 ---
 
-## Kontrola dostępu (RBAC) — v26
-
-System obsługuje 4 role z JWT-based autoryzacją:
-
-| Rola | Uprawnienia | Typ użytkownika |
-| --- | --- | --- |
-| **CallOperator** | Tworzenie sesji, zarządzanie lobby, dostęp do adminów | Operator alarmowy |
-| **Dispatcher** | Wysyłanie jednostek (`POST /api/sessions/{id}/dispatch`) | Dyspozytornia |
-| **OperationsCoordinator** | Dostęp do incydentów i podglądu tras | Koordynator |
-| **CrisisOfficer** | Dostęp do incydentów i podglądu tras | Oficer kryzysu |
-
-### Konfiguracja autoryzacji
-
-**Włączenie (produkcja):**
-
-```dotenv
-SECURITY__REQUIREAUTH=true
-SECURITY__ENABLEDEVTOKENENDPOINT=false
-SECURITY__JWT__SIGNINGKEY=<min-32-znaki-losowy-sekret>
-```
-
-**Wyłączenie (dev/testing):**
-
-```dotenv
-SECURITY__REQUIREAUTH=false
-SECURITY__ENABLEDEVTOKENENDPOINT=true
-```
-
-### Uzyskanie tokena dostępu (dev)
+## 3. Start
 
 ```bash
-# Aktywuj dev token endpoint (Security:EnableDevTokenEndpoint=true)
-
-curl -X POST http://localhost:5080/auth/dev-token \
-  -H "Content-Type: application/json" \
-  -d '{"subject":"alice","role":"Dispatcher"}'
-
-# Odpowiedź:
-# { "accessToken": "eyJ0eXAi...", "tokenType": "Bearer", "expiresIn": 3600, "role": "Dispatcher" }
-```
-
-Wklejaj `accessToken` w header: `Authorization: Bearer <accessToken>`
-
-### Endpointy chronione (Security:RequireAuth=true)
-
-| PUT/POST/GET | Endpoint | Rola wymagana | Opis |
-| --- | --- | --- | --- |
-| POST | /api/sessions/demo | CallOperator | Tworzenie sesji demo |
-| POST | /api/lobbies/demo | CallOperator | Tworzenie lobby demo |
-| POST | /api/sessions/{id}/dispatch | Dispatcher | Wysłanie jednostki |
-| POST | /api/quickplay/start | any authenticated | Start quickplay |
-| GET | /api/reference-data | any authenticated | Dane referencyjne gry |
-| GET | /api/sessions/{id} | any authenticated | Stan sesji |
-| POST | /api/sessions/{id}/actions | any authenticated | Akcje gracza |
-| POST | /api/sessions/{id}/shared-actions | any authenticated | Wspólne akcje |
-
-### Endpointy publiczne (zawsze dostępne)
-
-- GET `/health` — healthcheck
-- GET `/swagger/*` — dokumentacja API
-- POST `/auth/dev-token` — generacja tokena deweloperskiego
-
----
-
-## Uruchomienie
-
-
-```bash
-cd /opt/alarm112
-
-# Build i start
 docker compose -f infra/docker-compose.yml up -d --build
-
-# Sprawdź stan
 docker compose -f infra/docker-compose.yml ps
-
-# Sprawdź healthcheck
-curl http://localhost:5080/health
 ```
 
----
-
-## TLS (HTTPS) — Caddy jako reverse proxy
-
-Opcjonalny Caddy serwis jest dostępny w `infra/docker-compose.yml`. Dodaj do compose:
-
-```yaml
-caddy:
-  image: caddy:2
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./Caddyfile:/etc/caddy/Caddyfile
-    - caddy-data:/data
-    - caddy-config:/config
-  depends_on:
-    - api
-    - admin
-```
-
-Plik `infra/Caddyfile`:
-
-```caddyfile
-api.twoja-domena.pl {
-    reverse_proxy api:8080
-}
-
-admin.twoja-domena.pl {
-    reverse_proxy admin:8080
-}
-```
-
-Caddy automatycznie uzyska certyfikaty TLS z Let's Encrypt dla produkcji.
-
-Dla środowiska dev (local HTTPS):
-
-```caddyfile
-localhost:5090 {
-    reverse_proxy api:8080
-}
-```
-
----
-
-## Migracje bazy danych
-
-Skrypty SQL w `db/schema/` numerowane `001_init.sql` ... `021_v26_...sql`.
-
-Aplikuj w kolejności:
+Kontrole po starcie:
 
 ```bash
-docker compose -f infra/docker-compose.yml exec db psql -U postgres -d alarm112 -f /db/schema/001_init.sql
-# ... powtórz dla każdego pliku w kolejności numerycznej
+curl http://localhost:5080/health/live
+curl http://localhost:5080/health/ready
 ```
 
-Możesz też dodać service `migrate` do compose:
+`/health/ready` powinno zwrócić `ok=true`. Jeśli zwraca `503`, najpierw napraw brakujące bundla, konfigurację lub połączenie do store.
 
-```yaml
-migrate:
-  image: postgres:16
-  volumes:
-    - ../db/schema:/migrations
-  command: >
-    bash -c "for f in /migrations/*.sql; do psql -U postgres -h db -d alarm112 -f $$f; done"
-  depends_on:
-    db:
-      condition: service_healthy
+---
+
+## 4. Migracje i persistence
+
+- schematy SQL są w `db/schema/`
+- `docker-compose.yml` uruchamia teraz serwis `migrate`, który:
+  - czeka na zdrowego Postgresa,
+  - tworzy `schema_migrations`,
+  - aplikuje tylko nieuruchomione pliki SQL,
+- `PostgresSessionStore` nadal sam dba o tabelę `sessions`, jeśli jej nie ma.
+
+Ręczne uruchomienie migracji nadal jest dostępne:
+
+```powershell
+.\tools\run-migrations.ps1
 ```
 
 ---
 
-## Backup bazy danych
+## 5. Reverse proxy i HTTPS
 
-### Ręczny backup
+Wystawiaj publicznie tylko proxy:
+
+- `/` -> AdminWeb
+- `/api/*` i `/hubs/session` -> API
+
+Proxy powinno:
+- terminować TLS,
+- przekazywać nagłówki reverse-proxy,
+- ograniczać dostęp do `/admin` i `/api/admin/*`,
+- logować requesty i wspierać health probes.
+
+Przykład lokalnego uruchomienia z Caddy:
 
 ```bash
-docker compose -f infra/docker-compose.yml exec db pg_dump -U postgres alarm112 > backup_$(date +%Y%m%d_%H%M%S).sql
+docker compose -f infra/docker-compose.yml -f infra/docker-compose.proxy.yml up -d --build
 ```
 
-### Automatyczny backup (cron)
+Domyślne wejście:
 
-```cron
-0 2 * * * cd /opt/alarm112 && docker compose -f infra/docker-compose.yml exec -T db pg_dump -U postgres alarm112 > /backups/alarm112_$(date +\%Y\%m\%d).sql
-```
-
-Przechowuj backupy poza serwerem (S3, B2, rsync do innego hosta).
+- `http://localhost:5090/`
+- `http://localhost:5090/app`
+- `http://localhost:5090/admin`
+- `http://localhost:5090/api/...`
 
 ---
 
-## Update (nowa wersja)
+## 6. Runbook po wdrożeniu
 
-```bash
-cd /opt/alarm112
-git pull
-docker compose -f infra/docker-compose.yml up -d --build
-```
-
-Sprawdź czy nowe migration scripts są do aplikacji po update.
-
----
-
-## Monitoring minimum
-
-- `/health` endpoint — skonfiguruj monitoring (UptimeRobot, BetterStack) na `http://serwer:5080/health`
-- Logi Docker: `docker compose -f infra/docker-compose.yml logs -f api`
-- Structured logs z API dostępne przez `docker logs`
+1. `curl /health/live`
+2. `curl /health/ready`
+3. otwórz `/` i `/app`, aby potwierdzić publiczny surface
+4. otwórz `/admin` i zaloguj się kontem admina
+5. sprawdź `GET /api/admin/dashboard`
+6. uruchom próbne `POST /api/sessions/demo`
 
 ---
 
-## Rozwiązywanie problemów
+## 7. Główne braki przed pełnym launch
 
-| Problem | Przyczyna | Rozwiązanie |
-| --- | --- | --- |
-| API nie startuje | `data/` brak | Sprawdź `ContentBundles:DataRoot=/app/data` w Dockerfile |
-| 500 na endpointach | Brak content bundli | `docker exec api ls /app/data/` — czy data jest skopiowana |
-| DB connection failed | PostgreSQL nie gotowy | Sprawdź healthcheck — poczekaj na `service_healthy` |
-| CORS error w przeglądarce | Zły origin | Dodaj origin do `Cors:AllowedOrigins` w appsettings/env |
-| 429 Too Many Requests | Rate limiting | Zmniejsz częstość requestów lub zwiększ limit w `Program.cs` |
+- pełniejsze observability / monitoring zewnętrzny,
+- pelniejsze user-facing flows poza demo dashboardem,
+- szersze scenariusze produkcyjne zamiast demo/showcase flows.

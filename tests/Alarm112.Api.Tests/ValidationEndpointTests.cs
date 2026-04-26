@@ -22,6 +22,17 @@ public sealed class ValidationEndpointTests(Alarm112ApiFactory factory)
     }
 
     [Fact]
+    public async Task PostActions_NullBody_ReturnsProblemDetailsPayload()
+    {
+        var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+        var response = await _client.PostAsync("/api/sessions/test123/actions", content);
+        var payload = await response.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal("Request body is required.", payload.GetProperty("title").GetString());
+        Assert.Equal(400, payload.GetProperty("status").GetInt32());
+    }
+
+    [Fact]
     public async Task PostActions_InvalidActionType_Returns400()
     {
         var response = await _client.PostAsJsonAsync("/api/sessions/test123/actions", new
@@ -78,6 +89,16 @@ public sealed class ValidationEndpointTests(Alarm112ApiFactory factory)
     }
 
     [Fact]
+    public async Task GetSession_InvalidSessionIdFormat_ReturnsValidationProblem()
+    {
+        var response = await _client.GetAsync("/api/sessions/'; DROP TABLE sessions; --");
+        var payload = await response.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(400, payload.GetProperty("status").GetInt32());
+        Assert.True(payload.GetProperty("errors").TryGetProperty("sessionId", out _));
+    }
+
+    [Fact]
     public async Task PostActions_MissingSessionId_StillValidates()
     {
         // SessionId in body differs from URL (body matters for binding)
@@ -89,6 +110,22 @@ public sealed class ValidationEndpointTests(Alarm112ApiFactory factory)
             actionType = "dispatch",
             correlationId = "corr-001"
         });
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task PostActions_MismatchedSessionId_Returns400()
+    {
+        var response = await _client.PostAsJsonAsync("/api/sessions/test123/actions", new
+        {
+            sessionId = "other-session",
+            actorId = "player1",
+            role = "Dispatcher",
+            actionType = "dispatch",
+            payloadJson = "{\"incidentId\":\"INC-001\",\"unitId\":\"AMB-01\"}",
+            correlationId = "corr-002"
+        });
+
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 

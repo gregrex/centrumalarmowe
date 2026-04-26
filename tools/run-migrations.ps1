@@ -80,12 +80,37 @@ if (-not (Test-Path $ComposeFile)) {
 }
 
 foreach ($file in $files) {
+  docker compose -f $ComposeFile exec -T $Service `
+    psql -v ON_ERROR_STOP=1 -U $Username -d $Database `
+      -c "CREATE TABLE IF NOT EXISTS schema_migrations (filename text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now());" | Out-Host
+
+  $alreadyApplied = docker compose -f $ComposeFile exec -T $Service `
+    psql -t -A -U $Username -d $Database `
+      -c "SELECT 1 FROM schema_migrations WHERE filename = '$($file.Name)' LIMIT 1;"
+
+  if ($LASTEXITCODE -ne 0) {
+    throw "Failed to query schema_migrations for $($file.Name)"
+  }
+
+  if ($alreadyApplied.Trim() -eq '1') {
+    Write-Host "[run-migrations] skipping $($file.Name) (already applied)"
+    continue
+  }
+
   Write-Host "[run-migrations] applying $($file.Name)"
   Get-Content $file.FullName -Raw |
     docker compose -f $ComposeFile exec -T $Service psql -v ON_ERROR_STOP=1 -U $Username -d $Database | Out-Host
 
   if ($LASTEXITCODE -ne 0) {
     throw "Migration failed: $($file.Name)"
+  }
+
+  docker compose -f $ComposeFile exec -T $Service `
+    psql -v ON_ERROR_STOP=1 -U $Username -d $Database `
+      -c "INSERT INTO schema_migrations(filename) VALUES ('$($file.Name)');" | Out-Host
+
+  if ($LASTEXITCODE -ne 0) {
+    throw "Failed to register migration: $($file.Name)"
   }
 }
 

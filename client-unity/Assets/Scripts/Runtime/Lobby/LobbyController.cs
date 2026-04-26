@@ -4,7 +4,7 @@ namespace Alarm112.Client.Runtime.Lobby;
 
 public sealed class LobbyController : MonoBehaviour
 {
-    [SerializeField] private string _apiBaseUrl = "http://localhost:8080";
+    [SerializeField] private string _apiBaseUrl = "http://localhost:5080";
 
     public async void CreateDemoLobby()
     {

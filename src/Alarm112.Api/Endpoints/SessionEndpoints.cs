@@ -25,10 +25,13 @@ public static class SessionEndpoints
             async (string sessionId, ISessionService sessionService, CancellationToken cancellationToken) =>
             {
                 if (!IsValidSessionId(sessionId))
-                    return Results.BadRequest(new { error = "Invalid sessionId format." });
+                    return InvalidSessionIdResult();
                 var snapshot = await sessionService.GetSnapshotAsync(sessionId, cancellationToken);
                 if (snapshot is null)
-                    return Results.NotFound(new { error = "Session not found." });
+                    return Results.Problem(
+                        title: "Session not found.",
+                        detail: $"Session '{sessionId}' was not found.",
+                        statusCode: StatusCodes.Status404NotFound);
                 return Results.Ok(snapshot);
             });
 
@@ -37,9 +40,12 @@ public static class SessionEndpoints
                    IHubContext<SessionHub> hub, CancellationToken cancellationToken) =>
             {
                 if (action is null)
-                    return Results.BadRequest(new { error = "Request body is required." });
+                    return Results.Problem(
+                        title: "Request body is required.",
+                        detail: "Provide a valid SessionActionDto JSON body.",
+                        statusCode: StatusCodes.Status400BadRequest);
                 if (!IsValidSessionId(sessionId))
-                    return Results.BadRequest(new { error = "Invalid sessionId format." });
+                    return InvalidSessionIdResult();
 
                 var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
                 var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(action);
@@ -51,12 +57,28 @@ public static class SessionEndpoints
                     return Results.ValidationProblem(errors);
                 }
 
+                if (!string.Equals(action.SessionId, sessionId, StringComparison.Ordinal))
+                {
+                    return Results.ValidationProblem(new Dictionary<string, string[]>
+                    {
+                        ["sessionId"] = ["SessionId in the request body must match the route sessionId."]
+                    });
+                }
+
                 var result = await sessionService.ApplyActionAsync(sessionId, action, cancellationToken);
-                var envelope = new RealtimeEnvelopeDto(
-                    Guid.NewGuid().ToString("N"), sessionId, "session.snapshot.delta",
-                    DateTimeOffset.UtcNow, action.Role, action.ActionType, "1.0",
-                    new { sessionId, action = action.ActionType });
-                await hub.Clients.Group(sessionId).SendAsync("session.envelope", envelope, cancellationToken);
+
+                if (!result.Success)
+                    return Results.BadRequest(result);
+
+                if (!result.Duplicate)
+                {
+                    var envelope = new RealtimeEnvelopeDto(
+                        Guid.NewGuid().ToString("N"), sessionId, "session.snapshot.delta",
+                        DateTimeOffset.UtcNow, action.Role, action.ActionType, "1.0",
+                        new { sessionId, action = action.ActionType, action.CorrelationId });
+                    await hub.Clients.Group(sessionId).SendAsync("session.envelope", envelope, cancellationToken);
+                }
+
                 return Results.Ok(result);
             }).RequireRateLimiting("fixed");
 
@@ -72,7 +94,7 @@ public static class SessionEndpoints
                    IHubContext<SessionHub> hub, CancellationToken cancellationToken) =>
             {
                 if (!IsValidSessionId(sessionId))
-                    return Results.BadRequest(new { error = "Invalid sessionId format." });
+                    return InvalidSessionIdResult();
 
                 var payload = await cityMapService.DispatchAsync(sessionId, command, cancellationToken);
                 var envelope = new RealtimeEnvelopeDto(
@@ -158,4 +180,10 @@ public static class SessionEndpoints
 
         return app;
     }
+
+    private static IResult InvalidSessionIdResult() =>
+        Results.ValidationProblem(new Dictionary<string, string[]>
+        {
+            ["sessionId"] = ["SessionId contains invalid characters."]
+        });
 }

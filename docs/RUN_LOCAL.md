@@ -1,91 +1,103 @@
-# RUN_LOCAL.md — Uruchomienie lokalne
+# RUN_LOCAL.md — uruchomienie lokalne
 
 ## Wymagania
 
-- .NET 10 Preview SDK (zob. [BUILD.md](BUILD.md))
-- Opcjonalnie: Docker (dla PostgreSQL i Redis)
+- .NET 10 SDK
+- opcjonalnie Docker Desktop, jeśli chcesz uruchomić PostgreSQL i Redis
 
 ---
 
-## Szybki start — tylko API (in-memory)
-
-API działa bez bazy danych dzięki `InMemorySessionStore`. To wystarczy do developmentu i testów.
+## 1. API — szybki start (in-memory)
 
 ```powershell
-cd c:\projekty\centrumalarmowe
-dotnet run --project src/Alarm112.Api
+cd C:\projekty\centrumalarmowe
+dotnet run --project src\Alarm112.Api
 ```
 
-API startuje na `http://localhost:5080`.
+Domyślne endpointy:
 
-Swagger UI: **http://localhost:5080/swagger**
-
-Health check: **http://localhost:5080/health**
+- API: `http://localhost:5080`
+- Swagger: `http://localhost:5080/swagger`
+- Liveness: `http://localhost:5080/health/live`
+- Readiness: `http://localhost:5080/health/ready`
 
 ---
 
-## Uruchomienie z infrastrukturą (PostgreSQL + Redis)
+## 2. AdminWeb — lokalnie
 
-Wymaga Docker Desktop.
-
-```powershell
-# Uruchom PostgreSQL i Redis w tle
-docker compose -f infra/docker-compose.yml up db redis -d
-
-# Uruchom API z connection stringami
-$env:ConnectionStrings__Main = "Host=localhost;Port=5432;Database=alarm112;Username=postgres;Password=postgres"
-$env:Redis__Connection = "localhost:6379"
-dotnet run --project src/Alarm112.Api
-```
-
----
-
-## Panel admina
+AdminWeb wymaga credentials z env:
 
 ```powershell
-dotnet run --project src/Alarm112.AdminWeb
-```
-
-Panel startuje na `http://localhost:5081`. Domyślnie łączy się z API na `http://localhost:5080`.
-
-Aby zmienić adres API:
-```powershell
+$env:AdminAuth__Username = "admin"
+$env:AdminAuth__Password = "AdminDemoPass_12345"
 $env:ApiBaseUrl = "http://localhost:5080"
-dotnet run --project src/Alarm112.AdminWeb
+$env:ApiAuth__Jwt__SigningKey = "local-demo-signing-key-32-chars!!"
+dotnet run --project src\Alarm112.AdminWeb
 ```
 
----
+Panel:
 
-## Zmienne środowiskowe
+- landing: `http://localhost:5081/`
+- dashboard gracza: `http://localhost:5081/app`
+- panel admina: `http://localhost:5081/admin`
+- login: Basic Auth
+- user: `admin`
+- password: `AdminDemoPass_12345`
 
-| Zmienna | Domyślna | Opis |
-|---|---|---|
-| `ASPNETCORE_ENVIRONMENT` | `Development` | Środowisko ASP.NET Core |
-| `ASPNETCORE_URLS` | `http://localhost:5080` | Adresy nasłuchu API |
-| `ContentBundles:DataRoot` | `../../data` (rel. do projektu) | Ścieżka do bundli JSON |
-| `ConnectionStrings:Main` | (brak) | PostgreSQL — opcjonalne |
-| `Redis:Connection` | (brak) | Redis — opcjonalne |
-| `Cors:AllowedOrigins` | `http://localhost:3000,...` | CORS origins |
-| `ApiBaseUrl` | `http://localhost:5080` | Używane przez AdminWeb |
-
----
-
-## Weryfikacja uruchomionego API
+Demo gracza/API w trybie Development:
 
 ```powershell
-# Health check
-Invoke-RestMethod http://localhost:5080/health
-
-# Utwórz sesję demo
-Invoke-RestMethod -Method POST http://localhost:5080/sessions/demo
-
-# Pobierz stan sesji (zastąp SESSION_ID wartością z poprzedniego wywołania)
-Invoke-RestMethod http://localhost:5080/sessions/SESSION_ID/snapshot
+$body = @{ subject = "demo-player"; role = "Dispatcher" } | ConvertTo-Json
+Invoke-RestMethod -Method POST http://localhost:5080/auth/dev-token -ContentType "application/json" -Body $body
 ```
 
 ---
 
-## Porty domyślne
+## 3. API + infrastruktura lokalna
+
+Najpierw uruchom DB i Redis:
+
+```powershell
+Copy-Item infra\.env.example infra\.env
+docker compose -f infra\docker-compose.yml up db redis -d
+```
+
+Następnie ustaw connection stringi dla API:
+
+```powershell
+$env:ConnectionStrings__Main = "Host=localhost;Port=5432;Database=alarm112;Username=alarm112app;Password=CHANGE_ME_strong_password_here"
+$env:Redis__Connection = "localhost:6379,password=CHANGE_ME_strong_redis_password"
+dotnet run --project src\Alarm112.Api
+```
+
+Jeśli chcesz włączyć auth lokalnie:
+
+```powershell
+$env:Security__RequireAuth = "true"
+$env:Security__Jwt__SigningKey = "local-demo-signing-key-32-chars!!"
+dotnet run --project src\Alarm112.Api
+```
+
+---
+
+## 4. Szybka weryfikacja
+
+```powershell
+Invoke-RestMethod http://localhost:5080/health/live
+Invoke-RestMethod http://localhost:5080/health/ready
+Invoke-RestMethod -Method POST http://localhost:5080/api/sessions/demo
+.\tools\smoke-v26.ps1
+```
+
+Pełna lokalna bramka:
+
+```powershell
+.\tools\verify.ps1
+```
+
+---
+
+## 5. Typowe porty
 
 | Usługa | Port |
 |---|---|
@@ -94,32 +106,8 @@ Invoke-RestMethod http://localhost:5080/sessions/SESSION_ID/snapshot
 | PostgreSQL | 5432 |
 | Redis | 6379 |
 
----
-
-## Sprawdzenie zajętości portów
+Gdy porty są zajęte:
 
 ```powershell
 .\tools\find-free-port.ps1
-```
-
----
-
-## Logi
-
-Logi w trybie Development wychodzą na konsolę z poziomem `Debug`. W razie problemów z ładowaniem bundli szukaj linii zawierających `ContentBundleLoader`.
-
----
-
-## SignalR — połączenie testowe
-
-Hub jest dostępny pod `/hubs/session`. Przykład połączenia przez wscat:
-
-```bash
-npm install -g wscat
-wscat -c "ws://localhost:5080/hubs/session"
-```
-
-Po połączeniu wyślij:
-```json
-{"protocol":"json","version":1}
 ```

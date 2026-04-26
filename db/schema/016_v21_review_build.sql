@@ -1,19 +1,19 @@
 -- v21 review build schema starter
 create table if not exists ReviewBuildPackage
 (
-    Id nvarchar(64) not null primary key,
-    BuildName nvarchar(200) not null,
-    MissionId nvarchar(100) not null,
-    CaptureModeEnabled bit not null
+    Id varchar(64) not null primary key,
+    BuildName varchar(200) not null,
+    MissionId varchar(100) not null,
+    CaptureModeEnabled boolean not null
 );
 
 create table if not exists ReviewBuildChecklistItem
 (
-    Id int identity(1,1) not null primary key,
-    BuildId nvarchar(64) not null,
-    [Key] nvarchar(100) not null,
-    Title nvarchar(200) not null,
-    Severity nvarchar(50) not null,
-    Required bit not null,
-    Passed bit not null
+    Id integer generated always as identity primary key,
+    BuildId varchar(64) not null,
+    KeyName varchar(100) not null,
+    Title varchar(200) not null,
+    Severity varchar(50) not null,
+    Required boolean not null,
+    Passed boolean not null
 );

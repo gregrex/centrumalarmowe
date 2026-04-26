@@ -13,7 +13,7 @@
 - [x] `Security:EnableDevTokenEndpoint = false` w produkcji ✅
 - [x] JWT Signing Key: losowy, ≥ 32 znaki, **poza repo** (env var / secret manager) ✅
 - [x] JWT Signing Key: brak hardcoded wartości w repo (random per-startup gdy brak konfiguracji) ✅
-- [x] Admin panel (`/` na porcie 5081) wymaga uwierzytelniania (Basic Auth) ✅
+- [x] Admin panel (`/admin` na porcie 5081) wymaga uwierzytelniania (Basic Auth) ✅
 - [x] PostgreSQL: dedykowany user (`alarm112app`), hasło z env var, poza repo ✅
 - [x] Redis: hasło ustawione (`requirepass ${REDIS_PASSWORD}`), port za siecią internal ✅
 
@@ -62,7 +62,7 @@
 - [x] InMemorySessionStore unit tests ✅
 - [x] PostgresSessionStore unit tests ✅
 - [x] BotDirector unit tests ✅
-- [x] E2E Playwright tests: admin auth, health, sessions, validation ✅
+- [x] E2E Playwright specs istnieją dla auth, landing, user dashboard i admin route split ✅
 - [ ] Smoke test v26 przechodzi: `tools/smoke-v26.ps1` ⚠️ (wymaga działającego API)
 - [ ] Content bundle walidacja: `tools/content-verify.ps1` ⚠️ (środowiskowa)
 
@@ -72,6 +72,7 @@
 
 - [x] `appsettings.Production.json` istnieje z bezpiecznymi defaultami ✅
 - [x] `infra/.env.example` istnieje z opisem wymaganych zmiennych ✅
+- [x] `infra/.env.production.example` istnieje dla stage/prod ✅
 - [x] `infra/docker-compose.yml`: brak hardcoded haseł (wszystkie z env vars) ✅
 - [x] `docker-compose.override.yml.example` istnieje ✅
 - [x] `.gitignore` zawiera: `.env`, `docker-compose.override.yml` ✅
@@ -110,12 +111,13 @@
 - [x] `BotTickHostedService` loguje błędy zamiast swallowing (ILogger) ✅
 - [x] `InMemorySessionStore.TryGet` zaimplementowany ✅
 - [x] `SessionService` loguje błędy JSON (ILogger, catch(JsonException)) ✅
-- [x] AdminWeb JS: `textContent` zamiast `innerHTML` (XSS-safe) ✅
+- [x] AdminWeb JS krytycznych widoków używa bezpiecznych podstawień tekstowych dla danych runtime ✅
 - [x] AdminWeb: Basic Auth fail-fast (brak hasła → startup exception) ✅
 - [x] AdminWeb dashboard: same-origin `/api/admin/dashboard` + server-side JWT do chronionych metryk API ✅
 - [x] Korelacja requestów (X-Correlation-Id middleware) ✅
 - [x] `SessionService.GetSnapshotAsync` zwraca 404 dla nieistniejącej sesji ✅
 - [x] ContentValidationService: używa IContentBundleLoader zamiast raw paths ✅
+- [x] CORS: bezpieczny default ograniczony do `GET,POST` zamiast `AllowAnyMethod` ✅
 
 ---
 
@@ -156,107 +158,14 @@
 |--------|---------|---------|
 | Bezpieczeństwo | 🟢 95% | SEC-08 CORS częściowe (akceptowalne) |
 | Walidacje | 🟢 97% | Brak krytycznych blockerów w API session lookup |
-| Testy | 🟢 92% | Playwright wymaga działającego API |
+| Testy | 🟢 92% | Playwright runtime zależy od lokalnego bootstrapu serwerów |
 | Konfiguracja | 🟢 90% | Produkcyjne sekrety — operacyjne |
 | Infrastruktura | 🟡 75% | .NET preview, migracje operacyjne |
 | CI/CD | 🟢 85% | Registry push konfiguracja |
 | Dokumentacja | 🟢 100% | ✅ |
 | **Ogółem** | **🟢 ~93%** | **Gotowy na staging, bliski produkcji** |
 
-**Szacowany nakład do pełnej produkcji:** ~2-3 dni (głównie operacyjne: sekrety, migracje, .NET GA)
-
-
----
-
-## 1. Bezpieczeństwo
-
-### Krytyczne
-
-- [ ] `Security:RequireAuth = true` w `appsettings.Production.json`
-- [ ] `Security:EnableDevTokenEndpoint = false` w produkcji
-- [ ] JWT Signing Key: losowy, ≥ 32 znaki, **poza repo** (env var / secret manager)
-- [ ] JWT Signing Key zmieniony z wartości domyślnej `dev-only-*`
-- [ ] Admin panel (`/` na porcie 5081) wymaga uwierzytelniania
-- [ ] PostgreSQL: dedykowany user (nie `postgres`), hasło silne, poza repo
-- [ ] Redis: hasło ustawione, port nie wystawiony publicznie
-
-### Wysokie
-
-- [ ] Security headers dodane: `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `CSP`
-- [ ] Swagger UI wyłączony w produkcji (lub za auth)
-- [ ] CORS: ograniczony do konkretnych origin (nie localhost)
-- [ ] Rate limiter podpięty do endpointów POST (`RequireRateLimiting("fixed")`)
-- [ ] `AllowedHosts` ustawiony na domenę produkcyjną
-
-### Średnie
-
-- [ ] Redis auth skonfigurowany w `docker-compose.yml`
-- [ ] Logi bezpieczeństwa włączone (auth failures, rate limit hits)
-- [ ] SignalR hub wymaga uwierzytelniania w produkcji
-
----
-
-## 2. Walidacje
-
-- [ ] `SessionActionDto`: walidacja wszystkich pól (Required, StringLength, AllowedValues)
-- [ ] `DispatchCommandDto`: walidacja (Required, Pattern)
-- [ ] `QuickPlayStartRequestDto`: walidacja (Mode enum, Role enum)
-- [ ] Endpoint `/api/sessions/{sessionId}/*`: walidacja formatu sessionId
-- [ ] Payload JSON: limit rozmiaru 1KB
-- [ ] Odpowiedzi błędów walidacji: format ProblemDetails (RFC 7807)
-- [ ] Brak wycieków stacktrace w odpowiedziach produkcyjnych
-
----
-
-## 3. Testy
-
-- [ ] Wszystkie testy integracyjne przechodzą: `dotnet test Alarm112.sln`
-- [ ] Testy z auth włączonym: 401 na brak tokena
-- [ ] Testy walidacji: 400 na błędne DTO
-- [ ] Security headers: testy response headers
-- [ ] Smoke test v26 przechodzi: `tools/smoke-v26.ps1`
-- [ ] Content bundle walidacja: `tools/content-verify.ps1`
-
----
-
-## 4. Konfiguracja i sekrety
-
-- [ ] `appsettings.Production.json` istnieje z bezpiecznymi defaultami
-- [ ] `.env.production.example` istnieje z opisem wymaganych zmiennych
-- [ ] `docker-compose.override.yml` z produkcyjnymi secretami (gitignored)
-- [ ] `infra/docker-compose.yml`: brak hardcoded haseł
-- [ ] `.gitignore` zawiera: `.env`, `*.Production.json`, `docker-compose.override.yml`
-- [ ] User secrets NIE trafią do repozytorium
-
----
-
-## 5. Infrastruktura
-
-- [ ] Docker: non-root user (`USER appuser`) w obu Dockerfile
-- [ ] Docker: .NET stable (nie `10.0-preview`) gdy dostępny
-- [ ] Health endpoints dostępne i działające: `/health`
-- [ ] PostgreSQL podłączony (zastąpiono InMemoryStore)
-- [ ] Migracje SQL uruchomione (001–021)
-- [ ] Redis połączony z aplikacją (jeśli używany)
-- [ ] Backup bazy: automatyczny
-
----
-
-## 6. CI/CD
-
-- [ ] GitHub Actions `ci.yml`: restore → build → test → content-verify
-- [ ] GitHub Actions `docker.yml`: build → push → smoke
-- [ ] Pipeline nie commituje sekretów
-- [ ] Smoke tests przechodzą w CI
-
----
-
-## 7. Kod i architektura
-
-- [ ] Build: 0 błędów, 0 warnings: `dotnet build Alarm112.sln`
-- [ ] `BotTickHostedService` nie używa hardcoded `"DEMO112"` (pobiera z store)
-- [x] `SessionService.GetSnapshotAsync` zwraca 404 dla nieistniejącej sesji
-- [ ] Brak `TODO:` komentarzy w krytycznych ścieżkach
+**Szacowany nakład do pełnej produkcji:** nadal głównie operacyjny i produktowy: sekrety, migracje, .NET GA, pełniejszy frontend i scenariusze live.
 
 ---
 

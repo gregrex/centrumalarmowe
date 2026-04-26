@@ -30,49 +30,71 @@ test.describe('AdminWeb health', () => {
 });
 
 test.describe('AdminWeb dashboard', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.setExtraHTTPHeaders({ Authorization: basicAuth(ADMIN_USER, ADMIN_PASS) });
-  });
-
-  test('GET / returns 200', async ({ page }) => {
+  test('Landing page returns 200', async ({ page }) => {
     const response = await page.goto('/');
     expect(response?.status()).toBe(200);
   });
 
-  test('Dashboard has page title', async ({ page }) => {
+  test('Landing page exposes CTA to user dashboard', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Alarm112/i);
+    await expect(page.getByText('Zobacz dashboard uzytkownika')).toBeVisible();
   });
 
-  test('Dashboard has API Status card', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByText('Status API')).toBeVisible();
+  test('User dashboard returns 200', async ({ page }) => {
+    const response = await page.goto('/app');
+    expect(response?.status()).toBe(200);
   });
 
-  test('Dashboard has Content Validation card', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByText('Walidacja contentu')).toBeVisible();
+  test('User dashboard has player-facing hero copy', async ({ page }) => {
+    await page.goto('/app');
+    await expect(page.getByText('Od home huba do quickplay w jednym widoku.')).toBeVisible();
   });
 
-  test('Dashboard has Session Demo card', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByText('Sesje demo')).toBeVisible();
-  });
+  test.describe('Protected admin dashboard', () => {
+    test.beforeEach(async ({ page }) => {
+      await page.setExtraHTTPHeaders({ Authorization: basicAuth(ADMIN_USER, ADMIN_PASS) });
+    });
 
-  test('Dashboard has Reference Data card', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByText('Reference data')).toBeVisible();
-  });
+    test('GET /admin returns 200', async ({ page }) => {
+      const response = await page.goto('/admin');
+      expect(response?.status()).toBe(200);
+    });
 
-  test('Dashboard has City Map card', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.getByText('City Map')).toBeVisible();
-  });
+    test('Dashboard has page title', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page).toHaveTitle(/Alarm112/i);
+    });
 
-  test('Dashboard links are present', async ({ page }) => {
-    await page.goto('/');
-    const links = page.locator('a.btn');
-    const count = await links.count();
-    expect(count).toBeGreaterThan(3);
+    test('Dashboard has API Status card', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page.getByText('Status API')).toBeVisible();
+    });
+
+    test('Dashboard has Content Validation card', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page.getByText('Walidacja contentu')).toBeVisible();
+    });
+
+    test('Dashboard has Session Demo card', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page.getByText('Sesje demo')).toBeVisible();
+    });
+
+    test('Dashboard has Reference Data card', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page.getByText('Reference data')).toBeVisible();
+    });
+
+    test('Dashboard has City Map card', async ({ page }) => {
+      await page.goto('/admin');
+      await expect(page.getByText('City Map')).toBeVisible();
+    });
+
+    test('Dashboard links are present', async ({ page }) => {
+      await page.goto('/admin');
+      const links = page.locator('a.btn');
+      const count = await links.count();
+      expect(count).toBeGreaterThan(3);
+    });
   });
 });

@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS RcBugBashChecklist (
     Id TEXT PRIMARY KEY,
     Label TEXT NOT NULL,
     Severity TEXT NOT NULL,
-    IsBlocking INTEGER NOT NULL,
-    IsPassed INTEGER NOT NULL
+    IsBlocking BOOLEAN NOT NULL,
+    IsPassed BOOLEAN NOT NULL
 );

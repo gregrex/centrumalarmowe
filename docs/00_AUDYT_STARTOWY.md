@@ -1,177 +1,83 @@
 # 00 — Audyt Startowy: 112 Centrum Alarmowe
 
-> **Data audytu:** Aktualna sesja robocza  
-> **Wersja projektu:** v26 (Real Android Build)  
-> **Audytor:** Autonomous Principal Architect Agent
+> Stan po aktualnym przeglądzie repo i hardeningu operacyjnym v26.
 
 ---
 
-## 1. Aktualny stan architektury
+## 1. Krótkie podsumowanie stanu projektu
 
-### Backend (.NET 10 preview)
-- **Alarm112.Api** — minimal API (~962 loc) + SignalR hub, swagger, JWT rejestracja
-- **Alarm112.Application** — 28 serwisów (wszystkie Singleton), 29 interfejsów
-- **Alarm112.Contracts** — DTO only (brak walidacji!)
-- **Alarm112.Infrastructure** — `InMemorySessionStore` (ConcurrentDictionary)
-- **Alarm112.Domain** — enums + DemoFactory + VerticalSliceFactory
-- **Alarm112.AdminWeb** — inline HTML panel admina (brak auth!)
+### Co działa
+- `Alarm112.sln` buduje się lokalnie.
+- Testy .NET w `tests/Alarm112.Api.Tests` przechodzą.
+- Istnieje workflow CI (`.github/workflows/ci.yml`) z buildem, testami, walidacją contentu i buildami obrazów Docker.
+- API ma już:
+  - JWT auth z `RequireAuth` sterowanym konfiguracją,
+  - RBAC dla ról,
+  - CORS,
+  - rate limiting,
+  - security headers,
+  - correlation ID,
+  - ProblemDetails,
+  - SignalR hub,
+  - Dockerfile i docker-compose.
+- AdminWeb działa jako publiczny landing page, dashboard demo gracza oraz panel operacyjny z Basic Auth i serwerowym agregowaniem danych z API.
+- Repo zawiera lokalne i dockerowe skrypty weryfikacyjne oraz testy Playwright dla API/AdminWeb.
 
-### Frontend / Client
-- **client-unity/** — Unity 2D mobile klient (poza scopem backendu)
+### Co nie jest jeszcze w pełni produkcyjne
+- Duża część gameplay/backendu nadal operuje na demo/showcase data zamiast pełnej logice produkcyjnej.
+- Unity client zawiera szkielety i TODO dla części HUD-ów i sieci.
+- Domyślny tryb lokalny nadal startuje bez wymuszonego auth (`Development`), co jest dobre dla dev, ale wymaga jawnego przełączenia na `Production`.
+- Migracje SQL istnieją, ale nie są automatycznie wykonywane w compose ani przy starcie aplikacji.
+- Webowy surface istnieje (`/`, `/app`, `/admin`), ale nadal nie jest pełnym produkcyjnym portalem klienta końcowego.
 
-### Infrastruktura
-- Docker Compose: PostgreSQL 16 + Redis 7
-- Migracje SQL: 21 plików (001–021), schemat istnieje ale **nie jest używany** (InMemory store)
-- Health checks: skonfigurowane w docker-compose
-
----
-
-## 2. Lista modułów
-
-| Moduł | Opis | Stan |
-|-------|------|------|
-| Session | Tworzenie/zarządzanie sesjami gry | Demo-only, InMemory |
-| Lobby | Zarządzanie lobby 4-graczy | Demo-only |
-| BotDirector | AI fallback dla brakujących graczy | Zaimplementowany |
-| CityMap | Mapa miasta, dispatch | Demo data |
-| OperationsBoard | Tablica incydentów | Demo data |
-| RoundRuntime | Czas rundy, live deltas | Demo data |
-| MissionFlow | Przepływ misji (briefing→raport) | Demo data |
-| QuickPlay | Szybka rozgrywka | Demo data |
-| ReferenceData | Dane referencyjne z JSON | Content-driven |
-| ContentValidation | Walidacja bundli JSON | Działa |
-| AdminWeb | Panel administracyjny | **BRAK AUTH** |
+### Co wymaga pilnej poprawy
+1. Utrzymanie spójnej dokumentacji operacyjnej z rzeczywistym kodem.
+2. Twardsze readiness checks i jawna gotowość środowiskowa.
+3. Dalsze przechodzenie z demo data na rzeczywiste scenariusze produkcyjne.
+4. Automatyzacja migracji i pełniejszy deployment behind reverse proxy / HTTPS.
 
 ---
 
-## 3. Lista ryzyk bezpieczeństwa
+## 2. Najważniejsze ustalenia architektoniczne
 
-### 🔴 KRYTYCZNE
-
-| ID | Ryzyko | Lokalizacja | Opis |
-|----|--------|-------------|------|
-| SEC-01 | **Brak autoryzacji na wszystkich endpointach** | `appsettings.json:Security:RequireAuth=false` | Wszystkie API endpoints są publiczne |
-| SEC-02 | **Hardcoded JWT signing key** | `appsettings.json` line 21 | `"dev-only-signing-key-change-me-to-32-plus-chars"` w repo |
-| SEC-03 | **Admin panel bez auth** | `Alarm112.AdminWeb/Program.cs` | Panel admina dostępny publicznie bez logowania |
-| SEC-04 | **Dev token endpoint otwarty** | `Program.cs` line 192, `appsettings.json` `EnableDevTokenEndpoint:true` | Każdy może wygenerować token dla dowolnej roli |
-| SEC-05 | **Hardcoded DB credentials** | `infra/docker-compose.yml` | `postgres/postgres` w źródle |
-
-### 🟠 WYSOKIE
-
-| ID | Ryzyko | Lokalizacja | Opis |
-|----|--------|-------------|------|
-| SEC-06 | **Brak walidacji wejścia na DTO** | `Alarm112.Contracts/` | Zero atrybutów walidacyjnych, brak FluentValidation |
-| SEC-07 | **Brak security headers** | `Program.cs` | Brak X-Frame-Options, CSP, HSTS, X-Content-Type-Options |
-| SEC-08 | **CORS AllowCredentials + AllowAnyHeader** | `Program.cs` lines 88-90 | Ryzyko CSRF w kombinacji z credentials |
-| SEC-09 | **Swagger UI dostępny w produkcji** | `Program.cs` lines 153-154 | Brak środowiskowej blokady Swagger |
-| SEC-10 | **Rate limiter niezastosowany do endpointów** | `Program.cs` | Limiter zarejestrowany ale niepodpięty pod endpointy (`RequireRateLimiting`) |
-| SEC-11 | **Brak Redis auth** | `docker-compose.yml` | Redis bez hasła, port 6379 wystawiony |
-
-### 🟡 ŚREDNIE
-
-| ID | Ryzyko | Lokalizacja | Opis |
-|----|--------|-------------|------|
-| SEC-12 | **AllowedHosts: "*"** | `appsettings.json` line 8 | Brak ograniczeń nagłówka Host |
-| SEC-13 | **InMemory store — brak persystencji** | `InMemorySessionStore.cs` | Dane tracone przy restarcie |
-| SEC-14 | **Brak audytu logowania** | All services | Brak logowania operacji biznesowych |
-| SEC-15 | **Brak CSRF na POST endpoints** | `Program.cs` | Dotyczy cookie-based flow |
-| SEC-16 | **Hub bez auth** | `SessionHub.cs` | SignalR hub nie wymaga auth |
-| SEC-17 | **PayloadJson: raw string execution** | `SessionService.cs` | JSON.Parse bez limitu rozmiaru |
+| Obszar | Stan |
+|---|---|
+| Backend | Warstwowy układ `Api -> Application -> Domain`, DTO w `Contracts`, persistence w `Infrastructure` |
+| API | Minimal API + SignalR, duży zestaw endpointów demo/showcase |
+| Persistence | `InMemorySessionStore` dla local/dev, `PostgresSessionStore` aktywowany connection stringiem |
+| Content pipeline | JSON bundles w `data/`, ładowane przez `IContentBundleLoader` |
+| Admin | Minimal-hosted panel z Basic Auth i dashboardem operacyjnym |
+| Infra | Docker Compose dla API, AdminWeb, PostgreSQL i Redis |
+| Testy | xUnit + `WebApplicationFactory`, Playwright w `tests/e2e`, GitHub Actions CI |
 
 ---
 
-## 4. Lista brakujących walidacji
+## 3. Ryzyka
 
-| Klasa DTO | Brakujące walidacje |
-|-----------|---------------------|
-| `SessionActionDto` | `SessionId` max length, `ActorId` max length, `Role` enum check, `ActionType` enum whitelist, `PayloadJson` max size |
-| `DispatchCommandDto` | `IncidentId` pattern, `UnitId` pattern, `ActorRole` enum check |
-| `QuickPlayStartRequestDto` | Brak walidacji trybu, missionId |
-| `RoutePreviewRequestDto` | Brak walidacji współrzędnych |
-| `SharedActionDto` | Brak walidacji ID i type |
-| `DevTokenRequest` | `Role` już sprawdzany ręcznie (OK), `Subject` bez limitu długości |
+### Blocker
+- Brak pełnej logiki produkcyjnej dla wielu przepływów sesji; duża część to nadal vertical-slice/demo pack.
+- Brak automatycznego procesu migracji DB w runtime/deploy.
 
----
+### High
+- Dokumentacja repo była częściowo nieaktualna względem kodu.
+- Health checks były zbyt płytkie; po poprawce istnieją już `/health/live` i `/health/ready`, ale trzeba ich konsekwentnie używać w runbookach i wdrożeniu.
+- Content validation wcześniej obejmował tylko kilka plików; po poprawce waliduje krytyczne katalogi i bundli, ale nadal nie sprawdza semantyki domenowej każdego JSON.
 
-## 5. Lista brakujących testów
+### Medium
+- Compose nie zawiera reverse proxy ani TLS termination.
+- AdminWeb jest funkcjonalny operacyjnie, ale nie jest pełnym systemem administracyjnym CRUD/liveops.
+- Testy jakościowe są mocne dla backendu, ale nie pokrywają całości klienta Unity.
 
-| Kategoria | Brakuje |
-|-----------|---------|
-| Testy negatywne | Brak — tylko happy path |
-| Testy bezpieczeństwa | Żadne (brak tokena, zły token, brak roli) |
-| Testy walidacji | Żadne (złe DTO, null, oversized) |
-| Testy granic | Brak |
-| E2E Playwright | Brak (folder `tests/e2e/` pusty) |
-| Testy serwisów domenowych | Brak unit testów dla SessionService, BotDirector |
-| Testy InMemorySessionStore | Brak |
-| SignalR testy | Brak |
-| Admin panel UI testy | Brak |
+### Low
+- Część starszych dokumentów w repo nadal opisuje historyczne braki.
 
 ---
 
-## 6. Lista problemów UX/UI
+## 4. Priorytety
 
-| Element | Problem |
-|---------|---------|
-| Admin panel | Brak auth (login screen) |
-| Admin panel | Brak prawdziwych danych live (mockowane) |
-| Admin panel | Brak obsługi błędów w JS (fetch failure) |
-| Swagger | Dostępny publicznie na produkcji |
-| API errors | Brak spójnego formatu ProblemDetails na wszystkich ścieżkach błędów |
-| Admin panel | Brak CSRF ochrony dla akcji |
-
----
-
-## 7. Lista problemów wydajnościowych
-
-| Problem | Lokalizacja |
-|---------|-------------|
-| BotTickHostedService — hardcoded `DEMO112` session | `Program.cs` line 953 |
-| Brak pagination na endpointach listy | Wszystkie GET |
-| Brak cache na reference data | `ReferenceDataService` |
-| InMemory store — brak limitów rozmiaru | `InMemorySessionStore` |
-| 28 serwisów Singleton — brak lazy init | `Program.cs` |
-
----
-
-## 8. Lista problemów DevOps / deployment
-
-| Problem | Opis |
-|---------|------|
-| .NET 10 **preview** w Dockerfile | `mcr.microsoft.com/dotnet/aspnet:10.0-preview` — nie-prod |
-| Brak CI/CD pipeline | Folder `ci/` pusty, brak GitHub Actions |
-| Docker non-root user | Brak `USER app` w Dockerfile |
-| Brak `.env.production` przykładu | Tylko `.env.example` z portami |
-| Brak `COPY .env.example .env` | Nowy developer może nie wiedzieć co ustawić |
-| Redis bez TLS i bez auth | Otwarte w sieci lokalnej |
-
----
-
-## 9. Priorytety: Krytyczne / Wysokie / Średnie / Niskie
-
-```
-KRYTYCZNE (fix natychmiastowy):
-  SEC-01 RequireAuth=false
-  SEC-02 Hardcoded JWT key
-  SEC-03 Admin panel brak auth
-  SEC-04 Dev token endpoint otwarty
-  SEC-05 Hardcoded DB credentials
-
-WYSOKIE (fix przed release):
-  SEC-06 Brak walidacji DTO
-  SEC-07 Brak security headers
-  SEC-08 CORS misconfiguration
-  SEC-09 Swagger w prod
-  SEC-10 Rate limiter niepodpięty
-
-ŚREDNIE (backlog):
-  SEC-11 Redis bez auth
-  SEC-12 AllowedHosts: "*"
-  SEC-13 InMemory store
-  SEC-14 Brak audit log
-  SEC-15 CSRF
-
-NISKIE (tech debt):
-  SEC-16 Hub bez auth
-  SEC-17 PayloadJson raw parse
-```
+| Priorytet | Zakres |
+|---|---|
+| **Blocker** | produkcyjna logika sesji, migracje i bootstrap środowiska |
+| **High** | deploy readiness, spójna dokumentacja, security-by-default dla stage/prod |
+| **Medium** | rozszerzenie panelu admina, bogatsze smoke/e2e, pełniejsze demo operacyjne |
+| **Low** | porządki w starszych dokumentach i backlogach historycznych |

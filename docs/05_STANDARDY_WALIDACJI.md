@@ -14,6 +14,18 @@
 
 ---
 
+## Reguly biznesowe dla `SessionActionDto`
+
+1. `SessionId` w body musi byc zgodny z `{sessionId}` w route.
+2. `CorrelationId` jest wymaganym kluczem idempotencji dla retry klienta, botow i reconnectu.
+3. Ten sam `CorrelationId` dla tej samej sesji nie moze zostac przetworzony drugi raz.
+4. `dispatch` wymaga `incidentId` i `unitId` oraz stanu `pending` + `available`.
+5. `escalate` wymaga `incidentId` i nie moze eskalowac incydentu juz `resolved` lub juz `escalated`.
+6. `resolve` wymaga `incidentId` i `unitId`; po sukcesie incydent przechodzi do `resolved`, a jednostka wraca do `available`.
+7. `SharedActionDto.RequiredRoles` moze zawierac tylko kanoniczne role i nie moze zawierac duplikatow.
+
+---
+
 ## Format błędów walidacji (ProblemDetails)
 
 ```json
@@ -57,8 +69,9 @@ public sealed class SessionActionDto
     [StringLength(1024)]  // Max 1KB payload
     public string? PayloadJson { get; set; }
 
-    [StringLength(64)]
-    public string? CorrelationId { get; set; }
+    [Required]
+    [StringLength(64, MinimumLength = 1)]
+    public required string CorrelationId { get; set; }
 }
 ```
 
@@ -71,12 +84,12 @@ public sealed class DispatchCommandDto
 {
     [Required]
     [StringLength(64)]
-    [RegularExpression(@"^[a-zA-Z0-9\-_]+$")]
+    [RegularExpression(@"^[a-zA-Z0-9\-_\.]+$")]
     public required string IncidentId { get; set; }
 
     [Required]
     [StringLength(64)]
-    [RegularExpression(@"^[a-zA-Z0-9\-_]+$")]
+    [RegularExpression(@"^[a-zA-Z0-9\-_\.]+$")]
     public required string UnitId { get; set; }
 
     [Required]
@@ -97,7 +110,7 @@ public sealed class DispatchCommandDto
 public sealed class QuickPlayStartRequestDto
 {
     [StringLength(64)]
-    [RegularExpression(@"^[a-zA-Z0-9\-_]*$")]
+    [RegularExpression(@"^[a-zA-Z0-9\-_\.]*$")]
     public string? MissionId { get; set; }
 
     [AllowedValues("solo", "coop", "bot", null)]
@@ -119,9 +132,10 @@ public sealed class QuickPlayStartRequestDto
 | Role | string | — | — | — | CallOperator, Dispatcher, OperationsCoordinator, CrisisOfficer |
 | ActionType | string | — | — | — | dispatch, escalate, resolve |
 | PayloadJson | string? | 0 | 1024 | valid JSON | — |
-| CorrelationId | string? | 0 | 64 | — | — |
-| IncidentId | string | 1 | 64 | `[a-zA-Z0-9\-_]+` | — |
-| UnitId | string | 1 | 64 | `[a-zA-Z0-9\-_]+` | — |
+| CorrelationId | string | 1 | 64 | — | — |
+| IncidentId | string | 1 | 64 | `[a-zA-Z0-9\-_\.]+` | — |
+| UnitId | string | 1 | 64 | `[a-zA-Z0-9\-_\.]+` | — |
+| ScenarioId | string | 1 | 64 | `[a-zA-Z0-9\-_\.]+` | — |
 | LobbyId | string | 1 | 128 | `[a-zA-Z0-9\-_]+` | — |
 
 ---
@@ -146,6 +160,14 @@ app.MapPost("/api/sessions/{sessionId}/actions",
             .GroupBy(v => v.MemberNames.FirstOrDefault() ?? "general")
             .ToDictionary(g => g.Key, g => g.Select(v => v.ErrorMessage).ToArray());
         return Results.ValidationProblem(errors);
+    }
+    
+    if (!string.Equals(action.SessionId, sessionId, StringComparison.Ordinal))
+    {
+        return Results.ValidationProblem(new Dictionary<string, string[]>
+        {
+            ["sessionId"] = ["SessionId in the request body must match the route sessionId."]
+        });
     }
     
     // ... proceed

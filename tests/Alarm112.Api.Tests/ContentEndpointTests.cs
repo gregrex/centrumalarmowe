@@ -59,6 +59,37 @@ public sealed class ContentEndpointTests(Alarm112ApiFactory factory)
     }
 
     [Fact]
+    public async Task QuickPlayBootstrap_UsesCanonicalRoles()
+    {
+        var payload = await _client.GetFromJsonAsync<JsonElement>("/api/quickplay/bootstrap");
+
+        Assert.Equal("CallOperator", payload.GetProperty("preferredRole").GetString());
+        var recommendedRoles = payload.GetProperty("recommendedRoles").EnumerateArray().Select(x => x.GetString()).ToArray();
+        Assert.Contains("OperationsCoordinator", recommendedRoles);
+        Assert.DoesNotContain("role.operator", recommendedRoles);
+    }
+
+    [Fact]
+    public async Task QuickPlayStart_AssignsPreferredRoleToHumanPlayer()
+    {
+        var response = await _client.PostAsJsonAsync("/api/quickplay/start", new
+        {
+            scenarioId = "scenario.verticalslice.quickplay",
+            difficulty = "normal",
+            preferredRole = "OperationsCoordinator",
+            autoFillBots = true
+        });
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var payload = await response.Content.ReadFromJsonAsync<JsonElement>();
+        var roles = payload.GetProperty("roles").EnumerateArray().ToList();
+        var coordinator = roles.First(role => role.GetProperty("role").GetString() == "OperationsCoordinator");
+        Assert.True(coordinator.GetProperty("hasHuman").GetBoolean());
+        Assert.Equal("player.local", coordinator.GetProperty("occupantId").GetString());
+    }
+
+    [Fact]
     public async Task ThemePack_Returns200()
     {
         var response = await _client.GetAsync("/api/theme-pack");

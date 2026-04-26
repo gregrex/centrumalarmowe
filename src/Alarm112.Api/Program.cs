@@ -1,12 +1,14 @@
 
 using Alarm112.Application.Interfaces;
 using Alarm112.Application.Services;
+using Alarm112.Api;
 using Alarm112.Api.Endpoints;
 using Alarm112.Api.Hubs;
 using Alarm112.Api.Middleware;
 using Alarm112.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
@@ -35,30 +37,9 @@ builder.Host.UseSerilog((context, services, loggerConfiguration) =>
     }
 });
 
-// Content bundle loader — resolves data/ relative to solution root
-var dataRoot = Path.GetFullPath(
-    Path.Combine(builder.Environment.ContentRootPath,
-        builder.Configuration["ContentBundles:DataRoot"] ?? "../../data"));
-builder.Services.AddSingleton<IContentBundleLoader>(_ => new JsonContentBundleLoader(dataRoot));
-
-// Session store — use PostgreSQL when ConnectionStrings:Main is configured, else InMemory.
-// In production: set ConnectionStrings__Main env var to activate PostgresSessionStore.
-var pgConnStr = builder.Configuration.GetConnectionString("Main");
-var usingPostgres = !string.IsNullOrWhiteSpace(pgConnStr);
-if (usingPostgres)
-{
-    builder.Services.AddSingleton<ISessionStore>(sp =>
-        new PostgresSessionStore(pgConnStr!, sp.GetRequiredService<ILogger<PostgresSessionStore>>()));
-}
-else
-{
-    builder.Services.AddSingleton<ISessionStore, InMemorySessionStore>();
-}
-
-builder.Services.AddSignalR();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddOutputCache();
+var usingPostgres = builder.Services.AddAlarm112Services(
+    builder.Configuration,
+    builder.Environment.ContentRootPath);
 
 // Security (optional): JWT auth can be enabled per-environment via configuration.
 var requireAuth = builder.Configuration.GetValue<bool>("Security:RequireAuth");
@@ -117,7 +98,7 @@ builder.Services.AddAuthorization(options =>
 var allowedOrigins = builder.Configuration["Cors:AllowedOrigins"]?.Split(',', StringSplitOptions.RemoveEmptyEntries)
     ?? new[] { "http://localhost:3000", "http://localhost:5081", "http://localhost:5090" };
 var allowedMethods = builder.Configuration["Cors:AllowedMethods"]?.Split(',', StringSplitOptions.RemoveEmptyEntries)
-    ?? null; // null = AllowAnyMethod (dev default)
+    ?? ["GET", "POST"]; // safe default for browser clients and admin panel
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -125,11 +106,18 @@ builder.Services.AddCors(options =>
         var p = policy.WithOrigins(allowedOrigins)
                       .AllowAnyHeader()
                       .AllowCredentials();
-        if (allowedMethods is not null && allowedMethods.Length > 0)
+        if (allowedMethods.Length > 0)
             p.WithMethods(allowedMethods);
-        else
-            p.AllowAnyMethod();
     });
+});
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor |
+        ForwardedHeaders.XForwardedProto |
+        ForwardedHeaders.XForwardedHost;
+    ResetForwardedHeaderTrust(options);
 });
 
 // Rate limiting — 200 requests per 10 seconds per IP
@@ -157,35 +145,6 @@ builder.Services.AddProblemDetails(options =>
         }
     };
 });
-builder.Services.AddSingleton<ISessionService, SessionService>();
-builder.Services.AddSingleton<IBotDirector, BotDirector>();
-builder.Services.AddSingleton<IReferenceDataService, ReferenceDataService>();
-builder.Services.AddSingleton<ILobbyService, LobbyService>();
-builder.Services.AddSingleton<IContentValidationService, ContentValidationService>();
-builder.Services.AddSingleton<IQuickPlayService, QuickPlayService>();
-builder.Services.AddSingleton<ICityMapService, CityMapService>();
-builder.Services.AddSingleton<IOperationsBoardService, OperationsBoardService>();
-builder.Services.AddSingleton<IRoundRuntimeService, RoundRuntimeService>();
-builder.Services.AddSingleton<IThemePackService, ThemePackService>();
-builder.Services.AddSingleton<IHomeFlowService, HomeFlowService>();
-builder.Services.AddSingleton<ICampaignEntryService, CampaignEntryService>();
-builder.Services.AddSingleton<IRuntimeBootstrapService, RuntimeBootstrapService>();
-builder.Services.AddSingleton<IMissionFlowService, MissionFlowService>();
-builder.Services.AddSingleton<IMissionRuntimeService, MissionRuntimeService>();
-builder.Services.AddSingleton<IPlayableRuntimeService, PlayableRuntimeService>();
-builder.Services.AddSingleton<IRuntimePolishService, RuntimePolishService>();
-builder.Services.AddSingleton<IQuasiProductionDemoService, QuasiProductionDemoService>();
-builder.Services.AddSingleton<IRuntimeUiFlowService, RuntimeUiFlowService>();
-builder.Services.AddSingleton<INearFinalSliceService, NearFinalSliceService>();
-builder.Services.AddSingleton<IShowcaseDemoService, ShowcaseDemoService>();
-builder.Services.AddSingleton<IReviewBuildService, ReviewBuildService>();
-builder.Services.AddSingleton<IReleaseCandidateService, ReleaseCandidateService>();
-builder.Services.AddSingleton<IAndroidPreviewService, AndroidPreviewService>();
-builder.Services.AddSingleton<IInternalTestService, InternalTestService>();
-builder.Services.AddSingleton<IFinalHandoffService, FinalHandoffService>();
-builder.Services.AddSingleton<IRealAndroidBuildService, RealAndroidBuildService>();
-builder.Services.AddHostedService<Alarm112.Application.Services.BotTickHostedService>();
-
 var app = builder.Build();
 
 // Log which session store is active (visible in container logs and dev output)
@@ -204,6 +163,7 @@ if (isProduction && (jwtKeyAtRuntime?.Length ?? 0) < 32)
         "Security:Jwt:SigningKey must be at least 32 characters in production.");
 
 // Security headers — must be first in pipeline
+app.UseForwardedHeaders();
 app.UseSecurityHeaders();
 
 // Correlation ID — assign/propagate X-Correlation-Id for every request
@@ -258,17 +218,23 @@ if (requireAuth)
     });
 }
 
-app.MapGet("/health", (ISessionStore store, IContentValidationService contentSvc) =>
+app.MapGet("/health/live", () =>
+    Results.Ok(OperationalHealth.CreateLivenessReport()));
+
+app.MapGet("/health/ready", (ISessionStore store, IContentBundleLoader contentBundleLoader) =>
 {
-    var storeType = store.GetType().Name;
-    return Results.Ok(new
-    {
-        ok = true,
-        service = "Alarm112.Api",
-        version = "v26",
-        store = storeType,
-        utc = DateTimeOffset.UtcNow
-    });
+    var report = OperationalHealth.CreateReadinessReport(store, contentBundleLoader);
+    return report.Ok
+        ? Results.Ok(report)
+        : Results.Json(report, statusCode: StatusCodes.Status503ServiceUnavailable);
+});
+
+app.MapGet("/health", (ISessionStore store, IContentBundleLoader contentBundleLoader) =>
+{
+    var report = OperationalHealth.CreateReadinessReport(store, contentBundleLoader);
+    return report.Ok
+        ? Results.Ok(report)
+        : Results.Json(report, statusCode: StatusCodes.Status503ServiceUnavailable);
 });
 
 // Endpoint groups — each group in its own file under Endpoints/
@@ -285,3 +251,18 @@ app.MapReleaseEndpoints();
 app.MapHub<SessionHub>("/hubs/session");
 
 app.Run();
+
+static void ResetForwardedHeaderTrust(ForwardedHeadersOptions options)
+{
+    ClearForwardedHeadersCollection(options, "KnownIPNetworks");
+    ClearForwardedHeadersCollection(options, "KnownNetworks");
+    ClearForwardedHeadersCollection(options, "KnownProxies");
+}
+
+static void ClearForwardedHeadersCollection(ForwardedHeadersOptions options, string propertyName)
+{
+    var property = typeof(ForwardedHeadersOptions).GetProperty(propertyName);
+    var collection = property?.GetValue(options);
+    var clearMethod = collection?.GetType().GetMethod("Clear", Type.EmptyTypes);
+    clearMethod?.Invoke(collection, null);
+}

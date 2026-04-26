@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>112: Centrum Alarmowe - dispatch game platform</title>
+  <meta name="description" content="112: Centrum Alarmowe to nowoczesna platforma coop/disptach z live session backendem, rolami operatora i panelem operacyjnym." />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body class="site-body">
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-badge">112</span>
+      <span class="brand-text">Centrum Alarmowe</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Rozwiazanie</a>
+      <a href="#features">Funkcje</a>
+      <a href="#demo">Demo</a>
+      <a href="#faq">FAQ</a>
+      <a href="/app" class="nav-cta">Otworz demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Realtime dispatch / coop / admin operations</p>
+        <h1>Nowoczesna dyspozytornia grywalnej wspolpracy 4 ról.</h1>
+        <p class="hero-lead">
+          Produkt laczy backend sesji, role-based gameplay, AI fallback i panel operacyjny, tak aby demo dzialalo od pierwszego uruchomienia.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/app">Zobacz dashboard uzytkownika</a>
+          <a class="btn btn-secondary" href="/admin">Panel admina</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>4</strong><span>role coop</span></div>
+          <div><strong>v26</strong><span>showcase backend</span></div>
+          <div><strong>JSON</strong><span>content-driven pipeline</span></div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-card">
+          <div class="panel-label">Demo surfaces</div>
+          <ul class="bullet-list">
+            <li>landing page produktu</li>
+            <li>dashboard demo dla gracza</li>
+            <li>dashboard operacyjny admina</li>
+          </ul>
+        </div>
+        <div class="panel-card">
+          <div class="panel-label">API base</div>
+          <code>{{apiBase}}</code>
+          <p class="panel-note">Po starcie stacka sprawdz `health/live`, `health/ready` i sesje demo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem" class="section-grid">
+      <article class="info-card">
+        <h2>Problem</h2>
+        <p>Typowe projekty showcase backendu nie maja spojnej warstwy demo, czytelnego panelu operacyjnego ani gotowego punktu wejscia dla klienta.</p>
+      </article>
+      <article class="info-card">
+        <h2>Rozwiazanie</h2>
+        <p>Ten pakiet daje od razu backend, content bundla, health/readiness, panel admina, user demo dashboard i skrypty walidacyjne.</p>
+      </article>
+    </section>
+
+    <section id="solution" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">Architektura produktu</p>
+        <h2>Od content pipeline do live ops</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><h3>Backend .NET + SignalR</h3><p>Session API, realtime envelopes, auth, RBAC, rate limiting i readiness checks.</p></article>
+        <article class="feature-card"><h3>AI fallback</h3><p>Bot director przejmuje role bez ludzkiego gracza i utrzymuje demo flow gotowe do prezentacji.</p></article>
+        <article class="feature-card"><h3>Admin operations</h3><p>Basic Auth protected dashboard z agregacja zdrowia, sesji, content validation i jednostek runtime.</p></article>
+      </div>
+    </section>
+
+    <section id="features" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">Kluczowe funkcje</p>
+        <h2>Production-minded fundamentals</h2>
+      </div>
+      <div class="benefit-grid">
+        <article><h3>Security-by-default</h3><p>JWT, RBAC, security headers, correlation id, rate limiting i prod config.</p></article>
+        <article><h3>Demo readiness</h3><p>Home hub, mission briefing, quickplay bootstrap i showcase mission sa dostepne bez dodatkowego kodu UI.</p></article>
+        <article><h3>Deployability</h3><p>Docker, CI, verify scripts, health probes i content validation upraszczaja start oraz review.</p></article>
+      </div>
+    </section>
+
+    <section id="demo" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">Sekcja demo</p>
+        <h2>Gotowe scenariusze prezentacyjne</h2>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-card">
+          <h3>Dashboard uzytkownika</h3>
+          <p>Pokazuje gotowy mission flow, quickplay i showcase mission na bazie prawdziwych endpointow API.</p>
+          <a class="btn btn-primary" href="/app">Otworz /app</a>
+        </article>
+        <article class="demo-card">
+          <h3>Dashboard administratora</h3>
+          <p>Pokazuje health, content validation, sesje i metryki operacyjne w jednym panelu.</p>
+          <a class="btn btn-secondary" href="/admin">Otworz /admin</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <article class="info-card">
+        <h2>Korzyści</h2>
+        <ul class="bullet-list">
+          <li>krótka droga od klonowania repo do dzialajacego demo</li>
+          <li>czytelny podzial na powierzchnie publiczna, user i admin</li>
+          <li>lepsza gotowosc pod review klienta i deploy stage</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <h2>CTA</h2>
+        <p>Uruchom stack, sprawdz dashboard gracza i otworz panel admina na tych samych danych demo.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/app">Uruchom demo</a>
+          <a class="btn btn-secondary" href="{{apiBase}}/swagger" target="_blank" rel="noreferrer">Swagger</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="faq" class="section-block">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2>Najczestsze pytania</h2>
+      </div>
+      <div class="faq-list">
+        <details><summary>Czy projekt ma gotowy backend?</summary><p>Tak. API i AdminWeb buduja sie i przechodza lokalne bramki verify.</p></details>
+        <details><summary>Czy to jest juz pelen produkt koncowy?</summary><p>Nie. To mocny showcase/demo pack z production-minded hardeningiem, ale nie kompletna aplikacja live.</p></details>
+        <details><summary>Czy mozna go wdrozyc na stage?</summary><p>Tak, z Docker Compose, reverse proxy i poprawnie ustawionymi sekretami.</p></details>
+      </div>
+    </section>
+
+    <section id="contact" class="section-block contact-block">
+      <div class="section-heading">
+        <p class="eyebrow">Kontakt / CTA</p>
+        <h2>Zamow demo lub review architektury</h2>
+      </div>
+      <form id="contact-form" class="contact-form">
+        <label><span>Imie i nazwisko</span><input id="lead-name" name="name" maxlength="120" required /></label>
+        <label><span>Email</span><input id="lead-email" name="email" type="email" maxlength="200" required /></label>
+        <label><span>Firma</span><input id="lead-company" name="company" maxlength="120" /></label>
+        <label><span>Wiadomosc</span><textarea id="lead-message" name="message" rows="5" maxlength="2000" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Wyslij prosbe o demo</button>
+        <p id="contact-status" class="form-status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>112: Centrum Alarmowe</span>
+    <span>v26 showcase web surface</span>
+    <span>&copy; {{year}}</span>
+  </footer>
+
+  <script src="/js/landing.js"></script>
+</body>
+</html>

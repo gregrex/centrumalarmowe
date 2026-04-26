@@ -1,10 +1,12 @@
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Alarm112.Api.Tests;
 
@@ -40,6 +42,34 @@ public sealed class AdminDashboardEndpointTests
     }
 
     [Fact]
+    public async Task UserDashboard_ReturnsLiveApiData()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: true);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var response = await client.GetFromJsonAsync<UserDashboardResponseDto>("/api/user/dashboard");
+
+        Assert.NotNull(response);
+        Assert.Equal("online", response!.Api.Status);
+        Assert.Equal("ok", response.Home.Status);
+        Assert.Equal("dispatch.home", response.Home.DefaultScreen);
+        Assert.Equal(2, response.Home.Cards.Count);
+        Assert.Equal("ok", response.Chapters.Status);
+        Assert.Equal(2, response.Chapters.ChapterCount);
+        Assert.Equal(3, response.Chapters.MissionNodeCount);
+        Assert.Equal("ok", response.MissionEntry.Status);
+        Assert.Equal("mission.demo.01", response.MissionEntry.MissionId);
+        Assert.Equal("Dispatcher", response.MissionEntry.RecommendedRole);
+        Assert.Equal("ok", response.Briefing.Status);
+        Assert.Equal(18, response.Briefing.EstimatedMinutes);
+        Assert.Equal("ok", response.QuickPlay.Status);
+        Assert.Equal(3, response.QuickPlay.IncidentCount);
+        Assert.Equal("ok", response.Showcase.Status);
+        Assert.Equal(3, response.Showcase.Steps.Count);
+    }
+
+    [Fact]
     public async Task DashboardSummary_WithoutApiTokenConfig_ReturnsAuthConfigurationState()
     {
         await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
@@ -58,20 +88,109 @@ public sealed class AdminDashboardEndpointTests
     }
 
     [Fact]
-    public async Task RootPage_ReturnsRenderedDashboardTemplate()
+    public async Task RootPage_ReturnsRenderedLandingTemplateWithoutAuth()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("/");
+        var body = await response.Content.ReadAsStringAsync();
+
+        Assert.True(response.IsSuccessStatusCode);
+        Assert.Contains("Nowoczesna dyspozytornia", body);
+        Assert.Contains("/app", body);
+        Assert.Contains("/admin", body);
+    }
+
+    [Fact]
+    public async Task AdminPage_RequiresBasicAuth()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("/admin");
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task AdminPage_WithBasicAuth_ReturnsRenderedDashboardTemplate()
     {
         await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
         await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
         using var client = factory.CreateClient();
         client.DefaultRequestHeaders.Authorization = CreateBasicAuthHeader();
 
-        var response = await client.GetAsync("/");
+        var response = await client.GetAsync("/admin");
         var body = await response.Content.ReadAsStringAsync();
 
         Assert.True(response.IsSuccessStatusCode);
-        Assert.Contains("Alarm112", body);
+        Assert.Contains("Dashboard operacyjny", body);
         Assert.Contains(stubApi.BaseUrl, body);
         Assert.Contains("/js/admin.js", body);
+    }
+
+    [Fact]
+    public async Task LandingPage_HasSecurityHeaders()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("/");
+
+        Assert.True(response.Headers.Contains("X-Frame-Options"));
+        Assert.Equal("DENY", response.Headers.GetValues("X-Frame-Options").First());
+        Assert.True(response.Headers.Contains("X-Content-Type-Options"));
+        Assert.Equal("nosniff", response.Headers.GetValues("X-Content-Type-Options").First());
+        Assert.True(response.Headers.Contains("Content-Security-Policy"));
+    }
+
+    [Fact]
+    public async Task ContactEndpoint_IsRateLimited()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var codes = new List<HttpStatusCode>();
+        for (var i = 0; i < 12; i++)
+        {
+            var response = await client.PostAsJsonAsync("/api/public/contact", new
+            {
+                name = $"Lead {i}",
+                email = $"lead{i}@example.com",
+                company = "Alarm112",
+                message = "Chce zobaczyc demo produktu."
+            });
+
+            codes.Add(response.StatusCode);
+        }
+
+        Assert.Contains(HttpStatusCode.Accepted, codes);
+        Assert.Contains(HttpStatusCode.TooManyRequests, codes);
+    }
+
+    [Fact]
+    public async Task ContactEndpoint_InvalidEmail_ReturnsValidationProblem()
+    {
+        await using var stubApi = await StubApiHost.StartAsync(requireAuth: false);
+        await using var factory = new AdminWebFactory(stubApi.BaseUrl, apiSigningKey: ApiSigningKey);
+        using var client = factory.CreateClient();
+
+        var response = await client.PostAsJsonAsync("/api/public/contact", new
+        {
+            name = "Lead Invalid",
+            email = "not-an-email",
+            company = "Alarm112",
+            message = "Prosze o demo."
+        });
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        var payload = await response.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.True(payload!.GetProperty("errors").TryGetProperty("email", out _));
     }
 
     private static AuthenticationHeaderValue CreateBasicAuthHeader()
@@ -109,6 +228,140 @@ public sealed class AdminDashboardEndpointTests
                 version = "v26",
                 store = "RedisSessionStore"
             }));
+
+            app.MapGet("/api/home-hub", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new
+                {
+                    defaultScreen = "dispatch.home",
+                    continueSessionId = "demo-session-1",
+                    continueSummary = "1 aktywna zmiana i 2 alerty priorytetowe.",
+                    cards = new[]
+                    {
+                        new { id = "card-1", type = "campaign", labelKey = "home.card.campaign", state = "ready", route = "/campaign" },
+                        new { id = "card-2", type = "quickplay", labelKey = "home.card.quickplay", state = "hot", route = "/quickplay" }
+                    }
+                });
+            });
+
+            app.MapGet("/api/campaign-chapters/demo", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new[]
+                {
+                    new
+                    {
+                        chapterId = "chapter-1",
+                        titleKey = "chapter.one",
+                        themeId = "urban",
+                        progress = 0.5,
+                        nodes = new[]
+                        {
+                            new { missionId = "mission.demo.01", nodeKind = "mission", state = "ready", x = 0.1, y = 0.3, titleKey = "mission.one" },
+                            new { missionId = "mission.demo.02", nodeKind = "mission", state = "locked", x = 0.4, y = 0.6, titleKey = "mission.two" }
+                        }
+                    },
+                    new
+                    {
+                        chapterId = "chapter-2",
+                        titleKey = "chapter.two",
+                        themeId = "storm",
+                        progress = 0.2,
+                        nodes = new[]
+                        {
+                            new { missionId = "mission.demo.03", nodeKind = "mission", state = "ready", x = 0.8, y = 0.4, titleKey = "mission.three" }
+                        }
+                    }
+                });
+            });
+
+            app.MapGet("/api/mission-entry/demo", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new
+                {
+                    missionId = "mission.demo.01",
+                    titleKey = "mission.entry.demo",
+                    chapterId = "chapter-1",
+                    estimatedMinutes = 18,
+                    difficulty = "high",
+                    recommendedRole = "Dispatcher",
+                    weatherPreset = "rain",
+                    timeOfDay = "night",
+                    startingUnits = new[] { "unit-1", "unit-2" },
+                    riskTags = new[] { "traffic", "weather" },
+                    rewards = new[] { "xp", "unlock" },
+                    availableSlots = 4,
+                    defaultBotFillMode = "fill"
+                });
+            });
+
+            app.MapGet("/api/mission-briefing/demo", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new
+                {
+                    missionId = "mission.demo.01",
+                    titleKey = "briefing.demo.one",
+                    difficulty = "high",
+                    estimatedMinutes = 18,
+                    weatherPreset = "rain",
+                    timeOfDay = "night",
+                    primaryObjectives = new[] { "Stabilizuj ruch", "Zabezpiecz ofiary" },
+                    secondaryObjectives = new[] { "Utrzymaj KPI" },
+                    riskTags = new[] { "traffic", "weather" },
+                    recommendedRoles = new[] { "Dispatcher", "CallOperator" },
+                    suggestedUnits = new[] { "unit-1", "unit-2" },
+                    speakerPortraitId = "portrait-1",
+                    speakerLineKey = "speaker.line.demo",
+                    hotspots = new[] { "hotspot-1" }
+                });
+            });
+
+            app.MapGet("/api/quickplay/bootstrap", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new
+                {
+                    scenarioId = "quickplay.demo",
+                    difficulty = "high",
+                    preferredRole = "Dispatcher",
+                    autoFillBots = true,
+                    incidentIds = new[] { "inc-1", "inc-2", "inc-3" },
+                    recommendedRoles = new[] { "Dispatcher", "OperationsCoordinator" }
+                });
+            });
+
+            app.MapGet("/api/showcase-mission/demo", (HttpContext context) =>
+            {
+                if (requireAuth && !HasBearerToken(context))
+                    return Results.Unauthorized();
+
+                return Results.Ok(new
+                {
+                    missionId = "showcase-1",
+                    title = "Operator / Dispatcher showcase",
+                    recommendedRole = "Dispatcher",
+                    estimatedDurationSeconds = 240,
+                    steps = new[]
+                    {
+                        new { stepId = "s1", title = "Receive alert", description = "Incoming emergency", order = 1, isMandatory = true },
+                        new { stepId = "s2", title = "Dispatch units", description = "Assign resources", order = 2, isMandatory = true },
+                        new { stepId = "s3", title = "Recover operations", description = "Close out the shift", order = 3, isMandatory = false }
+                    }
+                });
+            });
 
             app.MapGet("/api/sessions", (HttpContext context) =>
             {
@@ -212,6 +465,15 @@ public sealed class AdminDashboardEndpointTests
         AdminDashboardIncidentsResponseDto Incidents,
         AdminDashboardUnitsResponseDto Units);
 
+    private sealed record UserDashboardResponseDto(
+        AdminDashboardApiResponseDto Api,
+        UserDashboardHomeResponseDto Home,
+        UserDashboardChaptersResponseDto Chapters,
+        UserDashboardMissionEntryResponseDto MissionEntry,
+        UserDashboardBriefingResponseDto Briefing,
+        UserDashboardQuickPlayResponseDto QuickPlay,
+        UserDashboardShowcaseResponseDto Showcase);
+
     private sealed record AdminDashboardApiResponseDto(
         string Status,
         string? Version,
@@ -245,4 +507,68 @@ public sealed class AdminDashboardEndpointTests
         int? BotBackfillCount,
         string? Summary,
         string? Error);
+
+    private sealed record UserDashboardHomeResponseDto(
+        string Status,
+        string? DefaultScreen,
+        string? ContinueSummary,
+        string? ContinueSessionId,
+        IReadOnlyCollection<UserDashboardHomeCardResponseDto> Cards,
+        string? Error);
+
+    private sealed record UserDashboardHomeCardResponseDto(
+        string Id,
+        string Type,
+        string LabelKey,
+        string State,
+        string Route);
+
+    private sealed record UserDashboardChaptersResponseDto(
+        string Status,
+        int? ChapterCount,
+        int? MissionNodeCount,
+        IReadOnlyCollection<object> Items,
+        string? Error);
+
+    private sealed record UserDashboardMissionEntryResponseDto(
+        string Status,
+        string? MissionId,
+        string? Title,
+        string? Difficulty,
+        string? RecommendedRole,
+        IReadOnlyCollection<string> RiskTags,
+        string? Error);
+
+    private sealed record UserDashboardBriefingResponseDto(
+        string Status,
+        string? Title,
+        string? Difficulty,
+        int? EstimatedMinutes,
+        IReadOnlyCollection<string> PrimaryObjectives,
+        IReadOnlyCollection<string> RecommendedRoles,
+        string? Error);
+
+    private sealed record UserDashboardQuickPlayResponseDto(
+        string Status,
+        string? ScenarioId,
+        string? Difficulty,
+        string? PreferredRole,
+        int? IncidentCount,
+        IReadOnlyCollection<string> RecommendedRoles,
+        string? Error);
+
+    private sealed record UserDashboardShowcaseResponseDto(
+        string Status,
+        string? MissionId,
+        string? Title,
+        string? RecommendedRole,
+        IReadOnlyCollection<UserDashboardShowcaseStepResponseDto> Steps,
+        string? Error);
+
+    private sealed record UserDashboardShowcaseStepResponseDto(
+        string StepId,
+        string Title,
+        string Description,
+        int Order,
+        bool IsMandatory);
 }

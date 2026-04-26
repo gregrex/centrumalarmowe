@@ -7,6 +7,11 @@ namespace Alarm112.Application.Services;
 public sealed class ContentValidationService : IContentValidationService
 {
     private readonly IContentBundleLoader _contentBundleLoader;
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true
+    };
 
     public ContentValidationService(IContentBundleLoader contentBundleLoader)
     {
@@ -17,30 +22,42 @@ public sealed class ContentValidationService : IContentValidationService
     {
         var issues = new List<ContentValidationIssueDto>();
         var dataRoot = _contentBundleLoader.DataRoot;
-        var files = new[]
-        {
-            Path.Combine(dataRoot, "reference", "reference-data.json"),
-            Path.Combine(dataRoot, "reference", "reference-data.extended.json"),
-            Path.Combine(dataRoot, "art", "icon_catalog.json"),
-            Path.Combine(dataRoot, "art", "sprite_atlas_manifest.json")
-        };
 
-        foreach (var file in files)
+        if (!Directory.Exists(dataRoot))
         {
+            issues.Add(new("Error", "data", "Data root missing."));
+            return new ContentValidationResultDto(false, issues);
+        }
+
+        foreach (var directory in ContentValidationCatalog.RequiredDirectories)
+        {
+            var fullDirectory = Path.Combine(dataRoot, directory);
+            if (!Directory.Exists(fullDirectory))
+                issues.Add(new("Error", directory, "Directory missing."));
+        }
+
+        foreach (var requiredFile in ContentValidationCatalog.RequiredFiles)
+        {
+            var file = Path.Combine(dataRoot, requiredFile);
             if (!File.Exists(file))
-            {
-                issues.Add(new("Error", file, "File missing."));
-                continue;
-            }
+                issues.Add(new("Error", ContentValidationCatalog.ToRelativePath(dataRoot, file), "File missing."));
+        }
+
+        foreach (var file in ContentValidationCatalog.EnumerateCandidateFiles(dataRoot))
+        {
+            var relativePath = ContentValidationCatalog.ToRelativePath(dataRoot, file);
 
             try
             {
                 await using var stream = File.OpenRead(file);
-                _ = await JsonSerializer.DeserializeAsync<JsonElement>(stream, cancellationToken: cancellationToken);
+                _ = await JsonSerializer.DeserializeAsync<JsonElement>(
+                    stream,
+                    JsonOptions,
+                    cancellationToken);
             }
-            catch (Exception ex)
+            catch (JsonException ex)
             {
-                issues.Add(new("Error", file, $"Invalid JSON: {ex.Message}"));
+                issues.Add(new("Error", relativePath, $"Invalid JSON: {ex.Message}"));
             }
         }
 

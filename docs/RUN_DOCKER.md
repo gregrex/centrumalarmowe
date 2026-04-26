@@ -1,147 +1,111 @@
-# RUN_DOCKER.md — Uruchomienie w Dockerze
+# RUN_DOCKER.md — uruchomienie w Dockerze
 
 ## Wymagania
 
-- Docker Desktop 4.x+
-- Plik `.env` (opcjonalny — są wartości domyślne)
+- Docker Desktop / Docker Engine z Compose v2
+- skopiowany plik `infra\.env`
 
 ---
 
-## Szybki start
+## 1. Przygotowanie `.env`
 
 ```powershell
-cd c:\projekty\centrumalarmowe
-docker compose -f infra/docker-compose.yml up --build
+Copy-Item infra\.env.example infra\.env
 ```
 
-Po uruchomieniu:
-- API: **http://localhost:5080/swagger**
-- AdminWeb: **http://localhost:5081**
-- PostgreSQL: `localhost:5432`
-- Redis: `localhost:6379`
+Minimalne rzeczy do sprawdzenia w `infra\.env`:
+
+- `POSTGRES_PASSWORD`
+- `REDIS_PASSWORD`
+- `JWT_SIGNING_KEY`
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `REQUIRE_AUTH`
 
 ---
 
-## Plik `.env` (opcjonalny)
-
-Skopiuj przykład i dostosuj porty jeśli są zajęte:
+## 2. Start całego stacka
 
 ```powershell
-Copy-Item infra/.env.example infra/.env
+docker compose -f infra\docker-compose.yml up -d --build
 ```
 
-Dostępne zmienne:
+Po starcie:
 
-```dotenv
-API_PORT=5080
-ADMIN_PORT=5081
-DB_PORT=5432
-REDIS_PORT=6379
-GATEWAY_PORT=5090
-```
+- API: `http://localhost:5080`
+- API Swagger: `http://localhost:5080/swagger`
+- API live: `http://localhost:5080/health/live`
+- API ready: `http://localhost:5080/health/ready`
+- landing: `http://localhost:5081/`
+- dashboard gracza: `http://localhost:5081/app`
+- panel admina: `http://localhost:5081/admin`
 
----
-
-## Uruchomienie w tle (detached)
+Opcjonalny pojedynczy gateway z Caddy:
 
 ```powershell
-docker compose -f infra/docker-compose.yml up -d --build
+docker compose -f infra\docker-compose.yml -f infra\docker-compose.proxy.yml up -d --build
 ```
 
-Sprawdzenie stanu kontenerów:
+Wtedy wejście publiczne jest pod:
 
-```powershell
-docker compose -f infra/docker-compose.yml ps
-```
+- `http://localhost:5090/`
+- `http://localhost:5090/app`
+- `http://localhost:5090/admin`
+- `http://localhost:5090/api/...`
 
 ---
 
-## Healthchecks
+## 3. Logowanie do AdminWeb
 
-Wszystkie serwisy mają skonfigurowane healthchecki. API i AdminWeb startują dopiero gdy baza danych i Redis są `healthy`.
+Panel admina używa Basic Auth z wartościami z `.env`:
 
-| Serwis | Healthcheck |
-|---|---|
-| `api` | `wget -qO- http://localhost:8080/health` |
-| `admin` | `wget -qO- http://localhost:8080/health` |
-| `db` | `pg_isready -U postgres -d alarm112` |
-| `redis` | `redis-cli ping` |
+- login: `ADMIN_USERNAME`
+- hasło: `ADMIN_PASSWORD`
+
+Jeśli `REQUIRE_AUTH=true`, AdminWeb powinien mieć poprawny `JWT_SIGNING_KEY`, bo sam pobiera dane chronione z API.
 
 ---
 
-## Weryfikacja po uruchomieniu
+## 4. Weryfikacja po starcie
 
 ```powershell
 .\tools\docker-verify.ps1
 ```
 
-Skrypt wykonuje:
-1. Załadowanie `.env`
-2. `docker compose build`
-3. `docker compose up -d`
-4. Polling healthchecków (timeout 30s)
-5. Smoke check `/health` na API i Admin
-6. Wyświetla `docker compose ps`
-7. `docker compose down -v`
+Skrypt:
+1. buduje obrazy,
+2. uruchamia kontenery,
+3. uruchamia też automatyczny serwis `migrate` dla `db/schema`,
+4. czeka na zdrowe API,
+5. odpytuje kluczowe endpointy API,
+6. wykonuje prawdziwy flow sesji (`demo session -> dispatch action -> odczyt zmienionego snapshotu`),
+7. odpytuje landing, `/app`, `/health` i chronione `/admin`,
+8. sprząta środowisko.
 
----
-
-## Zatrzymanie i sprzątanie
+Możesz też sprawdzić ręcznie:
 
 ```powershell
-# Zatrzymaj kontenery (zachowaj wolumeny)
-docker compose -f infra/docker-compose.yml down
+Invoke-RestMethod http://localhost:5080/health/live
+Invoke-RestMethod http://localhost:5080/health/ready
+docker compose -f infra\docker-compose.yml ps
+```
 
-# Zatrzymaj i usuń wolumeny (czysta baza)
-docker compose -f infra/docker-compose.yml down -v
+Jeśli chcesz odpalić migracje ręcznie:
+
+```powershell
+.\tools\run-migrations.ps1
 ```
 
 ---
 
-## Wolumeny
-
-| Wolumen | Zawartość |
-|---|---|
-| `db-data` | Dane PostgreSQL (persystentne między restartami) |
-| `redis-data` | Dane Redis |
-
----
-
-## Wysyłanie requestów do skonteneryzowanego API
+## 5. Zatrzymanie
 
 ```powershell
-# Health
-Invoke-RestMethod http://localhost:5080/health
-
-# Nowa sesja demo
-Invoke-RestMethod -Method POST http://localhost:5080/sessions/demo
+docker compose -f infra\docker-compose.yml down
 ```
 
----
-
-## Logi kontenerów
+Pełne czyszczenie z wolumenami:
 
 ```powershell
-# Logi API (na żywo)
-docker compose -f infra/docker-compose.yml logs -f api
-
-# Logi wszystkich serwisów
-docker compose -f infra/docker-compose.yml logs -f
+docker compose -f infra\docker-compose.yml down -v
 ```
-
----
-
-## Rebuild po zmianie kodu
-
-```powershell
-docker compose -f infra/docker-compose.yml build api
-docker compose -f infra/docker-compose.yml up -d api
-```
-
----
-
-## Znane problemy
-
-- **Port zajęty**: uruchom `.\tools\find-free-port.ps1` i dostosuj `.env`
-- **Build context**: Dockerfile wymaga katalogu głównego repo jako build context — jest to skonfigurowane prawidłowo (`context: ..` w docker-compose.yml)
-- **Brak obrazu preview**: Jeśli `mcr.microsoft.com/dotnet/aspnet:10.0-preview` niedostępny, zaktualizuj tagi w Dockerfile

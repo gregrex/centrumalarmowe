@@ -37,22 +37,11 @@ public sealed class BotDirector : IBotDirector
 
         foreach (var role in botRoles)
         {
-            // Pick a pending incident and simulate a dispatch action
-            var incident = snapshot.Incidents.FirstOrDefault(i => i.Status == "pending");
-            if (incident is null) continue;
+            cancellationToken.ThrowIfCancellationRequested();
 
-            var unit = snapshot.Units.FirstOrDefault(u => u.Status == "available");
-            if (unit is null) continue;
-
-            var action = new SessionActionDto
-            {
-                SessionId = sessionId,
-                ActorId = $"bot:{role.Role}",
-                Role = role.Role,
-                ActionType = "dispatch",
-                PayloadJson = JsonSerializer.Serialize(new { incidentId = incident.IncidentId, unitId = unit.UnitId, botProfileId = profile.Id }),
-                CorrelationId = Guid.NewGuid().ToString("N")
-            };
+            snapshot = _store.TryGet(sessionId) ?? snapshot;
+            if (CreateBotAction(sessionId, role.Role, profile, snapshot) is not { } action)
+                continue;
 
             await _sessionService.ApplyActionAsync(sessionId, action, cancellationToken);
         }
@@ -65,6 +54,61 @@ public sealed class BotDirector : IBotDirector
         _profiles = raw?.Profiles ?? [];
         return _profiles;
     }
+
+    private static SessionActionDto? CreateBotAction(
+        string sessionId,
+        string role,
+        BotProfileConfig profile,
+        SessionSnapshotDto snapshot)
+    {
+        var pendingIncident = snapshot.Incidents.FirstOrDefault(i => string.Equals(i.Status, "pending", StringComparison.OrdinalIgnoreCase));
+        var availableUnit = snapshot.Units.FirstOrDefault(u => string.Equals(u.Status, "available", StringComparison.OrdinalIgnoreCase));
+
+        if (pendingIncident is not null && availableUnit is not null)
+        {
+            return BuildAction(
+                sessionId,
+                role,
+                "dispatch",
+                new { incidentId = pendingIncident.IncidentId, unitId = availableUnit.UnitId, botProfileId = profile.Id });
+        }
+
+        var dispatchedIncident = snapshot.Incidents.FirstOrDefault(i =>
+            string.Equals(i.Status, "dispatched", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(i.Status, "escalated", StringComparison.OrdinalIgnoreCase));
+        var engagedUnit = snapshot.Units.FirstOrDefault(u => string.Equals(u.Status, "dispatched", StringComparison.OrdinalIgnoreCase));
+
+        if (dispatchedIncident is not null && engagedUnit is not null)
+        {
+            return BuildAction(
+                sessionId,
+                role,
+                "resolve",
+                new { incidentId = dispatchedIncident.IncidentId, unitId = engagedUnit.UnitId, botProfileId = profile.Id });
+        }
+
+        if (pendingIncident is not null)
+        {
+            return BuildAction(
+                sessionId,
+                role,
+                "escalate",
+                new { incidentId = pendingIncident.IncidentId, botProfileId = profile.Id });
+        }
+
+        return null;
+    }
+
+    private static SessionActionDto BuildAction(string sessionId, string role, string actionType, object payload) =>
+        new()
+        {
+            SessionId = sessionId,
+            ActorId = $"bot:{role}",
+            Role = role,
+            ActionType = actionType,
+            PayloadJson = JsonSerializer.Serialize(payload),
+            CorrelationId = Guid.NewGuid().ToString("N")
+        };
 
     private sealed record BotProfilesJson(BotProfileConfig[] Profiles);
     private sealed record BotProfileConfig(string Id, string Style, int CooldownMs, double RiskTolerance);

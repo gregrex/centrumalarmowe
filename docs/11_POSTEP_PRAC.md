@@ -676,3 +676,25 @@
 ### Testy
 - `AdminDashboardEndpointTests` rozszerzono o asercje dla agregacji incydentow i jednostek
 
+## Sesja 15 — hardening domyslnej polityki CORS
+
+### Co poprawiono
+- `Alarm112.Api` nie uzywa juz domyslnego `AllowAnyMethod` przy braku konfiguracji
+- bezpieczny default CORS to teraz `GET,POST`
+- `appsettings.json` jawnie deklaruje `Cors:AllowedMethods = GET,POST`
+
+### Testy
+- dodano test pozytywny preflight dla `POST`
+- dodano test negatywny preflight dla `PUT`
+
+## Sesja 16 — wydzielenie rejestracji DI z Alarm112.Api/Program.cs
+
+### Co poprawiono
+- dodano `src/Alarm112.Api/ServiceCollectionExtensions.cs`
+- `Program.cs` deleguje teraz rejestracje content loadera, session store, singleton services, SignalR, Swagger i OutputCache do `AddAlarm112Services(...)`
+- zachowano dotychczasowe zachowanie wyboru `PostgresSessionStore` vs `InMemorySessionStore`
+
+### Efekt
+- mniejszy i czytelniejszy bootstrap API
+- kolejne prace nad auth, CORS i middleware nie musza juz przebijac sie przez duzy blok DI
+

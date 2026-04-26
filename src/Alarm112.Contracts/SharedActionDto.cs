@@ -10,7 +10,7 @@ public sealed record SharedActionDto(
 
     [property: Required(ErrorMessage = "IncidentId is required.")]
     [property: StringLength(64, MinimumLength = 1, ErrorMessage = "IncidentId must be 1-64 characters.")]
-    [property: RegularExpression(@"^[a-zA-Z0-9\-_]+$", ErrorMessage = "IncidentId contains invalid characters.")]
+    [property: RegularExpression(@"^[a-zA-Z0-9\-_\.]+$", ErrorMessage = "IncidentId contains invalid characters.")]
     string IncidentId,
 
     [property: Required(ErrorMessage = "ActionType is required.")]
@@ -27,4 +27,43 @@ public sealed record SharedActionDto(
     [property: Range(1, 300, ErrorMessage = "TimeoutSeconds must be between 1 and 300.")]
     int TimeoutSeconds,
 
-    bool AllowBotAssist);
+    bool AllowBotAssist) : IValidatableObject
+{
+    private static readonly HashSet<string> AllowedRoles = new(StringComparer.Ordinal)
+    {
+        "CallOperator",
+        "Dispatcher",
+        "OperationsCoordinator",
+        "CrisisOfficer"
+    };
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (RequiredRoles is null)
+        {
+            yield return new ValidationResult(
+                "RequiredRoles must not be null.",
+                new[] { nameof(RequiredRoles) });
+            yield break;
+        }
+
+        var invalidRoles = RequiredRoles
+            .Where(role => !AllowedRoles.Contains(role))
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+
+        if (invalidRoles.Length > 0)
+        {
+            yield return new ValidationResult(
+                $"RequiredRoles contains invalid values: {string.Join(", ", invalidRoles)}.",
+                new[] { nameof(RequiredRoles) });
+        }
+
+        if (RequiredRoles.Count != RequiredRoles.Distinct(StringComparer.Ordinal).Count())
+        {
+            yield return new ValidationResult(
+                "RequiredRoles must not contain duplicates.",
+                new[] { nameof(RequiredRoles) });
+        }
+    }
+}

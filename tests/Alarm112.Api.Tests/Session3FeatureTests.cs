@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -112,6 +113,40 @@ public sealed class Session3FeatureTests(Alarm112ApiFactory factory)
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
+    [Fact]
+    public async Task CorsPreflight_Post_IsAllowedForConfiguredOrigin()
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Options, "/api/reference-data");
+        request.Headers.Add("Origin", "http://localhost:5081");
+        request.Headers.Add("Access-Control-Request-Method", "POST");
+
+        using var response = await _client.SendAsync(request);
+
+        Assert.True(
+            response.Headers.TryGetValues("Access-Control-Allow-Origin", out var origins) &&
+            origins.Contains("http://localhost:5081"),
+            "Configured origin should be echoed for allowed POST preflight.");
+        Assert.True(
+            response.Headers.TryGetValues("Access-Control-Allow-Methods", out var methods) &&
+            methods.Any(m => m.Contains("POST", StringComparison.OrdinalIgnoreCase)),
+            "POST should be present in allowed CORS methods.");
+    }
+
+    [Fact]
+    public async Task CorsPreflight_Put_IsRejectedByDefaultPolicy()
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Options, "/api/reference-data");
+        request.Headers.Add("Origin", "http://localhost:5081");
+        request.Headers.Add("Access-Control-Request-Method", "PUT");
+
+        using var response = await _client.SendAsync(request);
+
+        Assert.False(
+            response.Headers.TryGetValues("Access-Control-Allow-Methods", out var methods) &&
+            methods.Any(m => m.Contains("PUT", StringComparison.OrdinalIgnoreCase)),
+            "Unsafe PUT preflight should not be advertised in CORS allow methods.");
+    }
+
     // ─── SharedActionDto validation ───────────────────────────────────────────
 
     [Fact]
@@ -184,5 +219,59 @@ public sealed class Session3FeatureTests(Alarm112ApiFactory factory)
         var results = new System.Collections.Generic.List<System.ComponentModel.DataAnnotations.ValidationResult>();
         var valid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(dto, ctx, results, validateAllProperties: true);
         Assert.True(valid, $"Valid SharedActionDto should pass. Errors: {string.Join(", ", results.Select(r => r.ErrorMessage))}");
+    }
+
+    [Fact]
+    public void SharedActionDto_Validation_AcceptsDottedIncidentId()
+    {
+        var dto = new Alarm112.Contracts.SharedActionDto(
+            SharedActionId: "sa-valid-002",
+            IncidentId: "inc.medical.001",
+            ActionType: "confirm",
+            RequestedByRole: "Dispatcher",
+            RequiredRoles: ["CallOperator"],
+            TimeoutSeconds: 60,
+            AllowBotAssist: true);
+
+        var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(dto);
+        var results = new System.Collections.Generic.List<System.ComponentModel.DataAnnotations.ValidationResult>();
+        var valid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(dto, ctx, results, validateAllProperties: true);
+        Assert.True(valid, $"Dotted incident IDs should pass. Errors: {string.Join(", ", results.Select(r => r.ErrorMessage))}");
+    }
+
+    [Fact]
+    public void SharedActionDto_Validation_RejectsInvalidRequiredRole()
+    {
+        var dto = new Alarm112.Contracts.SharedActionDto(
+            SharedActionId: "sa-valid-003",
+            IncidentId: "inc.medical.001",
+            ActionType: "confirm",
+            RequestedByRole: "Dispatcher",
+            RequiredRoles: ["CallOperator", "SuperAdmin"],
+            TimeoutSeconds: 60,
+            AllowBotAssist: true);
+
+        var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(dto);
+        var results = new System.Collections.Generic.List<System.ComponentModel.DataAnnotations.ValidationResult>();
+        var valid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(dto, ctx, results, validateAllProperties: true);
+        Assert.False(valid, "Invalid RequiredRoles values should fail validation.");
+    }
+
+    [Fact]
+    public void SharedActionDto_Validation_RejectsDuplicateRequiredRoles()
+    {
+        var dto = new Alarm112.Contracts.SharedActionDto(
+            SharedActionId: "sa-valid-004",
+            IncidentId: "inc.medical.001",
+            ActionType: "confirm",
+            RequestedByRole: "Dispatcher",
+            RequiredRoles: ["CallOperator", "CallOperator"],
+            TimeoutSeconds: 60,
+            AllowBotAssist: true);
+
+        var ctx = new System.ComponentModel.DataAnnotations.ValidationContext(dto);
+        var results = new System.Collections.Generic.List<System.ComponentModel.DataAnnotations.ValidationResult>();
+        var valid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(dto, ctx, results, validateAllProperties: true);
+        Assert.False(valid, "Duplicate RequiredRoles should fail validation.");
     }
 }

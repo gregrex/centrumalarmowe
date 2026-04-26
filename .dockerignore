@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/TestResults/
+**/.vs/
+**/.idea/
+**/.vscode/
+artifacts/
+.git/
+.github/
+api5099.err.log
+api5099.out.log
+build_out.txt
+build_output.txt
+build_result.txt

@@ -55,6 +55,17 @@ test.describe('Session full flow', () => {
     expect(actionResp.status()).toBe(200);
     const actionResult = await actionResp.json();
     expect(actionResult.success).toBe(true);
+
+    // Step 5: Verify snapshot was really mutated
+    const updatedSnapResp = await request.get(`/api/sessions/${sessionId}`);
+    expect(updatedSnapResp.status()).toBe(200);
+    const updatedSnap = await updatedSnapResp.json();
+
+    const updatedIncident = updatedSnap.incidents.find((inc: { incidentId: string; status: string }) => inc.incidentId === incidentId);
+    const updatedUnit = updatedSnap.units.find((unit: { unitId: string; status: string }) => unit.unitId === unitId);
+
+    expect(updatedIncident?.status).toBe('dispatched');
+    expect(updatedUnit?.status).toBe('dispatched');
   });
 
   test('Multiple sessions are isolated', async ({ request }) => {

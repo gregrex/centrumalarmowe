@@ -40,4 +40,26 @@ public sealed class HealthEndpointTests(Alarm112ApiFactory factory)
         var json = await response.Content.ReadFromJsonAsync<JsonElement>();
         Assert.Equal("v26", json.GetProperty("version").GetString());
     }
+
+    [Fact]
+    public async Task HealthLive_ReturnsLiveStatus()
+    {
+        var response = await _client.GetAsync("/health/live");
+        var json = await response.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("live", json.GetProperty("status").GetString());
+    }
+
+    [Fact]
+    public async Task HealthReady_ReturnsReadinessChecks()
+    {
+        var response = await _client.GetAsync("/health/ready");
+        var json = await response.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.True(json.GetProperty("ok").GetBoolean());
+        Assert.Equal("ready", json.GetProperty("status").GetString());
+        Assert.True(json.GetProperty("checks").GetArrayLength() >= 3);
+    }
 }

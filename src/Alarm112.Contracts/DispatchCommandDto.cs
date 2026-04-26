@@ -5,12 +5,12 @@ namespace Alarm112.Contracts;
 public sealed record DispatchCommandDto(
     [property: Required(ErrorMessage = "IncidentId is required.")]
     [property: StringLength(64, MinimumLength = 1)]
-    [property: RegularExpression(@"^[a-zA-Z0-9\-_]+$", ErrorMessage = "IncidentId contains invalid characters.")]
+    [property: RegularExpression(@"^[a-zA-Z0-9\-_\.]+$", ErrorMessage = "IncidentId contains invalid characters.")]
     string IncidentId,
 
     [property: Required(ErrorMessage = "UnitId is required.")]
     [property: StringLength(64, MinimumLength = 1)]
-    [property: RegularExpression(@"^[a-zA-Z0-9\-_]+$", ErrorMessage = "UnitId contains invalid characters.")]
+    [property: RegularExpression(@"^[a-zA-Z0-9\-_\.]+$", ErrorMessage = "UnitId contains invalid characters.")]
     string UnitId,
 
     [property: Required(ErrorMessage = "ActionId is required.")]

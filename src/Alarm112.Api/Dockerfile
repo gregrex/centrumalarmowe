@@ -1,10 +1,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-preview AS base
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends wget \
+    && rm -rf /var/lib/apt/lists/*
+RUN groupadd --system appgroup && useradd --system --gid appgroup --create-home --home-dir /home/appuser appuser
 WORKDIR /app
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0-preview AS build
 WORKDIR /src
+COPY Directory.Build.props ./
 COPY src/Alarm112.Api/Alarm112.Api.csproj src/Alarm112.Api/
 COPY src/Alarm112.Contracts/Alarm112.Contracts.csproj src/Alarm112.Contracts/
 COPY src/Alarm112.Application/Alarm112.Application.csproj src/Alarm112.Application/
